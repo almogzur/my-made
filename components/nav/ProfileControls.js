@@ -5,31 +5,19 @@ import Link from "next/link";
 function ProfileControls() {
 
   const { data: session } = useSession()
-
-  const style = {
-    singIn:{
-      position:"absolute",
-      left:"5px",
-      top:"5px",
-      width:"100px",
-      height:"50px",
-      background:"none",
-      border:"none"
-    },
-    singOut:{}
-} 
+  
   return (
    !session ? 
  <button 
       onClick={() => signIn()}
-      style={style.singIn}
+      className="singIn"
     >הרשמה|התחברות
   </button> 
 :
 <>
  <button 
    onClick={() => signOut()}
-   style={style.singOut}
+   className="singOut"
    >התנתק
  </button>
  <br/>

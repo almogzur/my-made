@@ -6,44 +6,69 @@
 import Link from "next/link";
 import react, {  useEffect, useState } from "react";
 import ProfileControls from "components/nav/ProfileControls"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import {faHouse , faBroom , faPerson }from "@fortawesome/free-solid-svg-icons"
 
- 
+const CLink =({href,children,text,index})=>{
+    return (
+      <div className="c-div">
+     
+        <Link 
+           style={{textDecoration:"none"}}
+           href={href}
+           >
+          {[text,]}
+    
+        </Link>
+        <br/>
+        <div 
+          style={{display:"flex",justifyContent:"center"}}
+          >
+        {children}
+        </div>
+      </div>
+    )
+}
+
 
 const NavigationMenu = ()  => {
 
     const [isCollaps,setIsCollap] = useState(false)
+
+
  
-    const BuregerStyle = {
-       wrap:{
-         
-       },  
-    } 
-    const style= {
-        wrap:{
-          width:"100%",
-          height:"60px",
-          background:"lightblue",
-          display:"flex"
-        },
-        link:{
-          margin:"20px",
-          textDecoration:"none"
-        }
-    }
-
+  
     return ( 
-        <>
-        <nav
-        style={isCollaps ? BuregerStyle.wrap : style.wrap}
-      >
-        <Link  style={style.link} href={"home"}>בית</Link>
-        <Link  style={style.link} href={"/vender"}>מנקה</Link>
-        <Link  style={style.link} href={"costumer"}> לקוח </Link>
-
-        <ProfileControls/>
-       </nav>
-      </>
-      
+         <nav
+           className="NavWrapper"
+         >
+        <div className="linksWrapper" >
+          <CLink
+             href={"/"}
+             text={"דף הבית"}
+             index={1}
+             key={1}
+             >
+             <FontAwesomeIcon size="1x" icon={faHouse} /> 
+          </CLink>
+          <CLink  
+             text={"רישום נותן שירות"}
+              href="/vendor"
+              index={2}
+              key={2}>
+              <FontAwesomeIcon size="1x" icon={faBroom} />
+          </CLink>
+          <CLink
+                href="/costumer"
+                text={"לוח"}
+                index={3}
+                key={3}
+                >
+                 <FontAwesomeIcon size="1x" icon={faPerson} />
+          </CLink> 
+        </div>
+          <ProfileControls/>
+        </nav>    
      );
 }
 

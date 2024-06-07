@@ -1,5 +1,8 @@
 import { SessionProvider } from "next-auth/react"
 import "style/style.css"
+import "style/nav.css"
+import "style/ProfileControl.css"
+import "style/main.css"
 
 
 export default function App({
@@ -12,3 +15,4 @@ export default function App({
     </SessionProvider>
   )
 }
+ 

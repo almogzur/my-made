@@ -1,10 +1,10 @@
 import React,{} from "react";
-import NavigationMenu from "@/components/nav/NavWrapper";
+import FooterRwapper from "@/components/footer/FooterRwapper";
 import VenderForm from "@pages/vendor/VenderForm";
 function Vender() {
     return ( 
         <>
-            <NavigationMenu/>
+            <FooterRwapper/>
             <VenderForm/>
         </>
      );

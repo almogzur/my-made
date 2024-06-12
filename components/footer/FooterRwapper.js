@@ -4,16 +4,16 @@
 // Nav Wrapper
 "use client"
 import react,{useEffect, useState } from "react";
-import ProfileControls from "components/nav/ProfileControls"
+import ProfileControls from "@/components/footer/ProfileControls"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faHouse , faBroom , faPerson , faClipboard }from "@fortawesome/free-solid-svg-icons"
-import CostumeLink from "components/nav/CostumeLink";
+import CostumeLink from "@/components/footer/CostumeLink";
 
-const NavigationMenu = ()  => {
+const FooterRwapper = ()  => {
 
     return ( 
-         <nav
-            className="nav-wrapper" 
+         <footer
+            className="footer-wrapper" 
            >
          <div className="links-Wrapper" 
          >
@@ -50,8 +50,8 @@ const NavigationMenu = ()  => {
         </div>
         
           <ProfileControls/>
-        </nav>    
+        </footer>    
      );
 }
 
-export default NavigationMenu;
+export default FooterRwapper;

@@ -1,6 +1,6 @@
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useEffect } from "react";
-import NavigationMenu from "@/components/nav/NavWrapper";
+import FooterRwapper from "@/components/footer/FooterRwapper";
 
 
 
@@ -13,7 +13,7 @@ function ProfilePage() {
 
 
     return (<>
-    <NavigationMenu/>
+    <FooterRwapper/>
         
     </>  );
 }

@@ -3,12 +3,12 @@
 //Costumer Page
 //Costumer Page
 
-import NavigationMenu from "@/components/nav/NavWrapper"
+import FooterRwapper from "@/components/footer/FooterRwapper"
 
  const CostumerPage  = ({})=>{
   return (
   <>
-   <NavigationMenu/>  
+   <FooterRwapper/>  
   </>
   )
 }

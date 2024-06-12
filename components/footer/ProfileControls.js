@@ -11,7 +11,7 @@ function ProfileControls() {
  <button 
       onClick={() => signIn(undefined,{callbackUrl:"/profile"})}
       className="singIn"
-    >הרשמה|התחברות
+    >הרשמה או התחברות
   </button> 
 :
 <div

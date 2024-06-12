@@ -1,9 +1,9 @@
-import NavigationMenu from "@/components/nav/NavWrapper";
+import FooterRwapper from "@/components/footer/FooterRwapper";
 
 function BoardPage() {
     return (  
         <>
-            <NavigationMenu/>
+            <FooterRwapper/>
         </>
     );
 }

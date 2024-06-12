@@ -1,15 +1,26 @@
 
-const InputElemnt = ({type,text,id,classN}) => {
+const InputElemnt = ({type,text,id,inputClassName,labeClassName,required}) => {
 
-    return <>
-      <label htmlFor={id} className={classN}>
-       {text}
-       <br/>
-       <input type={type} id={id}/>
-      </label>
+
+
+
+    return <label 
+             htmlFor={id} 
+            className={labeClassName}
+            >
+            {text}
+            <br/>
+             <input 
+              required={required? true : false}
+              placeholder={required? "*" : null}
+              type={type}
+              id={id}
+              className={inputClassName}
+               />
+           </label>
       
  
-    </>
+    
    }
    export default InputElemnt
    

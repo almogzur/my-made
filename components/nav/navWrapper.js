@@ -3,70 +3,52 @@
 // Nav Wrapper
 // Nav Wrapper
 "use client"
-import Link from "next/link";
-import react, {  useEffect, useState } from "react";
+import react,{useEffect, useState } from "react";
 import ProfileControls from "components/nav/ProfileControls"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faHouse , faBroom , faPerson }from "@fortawesome/free-solid-svg-icons"
-
-const CLink =({href,children,text,index})=>{
-    return (
-      <div className="c-div">
-     
-        <Link 
-           style={{textDecoration:"none"}}
-           href={href}
-           >
-          {[text,]}
-    
-        </Link>
-        <br/>
-        <div 
-          style={{display:"flex",justifyContent:"center"}}
-          >
-        {children}
-        </div>
-      </div>
-    )
-}
-
+import {faHouse , faBroom , faPerson , faClipboard }from "@fortawesome/free-solid-svg-icons"
+import CostumeLink from "components/nav/CostumeLink";
 
 const NavigationMenu = ()  => {
 
-    const [isCollaps,setIsCollap] = useState(false)
-
-
- 
-  
     return ( 
          <nav
-           className="NavWrapper"
+            className="nav-wrapper" 
+           >
+         <div className="links-Wrapper" 
          >
-        <div className="linksWrapper" >
-          <CLink
+          <CostumeLink
              href={"/"}
-             text={"דף הבית"}
+             text={"בית"}
              index={1}
-             key={1}
              >
              <FontAwesomeIcon size="1x" icon={faHouse} /> 
-          </CLink>
-          <CLink  
-             text={"רישום נותן שירות"}
+          </CostumeLink>
+
+          <CostumeLink  
+             text={"משק"}
               href="/vendor"
               index={2}
-              key={2}>
+              >
               <FontAwesomeIcon size="1x" icon={faBroom} />
-          </CLink>
-          <CLink
+          </CostumeLink>
+
+          <CostumeLink
                 href="/costumer"
-                text={"לוח"}
-                index={3}
-                key={3}
+                text={"לקוח"}
+                index={3}             
                 >
                  <FontAwesomeIcon size="1x" icon={faPerson} />
-          </CLink> 
+          </CostumeLink> 
+
+          <CostumeLink
+            href={"board"}
+            text="לוח"
+          >
+        <FontAwesomeIcon size="1x" icon={faClipboard}/>
+        </CostumeLink>
         </div>
+        
           <ProfileControls/>
         </nav>    
      );

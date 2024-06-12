@@ -1,6 +1,11 @@
+*{
+    font-family: system-ui;
+    overflow:hidden;
+}
 body{
     direction:rtl;
     padding:0;
     margin:0;
+
 }
 

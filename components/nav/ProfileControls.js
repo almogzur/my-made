@@ -9,20 +9,28 @@ function ProfileControls() {
   return (
    !session ? 
  <button 
-      onClick={() => signIn()}
+      onClick={() => signIn(undefined,{callbackUrl:"/profile"})}
       className="singIn"
     >הרשמה|התחברות
   </button> 
 :
-<>
+<div
+ className="singOutDiv"
+>
  <button 
+ className="singOut"
    onClick={() => signOut()}
-   className="singOut"
    >התנתק
  </button>
- <br/>
-  <Link href={"/profile"}>{session?.user?.name}Profile</Link>
-</>
+ <Link 
+ href={"/profile"}
+   className="profile-link"
+ >{"פרופיל אישי "}<br/>
+  
+  </Link>
+
+
+</div>
 ) 
 }
 

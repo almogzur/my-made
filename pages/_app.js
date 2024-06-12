@@ -1,9 +1,10 @@
 import { SessionProvider } from "next-auth/react"
-import "style/style.css"
 import "style/nav.css"
-import "style/ProfileControl.css"
-import "style/main.css"
-
+import "style/profile-control.css"
+import "style/main-con.css"
+import "style/vender.css"
+import "style/star-rating.css"
+import "style/global.css"
 
 export default function App({
   Component,

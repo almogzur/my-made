@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import NavigationMenu from "components/nav/NavWrapper"
-import Main from '@/components/homeppage/Main'
+import Main from 'pages/Main'
+
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
   <>
     <NavigationMenu/>
     <Main/>
+
   </>
     
   )

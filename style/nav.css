@@ -1,17 +1,29 @@
-.NavWrapper{
+.nav-wrapper{
         width:100%;
         height:60px;
-        border: 1px solid black
+        border-bottom: 1px solid black
 }
-.linksWrapper{
+
+.links-Wrapper{
     display:flex;
-    
+    width:50%;
+    justify-content:space-around ;
 }
-.c-div{
-   align-content:center;
+.nav-link{
+    text-decoration:none;    
+}
+.costume-link-Wrapper{
+   width:40px;
+   height:55px;
+   border:1px solid black;
+   border-radius:10px;
+   font-size:12px;
+  
+   display:flex;
+   flex-direction:column;
    align-items:center;
-   justify-content:center;
-   height:50px;
-   margin-right:20px;
+   justify-content:space-around;
+
 }
+
 

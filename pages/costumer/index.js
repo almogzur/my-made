@@ -1,16 +1,15 @@
 //Costumer Page
-//Costumer Page
+//Costumer Page 
 //Costumer Page
 //Costumer Page
 
-import {  ReactNode } from "react"
-
+import NavigationMenu from "@/components/nav/NavWrapper"
 
  const CostumerPage  = ({})=>{
   return (
-    <>
-    Costumer
-    </>
+  <>
+   <NavigationMenu/>  
+  </>
   )
 }
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
 import Link from "next/link";
+import { PHASE_PRODUCTION_BUILD } from "next/dist/shared/lib/constants";
 
 function ProfileControls() {
 
@@ -23,13 +24,11 @@ function ProfileControls() {
    >התנתק
  </button>
  <Link 
- href={"/profile"}
+   href={"/profile"}
    className="profile-link"
  >{"פרופיל אישי "}<br/>
   
   </Link>
-
-
 </div>
 ) 
 }

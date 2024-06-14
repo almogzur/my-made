@@ -1,12 +1,32 @@
+import { VendorData } from "contaxt/contaxt"
+import { useContext, useEffect } from "react"
 
-const InputElemnt = ({type,text,id,inputClassName,labeClassName,required}) => {
+const InputElemnt = ({
+    type,
+    text,
+    id,
+    labeClassName,
+    required,
+}) => {
+        
+    const [data,setData] = useContext(VendorData)
+
+    useEffect(()=>{
+        console.log(data)
+    },[data])
 
 
+    const handleChange = (e) => {
+        setData({
+            ...data,
+            [id]: e.target.value
+        });
+    };
 
 
     return <label 
              htmlFor={id} 
-            className={labeClassName}
+            className={labeClassName? labeClassName:null}
             >
             {text}
             <br/>
@@ -15,11 +35,11 @@ const InputElemnt = ({type,text,id,inputClassName,labeClassName,required}) => {
               placeholder={required? "*" : null}
               type={type}
               id={id}
-              className={inputClassName}
+              className="vender-input"
+             onChange={handleChange}
                />
            </label>
       
- 
     
    }
    export default InputElemnt

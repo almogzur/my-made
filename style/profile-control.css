@@ -6,7 +6,30 @@
     height:50px;
     background:none;
     border:none;
+    color:#fff;
 }
+
+.singin:visited:{
+    color:white;
+}
+.singIn:active{
+    color:white;
+}
+.singIn:focus{
+    color:white;
+}
+.singIn:hover{
+    color:white;
+    background:black;
+    transition: ease 1s;
+    border: solid 1px #fff;
+}
+.singIn:active{
+    color:white;
+}
+
+
+
 
 .singOutDiv{
     position:absolute;
@@ -22,6 +45,12 @@
  width:100px;
 height:50%;
 }
+.singOut:visited{}
+.singOut:active{}
+.singOut:focus{}
+.singOut:hover{}
+.singOut:active{}
+
 .profile-link{
     text-decoration:none;
     width:100px;
@@ -30,8 +59,8 @@ height:50%;
     padding-top:5px
 }
 .profile-link:hover{
-    
+    background:white;
 }
 .profile-link:visited{
-    
+
 }

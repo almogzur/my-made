@@ -1,10 +1,7 @@
 import { createContext } from "react";
 
-const PageWidthC = React.createContext("")
-const ProfileControlLocation = React.createContext("")
-
+const VendorData = createContext(null)
 
 export { 
-    PageWidthC , 
-    ProfileControlLocation
+    VendorData
 }

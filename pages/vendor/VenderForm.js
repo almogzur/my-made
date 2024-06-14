@@ -1,58 +1,65 @@
-
-import { useState  } from "react";
-import ToggleSwitch from "components/ToggleSwitch";
 import InputElemnt from "@/components/InputElemnt"
-
+import Calinder from "@/components/Calinder";
 
 function VenderForm () {
-
+ 
     return (
      <form 
-     className="vender-form-wrapper" 
-     action={"/api/vendorreg/newvender"}
+        className="vender-form-wrapper" 
+        action={"/api/vendorreg/newvender"}
      >
-
        <InputElemnt 
         type={"text"}
-        id={"vender-fullname"}
+        id={"venderFullName"}
         text={"שם מלא"}  
-        labeClassName={""}
-        inputClassName={"vender-input"}
        />
 
       <InputElemnt 
         type={"tel"}
-        id={"vender-phone"}
+        id={"venderPhone"}
         text={"טלפון"}
-        
-        inputClassName={"vender-input"}
-        labeClassName={""}
 
       />
 
       <InputElemnt
         type={"email"}
-        id={"vendor-email"}
+        id={"vendorEmail"}
         text={"מייל"}
-        
-        inputClassName={"vender-input"}
-        labeClassName={""}
 
       />
       
       <InputElemnt
         type={"text"}
         text={"שם העסק"}
-        id={"business-"}
-        inputClassName={"vender-input"}
-        labeClassName={""}
+        id={"venderBussniseName"}
 
-        
 
       />
-      <button type="submit">Submit</button>
+      <InputElemnt
+         type={"number"}
+         text={"מחיר"}
+         id={"price"}
+         required
+      />
+
+     <label for="fruits">דרכי קבלת תשלום</label>
+        <select id="fruits" name="fruits" multiple size="5">
+            <option value="apple">פייפל</option>
+            <option value="banana">אשרי</option>
+            <option value="cherry">ביט</option>
+            <option value="date">מזומן</option>
+            <option value="grape"></option>
+        </select>
+
+
+        <Calinder text={"זמין מ "}/>
+        <Calinder text={"עד"}/>
+   
+      <button type="submit">הרשמת נותן שירות </button>
         </form>
       );
+
+      
 }
 
 export default VenderForm ;

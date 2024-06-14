@@ -7,6 +7,7 @@ import "style/main-con.css"
 import "style/vender.css"
 import "style/star-rating.css"
 import "style/global.css"
+import 'rc-select/assets/index.css';
 import "react-datepicker/dist/react-datepicker.css";
 
 export default function App({
@@ -20,7 +21,8 @@ export default function App({
     venderBussniseName:"",
     venderOpenDate:"",
     venderEndDate:"",
-    vendorEmail:""
+    vendorEmail:"",
+    vendorPaymentOptions:""
     })
    
 

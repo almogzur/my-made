@@ -2,7 +2,7 @@
     position:absolute;
     bottom:0;
         width:100%;
-        height:60px;
+        height:50px;
         border-top: 1px solid black;
         background:#404040;
         color:black;
@@ -14,7 +14,7 @@
 }
 .inner-link-Wrapper{
    width:35px;
-   height:55px;
+   height:45px;
    border-radius:10px;
    font-size:12px;
    display:flex;

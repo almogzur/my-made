@@ -1,17 +1,66 @@
+import React, {useContext} from "react"
+import { VendorData } from "contaxt/contaxt";
 import InputElemnt from "@/components/InputElemnt"
 import Calinder from "@/components/Calinder";
+import SelectElemnt from "@/components/SelectElemnt";
+
+
+function compareDatesSafe(d1, d2) {
+  const date1 = new Date(d1);
+  const date2 = new Date(d2);
+
+  if (isNaN(date1.getTime()) || isNaN(date2.getTime())) {
+      return 'One or both of the dates are invalid';
+  }
+  if (date1 < date2) {
+      return 'date1 is before date2';
+  } else if (date1 > date2) {
+      return 'date1 is after date2';
+  } else {
+      return 'date1 is equal to date2';
+  }
+}
 
 function VenderForm () {
+
+  const [data,setData]=useContext(VendorData)
+
+  const handleSubmit = async (event) => {
+
+    event.preventDefault();
+    try {
+      const response = await fetch('/api/vendor/newvendor', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data), // Send the form data as JSON
+      });
+
+      if (response.ok) {
+        // Handle successful response
+        console.log('Form submitted successfully');
+      } else {
+        // Handle error response
+        console.error('Failed to submit form');
+      }
+    } catch (error) {
+      console.error('Error during form submission:', error);
+    }
+  };
+
  
     return (
      <form 
+     onSubmit={handleSubmit}
         className="vender-form-wrapper" 
-        action={"/api/vendorreg/newvender"}
+
      >
        <InputElemnt 
         type={"text"}
         id={"venderFullName"}
         text={"שם מלא"}  
+        required
        />
 
       <InputElemnt 
@@ -33,7 +82,6 @@ function VenderForm () {
         text={"שם העסק"}
         id={"venderBussniseName"}
 
-
       />
       <InputElemnt
          type={"number"}
@@ -42,20 +90,25 @@ function VenderForm () {
          required
       />
 
-     <label for="fruits">דרכי קבלת תשלום</label>
-        <select id="fruits" name="fruits" multiple size="5">
-            <option value="apple">פייפל</option>
-            <option value="banana">אשרי</option>
-            <option value="cherry">ביט</option>
-            <option value="date">מזומן</option>
-            <option value="grape"></option>
-        </select>
+      <SelectElemnt/>
 
-
-        <Calinder text={"זמין מ "}/>
-        <Calinder text={"עד"}/>
+     <Calinder
+      id={"venderOpenDate"}
+      text={"תאריך התחלה"}
+     />
+     <Calinder
+      id={"venderEndDate"}
+      text={"תאריך סיום"}
+     />
    
-      <button type="submit">הרשמת נותן שירות </button>
+      <button 
+      type="submit"
+      className="vender-form-btn"
+
+      >הרשמה 
+      </button>
+
+    
         </form>
       );
 

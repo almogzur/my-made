@@ -11,11 +11,6 @@ const InputElemnt = ({
         
     const [data,setData] = useContext(VendorData)
 
-    useEffect(()=>{
-        console.log(data)
-    },[data])
-
-
     const handleChange = (e) => {
         setData({
             ...data,
@@ -36,7 +31,7 @@ const InputElemnt = ({
               type={type}
               id={id}
               className="vender-input"
-             onChange={handleChange}
+              onChange={handleChange}
                />
            </label>
       

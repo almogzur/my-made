@@ -1,5 +1,13 @@
+
 export default function handler(req, res) {
-    console.log(req)
+  if(req.method ==="POST")
+    {
+      console.log(req.body)
+    }
+  else if(req.method ==="GET"){
+    
+  }
+    console.log("")
   }
 
   export const config = {

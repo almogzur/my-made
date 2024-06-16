@@ -1,13 +1,8 @@
 
 export default function handler(req, res) {
-  if(req.method ==="POST")
-    {
-      console.log(req.body)
-    }
-  else if(req.method ==="GET"){
-    
-  }
-    console.log("")
+
+  console.log(req.body)
+  res.json({status:"OK"})
   }
 
   export const config = {
@@ -15,5 +10,6 @@ export default function handler(req, res) {
       bodyParser: {
         sizeLimit: '10mb',
       },
+      maxDuration: 5,
     },
   }

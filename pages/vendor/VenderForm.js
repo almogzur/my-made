@@ -5,31 +5,14 @@ import Calinder from "@/components/Calinder";
 import SelectElemnt from "@/components/SelectElemnt";
 
 
-function compareDatesSafe(d1, d2) {
-  const date1 = new Date(d1);
-  const date2 = new Date(d2);
-
-  if (isNaN(date1.getTime()) || isNaN(date2.getTime())) {
-      return 'One or both of the dates are invalid';
-  }
-  if (date1 < date2) {
-      return 'date1 is before date2';
-  } else if (date1 > date2) {
-      return 'date1 is after date2';
-  } else {
-      return 'date1 is equal to date2';
-  }
-}
-
 function VenderForm () {
 
   const [data,setData]=useContext(VendorData)
 
   const handleSubmit = async (event) => {
 
-    event.preventDefault();
     try {
-      const response = await fetch('/api/vendor/newvendor', {
+      const response = await fetch('/api/vendor', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,15 +35,16 @@ function VenderForm () {
  
     return (
      <form 
-     onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         className="vender-form-wrapper" 
-
-     >
+   
+     > 
+     <h1>הרשמת נותן שירות </h1>
        <InputElemnt 
         type={"text"}
         id={"venderFullName"}
         text={"שם מלא"}  
-        required
+        
        />
 
       <InputElemnt 
@@ -87,10 +71,13 @@ function VenderForm () {
          type={"number"}
          text={"מחיר"}
          id={"price"}
-         required
+         
       />
 
-      <SelectElemnt/>
+      <SelectElemnt
+      SelectOptions={[]}
+        text={"קבלת תשלום"}
+      />
 
      <Calinder
       id={"venderOpenDate"}
@@ -102,13 +89,12 @@ function VenderForm () {
      />
    
       <button 
-      type="submit"
-      className="vender-form-btn"
-
-      >הרשמה 
+       type="submit"
+       className="vender-form-btn"
+      >רישום 
       </button>
 
-    
+ 
         </form>
       );
 

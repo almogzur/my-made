@@ -1,6 +1,3 @@
-import { SessionProvider } from "next-auth/react"
-import { VendorData } from "contaxt/contaxt"
-import { useState } from "react"
 import "style/footer.css"
 import "style/profile-control.css"
 import "style/main-con.css"
@@ -9,6 +6,14 @@ import "style/star-rating.css"
 import "style/global.css"
 import 'rc-select/assets/index.css';
 import "react-datepicker/dist/react-datepicker.css";
+import "style/dialog.css"
+import "style/sidebar.css"
+import "style/customer-form.css"
+
+import { SessionProvider } from "next-auth/react"
+import { VendorData } from "contaxt/contaxt"
+import { useEffect, useState } from "react"
+
 
 export default function App({
   Component,
@@ -24,6 +29,10 @@ export default function App({
     vendorEmail:"",
     vendorPaymentOptions:""
     })
+
+    useEffect(()=>{
+        console.log(fromData)
+    },[fromData])
    
 
   return (

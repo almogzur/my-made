@@ -1,14 +1,16 @@
-import "style/footer.css"
-import "style/profile-control.css"
-import "style/main-con.css"
-import "style/vender.css"
-import "style/star-rating.css"
-import "style/global.css"
+import "components/Footer/footer.css"
+import "components/NextAuth/ProfileControl.css"
+import "pages/MainPage.css"
+import "pages/vendor/vender.css"
+import "components/StarRating/StarRating.css"
 import 'rc-select/assets/index.css';
 import "react-datepicker/dist/react-datepicker.css";
-import "style/dialog.css"
-import "style/sidebar.css"
-import "style/customer-form.css"
+import "components/Dialog/Dialog.css"
+import "components/Sidebar/SideBar.css"
+import "pages/costumer/customer.css"
+import "components/Acordione/Acordion.css"
+import "components/CommentSection/CommentSection.css"
+import "components/Loader/LoadingSpinner.css"
 
 import { SessionProvider } from "next-auth/react"
 import { VendorData } from "contaxt/contaxt"
@@ -20,7 +22,7 @@ export default function App({
   pageProps: { session, ...pageProps },
 }) {
 
-  const [fromData,setFormData]=useState({
+  const [VenderData,setVendorData]=useState({
     venderFullName:"",
     venderPhone:"",
     venderBussniseName:"",
@@ -30,14 +32,26 @@ export default function App({
     vendorPaymentOptions:""
     })
 
+    const [CustomerData,setCustomerDats] =useState({
+      customerFullName:"",
+      customerPhoneNumber:"",
+      customerApartmentSizw:"",
+      customer:"",
+      customer:"" ,
+
+       })
+
     useEffect(()=>{
-        console.log(fromData)
-    },[fromData])
+       // console.log(VenderData,CustomerData)
+    },[VenderData,CustomerData])
+
+
+    
    
 
   return (
     <SessionProvider session={session}>
-      <VendorData.Provider value={[fromData,setFormData]}>
+      <VendorData.Provider value={[VenderData,setVendorData]}>
       <Component {...pageProps} />
       </VendorData.Provider>
     </SessionProvider>

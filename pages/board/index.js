@@ -1,4 +1,4 @@
-import FooterRwapper from "@/components/footer/FooterRwapper";
+import FooterRwapper from "@/components/Footer/FooterRwapper";
 
 function BoardPage() {
     return (  

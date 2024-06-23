@@ -1,7 +1,7 @@
 
 export default function handler(req, res) {
 
-  console.log(req.body)
+  console.log(req)
   res.json({status:"OK"})
   }
 

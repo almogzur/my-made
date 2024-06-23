@@ -1,8 +1,8 @@
 import React, {useContext} from "react"
 import { VendorData } from "contaxt/contaxt";
-import InputElemnt from "@/components/InputElemnt"
-import Calinder from "@/components/Calinder";
-import SelectElemnt from "@/components/SelectElemnt";
+import InputElemnt from "@/components/InputElemnt/InputElemnt"
+import Calinder from "@/components/Calinder/Calinder";
+import SelectElemnt from "@/components/SelectComponent/SelectComponent"
 
 
 function VenderForm () {
@@ -77,15 +77,17 @@ function VenderForm () {
       <SelectElemnt
       SelectOptions={[]}
         text={"קבלת תשלום"}
+        className="vendor-payment"
+        hedlineText={"אפשריות תשלום"}
       />
 
      <Calinder
       id={"venderOpenDate"}
-      text={"תאריך התחלה"}
+      text={" זמין מ"}
      />
      <Calinder
       id={"venderEndDate"}
-      text={"תאריך סיום"}
+      text={"סיום"}
      />
    
       <button 

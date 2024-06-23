@@ -1,0 +1,48 @@
+/* LoadingSpinner.css */
+.container {
+    height:100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loader {
+    border-width: 0.5rem;
+    border-style: solid;
+    border-color: red blue green orange;
+    width: 3.625rem;
+    height: 3.625rem;
+
+    position: relative;
+    animation: spin 3s infinite;
+  }
+  
+  .loader::before,
+  .loader::after {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: purple;
+    position: absolute;
+    left: 0.125rem;
+  }
+  
+  .loader::before {
+    top: 0.063rem;
+  }
+  
+  .loader::after {
+    bottom: 0.063rem;
+  }
+  
+  @keyframes spin {
+    50%{
+        transform: rotate(-180deg);
+
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

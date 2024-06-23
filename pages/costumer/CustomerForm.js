@@ -1,18 +1,15 @@
-import React,{useState} from 'react'
-import InputElemnt from '@/components/InputElemnt'
-import Calendar from "components/Calinder"
-import StarRating from '@/components/StarRating'
-import ToggleSwitch from '@/components/ToggleSwitch'
-import SelectElemnt from '@/components/SelectElemnt'
-
-    const CustomerFrom = ({
-        children
-    })=>
-        {
-    const [ ,set] =useState(null)
+import React,{useState,useEffect} from 'react'
+import InputElemnt from '@/components/InputElemnt/InputElemnt'
+import Calendar from "@/components/Calinder/Calinder"
+import SelectElemnt from "@/components/SelectComponent/SelectComponent"
+import { useSession } from 'next-auth/react'
 
 
-/*    location,
+    const CustomerFrom = ({ })=>{
+       const { data: session ,status ,update} = useSession()
+
+/* Form Filds    
+location,
     aparment-size , 
     ditale-expation , 
     avalbilati,
@@ -28,7 +25,9 @@ import SelectElemnt from '@/components/SelectElemnt'
  */
 
         return (
-            <div className='customer-form-wrarpper'>
+            
+        <form className='customer-form-wrarpper'>
+            <h1>הזמנת שירות{session.user?.name} </h1>
             <InputElemnt
                 text={"שם הלקוח "}
                 type={"text"}
@@ -48,9 +47,12 @@ import SelectElemnt from '@/components/SelectElemnt'
             />
             <SelectElemnt
                 SelectOptions={["פיפאל","אשראי","ביט","מזומן"]}
+                className={"vendor-payment"}
             />
 
-            </div>
+            </form>
+ 
+            
         )
 
      }

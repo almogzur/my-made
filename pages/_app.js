@@ -1,20 +1,30 @@
-import "components/Footer/footer.css"
-import "components/NextAuth/ProfileControl.css"
-import "pages/MainPage.css"
-import "pages/vendor/vender.css"
+
+// Dynamic Components
 import "components/StarRating/StarRating.css"
 import 'rc-select/assets/index.css';
-import "react-datepicker/dist/react-datepicker.css";
 import "components/Dialog/Dialog.css"
-import "components/Sidebar/SideBar.css"
-import "pages/costumer/customer.css"
 import "components/Acordione/Acordion.css"
 import "components/CommentSection/CommentSection.css"
+
+// Static Components
+import "components/Footer/Footer.css"
 import "components/Loader/LoadingSpinner.css"
+import "react-datepicker/dist/react-datepicker.css";
+import "components/NextAuth/ProfileControl.css"
+
+
+// PagesCss
+import "pages/MainPage.css"
+import "pages/profile/Profile.css"
+import "pages/costumer/customer.css"
+import "pages/vendor/vender.css"
+import "pages/board/board.css"
+
 
 import { SessionProvider } from "next-auth/react"
-import { VendorData } from "contaxt/contaxt"
+import { VendorData,CostumrData,PageWidth } from "contaxt/contaxt"
 import { useEffect, useState } from "react"
+import { useMediaQuery } from "usehooks-ts"
 
 
 export default function App({
@@ -32,7 +42,7 @@ export default function App({
     vendorPaymentOptions:""
     })
 
-    const [CustomerData,setCustomerDats] =useState({
+  const [CustomerData,setCustomerDats] =useState({
       customerFullName:"",
       customerPhoneNumber:"",
       customerApartmentSizw:"",
@@ -40,6 +50,10 @@ export default function App({
       customer:"" ,
 
        })
+
+
+       const md = useMediaQuery('(max-width: 900px)')
+       const sm = useMediaQuery('(max-width: 600px)')
 
     useEffect(()=>{
        // console.log(VenderData,CustomerData)
@@ -52,7 +66,11 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <VendorData.Provider value={[VenderData,setVendorData]}>
+      <CostumrData.Provider value={[CostumrData,setCustomerDats]}>
+      <PageWidth.Provider value={[md,sm]}>
       <Component {...pageProps} />
+      </PageWidth.Provider>
+      </CostumrData.Provider>
       </VendorData.Provider>
     </SessionProvider>
   )

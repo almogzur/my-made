@@ -3,15 +3,17 @@ import Link from "next/link";
 export default function CostumeLink ({
   href,
   children,
-  text
+  text,
+  linkClassName,
+  divClassName
  })
   {
     return (
       <Link 
         href={href}
-        className="nav-link"
+        className={linkClassName}
            >
-        <div className="inner-link-Wrapper" >
+        <div className={divClassName} >
            {text}     
            {children}
       </div>

@@ -13,22 +13,22 @@ function ProfileControls() {
       onClick={() => signIn(undefined,{callbackUrl:"/profile"})}
       className="singIn"
     >הרשמה או התחברות
-  </button> 
+ </button> 
 :
-<div
+<div 
  className="singOutDiv"
 >
- <button 
- className="singOut"
-   onClick={() => signOut()}
-   >התנתק
- </button>
- <Link 
-   href={"/profile"}
-   className="profile-link"
- >{"פרופיל אישי "}<br/>
-  
-  </Link>
+   <button 
+      className="singOut"
+     onClick={() => signOut()}
+     >התנתק
+  </button>
+
+   <Link 
+     href={"/profile"}
+     className="profile-link"
+    >{"פרופיל אישי "}<br/>
+   </Link>
 </div>
 ) 
 }

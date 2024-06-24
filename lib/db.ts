@@ -14,7 +14,7 @@ const options = {
   },
 }
  
-let client
+let client: MongoClient
 let clientPromise: Promise<MongoClient>
  
 if (process.env.NODE_ENV === "development") {

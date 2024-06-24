@@ -1,9 +1,13 @@
+
+*{
+    transition:1s ease;
+}
 .singIn{
     position:absolute;
     left:15px;
-    top:5px;
+    top:0px;
     width:100px;
-    height:50px;
+    height:inherit;
     background:none;
     border:none;
     color:#fff;
@@ -26,8 +30,15 @@
 }
 .singIn:active{
     color:white;
+
 }
 
+
+/*
+//
+//
+//
+*/
 
 
 
@@ -36,30 +47,59 @@
     top:0;
     left:0;
     height:60px;
+    width:200px;
     display:flex;
-    flex-direction:column;
+    flex-direction:row;
+
 }
 .singOut{
  border:none;
  background:none;
- width:100px;
-height:50%;
+ width:inherit;
+ height:inherit;
+ color:#fff;
+ font-size:16px;
 }
 .singOut:visited{}
 .singOut:active{}
 .singOut:focus{}
-.singOut:hover{}
+.singOut:hover{
+    background:white;
+    color:black;
+}
 .singOut:active{}
 
 .profile-link{
     text-decoration:none;
-    width:100px;
-    height:50%;
-    text-align:center;
-    padding-top:5px
+    width:inherit;
+    height:inherit;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    
+
 }
+.profile-link:visited {
+    color:white
+}
+.profile-link:link{
+    color:white
+}
+.profile-linkctive {
+    color:white
+}
+.profile-link:focus {
+    color:white
+}
+.profile-link.visited:{
+    color:white
+}
+
 .profile-link:hover{
     background:white;
+    color:black;
+
 }
 .profile-link:visited{
 

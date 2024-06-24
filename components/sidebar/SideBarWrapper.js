@@ -1,26 +1,20 @@
-import { useState } from "react"
-
+import { useContext, useState } from "react"
+import { PageWidth } from "contaxt/contaxt"
 
 const SideBar  = ({
     children,
-    className,
-    callBack
+    sidebBarClassName,
+    callBack,
+    
     })=>
     {
-  const [ isOpen ,setIsOpen ] =useState(false)  
-
         const SideBarhandler = ()=>{}
-   
+
      return (
         <aside
-          style={{width : isOpen? "100px":"50px"}}
-            className={className}
+            className={sidebBarClassName}
         >
         {children}
-
-        <button
-          onClick={()=>setIsOpen(!isOpen)}
-        >{isOpen? "opem":"close"}</button>
         </aside>
             
             

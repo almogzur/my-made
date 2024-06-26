@@ -4,13 +4,15 @@
 }
 .singIn{
     position:absolute;
-    left:15px;
+    left:0px;
     top:0px;
     width:100px;
     height:inherit;
     background:none;
     border:none;
     color:#fff;
+    
+
 }
 
 .singin:visited:{
@@ -27,6 +29,7 @@
     background:black;
     transition: ease 1s;
     border: solid 1px #fff;
+    border-radius:15px
 }
 .singIn:active{
     color:white;
@@ -64,8 +67,10 @@
 .singOut:active{}
 .singOut:focus{}
 .singOut:hover{
-    background:white;
-    color:black;
+    background:black;
+    color:white;
+    border: 1px solid white;
+    border-radius:15px;    
 }
 .singOut:active{}
 
@@ -97,9 +102,11 @@
 }
 
 .profile-link:hover{
-    background:white;
-    color:black;
-
+    background:black;
+    color:white;
+    border: 1px solid white;
+    border-radius:15px;    
+    
 }
 .profile-link:visited{
 

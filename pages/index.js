@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import FooterRwapper from "@/components/Footer/FooterRwapper"
+import FooterRwapper from "@/components/Footer/Footer"
 import Main from 'pages/Main'
 
 

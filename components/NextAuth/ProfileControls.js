@@ -1,7 +1,7 @@
 import React from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
 import Link from "next/link";
-import { PHASE_PRODUCTION_BUILD } from "next/dist/shared/lib/constants";
+import { CgProfile } from "react-icons/cg";
 
 function ProfileControls() {
 
@@ -18,17 +18,18 @@ function ProfileControls() {
 <div 
  className="singOutDiv"
 >
+   <Link 
+     href={"/profile"}
+     className="profile-link"
+    ><CgProfile size={40} />
+      
+    <br/>
+   </Link>
    <button 
       className="singOut"
      onClick={() => signOut()}
      >התנתק
   </button>
-
-   <Link 
-     href={"/profile"}
-     className="profile-link"
-    >{"פרופיל אישי "}<br/>
-   </Link>
 </div>
 ) 
 }

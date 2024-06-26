@@ -5,12 +5,12 @@
 //Costumer Page
 //Costumer Page
 import { useEffect } from "react";
-import FooterRwapper from "@/components/Footer/FooterRwapper"
-import CustomerForm from "pages/costumer/CustomerForm"
+import FooterRwapper from "@/components/Footer/Footer"
+import CustomerForm from "pages/profile/costumer/CustomerForm"
 import { useRouter } from "next/router"; 
 import { useSession } from "next-auth/react";
 import LoadingSpinner from "@/components/Loader/LoadingSpinner";
-import StarRating from "@/components/StarRating/StarRating";
+import ProfileLayout from "@layouts/ProfileLayout";
 
 const CostumerPage  = ({})=>{
    
@@ -24,8 +24,9 @@ const CostumerPage  = ({})=>{
 
   return (
    <>
-   <FooterRwapper/>
-   <CustomerForm/>
+  <ProfileLayout>
+    <CustomerForm/>
+  </ProfileLayout>
     </>
   )
 }

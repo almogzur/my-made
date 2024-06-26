@@ -13,7 +13,10 @@ export const authOptions = {
       // ...
     }),
   ],
-  adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(clientPromise, {
+    databaseName:"my-made",
+    }
+  ),
 }
 
 export default NextAuth(authOptions)

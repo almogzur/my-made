@@ -16,8 +16,8 @@ import "components/NextAuth/ProfileControl.css"
 // PagesCss
 import "pages/MainPage.css"
 import "pages/profile/Profile.css"
-import "pages/costumer/customer.css"
-import "pages/vendor/vender.css"
+import "pages/profile/costumer/customer.css"
+import "pages/profile/vendor/vender.css"
 import "pages/board/board.css"
 
 
@@ -56,7 +56,6 @@ export default function App({
        const sm = useMediaQuery('(max-width: 600px)')
 
     useEffect(()=>{
-       // console.log(VenderData,CustomerData)
     },[VenderData,CustomerData])
 
 

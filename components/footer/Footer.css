@@ -5,14 +5,15 @@
     height:65px;
     background:#404040;
     color:white;
+    display:flex;
+    
 }
 
-.footer-link{
+ .footer-link{
     text-decoration:none; 
     color:white;
     transition: ease 1s
 }
-
 
 .inner-link-wrapper{
     display:flex;
@@ -20,32 +21,30 @@
     justify-content:space-around;    
     align-items:center;
     align-content:enter;
-
-    width:55px;
-    height:55px;
+    width:70px;
+    height:65px;
     border-radius:10px;
-    font-size:12px;
+
    
 }
-
-
 
 .footer-link:visited{
     color:white;
 }
-.footer-link:active{
+
+.inner-link-wrapper:active{
     color:white;
 }
-.footer-link:focus{
+.inner-link-wrapper:focus{
     color:white;
 }
-.footer-link:hover{
+.inner-link-wrapper:hover{
     color:white;
     background:black;
     transition: ease 1s;
     border: solid 1px #fff;
 }
-.footer-link:active{
+.inner-link-wrapper:active{
     color:white;
 }
 

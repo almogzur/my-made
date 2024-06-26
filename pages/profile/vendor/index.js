@@ -5,15 +5,16 @@
 
 
 import React,{} from "react";
-import FooterRwapper from "@/components/Footer/FooterRwapper";
-import VenderForm from "@pages/vendor/VenderForm";
+import ProfileLayout from "@layouts/ProfileLayout";
+import VenderForm from "@pages/profile/vendor/VenderForm";
 
 function Vender() {
     return ( 
         <> 
-    
+      <ProfileLayout>
         <VenderForm/>
-        <FooterRwapper/>
+      </ProfileLayout>
+
         
         </>
      );

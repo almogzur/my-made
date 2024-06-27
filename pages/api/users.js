@@ -8,10 +8,11 @@ export default async function handler(req, res) {
   const a =[]
 
    for await (const doc of users){
-    console.log(doc)
-    a.push(doc)
+   
+     a.push(doc)
   
    }
+   console.log(a)
    res.status(200).json(a);
   
   

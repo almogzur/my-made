@@ -1,5 +1,5 @@
 import React, {useContext} from "react"
-import { VendorData } from "contaxt/contaxt";
+import { VendorContaxt} from "contaxt/contaxt";
 import InputElemnt from "@/components/InputElemnt/InputElemnt"
 import Calinder from "@/components/Calinder/Calinder";
 import SelectElemnt from "@/components/SelectComponent/SelectComponent"
@@ -7,75 +7,59 @@ import SelectElemnt from "@/components/SelectComponent/SelectComponent"
 
 function VenderForm () {
 
-  const [data,setData]=useContext(VendorData)
-
-  const handleSubmit = async (event) => {
-
-    try {
-      const response = await fetch('/api/vendor', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data), // Send the form data as JSON
-      });
-
-      if (response.ok) {
-        // Handle successful response
-        console.log('Form submitted successfully');
-      } else {
-        // Handle error response
-        console.error('Failed to submit form');
-      }
-    } catch (error) {
-      console.error('Error during form submission:', error);
-    }
-  };
+  const [Vendor,setVendor]=useContext(VendorContaxt)
 
  
     return (
      <form 
-        onSubmit={handleSubmit}
         className="vender-form-wrapper" 
    
      > 
      <h1>הרשמת נותן שירות </h1>
        <InputElemnt 
         type={"text"}
-        id={"venderFullName"}
+        id={"FullName"}
         text={"שם מלא"}  
+        contextType={"Vendor"}
         
        />
 
       <InputElemnt 
         type={"tel"}
-        id={"venderPhone"}
+        id={"Phone"}
         text={"טלפון"}
+        contextType={"Vendor"}
 
       />
 
       <InputElemnt
         type={"email"}
-        id={"vendorEmail"}
+        id={"Email"}
         text={"מייל"}
+        contextType={"Vendor"}
+
 
       />
       
       <InputElemnt
         type={"text"}
         text={"שם העסק"}
-        id={"venderBussniseName"}
+        id={"BussniseName"}
+        contextType={"Vendor"}
+
 
       />
       <InputElemnt
          type={"number"}
          text={"מחיר"}
-         id={"price"}
+         id={"Price"}
+         contextType={"Vendor"}
+
          
       />
 
       <SelectElemnt
-      SelectOptions={[]}
+        SelectOptionsArray={[]}
         text={"קבלת תשלום"}
         className="vendor-payment"
         hedlineText={"אפשריות תשלום"}

@@ -5,7 +5,6 @@
 //Costumer Page
 //Costumer Page
 import { useEffect } from "react";
-import FooterRwapper from "@/components/Footer/Footer"
 import CustomerForm from "pages/profile/costumer/CustomerForm"
 import { useRouter } from "next/router"; 
 import { useSession } from "next-auth/react";
@@ -18,6 +17,14 @@ const CostumerPage  = ({})=>{
   const { data: session ,status ,update} = useSession()
 
 
+
+  useEffect(()=>{
+    
+    if (status === "unauthenticated" ) {
+     router.push("/")
+
+ }
+})
   if (status === 'loading') {
     return <LoadingSpinner/>
   }

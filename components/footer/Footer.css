@@ -1,6 +1,6 @@
 .footer-wrapper{
-    position:absolute;
-    bottom:0;
+    position: fixed;
+    bottom: 0;
     width:100%;
     height:65px;
     background:#404040;
@@ -39,7 +39,8 @@
     color:white;
 }
 .inner-link-wrapper:hover{
-    color:white;
+    color:#00c0ff;
+
     background:black;
     transition: ease 1s;
     border: solid 1px #fff;

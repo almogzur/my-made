@@ -1,7 +1,5 @@
 
-*{
-    transition:1s ease;
-}
+
 .singIn{
     position:absolute;
     left:0px;
@@ -16,24 +14,24 @@
 }
 
 .singin:visited:{
-    color:white;
+    color:#00c0ff;
 }
 .singIn:active{
-    color:white;
+    color:#00c0ff;
 }
 .singIn:focus{
-    color:white;
+    color:#00c0ff;
+
 }
 .singIn:hover{
-    color:white;
+    color:#00c0ff;
     background:black;
     transition: ease 1s;
     border: solid 1px #fff;
     border-radius:15px
 }
 .singIn:active{
-    color:white;
-
+    color:#00c0ff;
 }
 
 
@@ -68,7 +66,8 @@
 .singOut:focus{}
 .singOut:hover{
     background:black;
-    color:white;
+    color:#00c0ff;
+    transition: 1s ease;
     border: 1px solid white;
     border-radius:15px;    
 }
@@ -98,14 +97,16 @@
     color:white
 }
 .profile-link.visited:{
-    color:white
+    color:white;
+    
 }
 
 .profile-link:hover{
     background:black;
-    color:white;
+    color:#00c0ff;
     border: 1px solid white;
     border-radius:15px;    
+    transition: 1s ease
     
 }
 .profile-link:visited{

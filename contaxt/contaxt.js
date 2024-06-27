@@ -1,11 +1,13 @@
 import { createContext } from "react";
 
-const VendorData = createContext(null)
-const CostumrData = createContext(null)
-const PageWidth = createContext(null)
+const VendorContaxt = createContext(null)
+const CostumrContaxt = createContext(null)
+const UserContaxt = createContext(null)
+const WindowWidthContaxt = createContext(null)
 
 export { 
-    VendorData,
-    CostumrData,
-    PageWidth
+    VendorContaxt,
+    CostumrContaxt,
+    WindowWidthContaxt,
+    UserContaxt
 }

@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import DatePicker from "react-datepicker";
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import { he } from 'date-fns/locale/he';
-import { VendorData } from "contaxt/contaxt";
+import { VendorContaxt } from "contaxt/contaxt";
 
 registerLocale('he', he )
 // CSS Modules, react-datepicker-cssmodules.css
@@ -10,7 +10,8 @@ registerLocale('he', he )
 
 const Calinder = ({id,text}) => {
   const [startDate, setStartDate] = useState(new Date());
-  const [data,setData]=useContext(VendorData)
+  
+  const [data,setData]=useContext(VendorContaxt)
 
   const handleChange = (e) => {
     setData({

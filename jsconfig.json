@@ -6,7 +6,8 @@
       "@/lib/*":["lib/*"],
       "@pages/*":["pages/*"],
       "@api/*":["api/*"],
-      "@layouts/*":["layouts/*"]
+      "@layouts/*":["layouts/*"],
+      "@public/*":["public/*"]
    } 
  }
 }

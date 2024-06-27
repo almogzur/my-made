@@ -1,41 +1,56 @@
-import { VendorData } from "contaxt/contaxt"
-import { useContext, useEffect } from "react"
+import { useContext } from "react";
+import { VendorContaxt, CostumrContaxt, UserContaxt } from "contaxt/contaxt";
 
 const InputElemnt = ({
     type,
     text,
     id,
-    labeClassName,
+    labelClassName,
     required,
+    inputClassName,
+    contextType
 }) => {
-        
-    const [data,setData] = useContext(VendorData)
+    const [Vendor, setVendor] = useContext(VendorContaxt);
+    const [Customer, setCustomer] = useContext(CostumrContaxt);
+    const [User, setUser] = useContext(UserContaxt);
 
     const handleChange = (e) => {
-        setData({
-            ...data,
-            [id]: e.target.value
-        });
-    };
+        
+        const { value, id } = e.target;
 
+        // Determine which context to update based on contextType
+        switch (contextType) {
+            case 'Vendor':
+                setVendor((prev) => ({ ...prev, [id]: value }));
+                break;
+            case 'Customer':
+                setCustomer((prev) => ({ ...prev, [id]: value }));
+                break;
+            case 'User':
+                setUser((prev) => ({ ...prev, [id]: value }));
+                break;
+            default:
+                console.warn(`Unknown contextType: ${contextType}`);
+        }
+    };;
 
-    return <label 
-             htmlFor={id} 
-            className={labeClassName? labeClassName:null}
-            >
+    return (
+        <label 
+            htmlFor={id} 
+            className={labelClassName ? labelClassName : null}
+        >
             {text}
-            <br/>
-             <input 
-              required={required? true : false}
-              placeholder={required? "*" : null}
-              type={type}
-              id={id}
-              className="vender-input"
-              onChange={handleChange}
-               />
-           </label>
-      
-    
-   }
-   export default InputElemnt
-   
+            <br />
+            <input 
+                required={required ? true : false}
+                placeholder={required ? "*" : null}
+                type={type}
+                id={id}
+                className={inputClassName}
+                onChange={handleChange}
+            />
+        </label>
+    );
+};
+
+export default InputElemnt;

@@ -12,8 +12,6 @@ return (
   <SideBar
         sidebBarClassName={"profile-sidebar"}
     >
-   
-
         <CostumeLink  
               text={"משק"}
               href="/profile/vendor"
@@ -32,8 +30,10 @@ return (
            <FontAwesomeIcon size="1x" icon={faPerson} />
         </CostumeLink> 
            
-  </SideBar>    
-   {children}
+  </SideBar> 
+
+    {children}
+
   <Footer/>
     </>
 ) 

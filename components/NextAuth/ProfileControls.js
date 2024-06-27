@@ -27,7 +27,9 @@ function ProfileControls() {
    </Link>
    <button 
       className="singOut"
-     onClick={() => signOut()}
+     onClick={() => signOut({
+        callbackUrl:"/"
+     })}
      >התנתק
   </button>
 </div>

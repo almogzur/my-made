@@ -20,9 +20,9 @@ return (
   <div
 
     style={{
-       width:"fill",
+       width:"100%",
        height:"370px",
-       marginRight:"70px",
+
        padding:0,
        boxShadow: "inset 0 0px 0px #00c0ff ,0 0 0 0px white ,0px 0px 0.7em #404040", 
        }}
@@ -33,21 +33,20 @@ return (
         src={defualtProfileImage}
         
       />  
-     <motion.h1
-         animate={{ x: [0,70,0] ,rotate : 360 }}
-         transition={{duration:2,ease:"anticipate"}}
+     <h1
+        
          className='profile-heder-text' 
         
          >
          {text}
-     </motion.h1>
+     </h1>
 
      <h1 style={{position:"relative",top:"-70px",left:"-10px"}} >פרטים</h1>
 
      <motion.div 
          className='profile-heder-img'
          animate={{ x: [0,-70,0] ,rotate : 360 }}
-         transition={{duration:2,ease:"anticipate"}}
+         transition={{duration:3,ease:"anticipate"}}
        >
        <Image
         src={image?image:defulteUserImg} 

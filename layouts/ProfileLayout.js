@@ -1,9 +1,9 @@
 import FooterRwapper from "@/components/Footer/Footer"
 import {faHouse , faBroom , faPerson }from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import SideBar from '@/components/Sidebar/SideBarWrapper'
-import CostumeLink from '@/components/Footer/CostumeLink'
-import Footer from '@/components/Footer/Footer'
+import SideBar from 'components/Sidebar/SideBarWrapper'
+import CostumeLink from 'components/Footer/CostumeLink'
+import Footer from 'components/Footer/Footer'
 
 const ProfileLayout = ({children})=>{
 

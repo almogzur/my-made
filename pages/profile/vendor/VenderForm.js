@@ -15,11 +15,10 @@ function VenderForm () {
 
 
     return (
-     <form 
+    <form 
         className="vender-form-wrapper" > 
-     <h1 > הרשמת נותן שירות   </h1>
-
-    <div className="vendor-form-split1"
+      <h1 > הרשמת נותן שירות   </h1>
+      <div className="vendor-form-split1"
       >
        <InputElemnt 
         type={"text"}
@@ -36,7 +35,7 @@ function VenderForm () {
       />
       </div>
       <br/>
-  <div className=" vendor-form-split2" >
+      <div className=" vendor-form-split2" >
       <InputElemnt
         type={"email"}
         id={"Email"}
@@ -79,9 +78,8 @@ function VenderForm () {
        className="vender-form-btn"
       >רישום 
       </button>
-    </div>
- 
-        </form>
+      </div>
+    </form>
       );
 
       

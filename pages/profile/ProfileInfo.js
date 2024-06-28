@@ -6,7 +6,6 @@ import { UserData } from 'contaxt/contaxt'
 import InputElemnt from '@/components/InputElemnt/InputElemnt'
 
 
-
 const ProfileInfo=({UserObject})=>{
 
     const router = useRouter()

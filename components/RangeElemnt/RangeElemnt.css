@@ -1,0 +1,17 @@
+.range-input {
+    margin: 20px 0;
+}
+
+.range-input label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.range-input input {
+    width: 100%;
+}
+
+.range-input span {
+    display: inline-block;
+    margin-top: 10px;
+}

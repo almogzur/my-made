@@ -1,8 +1,16 @@
 // RangeInput.js
 import React from 'react';
 
-const RangeInput = ({ minValue, maxValue, price ,id, user, onChange,className }) => {
-
+const RangeInput = ({ 
+     minValue, 
+     maxValue, 
+     price ,
+     id,
+     user,
+     onChange,
+     className 
+  }) => {
+    
     return (
         <div className={className}>
             <label htmlFor={id}>Value for {price}:</label>

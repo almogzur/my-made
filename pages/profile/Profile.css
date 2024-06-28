@@ -1,10 +1,9 @@
 .profile-sidebar{  
     position:absolute;
-    border-left:1px solid black;
     width:70px;
-    height:100dvh;
+    border-radius:15px;
     background:#404040;
-    padding-top:10px;    
+    margin-top:10px;    
 }
 
 /*

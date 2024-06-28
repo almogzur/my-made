@@ -15,7 +15,8 @@ export const authOptions = {
   ],
   adapter: MongoDBAdapter(clientPromise, {
     databaseName:"my-made",
-    }
+    },
+    
   ),
 }
 

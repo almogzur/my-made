@@ -47,7 +47,7 @@ export default function App({
       Phone:"",
       ApartmentRoomsSize:"",
       PriceRange:[],
-      customerLocation:""
+      Location:""
        })
 
   const [User,setUser]=useState({

@@ -16,8 +16,6 @@ function Vender() {
   const { data: session ,status ,update} = useSession()
   const router = useRouter()
 
-
-
   useEffect(()=>{
     
     if (status === "unauthenticated" ) {

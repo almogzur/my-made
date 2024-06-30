@@ -1,5 +1,4 @@
-import FooterRwapper from "@/components/Footer/Footer"
-import {faHouse , faBroom , faPerson }from "@fortawesome/free-solid-svg-icons"
+import { faBroom , faPerson }from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SideBar from 'components/Sidebar/SideBarWrapper'
 import CostumeLink from 'components/Footer/CostumeLink'
@@ -22,7 +21,7 @@ return (
         </CostumeLink>
 
         <CostumeLink
-                href="/profile/costumer"
+                href="/profile/customer"
                 text={"לקוח"}
                 linkClassName={"side-bar-link-wrapper"}
                 divClassName={"side-bar-link"}

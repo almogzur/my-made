@@ -1,7 +1,5 @@
-import { useContext } from "react";
-import { VendorContaxt, CostumrContaxt, UserContaxt } from "contaxt/contaxt";
-
-
+import { useContext } from 'react';
+import { UserContext } from 'Context/Context';
 
 const InputElemnt = ({
     type,
@@ -11,62 +9,56 @@ const InputElemnt = ({
     required,
     inputClassName,
     contextType,
-    placeholder
-    
 }) => {
-    const [Vendor, setVendor] = useContext(VendorContaxt);
-    const [Customer, setCustomer] = useContext(CostumrContaxt);
-    const [User, setUser] = useContext(UserContaxt);
+    const [User, setUser] = useContext(UserContext);
 
-     const defualtStyle = {
-        label:{},
-        input:{
-            width:"300px",
-            height:"70px",
-            borderRadius:"15px",
-            border:"2px solid #404040",
-            
-        } 
-     }
-
+    const defaultStyle = {
+        label: {},
+        input: {
+            width: "300px",
+            height: "70px",
+            borderRadius: "15px",
+            border: "1px solid #404040",
+        }
+    };
 
     const handleChange = (e) => {
+        const { value } = e.target;
 
-        const { value, id } = e.target;
-
-        // Determine which context to update based on contextType
-        switch (contextType) {
-            case 'Vendor':
-                setVendor((prev) => ({ ...prev, [id]: value }));
-                break;
-            case 'Customer':
-                setCustomer((prev) => ({ ...prev, [id]: value }));
-                break;
-            case 'User':
-                setUser((prev) => ({ ...prev, [id]: value }));
-                break;
-            default:
-                console.warn(`Unknown contextType: ${contextType}`);
-        }
-    };;
+        setUser((prev) => {
+            const newState = { ...prev };
+            switch (contextType) {
+                case 'Vendor':
+                    newState.isVendor[id] = value;
+                    break;
+                case 'Customer':
+                    newState.isCustomer[id] = value;
+                    break;
+                default:
+                    newState[id] = value;
+                    break;
+            }
+            return newState;
+        });
+    };
 
     return (
-        <label 
-           style={defualtStyle.label}
-            htmlFor={id} 
-            className={labelClassName ? labelClassName : null}
+        <label
+            style={defaultStyle.label}
+            htmlFor={id}
+            className={labelClassName || null}
         >
             {text}
             <br />
-            <input 
-            style={defualtStyle.input}
-                required={required ? true : false}
-                placeholder={required  ? "*" : null}
+            <input
+                style={defaultStyle.input}
+                required={required || false}
+                placeholder={required ? "*" : null}
                 type={type}
                 id={id}
                 className={inputClassName}
                 onChange={handleChange}
-               
+                value={contextType === 'Vendor' ? User.isVendor[id] : contextType === 'Customer' ? User.isCustomer[id] : User[id] || ''}
             />
         </label>
     );

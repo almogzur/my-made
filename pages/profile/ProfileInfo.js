@@ -1,40 +1,34 @@
 import { useSession } from 'next-auth/react'
 import {useContext, useEffect,useState} from 'react'
-import { useRouter } from 'next/router'
-import LoadingSpinner from '@/components/Loader/LoadingSpinner'
-import { UserData } from 'contaxt/contaxt'
 import InputElemnt from '@/components/InputElemnt/InputElemnt'
+import { UserContext } from '@Context/Context'
+import TextArea from '@/components/TextArea/TextArea'
+import Dialog from '@/components/Dialog/Dialog'
+import ProfileForm from './ProfileForm'
 
+const ProfileInfo=({state,setState,session})=>{
 
-const ProfileInfo=({UserObject})=>{
+ const { User,isVendor,isCostumer } = state
+    
 
-    const router = useRouter()
-    const { data: session ,status ,update} = useSession()
-    const {age ,about , phone , CoverImg } = UserObject
+   if(User.age||!User.about||User.phone){
 
-    useEffect(()=>{
-        console.log(UserObject)
-    })
-
-    return (
-        <section
-         className='profile-info-section'
+    return  <Dialog
+                id={"profile-info"}
+           
+                buttonText={"עדכון פרטים"}
+                buttonstyle={{width:"150px",height:"70px",border:"none",borderRadius:"15px"}}
+                
         >
-        {
-            UserObject.age? User.age :
-
-        <InputElemnt
-            type={"text"}
-            text={"גיל"}
-            id="age"
-            labeClassName={"profile-age"}
-
-        />
         
-        }
-            
-        </section>
-) 
+                <ProfileForm/>
+                
+            </Dialog>
+    }
+
+    return <div>{[]}</div>
+     
+   
 }
 
 export default ProfileInfo

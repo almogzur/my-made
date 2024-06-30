@@ -1,17 +1,21 @@
 import React, {useContext} from "react"
-import { VendorContaxt} from "contaxt/contaxt";
+import { UserContext} from "Context/Context";
 import InputElemnt from "@/components/InputElemnt/InputElemnt"
 import Calinder from "@/components/Calinder/Calinder";
 import SelectElemnt from "@/components/SelectComponent/SelectComponent"
 import { useSession } from "next-auth/react";
 
-function VenderForm () {
+ function  VenderForm () {
 
-  const [Vendor,setVendor]=useContext(VendorContaxt)
+  const [VenUserdor,setUser]=useContext(UserContext)
   const { data: session ,status ,update} = useSession()
 
-  const { FullName, Phone, BusinessName, OpenDate, EndDate, Email, Payment } = Vendor;
-  const { user: { name, email, image }, expires } = session;
+
+
+   if(!session){
+    return <div>Loading...</div>
+   }
+  const { user: { name, email, image }, expires } =  session;
 
 
     return (
@@ -58,10 +62,11 @@ function VenderForm () {
       />
 
       <SelectElemnt
-        SelectOptionsArray={[]}
+        SelectOptionsArray={["אשרי", "מזומן","ביט" ,"פיפאל"]}
         text={"קבלת תשלום"}
         className="vendor-payment"
         hedlineText={"אפשריות תשלום"}
+        contextType={"isVendor"}
       />
 
      <Calinder

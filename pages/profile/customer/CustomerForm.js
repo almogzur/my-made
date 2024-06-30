@@ -8,9 +8,8 @@ import { useRouter } from 'next/router'
 
     const CustomerFrom = ({ })=>{
 
-       const { data: session ,status ,update} = useSession()
-       const router = useRouter()
 
+       const { data: session ,status ,update} = useSession()
        useEffect(()=>{
     
         if (status === "unauthenticated" ) {
@@ -64,6 +63,7 @@ location,
             <SelectElemnt
                 SelectOptionsArray={["פיפאל","אשראי","ביט","מזומן"]}
                 className={"vendor-payment"}
+                contextType={""}
             />
 
             <InputElemnt

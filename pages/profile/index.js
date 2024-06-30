@@ -10,19 +10,24 @@ import {useContext, useEffect,useState} from 'react'
 import { useRouter } from 'next/router'
 import LoadingSpinner from '@/components/Loader/LoadingSpinner'
 import ProfileLayout from 'layouts/ProfileLayout'
-import ProfileHeader from './PrifileHeder'
-import ProfileInfo from './ProfileInfo'
-import { UserContaxt,  } from 'contaxt/contaxt'
+import ProfileHeader from '@pages/profile/PrifileHeder'
+import ProfileInfo from '@pages/profile/ProfileInfo'
+import { UserContext  } from 'Context/Context'
 
 
 const ProfilePage = () => {
 
-  const router = useRouter()
-  const { data: session ,status ,update} = useSession()
-  const [User,setUser]=useContext(UserContaxt)
+  const PAGE_STATE= "User"
 
-useEffect(()=>{
-    // Prevent Slug Navigation     
+  const router = useRouter()
+
+  const { data: session ,status ,update} = useSession()
+
+  const [state,setState]=useContext(UserContext)
+
+  // Prevent Slug Navigation     
+  useEffect(()=>{
+  
     if (status === "unauthenticated"  ) {
      router.push("/")
  }
@@ -33,17 +38,19 @@ useEffect(()=>{
 }
 
 return (
-     
-    <ProfileLayout>
-     <ProfileHeader
-        text={session?.user?.name+" " }
-        image={session?.user?.image }
-     />
-     <ProfileInfo
-        UserObject={User}
 
-     />
-     </ProfileLayout>
+    <ProfileLayout>
+
+      <ProfileHeader
+         name={session?.user?.name+" " }
+         image={session?.user?.image }
+       />
+       <ProfileInfo 
+          state={state}
+          setState={setState}
+          session={session}
+       />
+    </ProfileLayout>
 
     
 ) 

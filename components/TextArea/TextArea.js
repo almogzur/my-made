@@ -1,24 +1,13 @@
-import { useContext, useEffect } from 'react';
-import { UserContext } from '@Context/Context'; // Adjust the path if necessary
-
 const TextArea = ({
   id,
   rows,
   cols,
+  value,
+  onChange
 }) => {
-  const [User, setUser] = useContext(UserContext);
-
-  useEffect(()=>{
-   console.log(User.about)
-  })
-
   const handleChange = (e) => {
     const { value } = e.target;
-
-    setUser((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
+    onChange(id, value);
   };
 
   return (
@@ -26,7 +15,7 @@ const TextArea = ({
       <label htmlFor={id}>{id}</label>
       <textarea
         id={id}
-        value={User[id] || ''}
+        value={value || ''}
         onChange={handleChange}
         rows={rows || 4}
         cols={cols || 50}

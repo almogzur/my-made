@@ -6,10 +6,9 @@ import { useRouter } from 'next/router'
 import { CommentSection } from 'replyke';
 
 
-const ComSection=()=>{
+const ComSection=({})=>{
 
   const router = useRouter()
-  const { data: session ,status ,update} = useSession()
 
   useEffect(()=>{ })
 

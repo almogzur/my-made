@@ -3,7 +3,11 @@ import { useState } from "react";
 import ReactModal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons"
+import {  motion } from "framer-motion";
 
+
+
+///// change button naming for css
 
 const Dialog = ({id,children,buttonText})=>{
 
@@ -15,7 +19,7 @@ const Dialog = ({id,children,buttonText})=>{
 
       
       return(
-      <div className={`${id}-dialog-wrapper`} >
+      <div className={`${id}-wrapper`} >
          <button 
            className={`${id}-btn`}
              onClick={handleModal}
@@ -31,12 +35,20 @@ const Dialog = ({id,children,buttonText})=>{
             >
               {children}
     
-         <button  
-         onClick={handleModal}
-           className="vener-x-btn"
+         <motion.button   
+          whileHover={ {} }
+           onClick={handleModal}
+           style={{
+             position:"absolute",
+             top:"10px",
+             right:"10px",
+             borderRadius:"15px"
+           }}
+          
+           
          >
-          <FontAwesomeIcon icon={faXmark} />
-        </button>
+          <FontAwesomeIcon size="4x" icon={faXmark} />
+        </motion.button>
 
      
       </ReactModal>

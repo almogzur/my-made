@@ -1,40 +1,27 @@
-import Select, { Option } from 'rc-select';
 import {  UserContext} from 'Context/Context';
 import { useContext, useState } from 'react';
-
+import Select, { Option } from 'rc-select';
 
 const SelectElemnt = ({
   id,
   hedlineText,
   SelectOptionsArray,
   className,
-  contextType, // new prop to determine which part of the state to update
+  value,       // prop to handle selected values
+  onChange,    // prop to handle changes
 }) => {
-  const [User, setUser] = useContext(UserContext);
-
-  const handleChange = (value) => {
-    setUser((prevState) => ({
-      ...prevState,
-      [contextType]: {
-        ...prevState[contextType],
-        // Assuming `vendorPaymentOptions` or similar key based on stateKey
-        Payment: value,
-      },
-    }));
-  };
-
   return (
     <label htmlFor={id} 
       style={{ display: "flex", flexDirection: "column" }}
-      >
+    >
       {hedlineText}
       <Select
         animation={"slide-up"}
         mode='multiple'
         multiple
         className={className}
-        value={User[contextType]?.Payment || []}
-        onChange={handleChange}
+        value={value}
+        onChange={onChange}
       >
         {SelectOptionsArray.map((option, i) => (
           <Option value={option} key={i}>{option}</Option>

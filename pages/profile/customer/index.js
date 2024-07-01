@@ -36,7 +36,9 @@ const CostumerPage  = ({})=>{
   return (
    <>
   <ProfileLayout>
-     <CustomerForm/>
+     <CustomerForm
+      
+     />
   </ProfileLayout>
     </>
   )

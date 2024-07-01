@@ -11,14 +11,8 @@ registerLocale('he', he )
 const Calinder = ({id,text}) => {
   const [startDate, setStartDate] = useState(new Date());
   
-  const [User,setUser]=useContext(UserContext)
 
-  const handleChange = (e) => {
-    setData({
-        ...data,
-        [id]: startDate
-    });
-};
+
 
   return (
     <label 
@@ -38,7 +32,7 @@ const Calinder = ({id,text}) => {
         showFullMonthYearPicker
         showTwoColumnMonthYearPicker
         closeOnScroll
-        onClickOutside={handleChange}
+       //onClickOutside={handleChange}
         
         
        />

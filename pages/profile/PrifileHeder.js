@@ -7,7 +7,6 @@ import { UserContext } from "Context/Context"; // Corrected context import
 
 const ProfileHeader = ({ image, name }) => {
 
-    
 
 
     return (
@@ -15,29 +14,33 @@ const ProfileHeader = ({ image, name }) => {
             className='profile-header'
             style={{padding:"20px"}}
         >
-     
-
             <h1 className='profile-header-text'>
                 {name}
             </h1>
 
             <motion.div
-                className='profile-header-img'
-                animate={{ x: [0, -70, 70,0], rotate: 360 }}
-                transition={{ duration: 3, ease: "anticipate" }}
+            style={{
+                borderRadius: "15px",
+                position:"absolute",
+                left:"30px",
+                top:"90px"
+                }}
+             
+             
+             whileHover={{
+                 rotate:30
+             }}
+             animate={{ rotate:360   }}
+             transition={{ type: "spring" }}
+           
+   
             >
                 <Image
                     src={image || defulteUserImg}
-             
-                    style={{ 
-                        borderRadius: "15px",
-                        position:"absolute",
-                        left:"0px",
-                        top:"-50px"
-                         }}
                     height={100}
                     width={100}
                     alt='profile image'
+                    style={{borderRadius:"15px"}}
                 />
             </motion.div>
 
@@ -50,8 +53,6 @@ const ProfileHeader = ({ image, name }) => {
             >
                 פרטים
             </h1>
-
-
         </div>
     );
 };

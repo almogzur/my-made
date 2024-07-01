@@ -43,7 +43,7 @@ return (
 
       <ProfileHeader
          name={session?.user?.name+" " }
-         image={session?.user?.image }
+         image={session?.user?.image}
        />
        <ProfileInfo 
           state={state}

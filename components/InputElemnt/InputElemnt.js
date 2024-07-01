@@ -1,7 +1,6 @@
-import { useContext } from 'react';
-import { UserContext } from 'Context/Context';
 
-const InputElemnt = ({
+
+const InputElement = ({
     type,
     text,
     id,
@@ -9,9 +8,9 @@ const InputElemnt = ({
     required,
     inputClassName,
     contextType,
+    value,
+    onChange,
 }) => {
-    const [User, setUser] = useContext(UserContext);
-
     const defaultStyle = {
         label: {},
         input: {
@@ -24,22 +23,7 @@ const InputElemnt = ({
 
     const handleChange = (e) => {
         const { value } = e.target;
-
-        setUser((prev) => {
-            const newState = { ...prev };
-            switch (contextType) {
-                case 'Vendor':
-                    newState.isVendor[id] = value;
-                    break;
-                case 'Customer':
-                    newState.isCustomer[id] = value;
-                    break;
-                default:
-                    newState[id] = value;
-                    break;
-            }
-            return newState;
-        });
+        onChange(id, value, contextType);
     };
 
     return (
@@ -58,10 +42,10 @@ const InputElemnt = ({
                 id={id}
                 className={inputClassName}
                 onChange={handleChange}
-                value={contextType === 'Vendor' ? User.isVendor[id] : contextType === 'Customer' ? User.isCustomer[id] : User[id] || ''}
+                value={value || ''}
             />
         </label>
     );
 };
 
-export default InputElemnt;
+export default InputElement;

@@ -1,18 +1,21 @@
-import { useSession } from 'next-auth/react'
-import {useContext, useEffect,useState} from 'react'
-import InputElemnt from '@/components/InputElemnt/InputElemnt'
-import { UserContext } from '@Context/Context'
-import TextArea from '@/components/TextArea/TextArea'
+
 import Dialog from '@/components/Dialog/Dialog'
 import ProfileForm from './ProfileForm'
 import {  motion } from 'framer-motion'
 
+
+
+
 const ProfileInfo=({state,setState,session})=>{
 
- const { Info,isVendor,isCostumer } = state
 
 
-   if(Info.age||!Info.about||Info.phone){
+  // db qury if user have the Info saved 
+  // then will render Info else Render Form 
+
+  let  UserDBInfo  ;
+
+
 
 
     return <motion.div
@@ -21,7 +24,7 @@ const ProfileInfo=({state,setState,session})=>{
               x:[-400,0]
             }}
            
-            transition={{duration:1.5}}
+            transition={{duration:1}}
             whileHover={{ }}
             
                 >
@@ -43,9 +46,9 @@ const ProfileInfo=({state,setState,session})=>{
           </motion.div>
     }
 
-    return <div>{[]}</div>
+
      
    
-}
+
 
 export default ProfileInfo

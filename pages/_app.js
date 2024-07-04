@@ -48,26 +48,34 @@ import State from "@/lib/State"
 ////                re-rendering                  ////
 ///// components that do not need the updated   //// 
 ////   context values. However, extensive prop  ////
-//// drilling can also lead to performance issues ///                                             //// 
+//// drilling can also lead to performance issues
+////                                             //// 
 ///////////////////////////////////////////////////////
  
+           const getData = async (URL) => {
+             try {
+                 const response = await fetch(URL);
+                    if (!response.ok) {
+                     throw new Error(`Response status: ${response.status}`);
+}
+
+                 const json = await response.json();
+                 console.log(json);
+}
+            catch (error) {
+               console.error(error.message);
+}
+}
 
 export default function App({
+  
   Component,
    pageProps: { session, ...pageProps },
 }) {
 
-   const [state,setState]=useState(State)
-
-   
+   const [state,setState] = useState(State)
    const md = useMediaQuery('(max-width: 900px)')
    const sm = useMediaQuery('(max-width: 600px)')
-
-
-
-
-
-
 
 
   return (
@@ -81,4 +89,4 @@ export default function App({
 
   )
 }
- 
+   

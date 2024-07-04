@@ -4,6 +4,10 @@ import { UserContext } from '@Context/Context';
 import InputElemnt from '@/components/InputElemnt/InputElemnt';
 import TextArea from '@/components/TextArea/TextArea';
 
+
+
+
+
 const ProfileForm = ({state,session,setState}) => {
 
    const STATE_KEY = "Info"
@@ -18,6 +22,29 @@ const ProfileForm = ({state,session,setState}) => {
       }
     }));
   };
+
+    const handleInfoSave = async (Data) => {
+       try {
+         const response = await fetch('/api/user/profile', { // Change this URL to your actual endpoint
+             method: 'POST',
+              headers: {
+                 'Content-Type': 'application/json',
+                    },
+                   body : JSON.stringify(Data)  
+                    });
+         if (response.ok) {
+                 // Handle success
+              console.log('Profile updated successfully');
+             }
+         else {
+              // Handle errors
+               console.error('Failed to update profile');
+  }
+  }
+         catch (error) {
+          console.error('Error updating profile:', error);
+               }
+  }
 
 
 
@@ -38,7 +65,7 @@ const ProfileForm = ({state,session,setState}) => {
           labelClassName=""
           required
           inputClassName=""
-          value={""}
+          value={state.Info.age}
           onChange={handleTextAreaChange}
         />
         <InputElemnt
@@ -48,7 +75,7 @@ const ProfileForm = ({state,session,setState}) => {
           labelClassName=""
           required
           inputClassName=""
-          value={""}
+          value={state.Info.phone}
           onChange={handleTextAreaChange}
         />
 
@@ -66,7 +93,7 @@ const ProfileForm = ({state,session,setState}) => {
 
       {/** User Data Save to db  */}
      <button
-        
+        onClick={handleInfoSave}
         >{"עדכון"}
         
         </button>

@@ -13,10 +13,25 @@ import ProfileLayout from 'layouts/ProfileLayout'
 import ProfileHeader from '@pages/profile/PrifileHeder'
 import ProfileInfo from '@pages/profile/ProfileInfo'
 import { UserContext  } from 'Context/Context'
-import { updateUserState } from "@/lib/dbCalls"
 
 
-const ProfilePage = () => {
+     const getData = async (URL) => {
+          try {
+            const response = await fetch(URL);
+          if (response.ok) {
+             const json = await response.json();
+                return json
+              }
+          else{
+                throw new Error(`Response status: ${response.status}`);
+              }
+              }
+          catch (error) {
+                console.error(error.message);
+               }
+ }
+
+const ProfilePage = ({dbUser}) => {
 
   const router = useRouter()
 
@@ -24,16 +39,20 @@ const ProfilePage = () => {
 
   const [state,setState]=useContext(UserContext)
 
+  useEffect(()=>{
+    getData(`http://localhost:3000/api/user`).then((data)=>{
+      console.log(data)
+    })
+  },[dbUser])
+
   // Prevent Slug Navigation     
   useEffect(()=>{
+
   
     if (status === "unauthenticated"  ) {
      router.push("/")
  }
 })
-
-
-
 
  if (status === 'loading') {
      return <LoadingSpinner/>
@@ -41,18 +60,19 @@ const ProfilePage = () => {
 
 return (
 
-    <ProfileLayout>
+ <ProfileLayout>
 
       <ProfileHeader
          name={session?.user?.name+" " }
          image={session?.user?.image}
-       />
+    />
        <ProfileInfo 
           state={state}
           setState={setState}
           session={session}
-       />
-    </ProfileLayout>
+    />
+
+ </ProfileLayout>
 
     
 ) 

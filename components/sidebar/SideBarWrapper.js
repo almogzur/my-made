@@ -14,10 +14,10 @@ const SideBar  = ({
         <motion.aside
             animate={{
                 x:[-100,0],
-                rotate:360,
+               
             
             }}
-            transition={{duration:2}}
+            transition={{duration:1}}
             className={sidebBarClassName}
         >
         {children}

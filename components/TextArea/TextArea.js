@@ -8,13 +8,13 @@ const TextArea = ({
   resize,
 
 }) => {
-  
-
-
+ 
+                  
+ 
   const handleChange = (e) => {
 
     const { value } = e.target;
-    
+
     onChange(id, value);
   };
 

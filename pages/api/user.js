@@ -1,41 +1,48 @@
+// pages/api/user.js
+import clientPromise from '@/lib/db';
+import { getServerSession } from "next-auth/next"
+import { authOptions } from "./auth/[...nextauth]"
 
-
-// pages/api/updateUserState.js
-
-import { getSession } from 'next-auth/react'
-import clientPromise from '@/lib/db'
 
 export default async function handler(req, res) {
 
-  if (req.method !== 'GET') {
-    return res.status(405).json({ message: 'Method not allowed' })
-  }
-
-  const session = await getSession({ req })
-  
-  if (!session) {
-    return res.status(401).json({ message: 'Unauthorized' })
-  }
-
-  const { state } = req.body
-
   try {
-    const client = await clientPromise
-    const db = client.db('my-made')
-    const usersCollection = db.collection('users')
+    
+    const session = await getServerSession(req, res, authOptions)
 
-    const result = await usersCollection.updateOne(
-      { email: session.user.email },
-      { $set: state }
-    )
+    const client = await clientPromise;
+    const database = client.db('my-made');
+    const users = database.collection('users');
 
-    if (result.modifiedCount === 1) {
-      res.status(200).json({ message: 'User state updated successfully' })
-    } else {
-      res.status(404).json({ message: 'User not found' })
+    if (req.method === 'GET') {
+      // Fetch user profile
+      const user = await users.findOne({ email: session.user.email });
+
+        if (!user) {
+           res.status(404).json({ message: 'User not found' });
+        } 
+           
+         res.status(200).json(user);
+      
+      } 
+
+    else if (req.method === 'POST') {
+       // Save/update user profile
+        const { email, age, phone, about } = req.body;
+        const result = await users.updateOne(
+        { email: email },
+        { $set: { age, phone, about } },
+        { upsert: true }
+      );
+
+      res.status(200).json({ message: 'Profile updated successfully' });
+    } 
+    else {
+      res.setHeader('Allow', ['GET', 'POST']);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
     }
   } catch (error) {
-    console.error('Error updating user state:', error)
-    res.status(500).json({ message: 'Error updating user state' })
+     console.error('Error interacting with MongoDB:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 }

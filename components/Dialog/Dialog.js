@@ -27,11 +27,13 @@ const Dialog = ({id,children,buttonText})=>{
            {buttonText}
         </button>
         <ReactModal 
+            ariaHideApp={false}
             isOpen={showModal}
             contentLabel="onRequestClose Example"
             onRequestClose={handleModal}
             className="Modal"
             overlayClassName="Overlay"
+            
             >
               {children}
     
@@ -47,7 +49,7 @@ const Dialog = ({id,children,buttonText})=>{
           
            
          >
-          <FontAwesomeIcon size="4x" icon={faXmark} />
+          <FontAwesomeIcon size="2x" icon={faXmark} />
         </motion.button>
 
      

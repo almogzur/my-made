@@ -6,10 +6,9 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
 
-    const CustomerFrom = ({ })=>{
+    const CustomerFrom = ({session , status , setState })=>{
 
-
-       const { data: session ,status ,update} = useSession()
+       
        useEffect(()=>{
     
         if (status === "unauthenticated" ) {
@@ -40,22 +39,33 @@ location,
             <h1>הזמנת שירות{session?.user?.name} </h1>
 
             <InputElemnt
+                labelClassName={"  "}
+                required 
+                inputClassName={""}
+                stateKey ={''}
+                value ={""}
+                onChange ={()=>{}}
                 text={"שם הלקוח"}
                 type={"text"}
-                contextType={"Customer"}
+                contextType={"isCustomer"}
                 id="FullName" 
             />
 
             <InputElemnt
                 type={"number"}
                 text={"מספר חדרים "}
-                contextType={"Customer"}
+                stateKey={"Customer"}
                 id="Phone" 
+                labelClassName={""}
+                required
+               inputClassName={""}
+                value={''}
+                onChange={()=>{}}
             />
            
             <InputElemnt
                 text={"מספר מקלחות"}
-                contextType={"Customer"}
+                stateKey={"isCustomer"}
             />
              <Calendar
                 text={"זמין ב"}
@@ -63,7 +73,11 @@ location,
             <SelectElemnt
                 SelectOptionsArray={["פיפאל","אשראי","ביט","מזומן"]}
                 className={"vendor-payment"}
-                contextType={""}
+                stateKey={"isCustomer"}
+                id={""}
+                hedlineText={""}
+                value={""}
+                onChange={""    }
             />
 
             <InputElemnt
@@ -71,9 +85,18 @@ location,
                 type={"location"}
                 contextType={"Customer"}
                 id={"location"}
+                labelClassName={""}
+                required
+                inputClassName={""}
+                stateKey={""}
+                value={""}
+                onChange={""}
             />
+      {/** User Data Save to db  */}
 
-
+         <button>
+         
+        </button>
             </form>
  
             

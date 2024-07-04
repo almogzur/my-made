@@ -5,14 +5,13 @@ import { he } from 'date-fns/locale/he';
 import { UserContext } from "@Context/Context";
 
 registerLocale('he', he )
+
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const Calinder = ({id,text}) => {
   const [startDate, setStartDate] = useState(new Date());
   
-
-
 
   return (
     <label 

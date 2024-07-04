@@ -13,11 +13,30 @@ export const authOptions = {
       // ...
     }),
   ],
-  adapter: MongoDBAdapter(clientPromise, {
-    databaseName:"my-made",
-    },
-    
-  ),
+  callbacks: {
+  async session({ session, token, user }) {
+    // Send properties to the client, like an access_token and user id from a provider.
+    // extanding Session Object 
+    // passiong user id for db calls from Front end as slug quary 
+      session.user.id=user.id
+      
+    return session
+  },
+  /*async jwt({ token, user, account, profile, isNewUser }) {
+     }
+   */ 
+
+
+},
+
+// when useing adapter Session Stratgy defualt back to Databace
+adapter: MongoDBAdapter(clientPromise, {
+  databaseName:"my-made",
+  },  
+),
+
+
+  
 }
 
 export default NextAuth(authOptions)

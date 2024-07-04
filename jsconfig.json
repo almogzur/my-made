@@ -7,7 +7,7 @@
       "@pages/*":["pages/*"],
       "@api/*":["api/*"],
       "@layouts/*":["layouts/*"],
-      "@Public/*":["Public/*"],
+      "@public/*":["public/*"],
       "@Context/*":["Context/*"]
    } 
  }

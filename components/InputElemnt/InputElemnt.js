@@ -7,23 +7,24 @@ const InputElement = ({
     labelClassName,
     required,
     inputClassName,
-    contextType,
+    stateKey,
     value,
     onChange,
 }) => {
     const defaultStyle = {
         label: {},
         input: {
-            width: "300px",
-            height: "70px",
-            borderRadius: "15px",
+            width: "150px",
+            height: "40px",
+            borderRadius: "10px",
             border: "1px solid #404040",
+            margin:"5px"
         }
     };
 
     const handleChange = (e) => {
         const { value } = e.target;
-        onChange(id, value, contextType);
+        onChange(id, value, stateKey);
     };
 
     return (

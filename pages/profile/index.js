@@ -13,11 +13,10 @@ import ProfileLayout from 'layouts/ProfileLayout'
 import ProfileHeader from '@pages/profile/PrifileHeder'
 import ProfileInfo from '@pages/profile/ProfileInfo'
 import { UserContext  } from 'Context/Context'
+import { updateUserState } from "@/lib/dbCalls"
 
 
 const ProfilePage = () => {
-
-  const PAGE_STATE= "User"
 
   const router = useRouter()
 
@@ -32,6 +31,9 @@ const ProfilePage = () => {
      router.push("/")
  }
 })
+
+
+
 
  if (status === 'loading') {
      return <LoadingSpinner/>

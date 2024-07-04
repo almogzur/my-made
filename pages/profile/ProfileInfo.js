@@ -9,32 +9,35 @@ import {  motion } from 'framer-motion'
 
 const ProfileInfo=({state,setState,session})=>{
 
- const { User,isVendor,isCostumer } = state
+ const { Info,isVendor,isCostumer } = state
 
 
-   if(User.age||!User.about||User.phone){
+   if(Info.age||!Info.about||Info.phone){
 
 
     return <motion.div
             className='profile-info-dialog-motion'
             animate={{
-                rotate:[7,0,-7,0]
+              x:[-400,0]
             }}
            
-            transition={{duration:1}}
-            whileHover={{rotate:[7,0,7,0]}}
+            transition={{duration:1.5}}
+            whileHover={{ }}
             
                 >
 
            <Dialog
                 id={"profile-info-dialog"}
-           
                 buttonText={"עדכון פרטים"}
-                buttonstyle={{width:"150px",height:"70px",border:"none",borderRadius:"15px"}}
-                
-        >
+
+            >
         
-                <ProfileForm/>
+                <ProfileForm
+                        state={state}
+                        session={session}
+                        setState={setState}
+                      
+                />
                 
             </Dialog>
           </motion.div>

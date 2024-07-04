@@ -21,7 +21,7 @@ function ProfileControls() {
    <Link 
      href={"/profile"}
      className="profile-link"
-    ><CgProfile size={40} />
+    ><CgProfile size={36} />
       
     <br/>
    </Link>

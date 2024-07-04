@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-
+import { motion } from "framer-motion"
 
 const SideBar  = ({
     children,
@@ -11,11 +11,17 @@ const SideBar  = ({
         const SideBarhandler = ()=>{}
 
      return (
-        <aside
+        <motion.aside
+            animate={{
+                x:[-100,0],
+                rotate:360,
+            
+            }}
+            transition={{duration:2}}
             className={sidebBarClassName}
         >
         {children}
-        </aside>
+        </motion.aside>
             
             
             

@@ -5,13 +5,10 @@ import Calinder from "@/components/Calinder/Calinder";
 import SelectElemnt from "@/components/SelectComponent/SelectComponent"
 import { useSession } from "next-auth/react";
 
- function  VenderForm () {
+ function  VenderForm ({state,setState,session,PAGE_STATE}) {
 
   const [VenUserdor,setUser]=useContext(UserContext)
-  const { data: session ,status ,update} = useSession()
-
-
-
+  
    if(!session){
     return <div>Loading...</div>
    }
@@ -25,10 +22,15 @@ import { useSession } from "next-auth/react";
       <div className="vendor-form-split1"
       >
        <InputElemnt 
-        type={"text"}
-        id={"FullName"}
-        text={"שם מלא"}  
-        contextType={"Vendor"}  
+          type={""} 
+          text={"שם מלא"}
+          id={"fullName"}
+          labelClassName={""}
+          required
+          inputClassName={""}
+          stateKey={PAGE_STATE}
+          value={""}
+          onChange={()=>{}}
        />
 
       <InputElemnt 
@@ -77,7 +79,7 @@ import { useSession } from "next-auth/react";
       id={"venderEndDate"}
       text={"סיום"}
      />
-   
+      {/** User Data Save to db  */}
       <button 
        type="submit"
        className="vender-form-btn"

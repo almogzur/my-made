@@ -28,7 +28,12 @@ function Vender() {
     return ( 
         <> 
       <ProfileLayout>
-          <VenderForm/>
+          <VenderForm 
+           state={state}
+           setState={setState}  
+           session={session}
+           PAGE_STATE={PAGE_STATE}
+           />
       </ProfileLayout> 
         </>
      );

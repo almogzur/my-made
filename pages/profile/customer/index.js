@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import LoadingSpinner from "@/components/Loader/LoadingSpinner";
 import ProfileLayout from "@layouts/ProfileLayout";
 import { UserContext } from "@Context/Context";
+
 const CostumerPage  = ({})=>{
   
   const PAGE_STATE="isCustomer"
@@ -37,6 +38,9 @@ const CostumerPage  = ({})=>{
    <>
   <ProfileLayout>
      <CustomerForm
+     state={state}
+     setState={setState}
+     session={session}
       
      />
   </ProfileLayout>

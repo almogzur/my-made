@@ -52,27 +52,25 @@ import State from "@/lib/State"
 ///////////////////////////////////////////////////////
  
 
-
-
 export default function App({
   Component,
-  pageProps: { session, ...pageProps },
+   pageProps: { session, ...pageProps },
 }) {
 
    const [state,setState]=useState(State)
+
+   
    const md = useMediaQuery('(max-width: 900px)')
    const sm = useMediaQuery('(max-width: 600px)')
 
-    useEffect(()=>{
-      console.log(state)
-    },[state])
 
 
-    
-   
+
+
+
+
 
   return (
-
       <SessionProvider session={session}>
       <UserContext.Provider value={[state,setState]}>
       <WindowWidthContaxt.Provider value={{md,sm}}>

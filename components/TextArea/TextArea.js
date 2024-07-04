@@ -3,20 +3,30 @@ const TextArea = ({
   rows,
   cols,
   value,
-  onChange
+  onChange,
+  className,
+  resize,
+
 }) => {
+  
+
+
   const handleChange = (e) => {
+
     const { value } = e.target;
+    
     onChange(id, value);
   };
 
+
+
   return (
-    <div>
+  <>
       <label htmlFor={id}>{id}</label>
       <textarea
         id={id}
-        value={value || ''}
-        onChange={handleChange}
+        value={value}
+        className={className}
         rows={rows || 4}
         cols={cols || 50}
         maxLength={500}
@@ -26,13 +36,15 @@ const TextArea = ({
         disabled={false}
         wrap="soft"
         spellCheck={true}
+        onChange={handleChange}
         style={{
-          resize: 'both',
-          width: '100%',
+          resize: resize? resize : 'both',
+          borderRadius:"5px",
           height: '100px',
+          resize:"none"
         }}
       />
-    </div>
+      </>  
   );
 };
 

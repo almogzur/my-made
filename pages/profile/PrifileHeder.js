@@ -30,24 +30,25 @@ const ProfileHeader = ({ image, name }) => {
              whileHover={{
                  rotate:30
              }}
-             animate={{ rotate:360   }}
-             transition={{ type: "spring" }}
+             animate={{ rotate:720   }}
+             transition={{ type: "spring" ,duration:5 }}
            
    
             >
                 <Image
                     src={image || defulteUserImg}
-                    height={100}
-                    width={100}
+                    height={70}
+                    width={70}
                     alt='profile image'
                     style={{borderRadius:"15px"}}
+                    fetchpriority='auto'
                 />
             </motion.div>
 
             <h1
                 style={{
                     position:  "relative",
-                    top: "250px",
+                    top: "60px",
                     right: "0px"
                 }}
             >

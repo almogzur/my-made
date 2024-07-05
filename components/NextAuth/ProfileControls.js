@@ -1,8 +1,8 @@
 import React from "react";
 import { useSession, signIn, signOut } from "next-auth/react"
 import Link from "next/link";
-import { CgProfile } from "react-icons/cg";
-
+import { motion } from "framer-motion";
+import Image from "next/image";
 function ProfileControls() {
 
   const { data: session } = useSession()
@@ -17,14 +17,24 @@ function ProfileControls() {
 :
 <div 
  className="singOutDiv"
->
-   <Link 
-     href={"/profile"}
-     className="profile-link"
-    ><CgProfile size={36} />
-      
-    <br/>
-   </Link>
+> 
+  <motion.div  
+    animate={{ rotate:360}}
+    transition={{ type: "spring" ,duration:5 }}
+    whileHover={{rotate:30}}
+   >
+     <Link 
+       href={"/profile"}
+      >
+       <Image
+         src={session.user.image} 
+         height={50}
+         width={50}
+         style={{borderRadius:"15px"}}
+       />  
+       </Link>
+   </motion.div>
+
    <button 
       className="singOut"
      onClick={() => signOut({

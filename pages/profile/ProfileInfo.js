@@ -1,6 +1,6 @@
 
 import Dialog from '@/components/Dialog/Dialog'
-import ProfileForm from './ProfileForm'
+import ProfileForm from '@pages/profile/ProfileForm'
 import {  motion } from 'framer-motion'
 
 

@@ -13,6 +13,7 @@ import "components/Loader/LoadingSpinner.css"
 import "react-datepicker/dist/react-datepicker.css"
 import "components/NextAuth/ProfileControl.css"
 import "components/header/header.css"
+import "components/MongoSpinner/mongoSpinner.css"
 
 // PagesCss
 import "pages/MainPage.css"
@@ -52,20 +53,7 @@ import State from "@/lib/State"
 ////                                             //// 
 ///////////////////////////////////////////////////////
  
-           const getData = async (URL) => {
-             try {
-                 const response = await fetch(URL);
-                    if (!response.ok) {
-                     throw new Error(`Response status: ${response.status}`);
-}
 
-                 const json = await response.json();
-                 console.log(json);
-}
-            catch (error) {
-               console.error(error.message);
-}
-}
 
 export default function App({
   

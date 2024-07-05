@@ -6,7 +6,7 @@
 
 import React,{useContext, useEffect, useState} from "react";
 import ProfileLayout from "@layouts/ProfileLayout";
-import VenderForm from "@pages/profile/vendor/VenderForm";
+import Form from "@pages/profile/vendor/Form";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import LoadingSpinner from "@/components/Loader/LoadingSpinner";
@@ -28,7 +28,7 @@ function Vender() {
     return ( 
         <> 
       <ProfileLayout>
-          <VenderForm 
+          <Form 
            state={state}
            setState={setState}  
            session={session}

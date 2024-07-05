@@ -1,14 +1,15 @@
-// pages/api/user.js
 import clientPromise from '@/lib/db';
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "./auth/[...nextauth]"
 
-
 export default async function handler(req, res) {
 
   try {
-    
-    const session = await getServerSession(req, res, authOptions)
+    const session = await getServerSession(req, res, authOptions);
+
+    if (!session) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
 
     const client = await clientPromise;
     const database = client.db('my-made');
@@ -18,31 +19,25 @@ export default async function handler(req, res) {
       // Fetch user profile
       const user = await users.findOne({ email: session.user.email });
 
-        if (!user) {
-           res.status(404).json({ message: 'User not found' });
-        } 
-           
-         res.status(200).json(user);
-      
-      } 
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
 
-    else if (req.method === 'POST') {
-       // Save/update user profile
-        const { email, age, phone, about } = req.body;
-        const result = await users.updateOne(
-        { email: email },
-        { $set: { age, phone, about } },
-        { upsert: true }
-      );
+      // Include the state in the response
+      const userWithState = { ...user, state: session.state };
+      return res.status(200).json(userWithState);
 
-      res.status(200).json({ message: 'Profile updated successfully' });
     } 
+    
+  
     else {
-      res.setHeader('Allow', ['GET', 'POST']);
-      res.status(405).end(`Method ${req.method} Not Allowed`);
+      res.setHeader('Allow', ['GET']);
+      return res.status(405).end(`Method ${req.method} Not Allowed`);
     }
-  } catch (error) {
-     console.error('Error interacting with MongoDB:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+   } 
+    catch (error) {
+    console.error('Error interacting with MongoDB:', error);
+    return res.status(500).json({ error: 'Internal Server Error' });
   }
 }
+ 

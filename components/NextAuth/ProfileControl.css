@@ -61,15 +61,12 @@
  color:#fff;
  font-size:16px;
 }
-.singOut:visited{}
-.singOut:active{}
-.singOut:focus{}
+
 .singOut:hover{
-    background:black;
+  
     color:#00c0ff;
     transition: 1s ease;
-    border: 1px solid white;
-    border-radius:15px;    
+
 }
 .singOut:active{}
 

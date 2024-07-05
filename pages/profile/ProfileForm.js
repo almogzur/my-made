@@ -4,10 +4,6 @@ import { UserContext } from '@Context/Context';
 import InputElemnt from '@/components/InputElemnt/InputElemnt';
 import TextArea from '@/components/TextArea/TextArea';
 
-
-
-
-
 const ProfileForm = ({state,session,setState}) => {
 
    const STATE_KEY = "Info"
@@ -46,12 +42,6 @@ const ProfileForm = ({state,session,setState}) => {
                }
   }
 
-
-
-
-  useEffect(()=>{
-    console.log(state)
-  },[state])
 
   return (
 

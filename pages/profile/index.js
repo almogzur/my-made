@@ -10,56 +10,47 @@ import {useContext, useEffect,useState} from 'react'
 import { useRouter } from 'next/router'
 import LoadingSpinner from '@/components/Loader/LoadingSpinner'
 import ProfileLayout from 'layouts/ProfileLayout'
-import ProfileHeader from '@pages/profile/PrifileHeder'
+import ProfileHeader from '@pages/profile/ProfileHeder'
 import ProfileInfo from '@pages/profile/ProfileInfo'
 import { UserContext  } from 'Context/Context'
+import useGetUser from '@/lib/hooks/useGetUser'
+import useUpdateDbUserState from '@/lib/hooks/useUpdateDbUserState'
+import MongoSpinner from '@/components/MongoSpinner/MongoSpinner'
 
 
-     const getData = async (URL) => {
-          try {
-            const response = await fetch(URL);
-          if (response.ok) {
-             const json = await response.json();
-                return json
-              }
-          else{
-                throw new Error(`Response status: ${response.status}`);
-              }
-              }
-          catch (error) {
-                console.error(error.message);
-               }
- }
 
-const ProfilePage = ({dbUser}) => {
+const ProfilePage = () => {
 
   const router = useRouter()
-
   const { data: session ,status ,update} = useSession()
+  const [ state,setState]=useContext(UserContext)
+  const {DBUser,DBUserLoading,DBUserErr} = useUpdateDbUserState("/api/savestatetouserdb",state)
 
-  const [state,setState]=useContext(UserContext)
 
-  useEffect(()=>{
-    getData(`http://localhost:3000/api/user`).then((data)=>{
-      console.log(data)
-    })
-  },[dbUser])
+  /// find user 
+  // see
+  // extend user collection with state 
+
+  
+
 
   // Prevent Slug Navigation     
   useEffect(()=>{
-
-  
-    if (status === "unauthenticated"  ) {
+    if (status === "unauthenticated"){
      router.push("/")
  }
 })
+useEffect(()=>{
+  if (DBUserLoading){
+      return <MongoSpinner/>
+}
+},)
 
- if (status === 'loading') {
+    if (status === 'loading'){
      return <LoadingSpinner/>
 }
 
 return (
-
  <ProfileLayout>
 
       <ProfileHeader

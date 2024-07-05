@@ -9,7 +9,14 @@ import {  motion } from "framer-motion";
 
 ///// change button naming for css
 
-const Dialog = ({id,children,buttonText})=>{
+const Dialog = ({
+   children,
+   buttonText,
+   buttonStyle,
+   buttonClassName,
+   wrapperStyle,
+   wrapperClassName
+  })=>{
 
     const [showModal,setShowModle]=useState(false)
 
@@ -19,13 +26,18 @@ const Dialog = ({id,children,buttonText})=>{
 
       
       return(
-      <div className={`${id}-wrapper`} >
+      <div 
+       className={wrapperClassName?   wrapperClassName:null} 
+       style={wrapperStyle?wrapperStyle:null}
+      >
          <button 
-           className={`${id}-btn`}
-             onClick={handleModal}
+           style={buttonStyle?buttonStyle:null}
+           className={buttonClassName? buttonClassName:null}
+           onClick={handleModal}
             >
            {buttonText}
         </button>
+        
         <ReactModal 
             ariaHideApp={false}
             isOpen={showModal}

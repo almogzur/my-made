@@ -1,42 +1,52 @@
 import { useContext, useRef } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import axios from 'axios';
 import defulteUserImg from '@public/User.jpg';
-import { UserContext } from "Context/Context"; // Corrected context import
+import { ColorsContext } from "Context/Context"; // Corrected context import
 
 const ProfileHeader = ({ image, name }) => {
 
-
+    const Colors = useContext(ColorsContext)
 
     return (
-        <div
-            className='profile-header'
-            style={{padding:"20px"}}
+        <motion.div
+
+            style={{
+                padding:"20px",
+                width:"100%",
+                height:"200px",
+                border:"none",    
+                background: 'rgb(25,29,136)',
+                background: 'linear-gradient(329deg, rgba(25,29,136,1) 0%, rgba(20,80,163,1) 21%, rgba(255,255,255,1) 100%)',
+                boxShadow: '0 4px 8px #404040'
+                }}
         >
-            <h1 className='profile-header-text'>
+            <motion.h1 
+                
+             style={{   
+                position:"absolute",
+                 top:"00px",
+                 right: "10px",
+    }}
+            >
                 {name}
-            </h1>
+            </motion.h1>
 
             <motion.div
-            style={{
+             style={{
                 borderRadius: "15px",
                 position:"absolute",
-                left:"30px",
-                top:"90px"
+                left:"10px",
+                top:"20px"
                 }}
-             
-             
              whileHover={{
                  rotate:30
              }}
-             animate={{ rotate:720   }}
+             animate={{ rotate:720 }}
              transition={{ type: "spring" ,duration:5 }}
-           
-   
             >
                 <Image
-                    src={image || defulteUserImg}
+                  src={image || defulteUserImg}
                     height={70}
                     width={70}
                     alt='profile image'
@@ -45,16 +55,16 @@ const ProfileHeader = ({ image, name }) => {
                 />
             </motion.div>
 
-            <h1
+            <motion.h1
                 style={{
                     position:  "relative",
-                    top: "60px",
-                    right: "0px"
+                    top: "100px",
+                    right: "-10px"
                 }}
             >
                 פרטים
-            </h1>
-        </div>
+            </motion.h1>
+        </motion.div>
     );
 };
 

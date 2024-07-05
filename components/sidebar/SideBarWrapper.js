@@ -3,22 +3,24 @@ import { motion } from "framer-motion"
 
 const SideBar  = ({
     children,
-    sidebBarClassName,
     callBack,
-    
+    style,
+    className
     })=>
     {
         const SideBarhandler = ()=>{}
 
      return (
         <motion.aside
-            animate={{
+        className={className?className:null}
+        style={style?style:null}
+
+        animate={{
                 x:[-100,0],
                
             
             }}
             transition={{duration:1}}
-            className={sidebBarClassName}
         >
         {children}
         </motion.aside>

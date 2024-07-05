@@ -35,39 +35,12 @@
 }
 
 
-/*
-//
-//
-//
-*/
-
-
-
 .singOutDiv{
-    position:absolute;
-    top:0;
-    left:0;
-    height:50px;
-    width:200px;
-    display:flex;
-    flex-direction:row;
+
 
 }
-.singOut{
- border:none;
- background:none;
- width:inherit;
- height:inherit;
- color:#fff;
- font-size:16px;
-}
 
-.singOut:hover{
-  
-    color:#00c0ff;
-    transition: 1s ease;
 
-}
 .singOut:active{}
 
 .profile-link{

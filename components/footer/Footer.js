@@ -8,19 +8,20 @@ import ProfileControls from "@/components/NextAuth/ProfileControls"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { faHome, faClipboard } from "@fortawesome/free-solid-svg-icons";
 import CostumeLink from "@/components/Footer/CostumeLink";
+import { motion } from "framer-motion";
 
-const FooterRwapper = ({children})  => {
+const FooterRwapper = ({children,style,className})  => {
 
 
 
     return ( 
-         <footer
-            className="footer-wrapper" 
+    <motion.footer
+            style={style?style:null}
+            className={className?className:null} 
            >
          <CostumeLink
             href={"/"}
-            linkClassName={"footer-link"}
-            divClassName={"inner-link-wrapper"}
+           
            >
             <FontAwesomeIcon icon={faHome} size={"2x"} />
          </CostumeLink>
@@ -28,8 +29,7 @@ const FooterRwapper = ({children})  => {
          <CostumeLink
               href={"/board"}
      
-              linkClassName={"footer-link"}
-              divClassName={"inner-link-wrapper"}
+        
           >
            <FontAwesomeIcon size="2x" icon={faClipboard}/>
         </CostumeLink>
@@ -38,7 +38,7 @@ const FooterRwapper = ({children})  => {
       
         
           <ProfileControls/>
-        </footer>    
+    </motion.footer>    
      );
 }
 

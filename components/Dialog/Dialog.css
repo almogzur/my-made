@@ -5,12 +5,14 @@
     right: 10px;
     bottom: 10px;
     background-color: #ececec;
+    
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     align-content:enter;
     border-radius:7px;
+
     overflow:clip
   }
 
@@ -22,7 +24,8 @@
     bottom: 100px;
     background-color:#404040;
     border-radius:15px;
-  
+
+
   }
   .btn{
     position:absolute;

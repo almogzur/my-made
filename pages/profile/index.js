@@ -12,7 +12,7 @@ import LoadingSpinner from '@/components/Loader/LoadingSpinner'
 import ProfileLayout from 'layouts/ProfileLayout'
 import ProfileHeader from '@pages/profile/ProfileHeder'
 import ProfileInfo from '@pages/profile/ProfileInfo'
-import { UserContext  } from 'Context/Context'
+import { ColorsContext, UserContext  } from 'Context/Context'
 import useGetUser from '@/lib/hooks/useGetUser'
 import useUpdateDbUserState from '@/lib/hooks/useUpdateDbUserState'
 import MongoSpinner from '@/components/MongoSpinner/MongoSpinner'
@@ -24,15 +24,15 @@ const ProfilePage = () => {
   const router = useRouter()
   const { data: session ,status ,update} = useSession()
   const [ state,setState]=useContext(UserContext)
+
+  /// find user 
+  // extend user collection with state 
   const {DBUser,DBUserLoading,DBUserErr} = useUpdateDbUserState("/api/savestatetouserdb",state)
 
 
-  /// find user 
+
   // see
-  // extend user collection with state 
-
   
-
 
   // Prevent Slug Navigation     
   useEffect(()=>{
@@ -40,15 +40,21 @@ const ProfilePage = () => {
      router.push("/")
  }
 })
+
 useEffect(()=>{
-  if (DBUserLoading){
-      return <MongoSpinner/>
-}
-},)
+  console.log(DBUser)
+},[DBUser])
+
+
+
 
     if (status === 'loading'){
      return <LoadingSpinner/>
-}
+    }
+    else if( DBUserLoading ){
+      return <MongoSpinner/>
+    }
+
 
 return (
  <ProfileLayout>

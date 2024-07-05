@@ -2,24 +2,19 @@
 import Dialog from '@/components/Dialog/Dialog'
 import ProfileForm from '@pages/profile/ProfileForm'
 import {  motion } from 'framer-motion'
+import Colors from '@/lib/colors'
 
 
 
 
 const ProfileInfo=({state,setState,session})=>{
 
-
-
   // db qury if user have the Info saved 
   // then will render Info else Render Form 
 
-  let  UserDBInfo  ;
-
-
-
 
     return <motion.div
-            className='profile-info-dialog-motion'
+
             animate={{
               x:[-400,0]
             }}
@@ -30,9 +25,26 @@ const ProfileInfo=({state,setState,session})=>{
                 >
 
            <Dialog
-                id={"profile-info-dialog"}
-                buttonText={"עדכון פרטים"}
+              buttonText={"עדכון פרטים"}
 
+              buttonStyle={{
+                      height:"100px",
+                      marginTop:"15px",
+                      width:'40%',
+                      border:"none",
+                      borderRadius:"15px",
+                      background:Colors.b,
+                      boxShadow: "0 4px 2px #404040",
+                      
+                }}
+
+                wrapperStyle={{
+                      display:'flex',
+                      flexDirection:'column',
+                      justifyContent:'center',
+                      alignItems:'center',
+                      alignContent:'center',
+                }}
             >
         
                 <ProfileForm

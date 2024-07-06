@@ -1,83 +1,81 @@
-import { faBroom , faPerson }from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import SideBar from 'components/Sidebar/SideBarWrapper'
-import CostumeLink from '@/components/CostumeLink/CostumeLink'
-import Footer from 'components/Footer/Footer'
-import Colors from "@/lib/colors"
+import dynamic from 'next/dynamic';
+import { faBroom, faPerson } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Colors from "@/lib/colors";
 
-const ProfileLayout = ({children})=>{
+// Dynamic imports
+const SideBar = dynamic(() => import('components/Sidebar/SideBarWrapper'), {
+  ssr: true, // Only render on the client side
+  loading: () => <div>Loading Sidebar...</div>
+});
 
-  const WrapperDefualtStyle = {
-    color:Colors.d
-    
+const CostumeLink = dynamic(() => import('@/components/CostumeLink/CostumeLink'), {
+  loading: () => <div>Loading Link...</div>
+});
+
+const Footer = dynamic(() => import('components/Footer/Footer'), {
+  loading: () => <div>Loading Footer...</div>
+});
+
+const ProfileLayout = ({ children }) => {
+
+  const WrapperDefaultStyle = {
+    color: Colors.d
   }
+
   const DefaultLinkStyle = {
-    textDecoration:"none"
-  }
-  const DivDefualtStyle= {
-    
-    display:'flex',
-    flexDirection:'column',
-    justifyContent:'center',
-    alignItems:'center',
-    alignContent:'center',
-    width:"100%",
-    height:"70px",
-    
+    textDecoration: "none"
   }
 
+  const DivDefaultStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    width: "100%",
+    height: "70px",
+  }
 
-return (
+  return (
     <>
-  <SideBar
+      <SideBar
         style={{
           position: "fixed",
           bottom: "80px",
-          left: "20px", 
-          width:"70px",
-          background:Colors.c,
-        }
-        }
-    >
-        <CostumeLink  
-              text={"משק"}
-              href="/profile/vendor"
-              motionWrapperStyle= {WrapperDefualtStyle}
-              linkStyle={DefaultLinkStyle}
-              divStyle={DivDefualtStyle}
-
-           >
-           <FontAwesomeIcon size="1x" icon={faBroom} />
+          left: "20px",
+          width: "70px",
+          background: Colors.c,
+        }}
+      >
+        <CostumeLink
+          text={"משק"}
+          href="/profile/vendor"
+          motionWrapperStyle={WrapperDefaultStyle}
+          linkStyle={DefaultLinkStyle}
+          divStyle={DivDefaultStyle}
+        >
+          <FontAwesomeIcon size="1x" icon={faBroom} />
         </CostumeLink>
 
         <CostumeLink
-                href="/profile/customer"
-                text={"לקוח"}
-                motionWrapperStyle= {WrapperDefualtStyle}
-                linkStyle={DefaultLinkStyle}
-                divStyle={DivDefualtStyle}
+          href="/profile/customer"
+          text={"לקוח"}
+          motionWrapperStyle={WrapperDefaultStyle}
+          linkStyle={DefaultLinkStyle}
+          divStyle={DivDefaultStyle}
+        >
+          <FontAwesomeIcon size="1x" icon={faPerson} />
+        </CostumeLink>
+      </SideBar>
 
-         
-            >
-           <FontAwesomeIcon size="1x" icon={faPerson} />
-        </CostumeLink> 
-           
-  </SideBar> 
+      {children}
 
-    {children}
-
-  <Footer
-    style={{
-         position: "fixed",
-          bottom: "0",
-          width:"100%",
-          height:"55px",
-          background:Colors.a,
-          color:"white",
-         display:"flex",}}
-  />
+      <Footer
+        
+      />
     </>
-) 
+  )
 }
 
-export default ProfileLayout
+export default ProfileLayout;

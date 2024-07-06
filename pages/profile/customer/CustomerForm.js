@@ -39,7 +39,15 @@ location,
 
         return (
             
-        <form className='customer-form-wrarpper'>
+        <form 
+            style={{
+            display:'flex',
+            flexDirection:'column',
+            justifyContent:'center',
+            alignItems:'center',
+            alignContent:'center',}}
+
+        >
 
             <h1>הזמנת שירות{session?.user?.name} </h1>
 

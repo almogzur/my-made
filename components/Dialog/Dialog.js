@@ -37,6 +37,7 @@ const Dialog = ({
       className={wrapperClassName ? wrapperClassName : null}
       style={wrapperStyle ? wrapperStyle : null}
     >
+     {/**Open Dialog */}
       <button
         style={buttonStyle ? buttonStyle : null}
         className={buttonClassName ? buttonClassName : null}
@@ -45,18 +46,47 @@ const Dialog = ({
         {buttonText}
       </button>
 
+     {/** Dialog */}
       <ReactModal
         ariaHideApp={false}
         isOpen={showModal}
         contentLabel="onRequestClose Example"
         onRequestClose={handleModal}
-        className="Modal"
-        overlayClassName="Overlay"
+        
+        style={{
+          content:{
+            position: "absolute",
+            top: "10px",
+            left: "10px",
+            right: "10px",
+            bottom: '10px',
+            backgroundColor: "#ececec",
+            display:"flex",
+            flexDirection:"column",
+            justifyFontent:"center",
+            alignItems:"center",
+            alignContent:'enter',
+            borderRadius:"7px",
+            overflow:"clip",
+          },
+          overlay:{
+            position: 'fixed',
+            top: "100px",
+            left: "25px",
+            right: "25px",
+            bottom: "100px",
+            backgroundColor:"#404040",
+            borderRadius:"15px",
+            }
+            
+
+          }}
+        
       >
         {children}
         <LazyMotionWithFeatures features={loadFeatures}>
           <m.button
-            whileHover={{}}
+            whileHover={{background:"red"}}
             onClick={handleModal}
             style={{
               position: "absolute",

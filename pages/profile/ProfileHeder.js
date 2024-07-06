@@ -3,6 +3,7 @@ import { useSession } from "next-auth/react"
 import {m, LazyMotion} from 'framer-motion'
 import Image from 'next/image';
 import defulteUserImg from '@public/User.jpg';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 const loadFeatures = () =>
     import("@/lib/features").then(res => res.default)
@@ -12,7 +13,8 @@ const ProfileHeader = () => {
     const { data: session, status } = useSession()
 
  return (
-  <LazyMotion features={loadFeatures}>
+  <ErrorBoundary fallback={<p>Something went wrong</p> } >
+   <LazyMotion features={loadFeatures}>
       <m.div
          style={{
            padding:"20px",
@@ -65,7 +67,8 @@ const ProfileHeader = () => {
             >פרטים
           </m.h1>
       </m.div>
-   </LazyMotion>
+    </LazyMotion>
+   </ErrorBoundary>
     );
 };
 

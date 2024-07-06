@@ -1,31 +1,28 @@
+// Only Must have css Files will be included 
+// sutch as external packages and no excape in "React IN Line css"
 
-// Dynamic Components
-import "components/StarRating/StarRating.css"
+
+// Css
+import "pages/Main.css"
 import 'rc-select/assets/index.css'
-import "components/Dialog/Dialog.css"
+import "react-datepicker/dist/react-datepicker.css"
 import "components/Acordione/Acordion.css"
-import "components/CommentSection/CommentSection.css"
 import "components/RangeElemnt/RangeElemnt.css"
 
-// Static Components
-import "components/Footer/Footer.css"
+ // will move to in line 
 import "components/Loader/LoadingSpinner.css"
-import "react-datepicker/dist/react-datepicker.css"
-import "components/NextAuth/ProfileControl.css"
-import "components/header/header.css"
 import "components/MongoSpinner/mongoSpinner.css"
-
-// PagesCss
-import "pages/MainPage.css"
 import "pages/profile/Profile.css"
-import "pages/Profile/customer/customer.css"
-import "@pages/profile/vendor/vendor.css"
-import "pages/board/board.css"
+
 import { SessionProvider } from "next-auth/react"
 import { WindowWidthContaxt, UserContext,ColorsContext} from "Context/Context"
-import { useEffect, useState } from "react"
+import {  useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import State from "@/lib/State"
+
+
+
+
 
   //           STATE  HENDLING
 ////////////////////////////////////////////////////////

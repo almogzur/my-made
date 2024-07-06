@@ -29,9 +29,28 @@ function VenderForm({ PAGE_STATE }) {
   }
 
   return (
-    <form className="vender-form-wrapper">
+    <form style={{
+       height:"100%",
+       width:"inherit",
+      display:'flex',
+      flexDirection:'column',
+      justifyContent:'center',
+      alignItems:'center',
+     
+    }}>
       <h1> הרשמת נותן שירות </h1>
-      <div className="vendor-form-split1">
+      <div
+        style={{
+          width: "75%",
+          height:"100px",
+          display:"flex",
+          flexDirection:"row",
+          justifyContent:"space-evenly",
+          alignItems:"center",
+          borderRadius:"10px",
+          border:" 1px solid #404040",
+          }}
+        >
         <InputElemnt
           type={""}
           text={"שם מלא"}
@@ -52,7 +71,15 @@ function VenderForm({ PAGE_STATE }) {
         />
       </div>
       <br />
-      <div className="vendor-form-split2">
+      <div style={{
+        width:"60%",
+        border: "1px solid #404040",
+        height:"400px",
+        borderRadius:"15px",
+        display:"flex",
+        flexDirection:"column",
+        alignItems:"center"
+      }}>
         <InputElemnt
           type={"email"}
           id={"Email"}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { m, LazyMotion } from 'framer-motion';
 import Image from "next/image";
 import { FaPowerOff } from "react-icons/fa";
+import Colors from "@/lib/colors";
 
 // Dynamic import for LazyMotion and loadFeatures
 
@@ -15,29 +16,60 @@ function ProfileControls() {
 
   return (
     !session ?
-      <button
-        onClick={() => signIn(undefined, { callbackUrl: "/profile" })}
-        className="signIn"
+    <LazyMotion  features={loadFeatures}>
+    <div
+      style={{
+        position:"absolute",
+        left:"0px",
+        height:'inherit',
+
+        }}>
+      <m.button
+          style={{
+            height:'inherit',
+            border:"none"
+            
+            
+                 }}
+          animate={{x:[-70,0]}}
+          transition={{ duration:3 }}
+          whileHover={{
+            borderRadius:"15px",
+            transition:"ease",
+            background: Colors.d,
+ 
+          }}
+          onClick={() => signIn(undefined, { callbackUrl: "/profile" })}
+      
       >
         הרשמה או התחברות
-      </button>
+      </m.button>
+      </div>
+    </LazyMotion>
       :
-      <LazyMotion features={loadFeatures}>
+    <LazyMotion features={loadFeatures}>
         <div
+        
           style={{
             position: "absolute",
             top: "0px",
             left: "0px",
             width: "150px",
             display: "flex",
-            flexDirection: "row"
+            flexDirection: "row",
+
           }}
         >
 
           <m.div
-            animate={{ rotate: 360 }}
+            style={{borderRadius:"15px",height:"60px",display:'flex',
+            flexDirection:'row'|'column',
+            justifyContent:'center',
+            alignItems:'center',
+            alignContent:'center',}}
+            animate={{ rotate: [-30,0] }}
             transition={{ type: "spring", duration: 5 }}
-            whileHover={{ rotate: 30 }}
+            whileHover={{ rotate: 360 , background:Colors.d}}
           >
             <Link
               href={"/profile"}
@@ -59,11 +91,11 @@ function ProfileControls() {
               background: "none",
               width: "inherit",
               height: "inherit",
-              color: "#fff",
+              color: Colors.d,
             }}
-            animate={{ rotate: 360 }}
+            animate={{ rotate: [30,0] }}
             transition={{ type: "spring", duration: 5 }}
-            whileHover={{ rotate: 35 }}
+            whileHover={{ rotate: 360}}
             onClick={() => signOut({
               callbackUrl: "/"
             })}

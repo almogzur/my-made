@@ -4,7 +4,7 @@ import Colors from '@/lib/colors';
 import LoadingSpinner from '@/components/Loader/LoadingSpinner';
 
 // Dynamic imports
-const Header = dynamic(() => import('@/components/header/AppHeader'), {
+const Header = dynamic(() => import('@/components/header/Header'), {
   ssr: false,
   loading: () => <div>Loading Header...</div>,
 });

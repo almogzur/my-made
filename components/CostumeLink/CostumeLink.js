@@ -1,5 +1,9 @@
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { LazyMotion,m } from "framer-motion"
+
+const loadFeatures = () =>
+  import("@/lib/features").then(res => res.default)
+
 
 export default function CostumeLink ({
   href,
@@ -15,17 +19,18 @@ export default function CostumeLink ({
 
 
     return (
-      <motion.div
+      <LazyMotion features={loadFeatures}>
+            <m.div
           style={ motionWrapperStyle?motionWrapperStyle:null}
           animate={{rotate:360}}
           transition={{ type: "spring" ,duration:5 }}
           whileHover={{
-         rotate:30,
+          rotate:30,
            }}
 
       >
        <Link 
-        shallow={true}
+          prefetch={true}
         
          href={href}
          style={linkStyle ? linkStyle :null}
@@ -39,7 +44,8 @@ export default function CostumeLink ({
            {children}
       </div>
       </Link>
-      </motion.div>
+      </m.div>
+</LazyMotion>
     )
 }
 

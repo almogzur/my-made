@@ -4,10 +4,12 @@ import { UserContext } from '@Context/Context';
 import InputElemnt from '@/components/InputElemnt/InputElemnt';
 import TextArea from '@/components/TextArea/TextArea';
 
-const ProfileForm = ({state,session,setState}) => {
+const ProfileForm = () => {
 
    const STATE_KEY = "Info"
-
+   const { data: session ,status ,update} = useSession()
+   const [ state,setState]=useContext(UserContext)
+ 
 
    const handleTextAreaChange = (id, value) => {
     setState(prevState => ({

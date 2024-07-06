@@ -38,9 +38,7 @@ const CostumerPage  = ({})=>{
    <>
   <ProfileLayout>
      <CustomerForm
-     state={state}
-     setState={setState}
-     session={session}
+
       
      />
   </ProfileLayout>

@@ -4,16 +4,18 @@ import InputElemnt from "@/components/InputElemnt/InputElemnt"
 import Calinder from "@/components/Calinder/Calinder";
 import SelectElemnt from "@/components/SelectComponent/SelectComponent"
 import { useSession } from "next-auth/react";
+import LoadingSpinner from "@/components/Loader/LoadingSpinner";
 
- function  VenderForm ({state,setState,session,PAGE_STATE}) {
+ function  VenderForm ({PAGE_STATE}) {
 
-  const [VenUserdor,setUser]=useContext(UserContext)
+  const [state,setState]=useContext(UserContext)
+  const { data: session ,status ,update} = useSession()
   
-   if(!session){
-    return <div>Loading...</div>
+   if(status==="loading"){
+    return <LoadingSpinner/>
    }
-  const { user: { name, email, image }, expires } =  session;
 
+ 
 
     return (
     <form 

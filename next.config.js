@@ -1,6 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
+/** @type {import('next').NextConfig} */
+
+const nextConfig = {
+ 
   pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
   images:{
     remotePatterns: [
@@ -21,8 +26,12 @@ const nextConfig = {
              hostname:"**.githußbusercontent.com"
            }
               ],
-          }
+          },
+          httpAgentOptions: {
+            keepAlive: false,
+          },
 
 }
 
-module.exports = nextConfig
+
+module.exports =  withBundleAnalyzer (  nextConfig)

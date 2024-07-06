@@ -1,5 +1,10 @@
 import { useContext, useState } from "react"
-import { motion } from "framer-motion"
+import {m,LazyMotion} from 'framer-motion'
+
+const loadFeatures = () =>
+    import("@/lib/features").then(res => res.default)
+  
+  
 
 const SideBar  = ({
     children,
@@ -11,7 +16,8 @@ const SideBar  = ({
         const SideBarhandler = ()=>{}
 
      return (
-        <motion.aside
+        <LazyMotion features={loadFeatures}>
+        <m.aside
         className={className?className:null}
         style={style?style:null}
 
@@ -23,8 +29,8 @@ const SideBar  = ({
             transition={{duration:1}}
         >
         {children}
-        </motion.aside>
-            
+        </m.aside>
+        </LazyMotion> 
             
             
 )

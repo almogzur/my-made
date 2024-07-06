@@ -1,7 +1,7 @@
 import { faBroom , faPerson }from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import SideBar from 'components/Sidebar/SideBarWrapper'
-import CostumeLink from 'components/Footer/CostumeLink'
+import CostumeLink from '@/components/CostumeLink/CostumeLink'
 import Footer from 'components/Footer/Footer'
 import Colors from "@/lib/colors"
 

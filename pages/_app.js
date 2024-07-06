@@ -27,47 +27,47 @@ import { useEffect, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import State from "@/lib/State"
 
+
+
+
   //           STATE  HENDLING
 ////////////////////////////////////////////////////////
-////              STATE Paseed Throu Pages Indexes //////
-////["/profile","/profile/vendor",/profile/customer] /////
-////         To Children Component and so ON          ////
-////   Clear Component Hierarchy: Props are suitable   ///
-////   ifthe data flow in your component hierarchy is  /////
-////   simple and clear. Each component explicitly       //////
-////   receives the data it needs, which makes it      /////
-////        easier to understand and debug.              ////
-//// Component Reusability: Passing props makes your    ////
-//// components more reusable and flexible since they     ////
-////  don't depend on the global state provided by      /////
-////  context.  Predictable State Updates: With props   ,////
-//// state updates are more predictable since they  ////
-//// follow a clear data flow from parent to          ////
-////               child components.              ////
-////    Performance: Passing props can be more    ////
-////  efficient in some cases, as it avoids          ////
-////                re-rendering                  ////
-///// components that do not need the updated        //// 
-////   context values. However, extensive prop       ////
-//// drilling can also lead to performance issues       ///
+// /              hooks ! in component !              /////
+  ////////////////////////////////////////////////////////
 
-        // Style 
+ //              STYLE 
 //////////////////////////////////////////////////////////////////////////
 ////  5.7.24 idea come to me imgona switch all css files  with     /// ///////
 ////      framer mothen curosponding style elements More at           ///////////
-/// https://nextjs.org/docs/pages/api-reference/components/link#shallow   ///// 
 ///////////////////////////////////////////////////////////////////////////////////
 
+/*      Framer motion Lazy loading insane bundel size if not 
+///////////////////////////////////////////////////////////////////////////
+////////   If you're using a bundler like Webpack or Rollup,             /////
+/// /////       we can pass a dynamic import                             /////
+/// /////  domMax: This provides support for all of the above            /////
+/// ///// plus pan/drag gestures and layout animations. (+25kb)          /////
+ //// In the future it might be possible to offer more granular    /////
+ ///// feature packages, but for now these were chosen to reduce      /////
+ ////   the amount of duplication between features, which could result/////
+ /////      in much more data being downloaded ultimately.          /////
+/////          #Synchronous loading                                   /////
+/////    By passing one of these feature packages to LazyMotion, they'll /////
+/////        be bundled into your main JavaScript bundle.            /////
+///////////////////////////////////////////////////////////////////////////
+*/
+
+
+/*   LINKS
+ ///////////////////////////////////////////////////////////////////////////////
+/////        refetching happens when a <Link /> component enters the          /////
+ /////        user's viewport (initially or through scroll). Next.js          /////
+ /////        prefetches and loads the linked route (denoted by the href)       /////
+/////         and its data in the background to improve the performance of    /////
+ /////         client-side
+ ///////////////////////////////////////////////////////////////////////////////
+*/
   
-    // Next Js Link Component "SHALLOW" Is set To TRUE 
-    // NOT useing At this moment any prefetching methods
-////////////////////////////////////////////////////////////
-////   Update the path of the current page without  /////
-///  rerunning getStaticProps, getServerSideProps or        /////
-//          getInitialProps.  Defaults to false               /////
-///         Make Page Navigation Super Fast                   /////
-///       P.S Using Costume hooks to Fetch Data               ////
-//////////////////////////////////////////////////////////////
 
 
 
@@ -84,16 +84,15 @@ export default function App({
 
 
   return (
-
+      
       <SessionProvider session={session}>    
-
       <UserContext.Provider value={[state,setState]}>
       <WindowWidthContaxt.Provider value={{md,sm}}>
           <Component {...pageProps} />
       </WindowWidthContaxt.Provider>
       </UserContext.Provider>
- 
       </SessionProvider>
+
      
 
   )

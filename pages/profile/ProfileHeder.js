@@ -1,15 +1,20 @@
-import { useContext, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { useContext } from 'react';
+import { useSession } from "next-auth/react"
+import {   m, LazyMotion} from 'framer-motion'
 import Image from 'next/image';
 import defulteUserImg from '@public/User.jpg';
-import { ColorsContext } from "Context/Context"; // Corrected context import
 
-const ProfileHeader = ({ image, name }) => {
+const loadFeatures = () =>
+    import("@/lib/features").then(res => res.default)
+  
+const ProfileHeader = () => {
 
-    const Colors = useContext(ColorsContext)
+    const { data: session, status } = useSession()
+
 
     return (
-        <motion.div
+        <LazyMotion features={loadFeatures}>
+        <m.div
 
             style={{
                 padding:"20px",
@@ -21,7 +26,7 @@ const ProfileHeader = ({ image, name }) => {
                 boxShadow: '0 4px 8px #404040'
                 }}
         >
-            <motion.h1 
+            <h1 
                 
              style={{   
                 position:"absolute",
@@ -29,10 +34,14 @@ const ProfileHeader = ({ image, name }) => {
                  right: "10px",
     }}
             >
-                {name}
-            </motion.h1>
+                {session.user.name.toUpperCase()}
+            </h1>
 
-            <motion.div
+                <h2
+                style={{height:"70px",marginTop:"50px"}}
+                >{session.user.email}</h2>
+
+            <m.div
              style={{
                 borderRadius: "15px",
                 position:"absolute",
@@ -46,25 +55,22 @@ const ProfileHeader = ({ image, name }) => {
              transition={{ type: "spring" ,duration:5 }}
             >
                 <Image
-                  src={image || defulteUserImg}
+                  src={session.user.image || defulteUserImg}
                     height={70}
                     width={70}
                     alt='profile image'
                     style={{borderRadius:"15px"}}
                     fetchpriority='auto'
                 />
-            </motion.div>
+            </m.div>
 
-            <motion.h1
-                style={{
-                    position:  "relative",
-                    top: "100px",
-                    right: "-10px"
-                }}
+            <m.h1
+                style={{ }}
             >
                 פרטים
-            </motion.h1>
-        </motion.div>
+            </m.h1>
+        </m.div>
+        </LazyMotion>
     );
 };
 

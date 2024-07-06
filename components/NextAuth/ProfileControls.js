@@ -3,13 +3,8 @@ import Link from "next/link";
 import { m, LazyMotion } from 'framer-motion';
 import Image from "next/image";
 import { FaPowerOff } from "react-icons/fa";
-import dynamic from 'next/dynamic';
 
 // Dynamic import for LazyMotion and loadFeatures
-const LazyMotionWithFeatures = dynamic(() => import('framer-motion').then(({ m, LazyMotion }) => ({ default: LazyMotion, m })), {
-  ssr: false, // Disable server-side rendering if not needed
-  loading: () => <div>Loading...</div>, // Optional loading component
-});
 
 // Function to dynamically load features
 const loadFeatures = () =>
@@ -27,7 +22,7 @@ function ProfileControls() {
         הרשמה או התחברות
       </button>
       :
-      <LazyMotionWithFeatures features={loadFeatures}>
+      <LazyMotion features={loadFeatures}>
         <div
           style={{
             position: "absolute",
@@ -76,7 +71,7 @@ function ProfileControls() {
             <FaPowerOff size={45} />
           </m.button>
         </div>
-      </LazyMotionWithFeatures>
+      </LazyMotion>
   );
 }
 

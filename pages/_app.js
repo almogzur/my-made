@@ -27,9 +27,6 @@ import { useEffect, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import State from "@/lib/State"
 
-
-
-
   //           STATE  HENDLING
 ////////////////////////////////////////////////////////
 // /              hooks ! in component !              /////
@@ -67,6 +64,26 @@ import State from "@/lib/State"
  /////         client-side
  ///////////////////////////////////////////////////////////////////////////////
 */
+
+/* Dynamic Import  6/7/24
+  ///////////////////////////////////////////////////////////////////////////////
+
+ ////     Funny story. Last night at 01:00 pm   ////////
+ //   I didn't notice and activated CHROME throttling ////////
+ //.to 3G low, and my Profile page was taking 50 sec  ////////
+ ///to load I was sure that the performance was       ////////
+  //// coming from Framer-Motion Overloading webPack  ////////
+  //                   Watch                          /////// 
+  // https://www.framer.com/motion/guide-reduce-bundle-size/ ///
+  //// so I switched to m component and LazyLoading  ////
+  ////  which did  improv the bundle by 4K line      ////
+  ///// HOLY SHITTT !!!! But Loading was 30 Sec so   ////
+  ////  I hope in dynamic importing  and drop it by 30% to ///
+  ////  about 20 sec and I watch how next injects    //////
+  ////     the dynamic scrips I  fall in love        //////
+  ////// and from now on every component!!!    ///////
+  //      Cant use Hooks in dynamic import            //////  
+///////////////////////////////////////////////////////////*/
   
 
 

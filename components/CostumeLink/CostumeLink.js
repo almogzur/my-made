@@ -21,11 +21,11 @@ export default function CostumeLink ({
     return (
       <LazyMotion features={loadFeatures}>
             <m.div
-          style={ motionWrapperStyle?motionWrapperStyle:null}
-          animate={{rotate:360}}
-          transition={{ type: "spring" ,duration:5 }}
-          whileHover={{
-          rotate:30,
+                style={ motionWrapperStyle?motionWrapperStyle:null}
+                animate={{rotate:360}}
+                transition={{ type: "spring" ,duration:5 }}
+                 whileHover={{
+                 rotate:30,
            }}
 
       >

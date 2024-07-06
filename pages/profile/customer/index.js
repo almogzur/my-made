@@ -1,50 +1,46 @@
-"use client"
-
-//Costumer Page
-//Costumer Page 
-//Costumer Page
-//Costumer Page
-import { useEffect,useContext } from "react";
-import CustomerForm from "pages/profile/customer/CustomerForm"
-import { useRouter } from "next/router"; 
+import { useEffect, useContext } from "react";
+import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import LoadingSpinner from "@/components/Loader/LoadingSpinner";
-import ProfileLayout from "@layouts/ProfileLayout";
 import { UserContext } from "@Context/Context";
+import LoadingSpinner from "@/components/Loader/LoadingSpinner";
+import dynamic from 'next/dynamic';
 
-const CostumerPage  = ({})=>{
-  
-  const PAGE_STATE="isCustomer"
+// Dynamic import for ProfileLayout
+const ProfileLayout = dynamic(() => import("@layouts/ProfileLayout"), {
+  loading: () => <LoadingSpinner />,
+  ssr: false, // Disable server-side rendering if not needed
+});
 
-  const router = useRouter()
+// Dynamic import for CustomerForm
+const CustomerForm = dynamic(() => import("pages/profile/customer/CustomerForm"), {
+  loading: () => <LoadingSpinner />,
+  ssr: false, // Disable server-side rendering if not needed
+});
 
-  const { data: session ,status ,update} = useSession()
+const CostumerPage = () => {
+  const PAGE_STATE = "isCustomer";
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  const [state, setState] = useContext(UserContext);
 
-  const [state,setState]=useContext(UserContext)
-
-  // Prevent Slug Navigation     
-  useEffect(()=>{
-  
-    if (status === "unauthenticated"  ) {
-     router.push("/")
- }
-})
+  // Prevent Slug Navigation
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
 
   if (status === 'loading') {
-    return <LoadingSpinner/>
+    return <LoadingSpinner />;
   }
 
   return (
-   <>
-  <ProfileLayout>
-     <CustomerForm
-
-      
-     />
-  </ProfileLayout>
+    <>
+      <ProfileLayout>
+        <CustomerForm />
+      </ProfileLayout>
     </>
-  )
-}
+  );
+};
 
-
-export default CostumerPage
+export default CostumerPage;

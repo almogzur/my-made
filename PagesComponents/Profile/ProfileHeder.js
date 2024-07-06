@@ -51,7 +51,7 @@ const ProfileHeader = () => {
              whileHover={{
                  rotate:30
              }}
-             animate={{ rotate:720 }}
+             animate={{ rotate:360 }}
              transition={{ type: "spring" ,duration:5 }}
             ><Image
                 src={session.user.image || defulteUserImg}

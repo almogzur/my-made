@@ -19,11 +19,11 @@ const ProfileLayout = dynamic(() => import('@layouts/ProfileLayout'), {
   loading: () => <MongoSpinner />,
   ssr: true, 
 });
-const ProfileHeader = dynamic(() => import('@pages/profile/ProfileHeder'), {
+const ProfileHeader = dynamic(() => import('PagesComponents/Profile/ProfileHeder'), {
   loading: () => <MongoSpinner />, 
   ssr: true, 
 });
-const ProfileInfo = dynamic(() => import('@pages/profile/ProfileInfo'), {
+const ProfileInfo = dynamic(() => import('@PagesComponents/Profile/ProfileInfo'), {
   loading: () => <MongoSpinner />, 
   ssr: true,
 });

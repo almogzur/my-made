@@ -13,11 +13,11 @@ const loadFeatures = () =>
 
 // Dynamic imports
 const Dialog = dynamic(() => import('@/components/Dialog/Dialog'), {
-  ssr: false, // Disable server-side rendering if needed
-  loading: () => <LoadingSpinner/>// Optional loading component
+  ssr: false, 
+  loading: () => <LoadingSpinner/>
 });
 
-const ProfileForm = dynamic(() => import('@pages/profile/ProfileForm'), {
+const ProfileForm = dynamic(() => import('PagesComponents/Profile/ProfileForm'), {
   ssr: false,
   loading: () => <LoadingSpinner/>
 });

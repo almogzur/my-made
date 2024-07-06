@@ -9,7 +9,7 @@ const ProfileLayout = dynamic(() => import("@layouts/ProfileLayout"), {
   loading: () => <div>Loading Profile Layout...</div>,
 });
 
-const Form = dynamic(() => import("@pages/profile/vendor/Form"), {
+const Form = dynamic(() => import("@PagesComponents/Verndor/VenderForm"), {
   ssr: false,
   loading: () => <div>Loading Form...</div>,
 });

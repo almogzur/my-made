@@ -9,6 +9,9 @@ import dynamic from "next/dynamic";
 import LoadingSpinner from "../Loader/LoadingSpinner";
 import Colors from "@/lib/colors";
 
+
+
+
 const CostumeLink = dynamic(() => import("../CostumeLink/CostumeLink"), {
   ssr: false, // Disable server-side rendering if not needed
   loading: () => <LoadingSpinner/>, // Optional loading component
@@ -17,6 +20,9 @@ const ProfileControls = dynamic(() => import("@/components/NextAuth/ProfileContr
   ssr: false, // Disable server-side rendering if not needed
   loading: () => <LoadingSpinner/>, // Optional loading component
 });
+
+
+
 
 const Footer = ({children,style,className})  => {
 

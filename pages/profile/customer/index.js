@@ -12,7 +12,7 @@ const ProfileLayout = dynamic(() => import("@layouts/ProfileLayout"), {
 });
 
 // Dynamic import for CustomerForm
-const CustomerForm = dynamic(() => import("pages/profile/customer/CustomerForm"), {
+const CustomerForm = dynamic(() => import("PagesComponents/Customer/CustomerForm"), {
   loading: () => <LoadingSpinner />,
   ssr: false, // Disable server-side rendering if not needed
 });

@@ -30,7 +30,7 @@
     "react-modal": "^3.16.1",
     "replyke": "^2.0.21",
     "sharp": "^0.33.4",
-    "styled-components": "^6.1.11",
+    "styled-jsx": "^5.1.6",
     "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {

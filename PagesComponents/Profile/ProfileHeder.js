@@ -4,6 +4,7 @@ import {m, LazyMotion} from 'framer-motion'
 import Image from 'next/image';
 import defulteUserImg from '@public/User.jpg';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import Colors from '@/lib/colors';
 
 const loadFeatures = () =>
     import("@/lib/features").then(res => res.default)
@@ -31,15 +32,16 @@ const ProfileHeader = () => {
             position:"absolute",
             top:"00px",
             right: "10px",
-               }}
-            >{session.user.name.toUpperCase()}
+
+                           }}
+            >{session?.user?.name.toUpperCase()}
          </h1>
          <h2
           style={{
             height:"70px",
-            marginTop:"50px"
+            marginTop:"50px",
             }}
-          >{session.user.email}
+          >{session?.user?.email?.toUpperCase()}
          </h2>
          <m.div
             style={{
@@ -54,7 +56,7 @@ const ProfileHeader = () => {
              animate={{ rotate:360 }}
              transition={{ type: "spring" ,duration:5 }}
             ><Image
-                src={session.user.image || defulteUserImg}
+                src={session?.user?.image || defulteUserImg}
                 height={70}
                 width={70}
                 alt='profile image'

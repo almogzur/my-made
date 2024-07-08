@@ -1,25 +1,32 @@
-// pages/api/update.js
+// pages/api/save-user-to-db.ts
 import clientPromise from '@/lib/db';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
 
 export default async function handler(req, res) {
-  console.log("Update Handler invoked");
 
+
+  console.log("SAVE STATE API INVOKE");
+
+  
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
+    console.log("Method ${req.method} Not Allowed");
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
   const session = await getServerSession(req, res, authOptions);
-  const state = req.body;
 
   if (!session) {
+    console.log('message: Unauthorized')
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
+  const state = req.body;
+
   if (!state) {
-    return res.status(400).json({ message: 'Invalid input' });
+    console.log("No State");
+    return res.status(400).json({ message: 'No State' });
   }
 
   try {
@@ -27,24 +34,25 @@ export default async function handler(req, res) {
     const database = client.db('my-made');
     const users = database.collection('users');
 
-    // Check if the state already exists
+    console.log("SaveState Looking For User ");
     const existingUser = await users.findOne({ email: session.user.email });
-    if (existingUser && existingUser.state && JSON.stringify(existingUser.state) === JSON.stringify(state)) 
-      {
-        console.log("user have state object ")
-      return res.status(200).json({ message: 'State already saved' ,existingUser});
+
+    if (existingUser && existingUser.state && JSON.stringify(existingUser.state) === JSON.stringify(state)) {
+      console.log("User In Db");
+      return res.status(200).json({
+        message: 'State already saved',
+      });
     }
 
-    // Update user profile
     const result = await users.updateOne(
       { email: session.user.email },
-      { $set: { state } }, // Save the state in the database
-      { upsert: false }
+      { $set: { state } },
+      { upsert: true } // Using upsert to create the document if it does not exist
     );
-
-    return res.status(200).json({ message: 'Profile updated successfully' });
-  } 
-  catch (error) {
+      console.log("Save Api Sucsessful ");
+    return res.status(200).json({ message: 'Profile updated successfully', result });
+  } catch (error) {
+    console.log(error);
     console.error('Error updating user:', error);
     return res.status(500).json({ error: 'Internal Server Error' });
   }

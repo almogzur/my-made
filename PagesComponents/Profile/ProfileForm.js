@@ -21,14 +21,14 @@ const ProfileForm = () => {
     }));
   };
 
-    const handleInfoSave = async (Data) => {
+    const handleInfoSave = async () => {
        try {
-         const response = await fetch('/api/user/profile', { // Change this URL to your actual endpoint
+         const response = await fetch('/api/userinfo', { // Change this URL to your actual endpoint
              method: 'POST',
               headers: {
                  'Content-Type': 'application/json',
                     },
-                   body : JSON.stringify(Data)  
+                   body : JSON.stringify(state.Info)  
                     });
          if (response.ok) {
                  // Handle success
@@ -76,10 +76,7 @@ const ProfileForm = () => {
         <TextArea
           id="about"
           value={state.Info.about}
-          onChange={handleTextAreaChange}
-          
-
-
+          onChange={handleTextAreaChange} 
       />
       
 

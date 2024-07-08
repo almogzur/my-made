@@ -3,16 +3,12 @@ import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { m, LazyMotion } from "framer-motion";
+import Colors from "@/lib/colors";
 
 // Dynamic import for ReactModal, LazyMotion, and loadFeatures
 const ReactModal = dynamic(() => import("react-modal"), {
   loading: () => <div>Loading ReactModal...</div>, 
   ssr: false, 
-});
-
-const LazyMotionWithFeatures = dynamic(() => import("framer-motion").then(({ m, LazyMotion }) => ({ default: LazyMotion, m })), {
-  loading: () => <div>Loading...</div>, 
-  ssr: true, 
 });
 
 const loadFeatures = () =>
@@ -56,17 +52,18 @@ const Dialog = ({
         style={{
           content:{
             position: "absolute",
-            top: "10px",
-            left: "10px",
-            right: "10px",
-            bottom: '10px',
-            backgroundColor: "#ececec",
+            top: "5px",
+            left: "5px",
+            right: "5px",
+            bottom: '5px',
+            background: 'rgb(52,124,207)',
+            background: 'radial-gradient(circle, rgba(52,124,207,1) 0%, rgba(255,255,255,1) 100%)',
             display:"flex",
             flexDirection:"column",
             justifyFontent:"center",
             alignItems:"center",
             alignContent:'enter',
-            borderRadius:"7px",
+            borderRadius:"2px",
             overflow:"clip",
           },
           overlay:{
@@ -76,7 +73,6 @@ const Dialog = ({
             right: "25px",
             bottom: "100px",
             backgroundColor:"#404040",
-            borderRadius:"15px",
             }
             
 
@@ -84,7 +80,7 @@ const Dialog = ({
         
       >
         {children}
-        <LazyMotionWithFeatures features={loadFeatures}>
+        <LazyMotion features={loadFeatures}>
           <m.button
             whileHover={{background:"red"}}
             onClick={handleModal}
@@ -97,7 +93,7 @@ const Dialog = ({
           >
             <FontAwesomeIcon size="2x" icon={faXmark} />
           </m.button>
-        </LazyMotionWithFeatures>
+        </LazyMotion>
       </ReactModal>
     </div>
   );

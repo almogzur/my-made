@@ -25,24 +25,16 @@ export default function CostumeLink ({
           style={ motionWrapperStyle?motionWrapperStyle:null}
           animate={{rotate:360}}
           transition={{ type: "spring" ,duration:5 }}
-          whileHover={{rotate:30,}}
-      >    <style jsx>
-                  {
-                  `  
-                  div {
-                  heghit:100px;
-                  
-                  }div:hover{
-                      background:red
-                  }
-        
-                 `}
-      </style>
+          whileHover={{rotate:30}}
+      >    
        <Link 
+         id="thiss"
           prefetch={true}
           href={href}
           style={linkStyle ? linkStyle :null}
-           > <div
+           >
+   
+           <div
               style={divStyle?divStyle:null} 
                >
                 {text?text:null}     

@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import { faBroom, faPerson } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Colors from "@/lib/colors";
+import { color } from 'framer-motion';
 
 // Dynamic imports
 const SideBar = dynamic(() => import('components/Sidebar/SideBarWrapper'), {
@@ -35,6 +36,7 @@ const ProfileLayout = ({ children }) => {
     alignContent: 'center',
     width: "100%",
     height: "70px",
+    color:Colors.a
   }
 
   return (
@@ -65,7 +67,11 @@ const ProfileLayout = ({ children }) => {
           linkStyle={DefaultLinkStyle}
           divStyle={DivDefaultStyle}
         >
-          <FontAwesomeIcon size="1x" icon={faPerson} />
+          <FontAwesomeIcon 
+           size="1x"
+           icon={faPerson}
+ 
+            />
         </CostumeLink>
       </SideBar>
 

@@ -27,16 +27,14 @@ function ProfileControls() {
       <m.button
           style={{
             height:'inherit',
-            border:"none"
-            
-            
-                 }}
-          animate={{x:[-70,0]}}
-          transition={{ duration:3 }}
-          whileHover={{
-            borderRadius:"15px",
-            transition:"ease",
-            background: Colors.d,
+            border:"none",
+            background:Colors.c
+                }}
+            animate={{x:[-70,0]}}
+            transition={{ duration:2 }}
+            whileHover={{
+                 borderRadius:"15px",
+                 background: Colors.d,
  
           }}
           onClick={() => signIn(undefined, { callbackUrl: "/profile" })}
@@ -94,13 +92,13 @@ function ProfileControls() {
               color: Colors.d,
             }}
             animate={{ rotate: [30,0] }}
-            transition={{ type: "spring", duration: 5 }}
+            transition={{ type: "spring", duration: 1 }}
             whileHover={{ rotate: 360}}
             onClick={() => signOut({
               callbackUrl: "/"
             })}
           >
-            <FaPowerOff size={45} />
+            <FaPowerOff size={40} />
           </m.button>
         </div>
       </LazyMotion>

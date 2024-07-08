@@ -23,7 +23,6 @@ const ProfileControls = dynamic(() => import("@/components/NextAuth/ProfileContr
 
 
 
-
 const Footer = ({children,style,className})  => {
 
     const defualtStyle={
@@ -31,7 +30,7 @@ const Footer = ({children,style,className})  => {
       bottom: "0",
       width: "100%",
       height: "55px",
-      background: Colors.a,
+      background: Colors.b,
       color: "white",
       display: "flex",
     }
@@ -46,7 +45,7 @@ const Footer = ({children,style,className})  => {
             motionWrapperStyle={{
               width:"70px",
               display:'flex',
-              flexDirection:'row'|'column',
+              flexDirection:'column',
               justifyContent:'center',
               alignItems:'center',
               alignContent:'center',
@@ -55,7 +54,7 @@ const Footer = ({children,style,className})  => {
             divStyle={{}}
            
            >
-            <FontAwesomeIcon icon={faHome} size={"2x"} />
+            <FontAwesomeIcon icon={faHome} color="#FFC436" size={"2x"} />
          </CostumeLink>
 
          <CostumeLink
@@ -63,7 +62,6 @@ const Footer = ({children,style,className})  => {
               motionWrapperStyle={{
                 height:'inherit',
                 width:"70px",
-                border:"5px solid",
                 display:'flex',
                 flexDirection:'column',
                 justifyContent:'center',
@@ -75,7 +73,7 @@ const Footer = ({children,style,className})  => {
      
         
           >
-           <FontAwesomeIcon size="2x" icon={faClipboard}/>
+           <FontAwesomeIcon size="2x" color="#FFC436" icon={faClipboard}/>
         </CostumeLink>
             {children} 
            

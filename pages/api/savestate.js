@@ -5,13 +5,11 @@ import { authOptions } from "./auth/[...nextauth]";
 
 export default async function handler(req, res) {
 
-
   console.log("SAVE STATE API INVOKE");
 
-  
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
-    console.log("Method ${req.method} Not Allowed");
+    console.log(`Method ${req.method} Not Allowed`);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 
@@ -37,10 +35,10 @@ export default async function handler(req, res) {
     console.log("SaveState Looking For User ");
     const existingUser = await users.findOne({ email: session.user.email });
 
-    if (existingUser && existingUser.state && JSON.stringify(existingUser.state) === JSON.stringify(state)) {
-      console.log("User In Db");
+    if (existingUser && existingUser.state) {
+      console.log("User Already Has State in Db");
       return res.status(200).json({
-        message: 'State already saved',
+        message: 'State already exists',
       });
     }
 
@@ -49,7 +47,8 @@ export default async function handler(req, res) {
       { $set: { state } },
       { upsert: true } // Using upsert to create the document if it does not exist
     );
-      console.log("Save Api Sucsessful ");
+    
+    console.log("Save Api Successful ");
     return res.status(200).json({ message: 'Profile updated successfully', result });
   } catch (error) {
     console.log(error);

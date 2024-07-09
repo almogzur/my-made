@@ -14,9 +14,8 @@ const Form = dynamic(() => import("@PagesComponents/Verndor/VenderForm"), {
   loading: () => <div>Loading Form...</div>,
 });
 
-const LoadingSpinner = dynamic(() => import("@/components/Loader/LoadingSpinner"), {
+const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningLoader"), {
   ssr: false,
-  loading: () => <div>Loading Spinner...</div>,
 });
 
 const Vender = () => {

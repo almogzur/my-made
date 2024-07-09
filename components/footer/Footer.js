@@ -6,19 +6,15 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { faHome, faClipboard } from "@fortawesome/free-solid-svg-icons";
 import dynamic from "next/dynamic";
-import LoadingSpinner from "../Loader/LoadingSpinner";
 import Colors from "@/lib/colors";
 
 
 
 
 const CostumeLink = dynamic(() => import("../CostumeLink/CostumeLink"), {
-  ssr: false, // Disable server-side rendering if not needed
-  loading: () => <LoadingSpinner/>, // Optional loading component
-});
+  ssr: false, });
 const ProfileControls = dynamic(() => import("@/components/NextAuth/ProfileControls"), {
-  ssr: false, // Disable server-side rendering if not needed
-  loading: () => <LoadingSpinner/>, // Optional loading component
+  ssr: false, 
 });
 
 

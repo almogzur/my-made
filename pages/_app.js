@@ -10,7 +10,7 @@ import "components/Acordione/Acordion.css"
 import "components/RangeElemnt/RangeElemnt.css"
 
  // will move to in line 
-import "components/Loader/LoadingSpinner.css"
+import "components/SpiningLoader/SpiningLoader.css"
 import "components/MongoSpinner/mongoSpinner.css"
 import "pages/profile/Profile.css"
 

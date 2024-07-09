@@ -1,11 +1,10 @@
 
-* replace the useSaveState tio db with getrserverProps
 
 
-* Save State To db on user Init 
+ * in the user info section get user from db and chake if not null 
 
-* extract State update from lev2 or children chuildren nested componet 
+* style From Input 
 
-* set up imfo sectio 
+* add comment section to user Profile 
 
 *  ad location and map component

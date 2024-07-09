@@ -1,7 +1,5 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import Colors from '@/lib/colors';
-import LoadingSpinner from '@/components/Loader/LoadingSpinner';
 
 // Dynamic imports
 const Header = dynamic(() => import('@/components/header/Header'), {

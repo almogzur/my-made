@@ -1,15 +1,18 @@
 /// ProfilePage
 
 
-
-import { useEffect } from 'react';
+import { UserContext } from '@Context/Context';
+import { useEffect,useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic';
-import MongoSpinner from '@/components/MongoSpinner/MongoSpinner';
 
-import LoadingSpinner from '@/components/Loader/LoadingSpinner';
-
+const MongoSpinner = dynamic(() => import("@/components/MongoSpinner/MongoSpinner"), {
+  ssr: false,
+});
+const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningLoader"), {
+  ssr: false,
+});
 const ProfileLayout = dynamic(() => import('@layouts/ProfileLayout'), {
   loading: () => <MongoSpinner />,
   ssr: true,
@@ -23,14 +26,22 @@ const ProfileInfo = dynamic(() => import('@PagesComponents/Profile/ProfileInfo')
   ssr: true,
 });
 
+import useSaveUserState from '@/lib/hooks/useSaveUserState';
+
+
 
 const ProfilePage = ({  }) => {
   const router = useRouter();
   const { data: session ,status ,update} = useSession()
+  const [state, setState] = useContext(UserContext);
 
+  const { profileData, loading, error } = useSaveUserState(state, session);
+
+
+  
   useEffect(() => {
-    
-  }, []);
+     console.log(profileData, loading, error);
+  }, [profileData, loading, error]);
 
   useEffect(() => {
     if (status === "unauthenticated") {

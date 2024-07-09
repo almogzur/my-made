@@ -2,12 +2,16 @@ import { useEffect, useState, useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { useSession } from 'next-auth/react';
 import { UserContext } from '@Context/Context';
-import Colors from '@/lib/colors';
-import LoadingSpinner from '@/components/Loader/LoadingSpinner';
 import { LazyMotion, m } from "framer-motion";
+import Colors from '@/lib/colors';
 
+
+const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningLoader"), {
+  ssr: false,
+});
 const loadFeatures = () =>
-  import("@/lib/features.js").then(res => res.default);
+  import("@/lib/features.js")
+.then(res => res.default);
 
 const Dialog = dynamic(() => import('@/components/Dialog/Dialog'), {
   ssr: false, 
@@ -19,48 +23,11 @@ const ProfileForm = dynamic(() => import('PagesComponents/Profile/ProfileForm'),
   loading: () => <LoadingSpinner/>
 });
 
+
+
 const ProfileInfo = () => {
   const { data: session, status, update } = useSession();
-  const [state, setState] = useContext(UserContext);
-  const [profileData, setProfileData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-
-  //  this function save the satee object
-  // in db for lather ref 
-
-  useEffect(() => {
-    console.log(state);
-    const fetchProfileData = async () => {
-      try {
-        const response = await fetch('/api/savestate', {
-          method: 'POST',
-          body:JSON.stringify(state),
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setProfileData(data);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (session) {
-      fetchProfileData();
-    }
-  }, [session]);
-
-  if (loading) return <LoadingSpinner />;
-  if (error) return <p>Error: {error.message}</p>;
-
+ 
   return (
     <LazyMotion features={loadFeatures}>
       <m.div
@@ -72,7 +39,7 @@ const ProfileInfo = () => {
         }}
       >
         <Dialog
-          buttonText={profileData ? "עדכון פרטים" : "הוסף פרטים"}
+            buttonText={  "עדכון פרטים"}
           buttonStyle={{
             height: "100px",
             marginTop: "15px",
@@ -83,7 +50,7 @@ const ProfileInfo = () => {
             boxShadow: "4px 4px 2px #FFC436",
             fontSize: "20px"
           }}
-          wrapperStyle={{
+         wrapperStyle={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',

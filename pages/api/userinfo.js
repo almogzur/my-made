@@ -27,19 +27,23 @@ const handler = async (req, res) => {
   const userEmail = session.user.email;
   const database = client.db('my-made');
   const users = database.collection('users');
+  const { age, phone, about } = req.body;
+
 
   try {
     // Find the user by their email and update their information
     const filter = { email: userEmail };
     const updateDoc = {
       $set: {
-        age: req.body.age,
-        phone: req.body.phone,
-        about: req.body.about
+        "state.info.age": age,
+        "state.info.phone": phone,
+        "state.info.about": about
       }
     };
-
+    
+    // Assuming you're using MongoDB Node.js driver and have a collection called 'users'
     const result = await users.updateOne(filter, updateDoc);
+    
 
     if (result.modifiedCount === 1) {
       console.log("User Info Updated");

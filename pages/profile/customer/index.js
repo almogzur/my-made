@@ -2,8 +2,12 @@ import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { UserContext } from "@Context/Context";
-import LoadingSpinner from "@/components/Loader/LoadingSpinner";
 import dynamic from 'next/dynamic';
+
+
+const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningLoader"), {
+  ssr: false,
+});
 
 // Dynamic import for ProfileLayout
 const ProfileLayout = dynamic(() => import("@layouts/ProfileLayout"), {

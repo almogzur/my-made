@@ -2,21 +2,22 @@ import React, { useContext } from "react";
 import { UserContext } from "Context/Context";
 import dynamic from 'next/dynamic';
 import { useSession } from "next-auth/react";
-import LoadingSpinner from "@/components/Loader/LoadingSpinner";
+
+const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningLoader"), {
+  ssr: false,
+});
 
 // Dynamic imports with loading component
 const InputElemnt = dynamic(() => import("@/components/InputElemnt/InputElemnt"), {
-  loading: () => <LoadingSpinner />,
   ssr: true, 
 });
 
 const Calinder = dynamic(() => import("@/components/Calinder/Calinder"), {
-  loading: () => <LoadingSpinner />,
   ssr: true, 
 });
 
 const SelectElemnt = dynamic(() => import("@/components/SelectComponent/SelectComponent"), {
-  loading: () => <LoadingSpinner />,
+
   ssr: true, 
 });
 

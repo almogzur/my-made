@@ -35,13 +35,8 @@ const ProfilePage = ({  }) => {
   const { data: session ,status ,update} = useSession()
   const [state, setState] = useContext(UserContext);
 
-  const { profileData, loading, error } = useSaveUserState(state, session);
+  const { profileData, saving, profileError } = useSaveUserState(state, session);
 
-
-  
-  useEffect(() => {
-     console.log(profileData, loading, error);
-  }, [profileData, loading, error]);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -52,11 +47,21 @@ const ProfilePage = ({  }) => {
   if (status === 'loading') {
     return <LoadingSpinner/>;
   }
+  else if (profileError){
+    return <h1>Eroor Saving User Data {profileError}</h1>
+  }
+  else if(saving){
+    return <MongoSpinner/>
+  }
 
   return (
     <ProfileLayout>
       <ProfileHeader />
-      <ProfileInfo />
+      <ProfileInfo 
+        age={""}
+        about={""}
+        phone={0}
+      />
     </ProfileLayout>
   );
 };

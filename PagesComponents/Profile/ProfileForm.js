@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '@Context/Context';
 import InputElemnt from '@/components/InputElemnt/InputElemnt';
 import TextArea from '@/components/TextArea/TextArea';
-import useGetUser from '@/lib/hooks/useGetUser';
 
 const ProfileForm = () => {
 
@@ -24,7 +23,7 @@ const ProfileForm = () => {
 
     const handleInfoSave = async () => {
        try {
-         const response = await fetch('/api/userinfo', { // Change this URL to your actual endpoint
+         const response = await fetch('/api/saveuserinfo', { // Change this URL to your actual endpoint
              method: 'POST',
               headers: {
                  'Content-Type': 'application/json',

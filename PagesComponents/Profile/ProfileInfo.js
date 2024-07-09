@@ -4,6 +4,8 @@ import { useSession } from 'next-auth/react';
 import { UserContext } from '@Context/Context';
 import { LazyMotion, m } from "framer-motion";
 import Colors from '@/lib/colors';
+import { getServerSession } from "next-auth/next"
+import useGetUser from '@/lib/hooks/useGetUser';
 
 
 const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningLoader"), {
@@ -25,10 +27,20 @@ const ProfileForm = dynamic(() => import('PagesComponents/Profile/ProfileForm'),
 
 
 
-const ProfileInfo = () => {
+const ProfileInfo =  () => {
   const { data: session, status, update } = useSession();
- 
+const {userData,loading,error} = useGetUser(session.user.email)
+  
+  
+useEffect(()=>{
+  console.log(userData);
+})
+
+
+  
   return (
+
+
     <LazyMotion features={loadFeatures}>
       <m.div
         animate={{ x: [-400, 0] }}
@@ -39,8 +51,8 @@ const ProfileInfo = () => {
         }}
       >
         <Dialog
-            buttonText={  "עדכון פרטים"}
-          buttonStyle={{
+         buttonText={  "עדכון פרטים"}
+         buttonStyle={{
             height: "100px",
             marginTop: "15px",
             width: '40%',
@@ -58,7 +70,7 @@ const ProfileInfo = () => {
             alignContent: 'center',
           }}
         >
-          {<ProfileForm />}
+          <ProfileForm />
         </Dialog>
       </m.div>
     </LazyMotion>
@@ -66,3 +78,4 @@ const ProfileInfo = () => {
 };
 
 export default ProfileInfo;
+

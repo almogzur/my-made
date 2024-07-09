@@ -1,12 +1,18 @@
-// pages/api/user/profile.js
+// pages/api/userinfo
+
+// save "Profile Info Form"  Data To DB
+
+
 import clientPromise from '@/lib/db';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "./auth/[...nextauth]";
 
 const handler = async (req, res) => {
 
+  const API_NAME = "SAVE USER INFO FORM"
 
-  console.log("SAVE USER INFO API");
+
+  console.log(API_NAME);
 
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
@@ -17,7 +23,7 @@ const handler = async (req, res) => {
   const session = await getServerSession(req, res, authOptions);
 
   if (!session) {
-    console.log('Unauthorized');
+    console.log(API_NAME,'Unauthorized');
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
@@ -35,9 +41,9 @@ const handler = async (req, res) => {
     const filter = { email: userEmail };
     const updateDoc = {
       $set: {
-        "state.info.age": age,
-        "state.info.phone": phone,
-        "state.info.about": about
+        "state.Info.age": age,
+        "state.Info.phone": phone,
+        "state.Info.about": about
       }
     };
     
@@ -53,7 +59,7 @@ const handler = async (req, res) => {
       return res.status(404).json({ message: 'User not found or no changes made' });
     }
   } catch (error) {
-    console.error('Error updating profile:', error);
+    console.error(API_NAME,'Error updating profile:', error);
     return res.status(500).json({ message: 'Error updating profile', error });
   } finally {
     // Close the database connection

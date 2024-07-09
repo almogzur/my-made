@@ -46,9 +46,7 @@ const Dialog = ({
       <ReactModal
         ariaHideApp={false}
         isOpen={showModal}
-        contentLabel="onRequestClose Example"
-        onRequestClose={handleModal}
-        
+        onRequestClose={handleModal}        
         style={{
           content:{
             position: "absolute",

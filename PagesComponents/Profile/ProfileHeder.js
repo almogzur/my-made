@@ -4,6 +4,7 @@ import {m, LazyMotion} from 'framer-motion'
 import Image from 'next/image';
 import defulteUserImg from '@public/User.jpg';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import ColorsH1 from '@/components/gradientH1/ColoreH1';
 import Colors from '@/lib/colors';
 
 const loadFeatures = () =>
@@ -23,26 +24,43 @@ const ProfileHeader = () => {
            height:"200px",
            border:"none",    
            background: 'rgb(25,29,136)',
-           background: 'linear-gradient(329deg, rgba(25,29,136,1) 0%, rgba(20,80,163,1) 21%, rgba(255,255,255,1) 100%)',
+           background: `linear-gradient(-119deg, 
+             ${Colors.a} , 
+             ${Colors.c} ,
+             #fff
+            
+          
+           )
+           `,
            boxShadow: '0 4px 8px #404040'
                 }}
        >
-         <h1      
-          style={{   
+         <ColorsH1      
+         text={session?.user?.name.toUpperCase()}
+         color1={Colors.b}
+         color2={Colors.c}
+         angleDeg={"-17deg"}
+         style={{   
+            
             position:"absolute",
             top:"00px",
             right: "10px",
 
                            }}
-            >{session?.user?.name.toUpperCase()}
-         </h1>
-         <h2
+            >{}
+         </ColorsH1>
+
+         <ColorsH1
+         text={session?.user?.email?.toUpperCase()}
+         color1={Colors.b}
+         color2={Colors.c}
+         angleDeg={"-17deg"}
           style={{
             height:"70px",
             marginTop:"50px",
             }}
-          >{session?.user?.email?.toUpperCase()}
-         </h2>
+          >
+         </ColorsH1>
          <m.div
             style={{
                borderRadius: "15px",
@@ -64,10 +82,7 @@ const ProfileHeader = () => {
                 fetchpriority='auto'
                 />
          </m.div>
-          <m.h1
-            style={{ }}
-            >פרטים
-          </m.h1>
+
       </m.div>
     </LazyMotion>
    </ErrorBoundary>

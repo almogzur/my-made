@@ -6,6 +6,7 @@ import { authOptions } from "@pages/api/auth/[...nextauth]";
 const API_NAME = "GET USER API";
 
 const handler = async (req, res) => {
+  
   console.log(API_NAME);
 
   if (req.method !== 'GET') {

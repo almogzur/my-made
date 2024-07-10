@@ -6,6 +6,7 @@ const TextArea = ({
   onChange,
   className,
   resize,
+  text
 
 }) => {
  
@@ -22,7 +23,7 @@ const TextArea = ({
 
   return (
   <>
-      <label htmlFor={id}>{id}</label>
+      <label htmlFor={id}>{text}</label>
       <textarea
         id={id}
         value={value}

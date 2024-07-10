@@ -1,15 +1,25 @@
 import { useSession } from 'next-auth/react';
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '@Context/Context';
+import { StateContext } from '@Context/Context';
 import InputElemnt from '@/components/InputElemnt/InputElemnt';
 import TextArea from '@/components/TextArea/TextArea';
 
-const ProfileForm = () => {
+const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
 
    const STATE_KEY = "Info"
    const { data: session ,status ,update} = useSession()
-   const [ state,setState]=useContext(UserContext)
- 
+   const [ state,setState]=useContext(StateContext)
+
+   useEffect(() => {
+    setState(prevState => ({
+      ...prevState,
+      [STATE_KEY]: {
+        age: dbAge || prevState[STATE_KEY].age,
+        phone: dbPhone || prevState[STATE_KEY].phone,
+        about: dbAbout || prevState[STATE_KEY].about,
+      }
+    }));
+  }, [dbAge, dbPhone, dbAbout, setState]);
 
    const handleTextAreaChange = (id, value) => {
     setState(prevState => ({
@@ -20,7 +30,6 @@ const ProfileForm = () => {
       }
     }));
   };
-
     const handleInfoSave = async () => {
        try {
          const response = await fetch('/api/saveuserinfo', { // Change this URL to your actual endpoint
@@ -46,10 +55,11 @@ const ProfileForm = () => {
 
 
   return (
-
+    <form onSubmit={ handleInfoSave}>
     <div className='profile-info-section'>
       <h2>עדכון פרטי משתמש</h2>
       <div className='profile-info-split'>
+    
         <InputElemnt
           type="text"
           text="גיל"
@@ -58,6 +68,7 @@ const ProfileForm = () => {
           required
           inputClassName=""
           value={state.Info.age}
+          
           onChange={handleTextAreaChange}
         />
         <InputElemnt
@@ -75,6 +86,7 @@ const ProfileForm = () => {
 
         <TextArea
           id="about"
+          text="עלי"
           value={state.Info.about}
           onChange={handleTextAreaChange} 
       />
@@ -82,11 +94,12 @@ const ProfileForm = () => {
 
       {/** User Data Save to db  */}
      <button
-        onClick={handleInfoSave}
+          type='submit'
         >{"עדכון"}
-        
+          
         </button>
     </div>
+    </form>
   );
 };
 

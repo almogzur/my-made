@@ -1,58 +1,61 @@
 import { useEffect, useState, useContext } from 'react';
-import dynamic from 'next/dynamic';
 import { useSession } from 'next-auth/react';
-import { UserContext } from '@Context/Context';
 import { LazyMotion, m } from "framer-motion";
 import Colors from '@/lib/colors';
-import { getServerSession } from "next-auth/next"
 import useGetUser from '@/lib/hooks/useGetUser';
+import MongoSpinner from '@/components/MongoSpinner/MongoSpinner';
+import ProfileInfoDisplay from "@PagesComponents/Profile/ProfileInfoDisplay"
+import ProfileForm from 'PagesComponents/Profile/ProfileForm';
+import Dialog from "@/components/Dialog/Dialog"
+import LoadingSpinner from '@/components/SpiningLoader/SpiningLoader';
 
-
-const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningLoader"), {
-  ssr: false,
-});
 const loadFeatures = () =>
   import("@/lib/features.js")
-.then(res => res.default);
-
-const Dialog = dynamic(() => import('@/components/Dialog/Dialog'), {
-  ssr: false, 
-  loading: () => <LoadingSpinner/>
-});
-
-const ProfileForm = dynamic(() => import('PagesComponents/Profile/ProfileForm'), {
-  ssr: false,
-  loading: () => <LoadingSpinner/>
-});
+      .then(res => res.default)
 
 
 
-const ProfileInfo =  () => {
-  const { data: session, status, update } = useSession();
-const {userData,loading,error} = useGetUser(session.user.email)
-  
-  
-useEffect(()=>{
-  console.log(userData);
-})
+const ProfileInfo = () => {
+  const { data: session, status, update } = useSession(); 
+  const { UserData, dbloading, error } = useGetUser(session?.user?.email);
+  const [ resolvedUser , setResolvedUser] = useState(false)
+  const [showInfo,setShowInfo] = useState(true)
+
+  useEffect(()=>{
+  // the hook is at loading and without use effect dno know when user is !null 
+  // after geting the data set state
+      if(UserData!==null){
+        setResolvedUser(UserData)
+      }
+  },[UserData])
 
 
-  
-  return (
+  if (dbloading === "loading") {
+    return <MongoSpinner />;
+  }
 
 
-    <LazyMotion features={loadFeatures}>
+
+  return    resolvedUser && showInfo? <ProfileInfoDisplay
+                      age={resolvedUser.state.Info.age}
+                      phone={resolvedUser.state.Info.phone}
+                      about={resolvedUser.state.Info.about}
+                      setShowInfo={setShowInfo}
+                />
+      :
+      <LazyMotion features={loadFeatures}>
       <m.div
         animate={{ x: [-400, 0] }}
         transition={{ duration: 1 }}
         whileHover={{
           scale: 1.1,
-          duration: 5
+          duration: 5,
         }}
       >
+      
         <Dialog
-         buttonText={  "עדכון פרטים"}
-         buttonStyle={{
+                  buttonText={"עדכון פרטים"}
+          buttonStyle={{
             height: "100px",
             marginTop: "15px",
             width: '40%',
@@ -60,9 +63,12 @@ useEffect(()=>{
             borderRadius: "15px",
             background: Colors.b,
             boxShadow: "4px 4px 2px #FFC436",
-            fontSize: "20px"
+            fontSize: "20px",
+            color: "#fff",
+            cursor: "pointer",
+            textAlign: "center",
           }}
-         wrapperStyle={{
+          wrapperStyle={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -70,12 +76,22 @@ useEffect(()=>{
             alignContent: 'center',
           }}
         >
-          <ProfileForm />
+        
+          <ProfileForm 
+              dbAbout={resolvedUser?.state?.Info.about}
+              dbAge={resolvedUser?.state?.Info.age}
+              dbPhone={resolvedUser?.state?.Info.phone}
+          
+                />
+        
         </Dialog>
       </m.div>
-    </LazyMotion>
-  );
-};
+      </LazyMotion>
+    
+    
+  
+
+    
+}
 
 export default ProfileInfo;
-

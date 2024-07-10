@@ -1,8 +1,7 @@
 
 
-
- * in the user info section get user from db and chake if not null 
-
+ * move the rendring of Info Display in to the dilog as if statment 
+ 
 * style From Input 
 
 * add comment section to user Profile 

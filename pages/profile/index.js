@@ -1,11 +1,11 @@
 /// ProfilePage
 
 
-import { UserContext } from '@Context/Context';
+import { StateContext } from '@Context/Context';
 import { useEffect,useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import dynamic from 'next/dynamic';
+import dynamic from 'next/dynamic'; 
 
 const MongoSpinner = dynamic(() => import("@/components/MongoSpinner/MongoSpinner"), {
   ssr: false,
@@ -30,12 +30,11 @@ import useSaveUserState from '@/lib/hooks/useSaveUserState';
 
 
 
-const ProfilePage = ({  }) => {
+const ProfilePage = () => {
   const router = useRouter();
   const { data: session ,status ,update} = useSession()
-  const [state, setState] = useContext(UserContext);
-
-  const { profileData, saving, profileError } = useSaveUserState(state, session);
+  const [state, setState] = useContext(StateContext);
+  const { _, dbsaving, profileError } = useSaveUserState(state, session);
 
 
   useEffect(() => {
@@ -44,26 +43,23 @@ const ProfilePage = ({  }) => {
     }
   }, [status, router]);
 
+
+
   if (status === 'loading') {
     return <LoadingSpinner/>;
   }
-  else if (profileError){
-    return <h1>Eroor Saving User Data {profileError}</h1>
-  }
-  else if(saving){
+  else if(dbsaving){
     return <MongoSpinner/>
   }
+  else{
 
   return (
     <ProfileLayout>
       <ProfileHeader />
-      <ProfileInfo 
-        age={""}
-        about={""}
-        phone={0}
-      />
+      <ProfileInfo/>
     </ProfileLayout>
   );
+}
 };
 
 export default ProfilePage;

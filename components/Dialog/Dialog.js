@@ -1,15 +1,10 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { m, LazyMotion } from "framer-motion";
-import Colors from "@/lib/colors";
+import ReactModal from "react-modal";
 
-// Dynamic import for ReactModal, LazyMotion, and loadFeatures
-const ReactModal = dynamic(() => import("react-modal"), {
-  loading: () => <div>Loading ReactModal...</div>, 
-  ssr: false, 
-});
 
 const loadFeatures = () =>
   import("@/lib/features").then(res => res.default);
@@ -18,22 +13,26 @@ const Dialog = ({
   children,
   buttonText,
   buttonStyle,
-  buttonClassName,
   wrapperStyle,
-  wrapperClassName
+  wrapperClassName,
+  buttonClassName,
+
+
 }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleModal = () => {
     setShowModal(!showModal);
-  }
+  };
+
+
 
   return (
     <div
       className={wrapperClassName ? wrapperClassName : null}
       style={wrapperStyle ? wrapperStyle : null}
     >
-     {/**Open Dialog */}
+      {/** Open Dialog */}
       <button
         style={buttonStyle ? buttonStyle : null}
         className={buttonClassName ? buttonClassName : null}
@@ -42,13 +41,13 @@ const Dialog = ({
         {buttonText}
       </button>
 
-     {/** Dialog */}
+      {/** Dialog */}
       <ReactModal
         ariaHideApp={false}
-        isOpen={showModal}
-        onRequestClose={handleModal}        
+        isOpen={ showModal}
+        onRequestClose={handleModal}
         style={{
-          content:{
+          content: {
             position: "absolute",
             top: "5px",
             left: "5px",
@@ -56,31 +55,28 @@ const Dialog = ({
             bottom: '5px',
             background: 'rgb(52,124,207)',
             background: 'radial-gradient(circle, rgba(52,124,207,1) 0%, rgba(255,255,255,1) 100%)',
-            display:"flex",
-            flexDirection:"column",
-            justifyFontent:"center",
-            alignItems:"center",
-            alignContent:'enter',
-            borderRadius:"2px",
-            overflow:"clip",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            alignContent: 'center',
+            borderRadius: "2px",
+            overflow: "clip",
           },
-          overlay:{
+          overlay: {
             position: 'fixed',
             top: "100px",
             left: "25px",
             right: "25px",
             bottom: "100px",
-            backgroundColor:"#404040",
-            }
-            
-
-          }}
-        
+            backgroundColor: "#404040",
+          }
+        }}
       >
         {children}
         <LazyMotion features={loadFeatures}>
           <m.button
-            whileHover={{background:"red"}}
+            whileHover={{ background: "red" }}
             onClick={handleModal}
             style={{
               position: "absolute",
@@ -89,10 +85,11 @@ const Dialog = ({
               borderRadius: "15px"
             }}
           >
-            <FontAwesomeIcon size="2x" icon={faXmark} />
+            <FontAwesomeIcon size="2x" icon={faTimes} />
           </m.button>
         </LazyMotion>
       </ReactModal>
+
     </div>
   );
 }

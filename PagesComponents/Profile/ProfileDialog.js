@@ -4,7 +4,7 @@ import { LazyMotion, m } from "framer-motion";
 import Colors from '@/lib/colors';
 import useGetUser from '@/lib/hooks/useGetUser';
 import MongoSpinner from '@/components/MongoSpinner/MongoSpinner';
-import ProfileInfoDisplay from "@PagesComponents/Profile/ProfileInfoDisplay"
+import InfoDisplay from '@PagesComponents/Profile/InfoDisplay';
 import ProfileForm from 'PagesComponents/Profile/ProfileForm';
 import Dialog from "@/components/Dialog/Dialog"
 import LoadingSpinner from '@/components/SpiningLoader/SpiningLoader';
@@ -15,11 +15,12 @@ const loadFeatures = () =>
 
 
 
-const ProfileInfo = () => {
+const ProfileDialog = () => {
   const { data: session, status, update } = useSession(); 
   const { UserData, dbloading, error } = useGetUser(session?.user?.email);
   const [ resolvedUser , setResolvedUser] = useState(false)
   const [showInfo,setShowInfo] = useState(true)
+  const [perentOpenModle , setPerentOpenModle]= useState(false)
 
   useEffect(()=>{
   // the hook is at loading and without use effect dno know when user is !null 
@@ -36,11 +37,13 @@ const ProfileInfo = () => {
 
 
 
-  return    resolvedUser && showInfo? <ProfileInfoDisplay
+  return    resolvedUser && showInfo? <InfoDisplay
                       age={resolvedUser.state.Info.age}
                       phone={resolvedUser.state.Info.phone}
                       about={resolvedUser.state.Info.about}
                       setShowInfo={setShowInfo}
+                      perentOpenModle={perentOpenModle}
+                      setPerentOpenModle={setPerentOpenModle}
                 />
       :
       <LazyMotion features={loadFeatures}>
@@ -54,8 +57,10 @@ const ProfileInfo = () => {
       >
       
         <Dialog
-                  buttonText={"עדכון פרטים"}
-          buttonStyle={{
+            perentOpenModle={perentOpenModle}
+            setPerentOpenModle={setPerentOpenModle}
+            buttonText={"עדכון פרטים"}
+            buttonStyle={{
             height: "100px",
             marginTop: "15px",
             width: '40%',
@@ -94,4 +99,4 @@ const ProfileInfo = () => {
     
 }
 
-export default ProfileInfo;
+export default ProfileDialog;

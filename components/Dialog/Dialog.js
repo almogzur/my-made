@@ -16,14 +16,20 @@ const Dialog = ({
   wrapperStyle,
   wrapperClassName,
   buttonClassName,
+  perentOpenModle,
+  setPerentOpenModle
 
 
 }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleModal = () => {
+     if(perentOpenModle){
+        setPerentOpenModle(!perentOpenModle)
+     }else{
     setShowModal(!showModal);
-  };
+     }
+  }
 
 
 
@@ -44,7 +50,7 @@ const Dialog = ({
       {/** Dialog */}
       <ReactModal
         ariaHideApp={false}
-        isOpen={ showModal}
+        isOpen={ perentOpenModle ? perentOpenModle :  showModal}
         onRequestClose={handleModal}
         style={{
           content: {

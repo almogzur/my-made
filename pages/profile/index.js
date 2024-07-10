@@ -21,7 +21,7 @@ const ProfileHeader = dynamic(() => import('PagesComponents/Profile/ProfileHeder
   loading: () => <MongoSpinner />,
   ssr: true,
 });
-const ProfileInfo = dynamic(() => import('@PagesComponents/Profile/ProfileInfo'), {
+const ProfileDialog = dynamic(() => import('@PagesComponents/Profile/ProfileDialog'), {
   loading: () => <MongoSpinner />,
   ssr: true,
 });
@@ -56,7 +56,7 @@ const ProfilePage = () => {
   return (
     <ProfileLayout>
       <ProfileHeader />
-      <ProfileInfo/>
+      <ProfileDialog/>
     </ProfileLayout>
   );
 }

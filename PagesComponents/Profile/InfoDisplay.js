@@ -6,7 +6,7 @@ import Colors from '@/lib/colors';
 const loadFeatures = () =>
   import("@/lib/features.js").then(res => res.default);
 
-const UserInfoDisplay = ({ age, about, phone , showInfo,setShowInfo }) => {
+const InfoDisplay = ({ age, about, phone ,setShowInfo,setPerentOpenModle,perentOpenModle }) => {
 
   const userInfo = [
     ["גיל", age],
@@ -14,9 +14,6 @@ const UserInfoDisplay = ({ age, about, phone , showInfo,setShowInfo }) => {
     ["עלי", about],
 
   ];
- const hendler=()=>{
-  setShowInfo(!showInfo)
- }
 
   return (
     <LazyMotion features={loadFeatures}>
@@ -63,7 +60,14 @@ const UserInfoDisplay = ({ age, about, phone , showInfo,setShowInfo }) => {
           }}
           whileHover={{scale:1.1 ,  duration:1}} 
           transition={{ duration: 1 }}
-          onClick={()=>setShowInfo(!setShowInfo)}
+          onClick={
+            ()=>{
+            setShowInfo(false);
+            setPerentOpenModle(true)
+            
+            }
+
+          }
           >
            ערוך פרטים  
         </m.button>
@@ -72,4 +76,4 @@ const UserInfoDisplay = ({ age, about, phone , showInfo,setShowInfo }) => {
   );
 };
 
-export default UserInfoDisplay;
+export default InfoDisplay;

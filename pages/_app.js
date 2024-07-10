@@ -12,7 +12,6 @@ import "components/RangeElemnt/RangeElemnt.css"
  // will move to in line 
 import "components/SpiningLoader/SpiningLoader.css"
 import "components/MongoSpinner/mongoSpinner.css"
-import "pages/profile/Profile.css"
 
 import { SessionProvider } from "next-auth/react"
 import { WindowWidthContaxt, StateContext} from "Context/Context"

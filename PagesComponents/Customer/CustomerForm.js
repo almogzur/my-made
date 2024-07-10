@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useContext} from 'react'
-import { UserContext } from '@Context/Context'
+import { StateContext } from '@Context/Context'
 import InputElemnt from '@/components/InputElemnt/InputElemnt'
 import Calendar from "@/components/Calinder/Calinder"
 import SelectElemnt from "@/components/SelectComponent/SelectComponent"
@@ -11,7 +11,7 @@ import { useRouter } from 'next/router'
     const CustomerFrom = ({})=>{
         const { data: session ,status ,update} = useSession()
 
-        const [state,setState]=useContext(UserContext)
+        const [state,setState]=useContext(StateContext)
 
        
        useEffect(()=>{

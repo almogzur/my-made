@@ -3,6 +3,14 @@ import { useContext, useEffect, useState } from 'react';
 import { StateContext } from '@Context/Context';
 import InputElemnt from '@/components/InputElemnt/InputElemnt';
 import TextArea from '@/components/TextArea/TextArea';
+import Colors from '@/lib/colors';
+import {m,LazyMotion} from "framer-motion"
+
+const loadFeatures = () =>
+  import("@/lib/features.js")
+      .then(res => res.default)
+
+
 
 const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
 
@@ -10,6 +18,8 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
    const { data: session ,status ,update} = useSession()
    const [ state,setState]=useContext(StateContext)
 
+
+  /// chake the db vs the state and update the fileds
    useEffect(() => {
     setState(prevState => ({
       ...prevState,
@@ -55,18 +65,26 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
 
 
   return (
-    <form onSubmit={ handleInfoSave}>
-    <div className='profile-info-section'>
-      <h2>עדכון פרטי משתמש</h2>
-      <div className='profile-info-split'>
+    <form onSubmit={ handleInfoSave} style={{}}>
+         <h2 style={{textAlign:"center"}}>עדכון פרטי משתמש</h2> 
+
+     <div 
+        style={{
+          
+          display:'flex',
+          flexDirection:'column', 
+         
+        }} 
+    >
+      <div
+      style={{}}
+      >
     
         <InputElemnt
           type="text"
           text="גיל"
           id="age"
-          labelClassName=""
           required
-          inputClassName=""
           value={state.Info.age}
           
           onChange={handleTextAreaChange}
@@ -89,15 +107,30 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
           text="עלי"
           value={state.Info.about}
           onChange={handleTextAreaChange} 
+          resize={false}
       />
       
 
       {/** User Data Save to db  */}
-     <button
+      <LazyMotion features={loadFeatures}>
+     <m.button
           type='submit'
+          style={{  
+              width: '100%',
+              maxWidth: '400px',
+              border: `1px solid ${Colors.b}`,
+              borderRadius: "6px",
+              padding: "10px",
+              margin: "10px 0",
+              boxShadow: `2px 1px 1px ${Colors.c}`,
+              background:"#fff"
+              }}
+              whileHover={{scale:1.1 ,  duration:1}} 
+              transition={{ duration: 1 }}
         >{"עדכון"}
           
-        </button>
+        </m.button>
+        </LazyMotion>
     </div>
     </form>
   );

@@ -1,31 +1,21 @@
 import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import { UserContext } from "@Context/Context";
+import { StateContext } from "@Context/Context";
 import dynamic from 'next/dynamic';
-
+import CustomerForm from "@PagesComponents/Customer/CustomerForm"
+import  ProfileLayout from "@layouts/ProfileLayout"
 
 const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningLoader"), {
-  ssr: false,
+  ssr: true,
 });
 
-// Dynamic import for ProfileLayout
-const ProfileLayout = dynamic(() => import("@layouts/ProfileLayout"), {
-  loading: () => <LoadingSpinner />,
-  ssr: false, // Disable server-side rendering if not needed
-});
-
-// Dynamic import for CustomerForm
-const CustomerForm = dynamic(() => import("PagesComponents/Customer/CustomerForm"), {
-  loading: () => <LoadingSpinner />,
-  ssr: false, // Disable server-side rendering if not needed
-});
 
 const CostumerPage = () => {
   const PAGE_STATE = "isCustomer";
   const router = useRouter();
   const { data: session, status } = useSession();
-  const [state, setState] = useContext(UserContext);
+  const [state, setState] = useContext(StateContext);
 
   // Prevent Slug Navigation
   useEffect(() => {

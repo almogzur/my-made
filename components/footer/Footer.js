@@ -5,18 +5,9 @@
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { faHome, faClipboard } from "@fortawesome/free-solid-svg-icons";
-import dynamic from "next/dynamic";
 import Colors from "@/lib/colors";
-
-
-
-
-const CostumeLink = dynamic(() => import("../CostumeLink/CostumeLink"), {
-  ssr: false, });
-const ProfileControls = dynamic(() => import("@/components/NextAuth/ProfileControls"), {
-  ssr: false, 
-});
-
+import CostumeLink from '@/components/CostumeLink/CostumeLink'
+import ProfileControls from "@/components/NextAuth/ProfileControls";
 
 
 const Footer = ({children,style,className})  => {
@@ -27,7 +18,6 @@ const Footer = ({children,style,className})  => {
       width: "100%",
       height: "55px",
       background: Colors.b,
-      color: "white",
       display: "flex",
     }
 
@@ -50,7 +40,7 @@ const Footer = ({children,style,className})  => {
             divStyle={{}}
            
            >
-            <FontAwesomeIcon icon={faHome} color="#FFC436" size={"2x"} />
+            <FontAwesomeIcon icon={faHome} color={Colors.d} size={"2x"} />
          </CostumeLink>
 
          <CostumeLink
@@ -69,7 +59,7 @@ const Footer = ({children,style,className})  => {
      
         
           >
-           <FontAwesomeIcon size="2x" color="#FFC436" icon={faClipboard}/>
+           <FontAwesomeIcon size="2x" color={Colors.d} icon={faClipboard}/>
         </CostumeLink>
             {children} 
            

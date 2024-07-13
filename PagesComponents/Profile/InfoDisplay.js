@@ -36,6 +36,8 @@ const InfoDisplay = ({ age, about, phone ,setShowInfo,setPerentOpenModle,perentO
               padding: "10px",
               margin: "10px 0",
               boxShadow: `2px 1px 1px ${Colors.c}`,
+         
+        
             }}
             animate={{ opacity: [0, 1] }}
             transition={{ duration: 1 }}
@@ -50,9 +52,9 @@ const InfoDisplay = ({ age, about, phone ,setShowInfo,setPerentOpenModle,perentO
             width: '100px',
             border: "none",
             borderRadius: "8px",
-            backgroundColor: Colors.c,
-            color: "#fff",
-            boxShadow: `2px 2px 5px ${Colors.d}`,
+            background: `radial-gradient(circle, rgba(52,124,207,1) 60%,${Colors.b} 100%)`,
+            boxShadow: `4px 4px 2px ${Colors.c} `,
+            color:"#fff",
             fontSize: "16px",
             cursor: "pointer",
             marginTop: "10px",
@@ -69,7 +71,7 @@ const InfoDisplay = ({ age, about, phone ,setShowInfo,setPerentOpenModle,perentO
 
           }
           >
-           ערוך פרטים  
+         <strong>  ערוך פרטים  </strong>
         </m.button>
       </div>
     </LazyMotion>

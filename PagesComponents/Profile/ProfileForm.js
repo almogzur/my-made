@@ -31,7 +31,7 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
     }));
   }, [dbAge, dbPhone, dbAbout, setState]);
 
-   const handleTextAreaChange = (id, value) => {
+   const handleChange = (id, value) => {
     setState(prevState => ({
       ...prevState,
       [STATE_KEY]: {
@@ -42,13 +42,14 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
   };
     const handleInfoSave = async () => {
        try {
-         const response = await fetch('/api/saveuserinfo', { // Change this URL to your actual endpoint
+         const response = await fetch('/api/saveuserinfo', 
+          { 
              method: 'POST',
               headers: {
                  'Content-Type': 'application/json',
                     },
                    body : JSON.stringify(state.Info)  
-                    });
+           });
          if (response.ok) {
                  // Handle success
               console.log('Profile updated successfully');
@@ -65,7 +66,7 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
 
 
   return (
-    <form onSubmit={ handleInfoSave} style={{}}>
+    <form onSubmit={ handleInfoSave} >
          <h2 style={{textAlign:"center"}}>עדכון פרטי משתמש</h2> 
 
      <div 
@@ -86,8 +87,8 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
           id="age"
           required
           value={state.Info.age}
-          
-          onChange={handleTextAreaChange}
+          style={{width:"100%"}}
+          onChange={handleChange}
         />
         <InputElemnt
           type="text"
@@ -97,7 +98,8 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
           required
           inputClassName=""
           value={state.Info.phone}
-          onChange={handleTextAreaChange}
+          onChange={handleChange}
+          style={{width:"100%"}}
         />
 
       </div>
@@ -106,7 +108,7 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
           id="about"
           text="עלי"
           value={state.Info.about}
-          onChange={handleTextAreaChange} 
+          onChange={handleChange} 
           resize={false}
       />
       
@@ -125,9 +127,9 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
               boxShadow: `2px 1px 1px ${Colors.c}`,
               background:"#fff"
               }}
-              whileHover={{scale:1.1 ,  duration:1}} 
-              transition={{ duration: 1 }}
-        >{"עדכון"}
+          whileHover={{scale:1.1 ,  duration:1}} 
+          transition={{ duration: 1 }}
+        ><strong>עדכון פרטים</strong>
           
         </m.button>
         </LazyMotion>

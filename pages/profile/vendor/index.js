@@ -1,37 +1,53 @@
-import React, { useContext } from "react";
-import dynamic from "next/dynamic";
+////Vendor
+////Vendor
+////Vendor
+////Vendor
+////Vendor
+
+import React, { useContext,useState,useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import ProfileLayout from "@layouts/ProfileLayout";
+import VendorForm from '@PagesComponents/Verndor/VenderForm'
+import LoadingSpinner from "@/components/SpiningLoader/SpiningLoader";
 
-// Dynamic imports
-const ProfileLayout = dynamic(() => import("@layouts/ProfileLayout"), {
-  ssr: false,
-  loading: () => <div>Loading Profile Layout...</div>,
-});
 
-const Form = dynamic(() => import("@PagesComponents/Verndor/VenderForm"), {
-  ssr: false,
-  loading: () => <div>Loading Form...</div>,
-});
 
-const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningLoader"), {
-  ssr: false,
-});
 
-const Vender = () => {
-  const PAGE_STATE = "isVendor";
+const VenderPage = () => {
+
+  const STATE_KEY = "Vendor";
+   
   const { data: session, status } = useSession();
-  const router = useRouter();
+
+  const router = useRouter()
+
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
+
+
+
 
   if (status === 'loading') {
     return <LoadingSpinner />;
   }
 
-  return (
-    <ProfileLayout>
-      <Form PAGE_STATE={PAGE_STATE} />
-    </ProfileLayout>
-  );
+ return (
+      <ProfileLayout>
+        <VendorForm 
+          STATE_KEY={STATE_KEY}
+        />
+      </ProfileLayout>
+    );
+
+
+
+
+
 };
 
-export default Vender;
+export default VenderPage;

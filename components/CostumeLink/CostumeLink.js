@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { LazyMotion,m } from "framer-motion"
-
-const loadFeatures = () =>
-  import("@/lib/features").then(res => res.default)
+import { useState } from "react";
+import Colors from "@/lib/colors";
+import loadFeatures from '@/lib/features'
 
 
 export default function CostumeLink ({
@@ -12,30 +12,36 @@ export default function CostumeLink ({
   motionWrapperStyle,
   linkStyle,
   divStyle,
-  
+  onHoverColor  
  })
   {
-
-    
 
 
   return (
  <LazyMotion features={loadFeatures}>
+
     <m.div
-          style={ motionWrapperStyle?motionWrapperStyle:null}
+          style={{...motionWrapperStyle }}
           animate={{rotate:360}}
           transition={{ type: "spring" ,duration:5 }}
-          whileHover={{rotate:30}}
+          whileHover={{rotate:30 }}
+          onMouseEnter={(e)=>{
+            e.target.style.color = onHoverColor 
+           ,e.target.style.transition = "ease 1s"
+            }}
+          onMouseLeave={(e)=>{e.target.style.color = "" }}
+
       >    
        <Link 
          id="thiss"
-          prefetch={true}
           href={href}
-          style={linkStyle ? linkStyle :null}
+          style={{...linkStyle}}
+          
            >
    
-           <div
-              style={divStyle?divStyle:null} 
+           <div 
+             
+              style={{...divStyle}} 
                >
                 {text?text:null}     
                 {children}

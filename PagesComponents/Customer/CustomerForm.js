@@ -45,33 +45,21 @@ location,
             flexDirection:'column',
             justifyContent:'center',
             alignItems:'center',
-            alignContent:'center',}}
+            alignContent:'center',
+            }}
 
         >
 
-            <h1>הזמנת שירות{session?.user?.name} </h1>
+            <h2> {`שלום ${session?.user?.name} `}</h2>
+            <h3>{`הזמן משק בית `}</h3>
 
-            <InputElemnt
-                labelClassName={"  "}
-                required 
-                inputClassName={""}
-                stateKey ={''}
-                value ={""}
-                onChange ={()=>{}}
-                text={"שם הלקוח"}
-                type={"text"}
-                contextType={"isCustomer"}
-                id="FullName" 
-            />
-
+         
             <InputElemnt
                 type={"number"}
                 text={"מספר חדרים "}
                 stateKey={"Customer"}
                 id="Phone" 
-                labelClassName={""}
                 required
-               inputClassName={""}
                 value={''}
                 onChange={()=>{}}
             />
@@ -81,26 +69,16 @@ location,
                 stateKey={"isCustomer"}
             />
              <Calendar
-                text={"זמין ב"}
-            />
-            <SelectElemnt
-                SelectOptionsArray={["פיפאל","אשראי","ביט","מזומן"]}
-                className={"vendor-payment"}
-                stateKey={"isCustomer"}
-                id={""}
-                hedlineText={""}
-                value={""}
-                onChange={""    }
+                text={"תאירך ושעה"}
             />
 
+
             <InputElemnt
-                text={"מיקום"}
+                text={"כתובת"}
                 type={"location"}
                 contextType={"Customer"}
                 id={"location"}
-                labelClassName={""}
                 required
-                inputClassName={""}
                 stateKey={""}
                 value={""}
                 onChange={""}

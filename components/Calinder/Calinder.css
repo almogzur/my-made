@@ -1,0 +1,39 @@
+:root{
+    --main:#191D88;
+    --sec:#1450A3;
+    --therd:#337CCF;
+    --for:#ef6c00;
+}
+
+
+.vendor-calindre{
+    border:unset;
+    border:1px solid;
+    width:100%;
+    min-width: 380px;
+    padding: 10px;
+    margin: 20px 0;
+    box-shadow: 2px 1px 1px var(--therd);
+    border-color:var(--therd);
+    border-radius:6px;
+    transform: scale(1)
+}
+.vendor-calindre:hover{
+
+    transform: scale(1.1);
+    transition: all 2s ease-out;
+
+}
+
+.vendor-calinder-clear-btn{
+    position:unset;
+    position: inherit;
+    top:-50px;
+    right:370px
+}
+.vendor-calinder-clear-btn:hover{
+
+    transform: scale(1.1);
+    transition: all 1s ease-out;
+    
+}

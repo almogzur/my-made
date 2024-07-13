@@ -19,7 +19,7 @@ const SideBar  = ({
         <LazyMotion features={loadFeatures}>
         <m.aside
         className={className?className:null}
-        style={style?style:null}
+        style={{...style}}
 
         animate={{
                 x:[-100,0],

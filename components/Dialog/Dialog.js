@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { m, LazyMotion } from "framer-motion";
 import ReactModal from "react-modal";
+import Colors from "@/lib/colors";
 
 
 const loadFeatures = () =>
@@ -39,13 +40,23 @@ const Dialog = ({
       style={wrapperStyle ? wrapperStyle : null}
     >
       {/** Open Dialog */}
-      <button
+      <m.button
+          transition={{duration:0.5, stiffness:50}}
+        whileHover={{
+          boxShadow: `4px 4px 2px  ${Colors.c} inset `,
+          scale:1.1
+        }}
+        whileTap={{
+          boxShadow: `1px 1px 1px  ${Colors.c} inset `,
+
+        }}
+        
         style={buttonStyle ? buttonStyle : null}
         className={buttonClassName ? buttonClassName : null}
         onClick={handleModal}
       >
-        {buttonText}
-      </button>
+        <strong>{buttonText}</strong>
+      </m.button>
 
       {/** Dialog */}
       <ReactModal
@@ -75,7 +86,7 @@ const Dialog = ({
             left: "25px",
             right: "25px",
             bottom: "100px",
-            backgroundColor: "#404040",
+            borderRadius:"8px"
           }
         }}
       >

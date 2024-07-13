@@ -17,21 +17,24 @@ function ProfileControls() {
   return (
     !session ?
     <LazyMotion  features={loadFeatures}>
-    <div
+    <m.div
       style={{
         position:"absolute",
         left:"0px",
         height:'inherit',
+        }}
+        animate={{opacity:[0,0.5,1]}}
+        transition={{duration:2}}
 
-        }}>
+        >
       <m.button
           style={{
             height:'inherit',
             border:"none",
             background:Colors.c
                 }}
-            animate={{x:[-70,0]}}
-            transition={{ duration:2 }}
+
+            transition={{ duration:1 }}
             whileHover={{
                  borderRadius:"15px",
                  background: Colors.d,
@@ -42,12 +45,15 @@ function ProfileControls() {
       >
         הרשמה או התחברות
       </m.button>
-      </div>
+      </m.div>
+
+
     </LazyMotion>
       :
     <LazyMotion features={loadFeatures}>
-        <div
-        
+        <m.div
+          animate={{opacity:[0,0.5,1]}}
+          transition={{duration:2}}
           style={{
             position: "absolute",
             top: "0px",
@@ -65,9 +71,8 @@ function ProfileControls() {
             justifyContent:'center',
             alignItems:'center',
             alignContent:'center',}}
-            animate={{ rotate: [-30,0] }}
-            transition={{ type: "spring", duration: 5 }}
-            whileHover={{ rotate: 360 , background:Colors.d}}
+            transition={{ type: "spring", duration: 1 }}
+            whileHover={{ rotate: 180 , background:Colors.d}}
           >
             <Link
               href={"/profile"}
@@ -79,6 +84,7 @@ function ProfileControls() {
                 width={50}
                 style={{ borderRadius: "15px" }}
                 alt="User Profile Link"
+                fetchPriority="auto"
               />
             </Link>
           </m.div>
@@ -91,8 +97,7 @@ function ProfileControls() {
               height: "inherit",
               color: Colors.d,
             }}
-            animate={{ rotate: [30,0] }}
-            transition={{ type: "spring", duration: 1 }}
+            transition={{  duration: 1 }}
             whileHover={{ rotate: 360}}
             onClick={() => signOut({
               callbackUrl: "/"
@@ -100,7 +105,7 @@ function ProfileControls() {
           >
             <FaPowerOff size={40} />
           </m.button>
-        </div>
+        </m.div>
       </LazyMotion>
   );
 }

@@ -1,26 +1,30 @@
 import { useEffect, useState, useContext } from 'react';
 import { useSession } from 'next-auth/react';
-import { LazyMotion, m } from "framer-motion";
+import { color, LazyMotion, m } from "framer-motion";
 import Colors from '@/lib/colors';
 import useGetUser from '@/lib/hooks/useGetUser';
 import MongoSpinner from '@/components/MongoSpinner/MongoSpinner';
 import InfoDisplay from '@PagesComponents/Profile/InfoDisplay';
 import ProfileForm from 'PagesComponents/Profile/ProfileForm';
 import Dialog from "@/components/Dialog/Dialog"
-import LoadingSpinner from '@/components/SpiningLoader/SpiningLoader';
-
-const loadFeatures = () =>
-  import("@/lib/features.js")
-      .then(res => res.default)
+import loadFeatures from "@/lib/features"
 
 
 
-const ProfileDialog = () => {
+
+const ProfileDialog = ({
+  
+}) => {
+
   const { data: session, status, update } = useSession(); 
-  const { UserData, dbloading, error } = useGetUser(session?.user?.email);
-  const [ resolvedUser , setResolvedUser] = useState(false)
+
   const [showInfo,setShowInfo] = useState(true)
+
   const [perentOpenModle , setPerentOpenModle]= useState(false)
+
+  const { UserData, dbloading, error } = useGetUser(session?.user?.email);
+  
+  const [ resolvedUser , setResolvedUser] = useState(false)
 
   useEffect(()=>{
   // the hook is at loading and without use effect dno know when user is !null 
@@ -38,22 +42,17 @@ const ProfileDialog = () => {
 
 
   return    resolvedUser && showInfo? <InfoDisplay
-                      age={resolvedUser.state.Info.age}
-                      phone={resolvedUser.state.Info.phone}
-                      about={resolvedUser.state.Info.about}
+                      age={resolvedUser?.state?.Info.age}
+                      phone={resolvedUser?.state?.Info.phone}
+                      about={resolvedUser?.state?.Info.about}
                       setShowInfo={setShowInfo}
                       perentOpenModle={perentOpenModle}
                       setPerentOpenModle={setPerentOpenModle}
                 />
       :
       <LazyMotion features={loadFeatures}>
-      <m.div
-        animate={{ x: [-400, 0] }}
-        transition={{ duration: 1 }}
-        whileHover={{
-          scale: 1.1,
-          duration: 5,
-        }}
+      <div
+    
       >
       
         <Dialog
@@ -61,17 +60,19 @@ const ProfileDialog = () => {
             setPerentOpenModle={setPerentOpenModle}
             buttonText={"עדכון פרטים"}
             buttonStyle={{
-            height: "100px",
-            marginTop: "15px",
-            width: '40%',
-            border: "none",
-            borderRadius: "15px",
-            background: Colors.b,
-            boxShadow: "4px 4px 2px #FFC436",
-            fontSize: "20px",
-            color: "#fff",
-            cursor: "pointer",
-            textAlign: "center",
+                   height: "70px", 
+                   marginTop: "15px",
+                   width: '40%',
+                   border: "1px solid",
+                   borderRadius: "15px",
+                   background: "#fff",
+                   fontSize: "20px",
+                   color: "#fff",
+                   cursor: "pointer",
+                   textAlign: "center",
+                   color:Colors.b,
+                   boxShadow:`3px 3px 3px 3px ${Colors.c}`
+
           }}
           wrapperStyle={{
             display: 'flex',
@@ -90,7 +91,7 @@ const ProfileDialog = () => {
                 />
         
         </Dialog>
-      </m.div>
+      </div>
       </LazyMotion>
     
     

@@ -1,6 +1,5 @@
 import {m ,LazyMotion} from "framer-motion"
 import Colors from "@/lib/colors";
-import { features } from "process";
 
 const loadFeatures = () =>
     import("@/lib/features.js")
@@ -16,13 +15,16 @@ const InputElement = ({
     stateKey,
     value,
     onChange,
-    style
+    style,
+    // it type is number
+    min,
+    max,
+    step
 }) => {
     const defaultStyle = {
         label: {},
         input: {
-            width: '100%',
-            maxWidth: '400px',
+            minWidth:"400px",
             border: `1px solid ${Colors.b}`,
             borderRadius: "6px",
             padding: "10px",
@@ -55,9 +57,13 @@ const InputElement = ({
                 placeholder={required ? "*" : null}
                 type={type}
                 id={id}
-        
+                max={type === "number" ? max : null}
+                min={type === "number" ? min : null}
+                step={type === "number" ? step :null}       
+                pettern={type === "number" ? "^\$\d{1,3}(,\d{3})*(\.\d+)?$" :null}    
                 onChange={handleChange}
                 value={value || ''}
+                
             />
         </label>
         </LazyMotion>

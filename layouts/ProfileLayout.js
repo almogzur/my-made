@@ -2,21 +2,10 @@ import dynamic from 'next/dynamic';
 import { faBroom, faPerson } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Colors from "@/lib/colors";
-import { color } from 'framer-motion';
+import SideBar from 'components/Sidebar/SideBarWrapper';
+import CostumeLink from '@/components/CostumeLink/CostumeLink';
+import Footer from 'components/Footer/Footer';
 
-// Dynamic imports
-const SideBar = dynamic(() => import('components/Sidebar/SideBarWrapper'), {
-  ssr: true, // Only render on the client side
-  loading: () => <div>Loading Sidebar...</div>
-});
-
-const CostumeLink = dynamic(() => import('@/components/CostumeLink/CostumeLink'), {
-  loading: () => <div>Loading Link...</div>
-});
-
-const Footer = dynamic(() => import('components/Footer/Footer'), {
-  loading: () => <div>Loading Footer...</div>
-});
 
 const ProfileLayout = ({ children }) => {
 
@@ -56,6 +45,7 @@ const ProfileLayout = ({ children }) => {
           motionWrapperStyle={WrapperDefaultStyle}
           linkStyle={DefaultLinkStyle}
           divStyle={DivDefaultStyle}
+          onHoverColor={Colors.d}
         >
           <FontAwesomeIcon size="1x" icon={faBroom} />
         </CostumeLink>
@@ -66,6 +56,8 @@ const ProfileLayout = ({ children }) => {
           motionWrapperStyle={WrapperDefaultStyle}
           linkStyle={DefaultLinkStyle}
           divStyle={DivDefaultStyle}
+          HoverBackgroundColor={"green"}
+          onHoverColor={Colors.d}
         >
           <FontAwesomeIcon 
            size="1x"

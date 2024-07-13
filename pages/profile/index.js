@@ -6,26 +6,11 @@ import { useEffect,useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic'; 
-
-const MongoSpinner = dynamic(() => import("@/components/MongoSpinner/MongoSpinner"), {
-  ssr: false,
-});
-const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningLoader"), {
-  ssr: false,
-});
-const ProfileLayout = dynamic(() => import('@layouts/ProfileLayout'), {
-  loading: () => <MongoSpinner />,
-  ssr: true,
-});
-const ProfileHeader = dynamic(() => import('PagesComponents/Profile/ProfileHeder'), {
-  loading: () => <MongoSpinner />,
-  ssr: true,
-});
-const ProfileDialog = dynamic(() => import('@PagesComponents/Profile/ProfileDialog'), {
-  loading: () => <MongoSpinner />,
-  ssr: true,
-});
-
+import MongoSpinner from '@/components/MongoSpinner/MongoSpinner';
+import LoadingSpinner from '@/components/SpiningLoader/SpiningLoader';
+import ProfileLayout from '@layouts/ProfileLayout';
+import ProfileHeader from 'PagesComponents/Profile/ProfileHeder';
+import ProfileDialog from '@PagesComponents/Profile/ProfileDialog';
 import useSaveUserState from '@/lib/hooks/useSaveUserState';
 
 
@@ -34,7 +19,11 @@ const ProfilePage = () => {
   const router = useRouter();
   const { data: session ,status ,update} = useSession()
   const [state, setState] = useContext(StateContext);
-  const { _, dbsaving, profileError } = useSaveUserState(state, session);
+
+  // save satae to db on profile load 
+  // on first singin only the seesion is saved to db 
+  // this config the Profile to carry state in db and app 
+  const { _ResponceMoActualUse , dbsaving, profileError } = useSaveUserState(state, session);
 
 
   useEffect(() => {
@@ -50,6 +39,9 @@ const ProfilePage = () => {
   }
   else if(dbsaving){
     return <MongoSpinner/>
+  }
+  else if(profileError){
+    router.push("/error")
   }
   else{
 

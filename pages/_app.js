@@ -7,17 +7,17 @@ import "pages/Main.css"
 import 'rc-select/assets/index.css'
 import "react-datepicker/dist/react-datepicker.css"
 import "components/Acordione/Acordion.css"
-import "components/RangeElemnt/RangeElemnt.css"
+import "components/range-elemnt/RangeElemnt.css"
 import "components/Calinder/Calinder.css"
  // will move to in line 
-import "components/SpiningLoader/SpiningLoader.css"
-import "components/MongoSpinner/mongoSpinner.css"
+import "components/spining-loader/SpiningLoader.css"
+import "components/mongo-spinner/mongoSpinner.css"
 
 import { SessionProvider } from "next-auth/react"
-import { WindowWidthContaxt, StateContext} from "Context/Context"
+import { WindowWidthContaxt, StateContext} from "@Context/context"
 import {  useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
-import State from "@/lib/State"
+import State from "@/lib/state"
 
 
 

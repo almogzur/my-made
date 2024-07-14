@@ -2,9 +2,9 @@
   import { useSession } from 'next-auth/react'
   import {useEffect,useState} from 'react'
   import { useRouter } from 'next/router'
-  import Footer from '@components/Footer/Footer';
+  import Footer from '@/components/footer/Footer';
   import Header from '@/components/header/Header';
-  import LoadingSpinner from '@/components/SpiningLoader/SpiningLoader';
+  import LoadingSpinner from '@/components/spining-loader/SpiningLoader';
   
 
 

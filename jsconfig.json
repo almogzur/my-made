@@ -8,8 +8,8 @@
       "@api/*":["api/*"],
       "@layouts/*":["layouts/*"],
       "@public/*":["public/*"],
-      "@Context/*":["Context/*"],
-      "@PagesComponents/*":["PagesComponents/*"]
+      "@context/*":["context/*"],
+      "@pages-components/*":["pages-components/*"]
    } 
  }
 }

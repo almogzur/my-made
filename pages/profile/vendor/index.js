@@ -8,8 +8,8 @@ import React, { useContext,useState,useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import ProfileLayout from "@layouts/ProfileLayout";
-import VendorForm from '@PagesComponents/Verndor/VenderForm'
-import LoadingSpinner from "@/components/SpiningLoader/SpiningLoader";
+import VendorForm from 'pages-components/verndor/VenderForm'
+import LoadingSpinner from "@/components/spining-loader/SpiningLoader";
 
 
 

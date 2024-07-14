@@ -7,12 +7,12 @@ const Header = dynamic(() => import('@/components/header/Header'), {
   loading: () => <div>Loading Header...</div>,
 });
 
-const Footer = dynamic(() => import('@/components/Footer/Footer'), {
+const Footer = dynamic(() => import('@/components/footer/Footer'), {
 
   loading: () => <div>footer loading</div>,
 });
 
-const Main = dynamic(() => import('@PagesComponents/Home/Main'), {
+const Main = dynamic(() => import('pages-components/home/Main'), {
   ssr: false,
   loading: () => <div>Loading Main...</div>,
 });

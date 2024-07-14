@@ -1,16 +1,16 @@
 /// ProfilePage
 
 
-import { StateContext } from '@Context/Context';
+import { StateContext } from '@Context/context';
 import { useEffect,useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import dynamic from 'next/dynamic'; 
-import MongoSpinner from '@/components/MongoSpinner/MongoSpinner';
-import LoadingSpinner from '@/components/SpiningLoader/SpiningLoader';
+import MongoSpinner from '@/components/mongo-Spinner/MongoSpinner';
+import LoadingSpinner from '@/components/spining-loader/SpiningLoader';
 import ProfileLayout from '@layouts/ProfileLayout';
-import ProfileHeader from 'PagesComponents/Profile/ProfileHeder';
-import ProfileDialog from '@PagesComponents/Profile/ProfileDialog';
+import ProfileHeader from 'pages-components/profile/ProfileHeder';
+import ProfileDialog from 'pages-components/profile/ProfileDialog';
 import useSaveUserState from '@/lib/hooks/useSaveUserState';
 import Head from 'next/head';
 

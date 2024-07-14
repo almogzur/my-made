@@ -2,19 +2,10 @@
   import { useSession } from 'next-auth/react'
   import {useEffect,useState} from 'react'
   import { useRouter } from 'next/router'
-  import ErrorBoundary from '@/components/ErrorBoundary';
-
-const Footer = dynamic(() => import('components/Footer/Footer'), {
-  });
+  import Footer from 'components/Footer/Footer';
+  import Header from '@/components/header/Header';
+  import LoadingSpinner from '@/components/SpiningLoader/SpiningLoader';
   
-const CostumeLink = dynamic(() => import('@/components/CostumeLink/CostumeLink'), {
-  });
-  const Header = dynamic(() => import('@/components/header/Header'), {
-  });
-
-const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningLoader"), {
-  ssr: false,
-});
 
 
 
@@ -27,13 +18,12 @@ const LoadingSpinner = dynamic(() => import("@/components/SpiningLoader/SpiningL
        return <LoadingSpinner/>
   }
   
-  return (
-    <ErrorBoundary >
+  return (<>
           <Header/>
           {children}
 
         <Footer/>
-    </ErrorBoundary>
+        </>
   ) 
   }
   

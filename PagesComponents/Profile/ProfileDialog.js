@@ -46,7 +46,6 @@ const ProfileDialog = ({
                       phone={resolvedUser?.state?.Info.phone}
                       about={resolvedUser?.state?.Info.about}
                       setShowInfo={setShowInfo}
-                      perentOpenModle={perentOpenModle}
                       setPerentOpenModle={setPerentOpenModle}
                 />
       :

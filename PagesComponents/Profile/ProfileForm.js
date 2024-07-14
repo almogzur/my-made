@@ -68,16 +68,7 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
                }
   }
 
-  const handleResize = () => {
-    if (sm) {
-      setWidth("90%");
-    } else if (md) {
-      setWidth("500px");
-    } else {
-      setWidth("600px");
 
-    }
-  };
 
 
   return (

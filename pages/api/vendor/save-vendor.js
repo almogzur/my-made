@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 
 const handler = async (req, res) => {
-  const API_NAME = "SAVE VENDOR INFO";
+  const API_NAME = "UPDATE USER VENDOR INFO ";
 
   console.log(API_NAME);
 
@@ -24,7 +24,7 @@ const handler = async (req, res) => {
   const userEmail = session.user.email;
   const database = client.db('my-made');
   const users = database.collection('users');
-  const { BussniseName, price, OpenDate, EndDate, discription } = req.body;
+  const { BussniseName, price, OpenDate, EndDate, description } = req.body;
 
   try {
     // Find the user by their email and update their vendor information
@@ -35,18 +35,18 @@ const handler = async (req, res) => {
         "state.Vendor.price": price,
         "state.Vendor.OpenDate": OpenDate,
         "state.Vendor.EndDate": EndDate,
-        "state.Vendor.discription": discription
+        "state.Vendor.description": description
       }
     };
 
     const result = await users.updateOne(filter, updateDoc);
 
-    if (result.modifiedCount === 1) {
+    if (result.modifiedCount >= 1) {
       console.log("Vendor Info Updated");
       return res.status(200).json({ message: 'Vendor profile updated successfully' });
     } else {
       console.log("User not found or no changes made");
-      return res.status(404).json({ message: 'User not found or no changes made' });
+      return res.status(200).json({ message: 'User not found or no changes made' });
     }
   } catch (error) {
     console.error(API_NAME, 'Error updating vendor profile:', error);

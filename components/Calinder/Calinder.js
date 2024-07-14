@@ -3,21 +3,42 @@ import DatePicker from "react-datepicker";
 import { registerLocale, setDefaultLocale } from  "react-datepicker";
 import { he } from 'date-fns/locale/he';
 import Colors from "@/lib/colors";
+import { StateContext } from "@Context/Context";
+registerLocale('he', he )
 
 
 
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
+
+
 const Calinder = ({
-     id,
+    id,
     text,
     placeholder,
     title,
     onChange,
-    required,popperClassNameProps
-}) => {
-  const [startDate, setStartDate] = useState(new Date());
+    required,
+    STATE_KEY
+    }
+    ) => {
+  
+  const [state,setState] = useContext(StateContext)
+  const [startDate, setStartDate] = useState( );
+
+ useEffect(()=>{
+      const  Data = state[STATE_KEY]
+      const value = Data[id]
+      // if the value is not null
+        if(value){
+           console.log("have data " );
+           setStartDate(new Date(value))
+           console.log("new Key ");
+        }
+ },[state])
+
+
   
   const labelStyle = {       
       display:'flex',
@@ -29,16 +50,17 @@ const Calinder = ({
       }
 
   const handleChange = (e) => {
-    const value = JSON.stringify(e)
+    
+    const value = e
     onChange(id, value);
   };
 
-useEffect(()=>{
-  registerLocale('he', he )
-})
+  
+
 
   return (
    <label 
+   htmlFor={id}
      style={labelStyle}
      >
     <strong>{text}</strong>
@@ -49,25 +71,32 @@ useEffect(()=>{
         withPortal
         id={id} 
         selected={startDate} 
-        onChange={(date) => setStartDate(date)} 
+        onChange={
+          (date) =>{ 
+          // data is object   console.log(date)
+            setStartDate(date)
+            handleChange(date)
+
+            }
+          
+          }
+       
         closeOnScroll
         showYearDropdown
         showMonthDropdown
-        //onSelect={(e)=>{console.log(e)}}
         showTimeSelect
         showFullMonthYearPicker
         showPreviousMonths
         showPopperArrow
         placeholderText={placeholder}
-        onSelect={handleChange}
+     
         isClearable
         containerRef={"main"}
         className="vendor-calindre"
         clearButtonClassName="vendor-calinder-clear-btn"
         popperClassName="vendor-calindr"
-        timeFormat="p"
         timeIntervals={15}
-        dateFormat="Pp"
+        dateFormat="PPp"
         
 
    

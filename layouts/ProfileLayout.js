@@ -30,9 +30,7 @@ const ProfileLayout = ({ children }) => {
 
   return (
     <>
-    <head>
-      <meta/>
-    </head>
+    
       <SideBar
         style={{
           position: "fixed",

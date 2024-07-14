@@ -1,30 +1,39 @@
 // RangeInput.js
 import React from 'react';
 
-const RangeInput = ({ 
+const RangeElemnt = ({ 
      minValue, 
      maxValue, 
-     price ,
+     label ,
      id,
-     user,
      onChange,
-     className 
+     propsStyle
   }) => {
+
+    const defusltStyle = {
+        display:'flex',
+        flexDirection:'column',
+        justifyContent:'center',
+        alignItems:'center',
+        alignContent:'center',
+    }
     
     return (
-        <div className={className}>
-            <label htmlFor={id}>Value for {price}:</label>
+    
+            <label 
+            style={defusltStyle}
+            
+            htmlFor={id}>{label}
             <input 
                 type="range" 
                 id={id} 
                 min={minValue} 
                 max={maxValue} 
                 onChange={onChange} 
-                aria-label={`range input for ${user}`}
             />
-            <span id={`${id}-value`}>{minValue}</span>
-        </div>
+            <strong>{minValue}</strong>
+        </label>
     );
 }
 
-export default RangeInput;
+export default RangeElemnt;

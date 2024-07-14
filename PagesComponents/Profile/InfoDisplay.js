@@ -6,7 +6,7 @@ import Colors from '@/lib/colors';
 const loadFeatures = () =>
   import("@/lib/features.js").then(res => res.default);
 
-const InfoDisplay = ({ age, about, phone ,setShowInfo,setPerentOpenModle,perentOpenModle }) => {
+const InfoDisplay = ({ age, about, phone ,setShowInfo,setPerentOpenModle }) => {
 
   const userInfo = [
     ["גיל", age],

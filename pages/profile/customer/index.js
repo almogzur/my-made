@@ -9,7 +9,7 @@ import LoadingSpinner from "@/components/SpiningLoader/SpiningLoader";
 import useGetUser from "@/lib/hooks/useGetUser";
 
 const CostumerPage = () => {
-  const PAGE_STATE = "isCustomer";
+  const STATE_KEY = "Customer";
   const router = useRouter();
   const { data: session, status } = useSession()
   const [state, setState] = useContext(StateContext)
@@ -41,7 +41,7 @@ const CostumerPage = () => {
     <>
       <ProfileLayout>
         <CustomerForm 
-          PAGE_STATE={{}}
+         STATE_KEY={STATE_KEY}
 
 
         />

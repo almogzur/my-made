@@ -11,7 +11,7 @@ const InputElement = ({
   text,
   id,
   required,
-  stateKey,
+  STATE_KEY,
   value,
   onChange,
   style,
@@ -53,7 +53,7 @@ const InputElement = ({
 
   const handleChange = (e) => {
     const { value } = e.target;
-    onChange(id, value, stateKey);
+    onChange(id, value, STATE_KEY);
   };
 
   return (

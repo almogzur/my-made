@@ -3,7 +3,7 @@ import Features from "@/lib/features";
 
 import { m, LazyMotion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";
-import { WindowWidthContaxt } from "@Context/context";
+import { WindowWidthContaxt } from "@context/context";
 const TextArea = ({
   id,
   rows,

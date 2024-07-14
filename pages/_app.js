@@ -8,7 +8,7 @@ import 'rc-select/assets/index.css'
 import "react-datepicker/dist/react-datepicker.css"
 import "components/Acordione/Acordion.css"
 import "components/range-elemnt/RangeElemnt.css"
-import "components/Calinder/Calinder.css"
+import "components/calendar/Calinder.css"
  // will move to in line 
 import "components/spining-loader/SpiningLoader.css"
 import "components/mongo-spinner/mongoSpinner.css"

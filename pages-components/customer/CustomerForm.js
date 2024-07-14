@@ -1,7 +1,7 @@
 import React,{useState,useEffect,useContext} from 'react'
 import { StateContext } from '@context/context'
 import InputElemnt from '@/components/input-elemnt/InputElemnt'
-import Calendar from "@/components/calinder/Calinder"
+import Calinder from '@/components/calendar/Calendar'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import TextArea from '@/components/text-area/TextArea'
@@ -144,7 +144,7 @@ const headelinStyle = { textAlign: "center" };
 
 
             />
-             <Calendar
+             <Calinder
                 text={"תאירך ושעה"}
                 id={"ResurveDate"}
                 placeholder={""}

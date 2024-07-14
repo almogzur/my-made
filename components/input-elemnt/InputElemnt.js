@@ -1,7 +1,7 @@
 import { m, LazyMotion } from "framer-motion";
 import Colors from "@/lib/colors";
 import { useContext, useEffect, useState } from "react";
-import { WindowWidthContaxt } from "@Context/context";
+import { WindowWidthContaxt } from "context/context";
 
 const loadFeatures = () =>
   import("@/lib/features.js").then((res) => res.default);

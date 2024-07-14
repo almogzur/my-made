@@ -3,7 +3,7 @@ import { StateContext } from "@context/context";
 import { useSession } from "next-auth/react";
 import LoadingSpinner from "@/components/spining-loader/SpiningLoader";
 import InputElement from "@/components/input-elemnt/InputElemnt";
-import Calinder from "@/components/calinder/Calinder";
+import Calinder from "@/components/calendar/Calendar";
 import TextArea from "@/components/text-area/TextArea";
 import Colors from "@/lib/colors";
 import useGetUser from "@/lib/hooks/useGetUser";

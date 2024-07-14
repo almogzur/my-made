@@ -1,6 +1,4 @@
 
-import { ColorsContext } from "@Context/Context"
-import { useContext } from "react"
 import Colors from "@/lib/colors"
 
 const Header=()=>{

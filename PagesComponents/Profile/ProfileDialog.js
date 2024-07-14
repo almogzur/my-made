@@ -1,16 +1,11 @@
 import { useEffect, useState, useContext } from 'react';
 import { useSession } from 'next-auth/react';
-import { color, LazyMotion, m } from "framer-motion";
 import Colors from '@/lib/colors';
 import useGetUser from '@/lib/hooks/useGetUser';
 import MongoSpinner from '@/components/MongoSpinner/MongoSpinner';
 import InfoDisplay from '@PagesComponents/Profile/InfoDisplay';
 import ProfileForm from 'PagesComponents/Profile/ProfileForm';
 import Dialog from "@/components/Dialog/Dialog"
-import loadFeatures from "@/lib/features"
-
-
-
 
 const ProfileDialog = ({
   
@@ -49,7 +44,7 @@ const ProfileDialog = ({
                       setPerentOpenModle={setPerentOpenModle}
                 />
       :
-      <LazyMotion features={loadFeatures}>
+
       <div
     
       >
@@ -91,7 +86,7 @@ const ProfileDialog = ({
         
         </Dialog>
       </div>
-      </LazyMotion>
+
     
     
   

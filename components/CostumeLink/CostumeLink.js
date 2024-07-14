@@ -1,7 +1,5 @@
 import Link from "next/link";
 import { LazyMotion,m } from "framer-motion"
-import { useState } from "react";
-import Colors from "@/lib/colors";
 import loadFeatures from '@/lib/features'
 
 

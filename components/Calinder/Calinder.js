@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
-import { registerLocale, setDefaultLocale } from  "react-datepicker";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { he } from 'date-fns/locale/he';
-import Colors from "@/lib/colors";
 import { StateContext } from "@Context/Context";
 registerLocale('he', he )
 

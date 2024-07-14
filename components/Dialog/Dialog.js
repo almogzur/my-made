@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { m, LazyMotion } from "framer-motion";

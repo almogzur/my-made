@@ -1,10 +1,8 @@
 import React, { useContext } from 'react';
 import { LazyMotion, m } from "framer-motion";
 import Colors from '@/lib/colors';
+import f from "@/lib/features"
 
-
-const loadFeatures = () =>
-  import("@/lib/features.js").then(res => res.default);
 
 const InfoDisplay = ({ age, about, phone ,setShowInfo,setPerentOpenModle }) => {
 
@@ -16,7 +14,7 @@ const InfoDisplay = ({ age, about, phone ,setShowInfo,setPerentOpenModle }) => {
   ];
 
   return (
-    <LazyMotion features={loadFeatures}>
+    <LazyMotion features={f}>
       <div
         style={{
           display: 'flex',

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StateContext } from "Context/Context";
+import { StateContext } from "@Context/Context";
 import { useSession } from "next-auth/react";
 import LoadingSpinner from "@/components/SpiningLoader/SpiningLoader";
 import InputElement from "@/components/InputElemnt/InputElemnt";

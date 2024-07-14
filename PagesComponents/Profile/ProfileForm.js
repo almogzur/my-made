@@ -6,10 +6,8 @@ import TextArea from '@/components/TextArea/TextArea';
 import Colors from '@/lib/colors';
 import {m,LazyMotion} from "framer-motion"
 import { WindowWidthContaxt } from '@Context/Context';
+import f from "@/lib/features"
 
-const loadFeatures = () =>
-  import("@/lib/features.js")
-      .then(res => res.default)
 
 
 
@@ -72,7 +70,7 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
 
 
   return (
-    <LazyMotion features={loadFeatures}>
+    <LazyMotion features={f}>
 
     <form 
       onSubmit={ handleInfoSave} 

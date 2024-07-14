@@ -1,20 +1,17 @@
-import { useContext } from 'react';
 import { useSession } from "next-auth/react"
 import {m, LazyMotion} from 'framer-motion'
 import Image from 'next/image';
 import defulteUserImg from '@public/User.jpg';
 import ColorsH1 from '@/components/gradientH1/ColoreH1';
 import Colors from '@/lib/colors';
+import f from "@/lib/features"
 
-const loadFeatures = () =>
-    import("@/lib/features").then(res => res.default)
-  
 const ProfileHeader = () => {
 
     const { data: session, status } = useSession()
 
  return (
-   <LazyMotion features={loadFeatures}>
+   <LazyMotion features={f}>
       <div
          style={{
            padding:"0px",

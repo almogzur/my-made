@@ -1,16 +1,8 @@
 import { useContext, useState } from 'react';
-import dynamic from 'next/dynamic';
+import Select from 'rc-select';
+import Option from 'rc-select';
 
-// Dynamic imports with loading component
-const DynamicSelect = dynamic(() => import('rc-select'), {
-  ssr: false,
-  loading: () => <div>Loading Select...</div>,
-});
 
-const DynamicOption = dynamic(() => import('rc-select').then(mod => mod.Option), {
-  ssr: false,
-  loading: () => <div>Loading Option...</div>,
-});
 
 const SelectElemnt = ({
   id,
@@ -25,7 +17,7 @@ const SelectElemnt = ({
       style={{ display: "flex", flexDirection: "column" }}
     >
       {hedlineText}
-      <DynamicSelect
+      <Select
         animation={"slide-up"}
         mode='multiple'
         multiple
@@ -34,9 +26,9 @@ const SelectElemnt = ({
         onChange={onChange}
       >
         {SelectOptionsArray.map((option, i) => (
-          <DynamicOption value={option} key={i}>{option}</DynamicOption>
+          <Option value={option} key={i}>{option}</Option>
         ))}
-      </DynamicSelect>
+      </Select>
     </label>
   );
 };

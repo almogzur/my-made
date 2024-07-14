@@ -8,15 +8,17 @@
 
 .vendor-calindre{
     border:unset;
+    
     border:1px solid;
-    width:100%;
-    min-width: 380px;
     padding: 10px;
     margin: 20px 0;
     box-shadow: 2px 1px 1px var(--therd);
     border-color:var(--therd);
     border-radius:6px;
-    transform: scale(1)
+    width:300px;
+    transform: scale(1);
+
+     
 }
 .vendor-calindre:hover{
 
@@ -26,10 +28,9 @@
 }
 
 .vendor-calinder-clear-btn{
-    position:unset;
-    position: inherit;
-    top:-50px;
-    right:370px
+  position:unset;
+  position:absolute;
+  right:90%
 }
 .vendor-calinder-clear-btn:hover{
 
@@ -37,3 +38,17 @@
     transition: all 1s ease-out;
     
 }
+
+@media  (min-width: 600px)  {
+    .vendor-calindre{
+        width:500px;
+    }
+  }
+
+@media (min-width: 900px)  {
+    .vendor-calindre{
+        width:700px;
+    }
+  }
+  
+  

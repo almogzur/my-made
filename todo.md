@@ -1,4 +1,5 @@
 
+* add new  calinder 
 
  * move the rendring of Info Display in to the dilog as if statment 
  

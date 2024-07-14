@@ -30,11 +30,14 @@ const ProfileLayout = ({ children }) => {
 
   return (
     <>
+    <head>
+      <meta/>
+    </head>
       <SideBar
         style={{
           position: "fixed",
-          bottom: "80px",
-          left: "20px",
+          bottom: "60px",
+          left: "5px",
           width: "70px",
           background: Colors.c,
         }}
@@ -57,7 +60,7 @@ const ProfileLayout = ({ children }) => {
           linkStyle={DefaultLinkStyle}
           divStyle={DivDefaultStyle}
           HoverBackgroundColor={"green"}
-          onHoverColor={Colors.d}
+          onH={Colors.d}
         >
           <FontAwesomeIcon 
            size="1x"

@@ -13,7 +13,7 @@ function ThreeColorsH1({
         const defaultAngle = "90deg"
 
     return ( 
-        <h2
+        <h3
          style={{
             background:`linear-gradient(
             ${angleDeg?angleDeg:"90deg"},
@@ -23,10 +23,12 @@ function ThreeColorsH1({
              )`,
             color:"transparent",
             backgroundClip:"text",
+            padding:"0px",
+            margin:"0px",
             ...style
          }
          }
-        >{text? text : "Hello World"}</h2>
+        >{text? text : "Hello World"}</h3>
      );
 }
 

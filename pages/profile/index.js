@@ -12,10 +12,13 @@ import ProfileLayout from '@layouts/ProfileLayout';
 import ProfileHeader from 'PagesComponents/Profile/ProfileHeder';
 import ProfileDialog from '@PagesComponents/Profile/ProfileDialog';
 import useSaveUserState from '@/lib/hooks/useSaveUserState';
+import Head from 'next/head';
 
 
 
 const ProfilePage = () => {
+
+
   const router = useRouter();
   const { data: session ,status ,update} = useSession()
   const [state, setState] = useContext(StateContext);
@@ -50,6 +53,7 @@ const ProfilePage = () => {
       <ProfileHeader />
       <ProfileDialog/>
     </ProfileLayout>
+    
   );
 }
 };

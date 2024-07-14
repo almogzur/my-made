@@ -3,7 +3,6 @@ import { useSession } from "next-auth/react"
 import {m, LazyMotion} from 'framer-motion'
 import Image from 'next/image';
 import defulteUserImg from '@public/User.jpg';
-import ErrorBoundary from '@/components/ErrorBoundary';
 import ColorsH1 from '@/components/gradientH1/ColoreH1';
 import Colors from '@/lib/colors';
 
@@ -15,16 +14,17 @@ const ProfileHeader = () => {
     const { data: session, status } = useSession()
 
  return (
-  <ErrorBoundary fallback={<p>Something went wrong</p> } >
    <LazyMotion features={loadFeatures}>
-      <m.div
+      <div
          style={{
-           padding:"20px",
-           width:"100%",
+           padding:"0px",
+           minWidth:"100%",
+           margin:"0px",
            height:"200px",
            border:"none",    
            background: 'rgb(25,29,136)',
-           background: `linear-gradient(-119deg, 
+           background: `linear-gradient(
+             -119deg, 
              ${Colors.a} , 
              ${Colors.c} ,
              #fff
@@ -41,24 +41,23 @@ const ProfileHeader = () => {
          color2={Colors.c}
          angleDeg={"-17deg"}
          style={{   
-            
-            position:"absolute",
-            top:"00px",
-            right: "10px",
-
-                           }}
-            >{}
+          position:"absolute",
+            top:"10px",
+            right:"10px",
+              }}
+            >
          </ColorsH1>
 
          <ColorsH1
-         text={session?.user?.email?.toUpperCase()}
-         color1={Colors.b}
-         color2={Colors.c}
-         angleDeg={"-17deg"}
-          style={{
-            height:"70px",
-            marginTop:"50px",
-            }}
+           text={session?.user?.email?.toUpperCase()}
+           color1={Colors.b}
+           color2={Colors.c}
+           angleDeg={"-217deg"}
+           style={{   
+          position:"absolute",
+            top:"150px",
+            right:"40px",
+              }}
           >
          </ColorsH1>
          <m.div
@@ -66,7 +65,7 @@ const ProfileHeader = () => {
                borderRadius: "15px",
                position:"absolute",
                 left:"10px",
-                top:"20px"
+                top:"10px"
                   }}
              whileHover={{
                  rotate:30
@@ -83,9 +82,8 @@ const ProfileHeader = () => {
                 />
          </m.div>
 
-      </m.div>
+      </div>
     </LazyMotion>
-   </ErrorBoundary>
     );
 };
 

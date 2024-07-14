@@ -1,39 +1,69 @@
 import Colors from "@/lib/colors";
-import Features from "@/lib/features"
+import Features from "@/lib/features";
 
-import {m,LazyMotion} from "framer-motion"
-
-
+import { m, LazyMotion } from "framer-motion";
+import { useContext, useEffect, useState } from "react";
+import { WindowWidthContaxt } from "@Context/Context";
 const TextArea = ({
   id,
   rows,
   cols,
   value,
   onChange,
-  className,
   resize,
   text,
-  style,
-  placeholder
+  placeholder,
 }) => {
+  const [width, setWidth] = useState("");
+  const {md,sm} =useContext(WindowWidthContaxt)
+
+  const handleResize = () => {
+    if (sm) {
+        setWidth("90%");
+    } else if (md) {
+        setWidth("500px");
+    } else {
+      setWidth("700px")
+    }
+  };
+
+  useEffect(()=>{
+      handleResize()
+  },[width,setWidth,md,sm])
+
+  const defaultStyle = {
+    width: width,
+    border: `1px solid ${Colors.b}`,
+    borderRadius: "6px",
+    padding: "10px ",
+    margin: "10px 0",
+    boxShadow: `2px 1px 1px ${Colors.c}`,
+    resize: resize? resize: "none",
  
-                  
- 
+    
+  };
+
   const handleChange = (e) => {
-
     const { value } = e.target;
-
     onChange(id, value);
   };
 
-
-
   return (
-  <>
-      <label style={{minWidth:"400px",textAlign:"start"}} htmlFor={id}>{text}</label>
-      <LazyMotion features={Features}>
+    <LazyMotion features={Features}>
+      <label
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+       
+
+        }}
+        htmlFor={id}
+      >
+        <strong>{text}</strong>
+
           <m.textarea
-             id={id}
+            id={id}
             value={value}
             rows={rows || 4}
             cols={cols || 50}
@@ -43,25 +73,15 @@ const TextArea = ({
             required={false}
             disabled={false}
             spellCheck={true}
-            placeholder={placeholder?placeholder:null}
+            placeholder={placeholder ? placeholder : null}
             onChange={handleChange}
-           style={{
-                width: '100%',
-                maxWidth: '400px',
-                border: `1px solid ${Colors.b}`,
-                borderRadius: "6px",
-                padding: "10px",
-                margin: "10px 0",
-                boxShadow: `2px 1px 1px ${Colors.c}`,
-                resize:"none",
-                ...style
-            
-        }}
-        transition={{ duration: 1 }}
-        whileHover={{scale:  1.1 }}    
-      />
-      </LazyMotion>
-      </>  
+            style={defaultStyle}
+            transition={{ duration: 1 }}
+            whileHover={{ scale: 1.1 }}
+          />
+        </label>
+        </LazyMotion>
+
   );
 };
 

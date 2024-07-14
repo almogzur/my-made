@@ -17,6 +17,12 @@ const RangeElemnt = ({
         alignItems:'center',
         alignContent:'center',
     }
+
+    const handleChange = (e) => {
+        const { value } = e.target;
+        onChange(id, value, STATE_KEY);
+      };
+    
     
     return (
     
@@ -29,7 +35,7 @@ const RangeElemnt = ({
                 id={id} 
                 min={minValue} 
                 max={maxValue} 
-                onChange={onChange} 
+                onChange={handleChange} 
             />
             <strong>{minValue}</strong>
         </label>

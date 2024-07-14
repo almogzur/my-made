@@ -28,15 +28,14 @@ const Calinder = ({
   const [startDate, setStartDate] = useState( );
 
  useEffect(()=>{
-      const  Data = state[STATE_KEY]
+      const Data = state[STATE_KEY]
       const value = Data[id]
       // if the value is not null
         if(value){
-           console.log("have data " );
            setStartDate(new Date(value))
-           console.log("new Key ");
+           console.log("new date ");
         }
- },[state])
+ },[state[STATE_KEY][id]])
 
 
   

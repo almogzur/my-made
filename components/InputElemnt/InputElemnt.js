@@ -14,7 +14,6 @@ const InputElement = ({
   STATE_KEY,
   value,
   onChange,
-  style,
   min,
   max,
   step,

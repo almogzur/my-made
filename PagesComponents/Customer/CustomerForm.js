@@ -10,14 +10,19 @@ import RangeElemnt from '@/components/RangeElemnt/RangeElemnt'
 import Colors from '@/lib/colors'
 import {m,LazyMotion} from 'framer-motion'
 import f from "@/lib/features"
+import MongoSpinner from '@/components/MongoSpinner/MongoSpinner'
+
+const headelinStyle = { textAlign: "center" };
+
 
     const CustomerFrom = ({STATE_KEY})=>{
-        const { data: session ,status ,update} = useSession()
 
+        const { data: session ,status ,update} = useSession()
         const [state,setState]=useContext(StateContext)
         const { UserData, dbloading, profileError } = useGetUser(session?.user?.email);
         const [resolvedUser, setResolvedUser] = useState(null);
-      
+        const router = useRouter()
+        
     // No Session
        useEffect(()=>{
         console.log(STATE_KEY,state[STATE_KEY]);
@@ -26,18 +31,15 @@ import f from "@/lib/features"
          router.push("/")
     
      }
-    },[])
+    },[state])
 
-  // Boolean for Secssesful User Featch
-
+  // if Secssesful User Featch
   useEffect(() => {
     if (UserData) {
       setResolvedUser(UserData);
     }
   }, [UserData,state]);
-
-
-
+// if dbUser set it as State
   useEffect(() => {
     if (resolvedUser) {
       setState(prevState => ({
@@ -58,49 +60,88 @@ import f from "@/lib/features"
     }
   }, [resolvedUser, STATE_KEY, setState]);
 
-
   const handleChange = (id, value) => {
     setState(prevState => ({
       ...prevState,
       [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value}
     }));
   };
+  const handleSubmit = async (e) => {
+    try {
+      const response = await fetch('/api/customer/save-customer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(state[STATE_KEY])
+      });
+      const result = await response.json();
+      if (response.ok) {
+        console.log(result.message);
+        // Optionally, update the state or notify the user
+      } else {
+        console.error(result.message);
+      }
+    } catch (error) {
+      console.error('Failed to update customer information', error);
+    }
+  };
+  
 
 
 
-        return (
-            <LazyMotion features={f}>
-        <form    onSubmit={()=>{}}     >
+  if (status === "loading") {
+    return <LoadingSpinner />;
+  } else if (dbloading) {
+    return <MongoSpinner />;
+  }
 
-            <h2> {`שלום ${session?.user?.name} `}</h2>
-            <h3>{`הזמן משק בית `}</h3>
+
+
+    return (
+    <LazyMotion features={f}>
+        <form    onSubmit={handleSubmit}     >
+
+            <h2 style={headelinStyle}> {`שלום ${session?.user?.name} `}</h2>
+            <h3 style={headelinStyle}>{`הזמן משק בית `}</h3>
 
          
             <InputElemnt
                 type={"number"}
                 text={"מספר חדרים "}
                 STATE_KEY={"Customer"}
-                id="phone" 
+                id="ApartmentRoomsSize" 
                 required
-                value={''}
+                value={state[STATE_KEY].ApartmentRoomsSize}
                 onChange={handleChange}
             />
            
             <InputElemnt
+            type={"number"}
                 text={"מספר מקלחות"}
                 STATE_KEY={STATE_KEY}
                 id={"NumberOfBathRooms"}
+                onChange={handleChange}
+                value={state[STATE_KEY].NumberOfBathRooms}
+
+
             />
             <InputElemnt
                 id={"phone"}
                 text={"טלפון"}
                 required={true}
                 STATE_KEY={STATE_KEY}
+                onChange={handleChange}
+                value={state[STATE_KEY].phone}
+
             />
             <InputElemnt
                 id={"addphone"}
                 text={"טלפון נוסף"}
                 STATE_KEY={STATE_KEY}
+                onChange={handleChange}
+                value={state[STATE_KEY].addphone}
+
 
             />
              <Calendar
@@ -109,22 +150,25 @@ import f from "@/lib/features"
                 placeholder={""}
                 STATE_KEY={STATE_KEY}
                 onChange={handleChange}
+                value={state[STATE_KEY].ResurveDate}
             />
 
             <RangeElemnt
                 label={"מחיר מ"}
                 STATE_KEY={STATE_KEY}
-
+                onChange={handleChange}
+                
             />
                <RangeElemnt
                 label={"עד"}
                 STATE_KEY={STATE_KEY}
+                onChange={handleChange}
 
             />
 
             <TextArea
                   id={"JobDescription"} 
-                  value={state[STATE_KEY]["JobDescription"]}
+                  value={state[STATE_KEY].JobDescription}
                   onChange={handleChange}
                   resize={false}
                   text={"תיאור "}
@@ -135,10 +179,9 @@ import f from "@/lib/features"
                 text={"כתובת"}
                 type={"location"}
                 contextType={"Customer"}
-                id={"location"}
-                required
-                stateKey={""}
-                value={""}
+                id={"addres"}
+                STATE_KEY={STATE_KEY}
+                value={state[STATE_KEY].addres}
                 onChange={handleChange}
             />
       {/** User Data Save to db  */}
@@ -147,7 +190,7 @@ import f from "@/lib/features"
             type="submit"
             style={{
               height: "70px",
-              width: '150px',
+              width: '200px',
               border: "1px solid",
               borderRadius: "15px",
               background: "#fff",
@@ -156,6 +199,7 @@ import f from "@/lib/features"
               textAlign: "center",
               color: Colors.b,
               boxShadow: `3px 3px 3px 3px ${Colors.c}`,
+              marginBottom:"150px"
             }}
             whileHover={{
               boxShadow: `3px 3px 3px inset`,

@@ -1,9 +1,9 @@
 
-* add new  calinder 
+ * fix ad section 
 
- * move the rendring of Info Display in to the dilog as if statment 
- 
-* style From Input 
+ * fix css Vendor Custome 
+
+ * bulil Board page 
 
 * add comment section to user Profile 
 

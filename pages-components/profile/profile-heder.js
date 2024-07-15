@@ -24,7 +24,8 @@ const ProfileHeader = () => {
              -119deg, 
              ${Colors.a} , 
              ${Colors.c} ,
-             #fff
+             ${"#fff"}
+         
             
           
            )
@@ -48,7 +49,7 @@ const ProfileHeader = () => {
          <ColorsH1
            text={session?.user?.email?.toUpperCase()}
            color1={Colors.b}
-           color2={Colors.c}
+           color2={Colors.d}
            angleDeg={"-217deg"}
            style={{   
           position:"absolute",

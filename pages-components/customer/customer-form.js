@@ -100,7 +100,12 @@ const headelinStyle = { textAlign: "center" };
 
     return (
     <LazyMotion features={f}>
-        <form    onSubmit={handleSubmit}     >
+        <form
+           style={{ 
+                   marginBottom:"150px"
+                 }}
+           onSubmit={handleSubmit}     
+          >
 
             <h2 style={headelinStyle}> {`שלום ${session?.user?.name} `}</h2>
             <h3 style={headelinStyle}>{`הזמן משק בית `}</h3>
@@ -199,7 +204,6 @@ const headelinStyle = { textAlign: "center" };
               textAlign: "center",
               color: Colors.b,
               boxShadow: `3px 3px 3px 3px ${Colors.c}`,
-              marginBottom:"150px"
             }}
             whileHover={{
               boxShadow: `3px 3px 3px inset`,

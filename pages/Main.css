@@ -1,12 +1,15 @@
 *{
     font-family: system-ui;
+    
 }
 body{
     direction:rtl;
     position: relative;
     margin: 0;
     padding:0;
+    background:#F2F4F6;
     overflow-x: hidden;
+
 }
 
 .main{

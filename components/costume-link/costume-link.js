@@ -7,10 +7,10 @@ export default function CostumeLink ({
   href,
   children,
   text,
-  motionWrapperStyle,
   linkStyle,
   divStyle,
-  onHoverColor  
+  onHoverColor,  
+  motionWrapperStyle
  })
   {
 
@@ -19,10 +19,9 @@ export default function CostumeLink ({
  <LazyMotion features={f}>
 
     <m.div
-          style={{...motionWrapperStyle }}
+          style={motionWrapperStyle?motionWrapperStyle:null}
           animate={{rotate:360}}
           transition={{ type: "spring" ,duration:5 }}
-          whileHover={{rotate:30 }}
           onMouseEnter={(e)=>{
             e.target.style.color = onHoverColor 
            ,e.target.style.transition = "ease 1s"

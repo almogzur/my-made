@@ -50,7 +50,7 @@ const InfoDisplay = ({ age, about, phone ,setShowInfo,setPerentOpenModle }) => {
             width: '100px',
             border: "none",
             borderRadius: "8px",
-            background: `radial-gradient(circle, rgba(52,124,207,1) 60%,${Colors.b} 100%)`,
+            background: `radial-gradient(circle, ${Colors.c} 60%,${Colors.b} 100%)`,
             boxShadow: `4px 4px 2px ${Colors.c} `,
             color:"#fff",
             fontSize: "16px",

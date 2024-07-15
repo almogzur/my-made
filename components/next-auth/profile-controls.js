@@ -24,6 +24,7 @@ function ProfileControls() {
         transition={{duration:2}}
 
         >
+
       <m.button
           style={{
             height:'inherit',
@@ -43,10 +44,9 @@ function ProfileControls() {
         הרשמה או התחברות
       </m.button>
       </m.div>
-
-
     </LazyMotion>
       :
+
     <LazyMotion features={f}>
         <m.div
           animate={{opacity:[0,0.5,1]}}
@@ -63,13 +63,17 @@ function ProfileControls() {
         >
 
           <m.div
-            style={{borderRadius:"15px",height:"60px",display:'flex',
-            flexDirection:'row'|'column',
-            justifyContent:'center',
-            alignItems:'center',
-            alignContent:'center',}}
+            style={{
+               borderRadius:"5px",
+               height:"60px",
+               display:'flex',
+               flexDirection:'column',
+               justifyContent:'center',
+               alignItems:'center',
+               alignContent:'center',
+              }}
             transition={{ type: "spring", duration: 1 }}
-            whileHover={{ rotate: 180 , background:Colors.d}}
+        
           >
             <Link
               href={"/profile"}

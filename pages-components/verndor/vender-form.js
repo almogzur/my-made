@@ -87,7 +87,7 @@ const VendorForm = ({ STATE_KEY }) => {
 
   return (
     <LazyMotion features={f}>
-      <form onSubmit={handleIVenderSave}>
+      <form style={{marginBottom:"150px"}} onSubmit={handleIVenderSave}>
         <h2 style={headelinStyle}>{`שלום ${session?.user?.name}`}</h2>
         <h3 style={headelinStyle}>{`הרשם כנותן שירות משק`}</h3>
 

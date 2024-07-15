@@ -67,7 +67,7 @@ const Dialog = ({
             right: "5px",
             bottom: '5px',
             background: 'rgb(52,124,207)',
-            background: 'radial-gradient(circle, rgba(52,124,207,1) 0%, rgba(255,255,255,1) 100%)',
+            background: `radial-gradient(circle, ${Colors.c} 0%, ${"#fff"} 100%)`,
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",

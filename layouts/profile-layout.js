@@ -9,12 +9,11 @@ import Footer from '../components/footer/app-footer';
 
 const ProfileLayout = ({ children }) => {
 
-  const WrapperDefaultStyle = {
-    color: Colors.d
-  }
+
 
   const DefaultLinkStyle = {
-    textDecoration: "none"
+    textDecoration: "none",
+    color:Colors.d
   }
 
   const DivDefaultStyle = {
@@ -38,26 +37,25 @@ const ProfileLayout = ({ children }) => {
           left: "5px",
           width: "70px",
           background: Colors.c,
+          zIndex:2
         }}
       >
         <CostumeLink
           text={"משק"}
           href="/profile/vendor"
-          motionWrapperStyle={WrapperDefaultStyle}
           linkStyle={DefaultLinkStyle}
           divStyle={DivDefaultStyle}
-          onHoverColor={Colors.d}
+          onHoverColor={Colors.background}
         >
-          <FontAwesomeIcon size="1x" icon={faBroom} />
+          <FontAwesomeIcon size="1x" icon={faBroom}  />
         </CostumeLink>
 
         <CostumeLink
           href="/profile/customer"
           text={"לקוח"}
-          motionWrapperStyle={WrapperDefaultStyle}
           linkStyle={DefaultLinkStyle}
           divStyle={DivDefaultStyle}
-          HoverBackgroundColor={"green"}
+          onHoverColor={Colors.background}
           onH={Colors.d}
         >
           <FontAwesomeIcon 

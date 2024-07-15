@@ -1,6 +1,6 @@
 import clientPromise from '@/lib/db';
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]";
+import { authOptions } from "@pages/api/auth/[...nextauth]";
 
 const handler = async (req, res) => {
   const API_NAME = "UPDATE USER VENDOR INFO ";

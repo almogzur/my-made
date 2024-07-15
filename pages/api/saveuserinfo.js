@@ -3,9 +3,9 @@
 // save "Profile Info Form"  Data To DB
 
 
-import clientPromise from '@/lib/db';
+import clientPromise from '@lib/db';
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "./auth/[...nextauth]";
+import { authOptions } from "@pages/api/auth/[...nextauth]";
 
 const handler = async (req, res) => {
 

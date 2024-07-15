@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useSession  } from "next-auth/react";
 import { StateContext } from "@context/context";
 import CustomerForm from "@pages-components/customer/customer-form"
-import  ProfileLayout from "@layouts/profileLayout"
+import  ProfileLayout from "@layouts/profile-layout"
 import LoadingSpinner from "@components/spining-loader/spining-loader";
 import useGetUser from "@lib/hooks/use-get-user";
 

@@ -66,7 +66,6 @@ const Calinder = ({
         locale={he}
         required={required? true:false}
         title={title}
-        withPortal
         id={id} 
         selected={startDate} 
         onChange={
@@ -74,10 +73,7 @@ const Calinder = ({
           // data is object   console.log(date)
             setStartDate(date)
             handleChange(date)
-
-            }
-          
-          }
+            }}
        
         closeOnScroll
         showYearDropdown

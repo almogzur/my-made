@@ -1,9 +1,11 @@
 
  * fix ad section 
 
- * fix css Vendor Custome 
+  * config TSwitch css and state 
 
- * bulil Board page 
+* build display component for vendor and customer forms 
+
+* buld Board db quary and UI
 
 * add comment section to user Profile 
 

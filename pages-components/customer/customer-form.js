@@ -11,6 +11,7 @@ import Colors from '../../lib/colors'
 import {m,LazyMotion} from 'framer-motion'
 import f from "../../lib/features"
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
+import TSwitch from '../../components/t-switch'
 
 const headelinStyle = { textAlign: "center" };
 
@@ -189,6 +190,9 @@ const headelinStyle = { textAlign: "center" };
                 value={state[STATE_KEY].addres}
                 onChange={handleChange}
             />
+
+                <TSwitch/>
+
       {/** User Data Save to db  */}
       <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
           <m.button

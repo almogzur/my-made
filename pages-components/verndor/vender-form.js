@@ -9,6 +9,7 @@ import Colors from '../../lib/colors'
 import useGetUser from '../../lib/hooks/use-get-user'
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
 import { m, LazyMotion } from 'framer-motion';
+import TSwitch from '../../components/t-switch/index'
 import f from '../../lib/features'
 
 const descriptionPlaceholder = 
@@ -139,6 +140,8 @@ const VendorForm = ({ STATE_KEY }) => {
           STATE_KEY={STATE_KEY}
 
         />
+
+        <TSwitch/>
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
           <m.button

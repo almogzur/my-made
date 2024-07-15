@@ -1,5 +1,5 @@
 
- export default function ToggleSwitch  ({name,text,callback}) {
+ export default function TSwitch  ({name,text,callback}) {
 
      return(
       <label  className={name+"switch"}>

@@ -9,7 +9,8 @@ const State = {
        price:"",
        OpenDate:null,
        EndDate:null,
-       description:""
+       description:"",
+       isVendor:false,
      },
     Customer: { 
        ApartmentRoomsSize:"",
@@ -20,10 +21,8 @@ const State = {
        PriceRange:[],
        JobDescription:"",
        addres:"",
-     
+        IsCustomer:false
      },
-     IsBloak:false,
-     isVendor:false,
-     IsCustomer:false,
+     IsBlock:false,
   }
   export default State

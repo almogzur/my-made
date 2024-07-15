@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StateContext } from "@context/context";
 import { useSession } from "next-auth/react";
-import LoadingSpinner from "@/components/spining-loader/SpiningLoader";
-import InputElement from "@/components/input-elemnt/InputElemnt";
-import Calinder from "@/components/calendar/Calendar";
-import TextArea from "@/components/text-area/TextArea";
-import Colors from "@/lib/colors";
-import useGetUser from "@/lib/hooks/useGetUser";
-import MongoSpinner from "@/components/mongo-Spinner/MongoSpinner";
+import LoadingSpinner from "@components/spining-loader/SpiningLoader";
+import InputElement from "@components/input-elemnt/InputElemnt";
+import Calinder from "@components/calendar/Calendar";
+import TextArea from "@components/text-area/TextArea";
+import Colors from "@lib/colors";
+import useGetUser from "@lib/hooks/useGetUser";
+import MongoSpinner from "@components/mongo-Spinner/MongoSpinner";
 import { m, LazyMotion } from 'framer-motion';
-import features from '@/lib/features';
+import f from '@lib/features';
 
 const descriptionPlaceholder = 
 ` המחיר המבוקש הוא עבור ... 
@@ -86,7 +86,7 @@ const VendorForm = ({ STATE_KEY }) => {
   }
 
   return (
-    <LazyMotion features={features}>
+    <LazyMotion features={f}>
       <form onSubmit={handleIVenderSave}>
         <h2 style={headelinStyle}>{`שלום ${session?.user?.name}`}</h2>
         <h3 style={headelinStyle}>{`הרשם כנותן שירות משק`}</h3>

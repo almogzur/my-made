@@ -5,9 +5,9 @@
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import { faHome, faClipboard } from "@fortawesome/free-solid-svg-icons";
-import Colors from "@/lib/colors";
-import CostumeLink from '@/components/costume-link/CostumeLink'
-import ProfileControls from "@/components/next-auth/ProfileControls"
+import Colors from "@lib/colors";
+import CostumeLink from "@components/costume-link/CostumeLink";
+import ProfileControls from "@components/next-auth/ProfileControls"
 
 
 const Footer = ({children,style,className})  => {

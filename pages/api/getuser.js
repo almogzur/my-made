@@ -1,4 +1,4 @@
-import clientPromise from '@/lib/db';
+import clientPromise from '@lib/db';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@pages/api/auth/[...nextauth]";
 

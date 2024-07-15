@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LazyMotion,m } from "framer-motion"
-import loadFeatures from '@/lib/features'
+import f from '@lib/features'
 
 
 export default function CostumeLink ({
@@ -16,7 +16,7 @@ export default function CostumeLink ({
 
 
   return (
- <LazyMotion features={loadFeatures}>
+ <LazyMotion features={f}>
 
     <m.div
           style={{...motionWrapperStyle }}

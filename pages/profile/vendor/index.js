@@ -9,7 +9,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import ProfileLayout from "@layouts/ProfileLayout";
 import VendorForm from 'pages-components/verndor/VenderForm'
-import LoadingSpinner from "@/components/spining-loader/SpiningLoader";
+import LoadingSpinner from "@components/spining-loader/SpiningLoader";
 
 
 

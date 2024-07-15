@@ -3,11 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { m, LazyMotion } from "framer-motion";
 import ReactModal from "react-modal";
-import Colors from "@/lib/colors";
-
-
-const loadFeatures = () =>
-  import("@/lib/features").then(res => res.default);
+import Colors from "@lib/colors";
+import f from '@lib/features'
 
 const Dialog = ({
   children,
@@ -90,7 +87,7 @@ const Dialog = ({
         }}
       >
         {children}
-        <LazyMotion features={loadFeatures}>
+        <LazyMotion features={f}>
           <m.button
             whileHover={{ background: "red" }}
             onClick={handleModal}

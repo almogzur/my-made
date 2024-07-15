@@ -2,10 +2,10 @@ import { useEffect, useContext , useState } from "react";
 import { useRouter } from "next/router";
 import { useSession  } from "next-auth/react";
 import { StateContext } from "@context/context";
-import CustomerForm from "pages-components/customer/CustomerForm"
+import CustomerForm from "@pages-components/customer/CustomerForm"
 import  ProfileLayout from "@layouts/ProfileLayout"
-import LoadingSpinner from "@/components/spining-loader/SpiningLoader";
-import useGetUser from "@/lib/hooks/useGetUser";
+import LoadingSpinner from "@components/spining-loader/SpiningLoader";
+import useGetUser from "@lib/hooks/useGetUser";
 
 const CostumerPage = () => {
   const STATE_KEY = "Customer";

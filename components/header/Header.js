@@ -1,5 +1,5 @@
 
-import Colors from "@/lib/colors"
+import Colors from "@lib/colors"
 
 const Header=()=>{
 

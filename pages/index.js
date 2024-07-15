@@ -1,21 +1,9 @@
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
+import Header from '@components/header/Header';
+import Footer from '@components/footer/Footer';
+import Main from 'pages-components/home/Main';
 
-// Dynamic imports
-const Header = dynamic(() => import('@/components/header/Header'), {
-  ssr: false,
-  loading: () => <div>Loading Header...</div>,
-});
 
-const Footer = dynamic(() => import('@/components/footer/Footer'), {
-
-  loading: () => <div>footer loading</div>,
-});
-
-const Main = dynamic(() => import('pages-components/home/Main'), {
-  ssr: false,
-  loading: () => <div>Loading Main...</div>,
-});
 
 export default function Home() {
   return (

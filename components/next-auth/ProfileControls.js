@@ -3,20 +3,17 @@ import Link from "next/link";
 import { m, LazyMotion } from 'framer-motion';
 import Image from "next/image";
 import { FaPowerOff } from "react-icons/fa";
-import Colors from "@/lib/colors";
+import Colors from "@lib/colors";
+import f from '@lib/features'
 
-// Dynamic import for LazyMotion and loadFeatures
 
-// Function to dynamically load features
-const loadFeatures = () =>
-  import("@/lib/features").then(res => res.default);
 
 function ProfileControls() {
   const { data: session } = useSession();
 
   return (
     !session ?
-    <LazyMotion  features={loadFeatures}>
+    <LazyMotion  features={f}>
     <m.div
       style={{
         position:"absolute",
@@ -50,7 +47,7 @@ function ProfileControls() {
 
     </LazyMotion>
       :
-    <LazyMotion features={loadFeatures}>
+    <LazyMotion features={f}>
         <m.div
           animate={{opacity:[0,0.5,1]}}
           transition={{duration:2}}

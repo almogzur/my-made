@@ -1,16 +1,16 @@
 import React,{useState,useEffect,useContext} from 'react'
 import { StateContext } from '@context/context'
-import InputElemnt from '@/components/input-elemnt/InputElemnt'
-import Calinder from '@/components/calendar/Calendar'
+import InputElemnt from '@components/input-elemnt/InputElemnt'
+import Calinder from '@components/calendar/Calendar'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import TextArea from '@/components/text-area/TextArea'
-import useGetUser from '@/lib/hooks/useGetUser'
-import RangeElemnt from '@/components/range-elemnt/RangeElemnt'
-import Colors from '@/lib/colors'
+import TextArea from '@components/text-area/TextArea'
+import useGetUser from '@lib/hooks/useGetUser'
+import RangeElemnt from '@components/range-elemnt/RangeElemnt'
+import Colors from '@lib/colors'
 import {m,LazyMotion} from 'framer-motion'
-import f from "@/lib/features"
-import MongoSpinner from '@/components/mongo-Spinner/MongoSpinner'
+import f from "@lib/features"
+import MongoSpinner from '@components/mongo-Spinner/MongoSpinner'
 
 const headelinStyle = { textAlign: "center" };
 

@@ -78,7 +78,7 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
         display:'flex',
         flexDirection:'column',
         justifyContent:'center',
-        marginTop:"-100px"
+
       
       
       }}

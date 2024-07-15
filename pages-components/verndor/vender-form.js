@@ -147,7 +147,7 @@ const VendorForm = ({ STATE_KEY }) => {
               height: "70px",
               width: '150px',
               border: "1px solid",
-              borderRadius: "15px",
+              borderRadius: "3px",
               background: "#fff",
               fontSize: "20px",
               cursor: "pointer",

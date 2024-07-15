@@ -41,10 +41,10 @@ const InputElement = ({
     input: {
       width: width,
       border: `1px solid ${Colors.b}`,
-      borderRadius: "3px",
+      borderRadius: "1px",
       padding: "10px",
       margin: "10px 0",
-      boxShadow: `2px 1px 1px ${Colors.c}`,
+      boxShadow: `1px 1px 1px ${Colors.c}`,
     },
   };
 

@@ -14,6 +14,7 @@ const SideBar = ({
   const [sideBarTLocation, setSideBarLocation] = useState('default');
 
   useEffect(() => {
+    if(pathname){
     const inVendor = pathname.split("/").indexOf("vendor") !== -1;
     const inCustomer = pathname.split("/").indexOf("customer") !== -1;
 
@@ -24,7 +25,8 @@ const SideBar = ({
     } else {
         setSideBarLocation('default');
     }
-  }, [pathname]);
+  }
+  }, [pathname]); 
 
   const getAnimation = () => {
     switch (sideBarTLocation) {

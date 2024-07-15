@@ -5,7 +5,6 @@ import { useEffect,useContext } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
-import LoadingSpinner from '../../components/spining-loader/spining-loader'
 import ProfileLayout from '../../layouts/profile-layout'
 import ProfileHeader from '../../pages-components/profile/profile-heder'
 import ProfileDialog from '../../pages-components/profile/profile-dialog'
@@ -37,7 +36,7 @@ const ProfilePage = () => {
 
 
   if (status === 'loading') {
-    return <LoadingSpinner/>;
+    return <MongoSpinner/>;
   }
   else if(dbsaving){
     return <MongoSpinner/>

@@ -197,7 +197,7 @@ const headelinStyle = { textAlign: "center" };
               height: "70px",
               width: '200px',
               border: "1px solid",
-              borderRadius: "15px",
+              borderRadius: "3px",
               background: "#fff",
               fontSize: "20px",
               cursor: "pointer",

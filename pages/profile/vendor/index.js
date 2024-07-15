@@ -9,8 +9,8 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import ProfileLayout from '../../../layouts/profile-layout'
 import VendorForm from '../../../pages-components/verndor/vender-form'
-import LoadingSpinner from '../../../components/spining-loader/spining-loader'
 import Head from "next/head";
+import MongoSpinner from "../../../components/mongo-spinner/mongo-spinner";
 
 
 
@@ -34,7 +34,7 @@ const VenderPage = () => {
 
 
   if (status === 'loading') {
-    return <LoadingSpinner />;
+    return <MongoSpinner />;
   }
 
  return (

@@ -4,9 +4,8 @@ import { useSession  } from "next-auth/react";
 import { StateContext } from './../../../context'
 import CustomerFrom from "../../../pages-components/customer/customer-form";
 import  ProfileLayout from '../../../layouts/profile-layout'
-import LoadingSpinner from '../../../components/spining-loader/spining-loader'
-import useGetUser from '../../../lib/hooks/use-get-user'
 import Head from "next/head";
+import MongoSpinner from "../../../components/mongo-spinner/mongo-spinner";
 
 const CostumerPage = () => {
   const STATE_KEY = "Customer";
@@ -20,7 +19,7 @@ const CostumerPage = () => {
   }, [status, router]);
 
   if (status === 'loading') {
-    return <LoadingSpinner />;
+    return <MongoSpinner />;
   }
 
   return (

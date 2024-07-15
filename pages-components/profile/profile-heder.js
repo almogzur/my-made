@@ -15,9 +15,9 @@ const ProfileHeader = () => {
       <div
          style={{
            padding:"0px",
-           minWidth:"100%",
+           width:"100%",
            margin:"0px",
-           height:"200px",
+           height:"150px",
            border:"none",    
            background: 'rgb(25,29,136)',
            background: `linear-gradient(
@@ -53,8 +53,8 @@ const ProfileHeader = () => {
            angleDeg={"-217deg"}
            style={{   
           position:"absolute",
-            top:"150px",
-            right:"40px",
+            top:"120px",
+            right:"10px",
               }}
           >
          </ColorsH1>

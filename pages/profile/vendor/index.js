@@ -10,6 +10,7 @@ import { useRouter } from "next/router";
 import ProfileLayout from '../../../layouts/profile-layout'
 import VendorForm from '../../../pages-components/verndor/vender-form'
 import LoadingSpinner from '../../../components/spining-loader/spining-loader'
+import Head from "next/head";
 
 
 
@@ -37,11 +38,19 @@ const VenderPage = () => {
   }
 
  return (
+  <>
+      <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Your Page Title</title>
+        
+    </Head>
+ 
       <ProfileLayout>
         <VendorForm 
           STATE_KEY={STATE_KEY}
         />
       </ProfileLayout>
+      </>
     );
 
 

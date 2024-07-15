@@ -10,6 +10,7 @@ import ProfileLayout from '../../layouts/profile-layout'
 import ProfileHeader from '../../pages-components/profile/profile-heder'
 import ProfileDialog from '../../pages-components/profile/profile-dialog'
 import useSaveUserState from '../../lib/hooks/use-save-user-state';
+import Head from 'next/head';
 
 
 
@@ -47,11 +48,21 @@ const ProfilePage = () => {
   else{
 
   return (
+    <>
+
+    <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Your Page Title</title>
+        
+    </Head>
+ 
     <ProfileLayout>
-      <ProfileHeader />
-      <ProfileDialog/>
-    </ProfileLayout>
-    
+        <ProfileHeader />
+        <ProfileDialog />
+      </ProfileLayout>
+      
+      </>
+
   );
 }
 };

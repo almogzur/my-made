@@ -66,6 +66,7 @@ const Calinder = ({
         locale={he}
         required={required? true:false}
         title={title}
+        withPortal
         id={id} 
         selected={startDate} 
         onChange={

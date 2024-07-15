@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic';
 import { faBroom, faPerson } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Colors from "@lib/colors";
-import SideBar from '@components/side-bar/side-bar';
-import CostumeLink from '@components/costume-link/costume-link';
-import Footer from '@components/footer/footer';
+import Colors from "../lib/colors";
+import SideBar from '../components/side-bar/side-bar';
+import CostumeLink from '../components/costume-link/costume-link'
+import Footer from '../components/footer/footer';
 
 
 const ProfileLayout = ({ children }) => {

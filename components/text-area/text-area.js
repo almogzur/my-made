@@ -1,5 +1,5 @@
-import Colors from "@lib/colors";
-import Features from "@lib/features";
+import Colors from "../../lib/colors";
+import Features from "../../lib/features";
 
 import { m, LazyMotion } from "framer-motion";
 import { useContext, useEffect, useState } from "react";

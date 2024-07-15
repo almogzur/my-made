@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LazyMotion,m } from "framer-motion"
-import f from '@lib/features'
+import f from  '../../lib/features'
 
 
 export default function CostumeLink ({

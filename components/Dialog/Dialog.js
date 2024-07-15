@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { m, LazyMotion } from "framer-motion";
 import ReactModal from "react-modal";
-import Colors from "@lib/colors";
-import f from '@lib/features'
+import Colors from "../../lib/colors";
+import f from '../../lib/features'
 
 const Dialog = ({
   children,

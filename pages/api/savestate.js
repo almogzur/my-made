@@ -1,7 +1,7 @@
 // pages/api/save-user-to-db.ts
-import clientPromise from '@lib/db';
+import clientPromise from '../../lib/db';
 import { getServerSession } from "next-auth/next";
-import { authOptions } from '@pages/api/auth/[...nextauth]'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 export default async function handler(req, res) {
 

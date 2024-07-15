@@ -1,8 +1,8 @@
 import { m, LazyMotion } from "framer-motion";
-import Colors from "@lib/colors";
+import Colors from '../../lib/colors'
 import { useContext, useEffect, useState } from "react";
-import { WindowWidthContaxt } from "@context/context";
-import f  from '@lib/features'
+import { WindowWidthContaxt } from '../../context/context'
+import f  from '../../lib/features'
 
 const InputElement = ({
   type,

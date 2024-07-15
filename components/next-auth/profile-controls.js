@@ -3,8 +3,8 @@ import Link from "next/link";
 import { m, LazyMotion } from 'framer-motion';
 import Image from "next/image";
 import { FaPowerOff } from "react-icons/fa";
-import Colors from "@lib/colors";
-import f from '@lib/features'
+import Colors from "../../lib/colors";
+import f from '../../lib/features'
 
 
 

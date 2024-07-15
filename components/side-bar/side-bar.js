@@ -1,37 +1,54 @@
-import {m,LazyMotion} from 'framer-motion'
-import f from "../../lib/features"
+import { m, LazyMotion } from 'framer-motion';
+import f from "../../lib/features";
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
+const SideBar = ({
+  children,
+  callBack,
+  style,
+  className
+}) => {
+  const router = useRouter();
+  const { pathname } = router;
+  const [sideBarTLocation, setSideBarLocation] = useState('default');
 
-  
+  useEffect(() => {
+    const inVendor = pathname.split("/").indexOf("vendor") !== -1;
+    const inCustomer = pathname.split("/").indexOf("customer") !== -1;
 
-const SideBar  = ({
-    children,
-    callBack,
-    style,
-    className
-    })=>
-    {
-        const SideBarhandler = ()=>{}
+    if (inVendor) {
+        setSideBarLocation('vendor');
+    } else if (inCustomer) {
+        setSideBarLocation('customer');
+    } else {
+        setSideBarLocation('default');
+    }
+  }, [pathname]);
 
-     return (
-        <LazyMotion features={f}>
-        <m.aside
-        className={className?className:null}
-        style={{...style}}
+  const getAnimation = () => {
+    switch (sideBarTLocation) {
+      case 'vendor':
+        return { x: [100, 0] }; // Example animation for vendor
+      case 'customer':
+        return { x: [-200, 0] }; // Example animation for customer
+      default:
+        return { y: [200, 0] }; // Default animation
+    }
+  };
 
-        animate={{
-                x:[-100,0],
-               
-            
-            }}
-            transition={{duration:1}}
-        >
+  return (
+    <LazyMotion features={f}>
+      <m.aside
+        className={className || null}
+        style={{ ...style }}
+        animate={getAnimation()}
+        transition={{ duration: 1.5 }}
+      >
         {children}
-        </m.aside>
-        </LazyMotion> 
-            
-            
-)
+      </m.aside>
+    </LazyMotion>
+  );
 }
 
-export default SideBar
+export default SideBar;

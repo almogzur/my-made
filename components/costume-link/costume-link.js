@@ -18,15 +18,8 @@ export default function CostumeLink ({
   return (
  <LazyMotion features={f}>
 
-    <m.div
+    <div
           style={motionWrapperStyle?motionWrapperStyle:null}
-          animate={{rotate:360}}
-          transition={{ type: "spring" ,duration:5 }}
-          onMouseEnter={(e)=>{
-            e.target.style.color = onHoverColor 
-           ,e.target.style.transition = "ease 1s"
-            }}
-          onMouseLeave={(e)=>{e.target.style.color = "" }}
 
       >    
        <Link 
@@ -44,7 +37,7 @@ export default function CostumeLink ({
                 {children}
              </div>
        </Link>
-    </m.div>
+    </div>
 </LazyMotion>
     )
 }

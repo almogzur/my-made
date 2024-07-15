@@ -24,7 +24,7 @@ const ProfileLayout = ({ children }) => {
     alignContent: 'center',
     width: "100%",
     height: "70px",
-    color:Colors.a
+    color:Colors.d
   }
 
   return (
@@ -45,7 +45,6 @@ const ProfileLayout = ({ children }) => {
           href="/profile/vendor"
           linkStyle={DefaultLinkStyle}
           divStyle={DivDefaultStyle}
-          onHoverColor={Colors.background}
         >
           <FontAwesomeIcon size="1x" icon={faBroom}  />
         </CostumeLink>
@@ -55,8 +54,8 @@ const ProfileLayout = ({ children }) => {
           text={"לקוח"}
           linkStyle={DefaultLinkStyle}
           divStyle={DivDefaultStyle}
-          onHoverColor={Colors.background}
-          onH={Colors.d}
+          
+           
         >
           <FontAwesomeIcon 
            size="1x"

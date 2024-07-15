@@ -3,7 +3,7 @@ import {m, LazyMotion} from 'framer-motion'
 import Image from 'next/image';
 import defulteUserImg from '../../public/User.jpg';
 import ColorsH1 from '../../components/gradient-headline/index';
-import Colors from '../lib/colors';
+import Colors from '../../lib/colors';
 import f from "../../lib/features"
 
 const ProfileHeader = () => {

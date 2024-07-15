@@ -3,7 +3,7 @@
 
 
 // Css
-import "pages/Main.css"
+import '../pages/Main.css'
 import 'rc-select/assets/index.css'
 import "react-datepicker/dist/react-datepicker.css"
 import "../components/acordione/acordione.css"
@@ -17,7 +17,7 @@ import { SessionProvider } from "next-auth/react"
 import { WindowWidthContaxt, StateContext} from '../context'
 import {  useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
-import State from "../lib/state"
+import State from './../lib/state'
 
 
 

@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StateContext } from "@context/context";
 import { useSession } from "next-auth/react";
-import LoadingSpinner from "@components/spining-loader/SpiningLoader";
+import LoadingSpinner from "@components/spining-loader/spining-loader";
 import InputElement from "@components/input-elemnt/InputElemnt";
-import Calinder from "@components/calendar/Calendar";
+import Calinder from "@components/calendar/calendar";
 import TextArea from "@components/text-area/TextArea";
 import Colors from "@lib/colors";
-import useGetUser from "@lib/hooks/useGetUser";
-import MongoSpinner from "@components/mongo-Spinner/MongoSpinner";
+import useGetUser from "@lib/hooks/use-get-user";
+import MongoSpinner from "@components/mongo-spinner/mongo-spinner";
 import { m, LazyMotion } from 'framer-motion';
 import f from '@lib/features';
 

@@ -7,9 +7,9 @@
 import React, { useContext,useState,useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import ProfileLayout from "@layouts/ProfileLayout";
+import ProfileLayout from "@layouts/profileLayout";
 import VendorForm from 'pages-components/verndor/VenderForm'
-import LoadingSpinner from "@components/spining-loader/SpiningLoader";
+import LoadingSpinner from "@components/spining-loader/spining-loader";
 
 
 

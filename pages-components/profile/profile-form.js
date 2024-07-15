@@ -1,8 +1,8 @@
 import { useSession } from 'next-auth/react';
 import { useContext, useEffect, useState } from 'react';
 import { StateContext } from 'context/context';
-import InputElemnt from '@components/input-elemnt/InputElemnt';
-import TextArea from '@components/text-area/TextArea';
+import InputElemnt from '@components/input-elemnt/input-elemnt';
+import TextArea from '@components/text-area/text-area';
 import Colors from '@lib/colors';
 import {m,LazyMotion} from "framer-motion"
 import { WindowWidthContaxt } from '@context/context';

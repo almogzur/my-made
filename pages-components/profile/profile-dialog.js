@@ -1,11 +1,11 @@
 import { useEffect, useState, useContext } from 'react';
 import { useSession } from 'next-auth/react';
 import Colors from '@lib/colors';
-import useGetUser from '@lib/hooks/useGetUser';
-import MongoSpinner from '@components/mongo-Spinner/MongoSpinner';
-import InfoDisplay from 'pages-components/profile/InfoDisplay';
-import ProfileForm from 'pages-components/profile/ProfileForm';
-import Dialog from '@components/dialog/Dialog';
+import useGetUser from '@lib/hooks/use-get-user';
+import MongoSpinner from '@components/mongo-spinner/mongo-spinner';
+import InfoDisplay from '@pages-components/profile/InfoDisplay';
+import ProfileForm from '@pages-components/profile/ProfileForm';
+import Dialog from '@components/dialog/dialog';
 
 
 const ProfileDialog = ({

@@ -6,12 +6,12 @@
 import "pages/Main.css"
 import 'rc-select/assets/index.css'
 import "react-datepicker/dist/react-datepicker.css"
-import "components/Acordione/Acordion.css"
-import "components/range-elemnt/RangeElemnt.css"
-import "components/calendar/Calinder.css"
+import "@components/acordione/acordione.css"
+import "@components/range-elemnt/range-elemnt.css"
+import "@components/calendar/calendar.css"
  // will move to in line 
-import "components/spining-loader/SpiningLoader.css"
-import "components/mongo-spinner/mongoSpinner.css"
+import "@components/spining-loader/spining-loader.css"
+import "@components/mongo-spinner/mongo-spinner.css"
 
 import { SessionProvider } from "next-auth/react"
 import { WindowWidthContaxt, StateContext} from "@context/context"

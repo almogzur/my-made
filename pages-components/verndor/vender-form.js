@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StateContext } from "@context/context";
+import { StateContext } from '../../context/context'
 import { useSession } from "next-auth/react";
-import LoadingSpinner from "@components/spining-loader/spining-loader";
-import InputElement from "@components/input-elemnt/input-elemnt";
-import Calinder from "@components/calendar/calendar";
-import TextArea from "@components/text-area/text-area";
-import Colors from "@lib/colors";
-import useGetUser from "@lib/hooks/use-get-user";
-import MongoSpinner from "@components/mongo-spinner/mongo-spinner";
+import LoadingSpinner from '../../components/spining-loader/spining-loader'
+import InputElement from '../../components/input-elemnt/input-elemnt'
+import Calinder from '../../components/calendar/calendar'
+import TextArea from '../../components/text-area/text-area'
+import Colors from '../../lib/colors'
+import useGetUser from '../../lib/hooks/use-get-user'
+import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
 import { m, LazyMotion } from 'framer-motion';
-import f from '@lib/features';
+import f from '../../lib/features'
 
 const descriptionPlaceholder = 
 ` המחיר המבוקש הוא עבור ... 

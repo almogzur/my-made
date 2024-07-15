@@ -2,10 +2,10 @@ import { useEffect, useContext , useState } from "react";
 import { useRouter } from "next/router";
 import { useSession  } from "next-auth/react";
 import { StateContext } from "@context/context";
-import CustomerForm from "@pages-components/customer/customer-form"
-import  ProfileLayout from "@layouts/profile-layout"
-import LoadingSpinner from "@components/spining-loader/spining-loader";
-import useGetUser from "@lib/hooks/use-get-user";
+import CustomerFrom from "../../../pages-components/customer/customer-form";
+import  ProfileLayout from '../../../layouts/profile-layout'
+import LoadingSpinner from '../../../components/spining-loader/spining-loader'
+import useGetUser from '../../../lib/hooks/use-get-user'
 
 const CostumerPage = () => {
   const STATE_KEY = "Customer";
@@ -39,7 +39,7 @@ const CostumerPage = () => {
   return (
     <>
       <ProfileLayout>
-        <CustomerForm 
+        <CustomerFrom 
          STATE_KEY={STATE_KEY}
 
 

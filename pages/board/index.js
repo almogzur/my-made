@@ -12,7 +12,7 @@
 import { useSession } from 'next-auth/react'
 import {useEffect,useState} from 'react'
 import { useRouter } from 'next/router'
-import BoarfLayout from '@layouts/board-layout'
+import BoarfLayout from '../../layouts/board-layout'
 
 const BoardPage=()=>{
 

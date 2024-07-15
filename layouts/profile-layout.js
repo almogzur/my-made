@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Colors from "../lib/colors";
 import SideBar from '../components/side-bar/side-bar';
 import CostumeLink from '../components/costume-link/costume-link'
-import Footer from '../components/footer/footer';
+import Footer from '../components/footer/app-footer';
 
 
 const ProfileLayout = ({ children }) => {

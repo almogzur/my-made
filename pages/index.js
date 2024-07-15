@@ -1,7 +1,7 @@
 import Head from 'next/head';
-import Header from '@components/header/header';
-import Footer from '@components/footer/footer';
-import Main from '@pages-components/home/main-section';
+import Header from '../components/app-head/app-head';
+import Footer from '../components/footer/app-footer';
+import Main from '../pages-components/home/main-section'
 
 
 

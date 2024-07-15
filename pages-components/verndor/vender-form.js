@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StateContext } from '../../context/context'
+import { StateContext } from '../../context'
 import { useSession } from "next-auth/react";
 import LoadingSpinner from '../../components/spining-loader/spining-loader'
-import InputElement from '../../components/input-elemnt/input-elemnt'
+import InputElement from '../../components/input-elemnt'
 import Calinder from '../../components/calendar/calendar'
 import TextArea from '../../components/text-area/text-area'
 import Colors from '../../lib/colors'

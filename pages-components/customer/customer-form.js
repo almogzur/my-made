@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useContext} from 'react'
-import { StateContext } from '../../context/context'
-import InputElemnt from '../../components/input-elemnt/input-elemnt'
+import { StateContext } from '../../context'
+import InputElemnt from '../../components/input-elemnt'
 import Calinder from '../../components/calendar/calendar'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'

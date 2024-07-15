@@ -12,8 +12,8 @@ export default function Home() {
         <title>Home</title>
       </Head>
       <Header />
-      <MainSection/>
       <Footer/>
+      <MainSection/>
       
     </>
   );

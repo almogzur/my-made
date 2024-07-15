@@ -6,18 +6,18 @@
 import "pages/Main.css"
 import 'rc-select/assets/index.css'
 import "react-datepicker/dist/react-datepicker.css"
-import "@components/acordione/acordione.css"
-import "@components/range-elemnt/range-elemnt.css"
-import "@components/calendar/calendar.css"
+import "../components/acordione/acordione.css"
+import "../components/range-elemnt/range-elemnt.css"
+import "../components/calendar/calendar.css"
  // will move to in line 
-import "@components/spining-loader/spining-loader.css"
-import "@components/mongo-spinner/mongo-spinner.css"
+import "../components/spining-loader/spining-loader.css"
+import "../components/mongo-spinner/mongo-spinner.css"
 
 import { SessionProvider } from "next-auth/react"
 import { WindowWidthContaxt, StateContext} from '../context'
 import {  useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
-import State from "@lib/state"
+import State from "../lib/state"
 
 
 

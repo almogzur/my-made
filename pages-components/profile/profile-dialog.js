@@ -3,8 +3,8 @@ import { useSession } from 'next-auth/react';
 import Colors from '../../lib/colors';
 import useGetUser from '../../lib/hooks/use-get-user'
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
-import InfoDisplay from '../../pages-components/profile/info-display'
-import ProfileForm from '../../pages-components/profile/profile-form'
+import InfoDisplay from './display'
+import ProfileForm from './profile-form'
 import Dialog from '../../components/dialog/ui-dialog'
 
 

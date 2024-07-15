@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react"
 import {m, LazyMotion} from 'framer-motion'
 import Image from 'next/image';
 import defulteUserImg from '../../public/User.jpg';
-import ColorsH1 from '../components/gradientH1/coloreH1';
+import ColorsH1 from '../../components/gradient-headline/index';
 import Colors from '../lib/colors';
 import f from "../../lib/features"
 

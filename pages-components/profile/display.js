@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { LazyMotion, m } from "framer-motion";
-import Colors from '.../../lib/colors';
+import Colors from '../../lib/colors'
 import f from "../../lib/features"
 
 

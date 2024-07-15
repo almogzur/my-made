@@ -17,7 +17,7 @@ import { SessionProvider } from "next-auth/react"
 import { WindowWidthContaxt, StateContext} from '../context'
 import {  useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
-import State from './../lib/state'
+import State from '../lib/state'
 
 
 

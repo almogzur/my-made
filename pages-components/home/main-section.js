@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Colors from "../../lib/colors";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
+import MongoSpinner from "../../components/mongo-spinner/mongo-spinner";
 
-const Headline = "תיאום פשוט וחכם בין לקוחות למשקי בית";
+const Headline = "MadeIt";
 
-const AdText = "הכירו את XXXXX המיקרו-סרוויס החדש שלנו,"
-  + "המאפשר תיאום חכם ויעיל בין לקוחות למשקי בית."
-  + " הפלטפורמה החדשנית שלנו מבטיחה חוויית שירות מותאמת אישית, תוך ניהול "
-  + " יעיל של משאבים וזמנים. בעזרת המיקרו-סרוויס שלנו, תוכלו ליהנות "
-  + "מתהליך פשוט ואינטואיטיבי, חוסך זמן ומאמץ. בין אם אתם בעלי עסקים "
-  + " המחפשים לקוחות חדשים, או לקוחות המעוניינים בשירותים איכותיים "
-  + " ומותאמים לצרכים האישיים שלכם - הפתרון שלנו כאן בשבילכם. "
-  + " הצטרפו היום!";
+const AdText = "מיקרו-סרוויס המאפשר תיאום חכם ויעיל בין לקוחות למשק בית.";
 
 const styles = {
   container: {
@@ -24,13 +20,14 @@ const styles = {
     padding: '20px',
     position: 'relative',
     overflow: 'hidden',
+    position:"relative"
   },
   main: {
     backgroundColor: Colors.a,
     color: Colors.d,
     padding: '30px',
     borderRadius: '3px',
-    boxShadow: `0 3px 3px ${Colors.d}`,
+    boxShadow: `0px 3px 3px 3px ${Colors.d}`,
     maxWidth: '800px',
     marginBottom: "150px",
     marginTop: "60px",
@@ -49,37 +46,65 @@ const styles = {
     borderRadius: '30%',
     backgroundColor: Colors.b,
     opacity: 0.5,
-    transition: 'transform 1s ease-in-out',
-    boxShadow:` 0px 2px 2px ${Colors.d} `
+    boxShadow: `0px 2px 2px ${Colors.d}`,
   },
+  button: {
+    marginTop: '20px',
+    padding: '10px 20px',
+    fontSize: '16px',
+    color: Colors.a,
+    backgroundColor: Colors.c,
+    border: 'none',
+    borderRadius: '3px',
+    cursor: 'pointer',
+    textDecoration: 'none',
+    display: 'inline-block',
+    transition: 'background-color 0.3s, color 0.3s',
+    textAlign: 'center',
+  },
+  buttonHover: {
+    backgroundColor: Colors.d,
+    color: Colors.a,
+  }
 };
 
 function Main() {
-  const [shapeTransforms, setShapeTransforms] = useState({
-    shape1: { transform: 'translateY(0px) rotate(50deg)' },
-    shape2: { transform: 'translateY(0px) rotate(30deg)' },
-    shape3: { transform: 'translateY(0px) rotate(10deg)' },
-  });
-
-  const handleScroll = () => {
-    const scrollY = window.scrollY;
-    setShapeTransforms({
-      shape1: {
-        transform: `translateY(${scrollY * 0.5}px) rotate(${scrollY * 0.05}deg)`,
-      },
-      shape2: {
-        transform: `translateY(${scrollY * 0.3}px) rotate(${scrollY * 0.1}deg)`,
-      },
-      shape3: {
-        transform: `translateY(${scrollY * 0.7}px) rotate(${scrollY * 0.15}deg)`,
-      },
-    });
-  };
+  const [scrollY, setScrollY] = useState(0);
+  const [rotation, setRotation] = useState(0);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    const animateRotation = () => {
+      setRotation(prevRotation => (prevRotation + 1) % 360);
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    const rotationInterval = setInterval(animateRotation, 16); // ~60 FPS
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearInterval(rotationInterval);
+    };
   }, []);
+
+  const shape1Transform = {
+    transform: `translateY(${scrollY * 0.5}px) rotate(${rotation}deg)`,
+  };
+  const shape2Transform = {
+    transform: `translateY(${scrollY * 0.3}px) rotate(${rotation}deg)`,
+  };
+  const shape3Transform = {
+    transform: `translateY(${scrollY * 0.7}px) rotate(${rotation}deg)`,
+  };
+
+  if (status === "loading") {
+    return <MongoSpinner />;
+  }
 
   return (
     <div style={styles.container}>
@@ -88,9 +113,9 @@ function Main() {
           ...styles.floatingShape,
           width: '100px',
           height: '100px',
-          top: '10%',
+          top: '5%',
           left: '10%',
-          ...shapeTransforms.shape1,
+          ...shape1Transform,
         }}
       ></div>
       <div
@@ -98,9 +123,9 @@ function Main() {
           ...styles.floatingShape,
           width: '150px',
           height: '150px',
-          bottom: '20%',
-          right: '15%',
-          ...shapeTransforms.shape2,
+          bottom: '10%',
+          right: '35%',
+          ...shape2Transform,
         }}
       ></div>
       <div
@@ -109,13 +134,17 @@ function Main() {
           width: '80px',
           height: '80px',
           top: '30%',
-          right: '40%',
-          ...shapeTransforms.shape3,
+          right: '30%',
+          ...shape3Transform,
         }}
-      ></div>
+      >
+
+      </div>
+
       <div style={styles.main}>
-        <h1 style={styles.headline}>{Headline}</h1>
+        <h1 style={styles.headline}>{session? session.user.name + "" : Headline}</h1>
         <p style={styles.adText}>{AdText}</p>
+
       </div>
     </div>
   );

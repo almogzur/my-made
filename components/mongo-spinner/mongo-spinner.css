@@ -1,3 +1,5 @@
+@import '../../pages/Main';
+
 .mongo-spinner {
     position: fixed;
     top: 0;
@@ -8,7 +10,7 @@
     align-items: center;
     justify-content: center;
     background: rgb(0,104,75);
-    background: linear-gradient(216deg, rgba(0,104,75,1) 0%, rgba(188,188,188,1) 68%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(216deg, var(--a) 0%, var(--b) 58%, rgba(255,255,255,1) 100%);
     
     color:#00684b
   }

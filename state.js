@@ -12,7 +12,6 @@ const State = {
     Customer: { 
        addres:"",
        phone:0,
-       addphone:0,
        ApartmentRoomsSize:"",
        NumberOfBathRooms:0,
        ResurveDate:null,

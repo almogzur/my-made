@@ -36,7 +36,7 @@ const ProfileLayout = ({ children }) => {
           bottom: "60px",
           left: "5px",
           width: "70px",
-          background: Colors.c,
+          background: Colors.b,
           zIndex:2
         }}
       >

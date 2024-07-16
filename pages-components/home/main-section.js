@@ -27,7 +27,7 @@ const styles = {
     color: Colors.d,
     padding: '30px',
     borderRadius: '3px',
-    boxShadow: `0px 3px 3px 3px ${Colors.d}`,
+    boxShadow: `1px 1px 1px 1px rgb(0.0.0,02)`,
     maxWidth: '800px',
     marginBottom: "150px",
     marginTop: "60px",

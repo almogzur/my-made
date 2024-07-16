@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StateContext } from '../../context'
+import { StateContext } from '../../context';
 import { useSession } from "next-auth/react";
-import LoadingSpinner from '../../components/spining-loader/spining-loader'
-import InputElement from '../../components/input-elemnt'
-import Calinder from '../../components/calendar'
-import TextArea from '../../components/text-area'
-import Colors from '../../lib/colors'
-import useGetUser from '../../lib/hooks/use-get-user'
-import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
+import LoadingSpinner from '../../components/spining-loader/spining-loader';
+import InputElement from '../../components/input-elemnt';
+import TextArea from '../../components/text-area';
+import Colors from '../../lib/colors';
+import useGetUser from '../../lib/hooks/use-get-user';
+import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
 import { m, LazyMotion } from 'framer-motion';
-import TSwitch from '../../components/t-switch/switch'
-import f from '../../lib/features'
+import TSwitch from '../../components/t-switch/switch';
+import f from '../../lib/features';
+import VendorDisplay from "./user-is-vendor";
 
 const descriptionPlaceholder = 
 ` המחיר המבוקש הוא לשעה או גלובלי  ... 
@@ -18,36 +18,29 @@ const descriptionPlaceholder =
 
 const headelinStyle = { textAlign: "center" };
 
-
-
 const VendorForm = ({ STATE_KEY }) => {
   const [state, setState] = useContext(StateContext);
   const { data: session, status } = useSession();
   const { UserData, dbloading, profileError } = useGetUser(session?.user?.email);
   const [resolvedUser, setResolvedUser] = useState(null);
 
-
-
-
   useEffect(() => {
-     console.log(STATE_KEY,state[STATE_KEY]);
+    console.log(STATE_KEY, state[STATE_KEY]);
     if (UserData) {
       setResolvedUser(UserData);
     }
-  }, [UserData,state,STATE_KEY]);
+  }, [UserData, state, STATE_KEY]);
 
-
-  // Update STATE FROM DB 
   useEffect(() => {
     if (resolvedUser) {
       setState(prevState => ({
         ...prevState,
         [STATE_KEY]: {
           ...prevState[STATE_KEY],
-          BussniseName: resolvedUser.state[STATE_KEY].BussniseName ,
-          price: resolvedUser.state[STATE_KEY].price ,
+          BussniseName: resolvedUser.state[STATE_KEY].BussniseName,
+          price: resolvedUser.state[STATE_KEY].price,
           description: resolvedUser.state[STATE_KEY].description,
-          isVendor : resolvedUser.state[STATE_KEY].isVendor
+          isVendor: resolvedUser.state[STATE_KEY].isVendor
         }
       }));
     }
@@ -56,11 +49,12 @@ const VendorForm = ({ STATE_KEY }) => {
   const handleChange = (id, value) => {
     setState(prevState => ({
       ...prevState,
-      [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value}
+      [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value }
     }));
   };
 
   const handleIVenderSave = async (e) => {
+
     try {
       const response = await fetch('/api/vendor/save-vendor', {
         method: 'POST',
@@ -85,12 +79,25 @@ const VendorForm = ({ STATE_KEY }) => {
     return <MongoSpinner />;
   }
 
+  if (resolvedUser) {
+    const { Vendor } = resolvedUser.state;
+    
+    const { BussniseName, price, description, isVendor } = Vendor;
+    return <VendorDisplay 
+        BussniseName={BussniseName}
+        price={price}
+        descriptionm={description}
+        isVendor={isVendor}
+        phone={resolvedUser.state.Info.phone}
+        setResolvedUser={setResolvedUser}
+    />
+  }
+
   return (
     <LazyMotion features={f}>
-      <form style={{marginBottom:"150px"}} onSubmit={handleIVenderSave}>
+      <form style={{ marginBottom: "150px" }} onSubmit={handleIVenderSave}>
         <h2 style={headelinStyle}>{`שלום ${session?.user?.name}`}</h2>
         <h3 style={headelinStyle}>{`הרשם כנותן שירות משק`}</h3>
-
 
         <InputElement
           type={"text"}
@@ -122,11 +129,7 @@ const VendorForm = ({ STATE_KEY }) => {
           placeholder={descriptionPlaceholder}
         />
 
-
-        <TSwitch
-
-
-        />
+        <TSwitch />
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
           <m.button
@@ -146,8 +149,8 @@ const VendorForm = ({ STATE_KEY }) => {
             whileHover={{
               boxShadow: `3px 3px 3px inset`,
             }}
-            onChange={{}}
-          >{resolvedUser?"הרשמה ":null}
+          >
+            {resolvedUser ? "הרשמה " : "עדכון"}
           </m.button>
         </div>
       </form>

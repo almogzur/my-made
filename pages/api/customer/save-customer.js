@@ -25,13 +25,14 @@ const handler = async (req, res) => {
   const database = client.db('my-made');
   const users = database.collection('users');
   const { phone, 
-         addphone, 
+         addres, 
          ApartmentRoomsSize,
          NumberOfBathRooms,
          ResurveDate,
          PriceRange, 
          JobDescription,
-         addres } = req.body;
+         IsCustomer,
+        } = req.body;
 
   try {
     // Find the user by their email and update their customer information
@@ -39,13 +40,14 @@ const handler = async (req, res) => {
     const updateDoc = {
       $set: {
         "state.Customer.phone": phone,
-        "state.Customer.addphone": addphone,
         "state.Customer.ApartmentRoomsSize": ApartmentRoomsSize,
         "state.Customer.NumberOfBathRooms": NumberOfBathRooms,
         "state.Customer.ResurveDate": ResurveDate,
         "state.Customer.PriceRange": PriceRange,
         "state.Customer.JobDescription": JobDescription,
         "state.Customer.addres": addres,
+        "state.Customer.IsCustomer" : IsCustomer
+
       }
     };
 

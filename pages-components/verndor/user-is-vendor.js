@@ -9,7 +9,7 @@ const VendorDisplay = ({
                 price, 
                 description,
                 isVendor,
-                setResolvedUser,
+                setEdit,
                 phone
    }) => {
   const router = useRouter();
@@ -74,7 +74,7 @@ const VendorDisplay = ({
             boxShadow: `3px 3px 3px 3px ${Colors.c}`,
             transition: 'box-shadow 0.3s ease-in-out',
           }}
-          onClick={() => {setResolvedUser(false)}}
+          onClick={() => {setEdit(false)}}
           onMouseOver={(e) => e.target.style.boxShadow = `0px 0px 0px 0px ${Colors.a}` }
           onMouseOut={(e) => e.target.style.boxShadow =  `0px 4px 8px ${Colors.c}`}
         >

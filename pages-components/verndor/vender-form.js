@@ -23,6 +23,7 @@ const VendorForm = ({ STATE_KEY }) => {
   const { data: session, status } = useSession();
   const { UserData, dbloading, profileError } = useGetUser(session?.user?.email);
   const [resolvedUser, setResolvedUser] = useState(null);
+  const [edit ,setEdit] = useState(true)
 
   useEffect(() => {
     console.log(STATE_KEY, state[STATE_KEY]);
@@ -79,7 +80,7 @@ const VendorForm = ({ STATE_KEY }) => {
     return <MongoSpinner />;
   }
 
-  if (resolvedUser) {
+  if (resolvedUser && edit) {
     const { Vendor } = resolvedUser.state;
      
     const { BussniseName, price, description, isVendor } = Vendor;
@@ -90,7 +91,7 @@ const VendorForm = ({ STATE_KEY }) => {
         descriptionm={description}
         isVendor={isVendor}
         phone={resolvedUser.state.Info.phone}
-        setResolvedUser={setResolvedUser}
+        setEdit={setEdit}
     />
       }
   }

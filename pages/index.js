@@ -14,15 +14,17 @@ export default function Home() {
       </Head>
       <Header />
       <MainSection/>
+
       <div style={{
+            marginTop:"20px",
             width:"100%",
             display:'flex',
-            flexDirection:'row'|'column',
+            flexDirection:'column',
             justifyContent:'center',
             alignItems:'center',
             alignContent:'center',
             position:"absolute",
-            bottom:"30%",
+            bottom:"20%",
         }
       }>
       <ProfileControls

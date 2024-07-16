@@ -22,28 +22,29 @@ function ProfileControls() {
   if (!session) {
     return (
       <LazyMotion features={f}>
-        <m.div
-          style={{ width: "150px", height: "60px" }}
-          animate={{ opacity: [0, 0.5, 1] }}
-          transition={{ duration: 2 }}
-        >
+        
           <m.button
             style={{
-              height: 'inherit',
+              
+              width:"150px",
+              height: '60px',
               border: "none",
               background: Colors.c,
-              borderRadius: "6px"
+              borderRadius: "6px",
+           
             }}
             transition={{ duration: 1 }}
             whileHover={{
               borderRadius: "15px",
               background: Colors.d,
             }}
+            animate={{ opacity: [0, 0.5, 1] }}
+            
             onClick={() => signIn(undefined, { callbackUrl: "/profile" })}
           >
-            הרשמה או התחברות
+          <strong>כניסה</strong>
           </m.button>
-        </m.div>
+        
       </LazyMotion>
     );
   } else if (pathname === "/") {

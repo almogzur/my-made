@@ -81,8 +81,9 @@ const VendorForm = ({ STATE_KEY }) => {
 
   if (resolvedUser) {
     const { Vendor } = resolvedUser.state;
-    
+     
     const { BussniseName, price, description, isVendor } = Vendor;
+      if(BussniseName && price){
     return <VendorDisplay 
         BussniseName={BussniseName}
         price={price}
@@ -91,6 +92,7 @@ const VendorForm = ({ STATE_KEY }) => {
         phone={resolvedUser.state.Info.phone}
         setResolvedUser={setResolvedUser}
     />
+      }
   }
 
   return (
@@ -135,7 +137,7 @@ const VendorForm = ({ STATE_KEY }) => {
           <m.button
             type="submit"
             style={{
-              height: "70px",
+              height: "60px",
               width: '150px',
               border: "1px solid",
               borderRadius: "3px",

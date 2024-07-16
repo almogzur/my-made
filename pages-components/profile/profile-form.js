@@ -100,7 +100,7 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
           type='submit'
           style={{  
               border: `1px solid ${Colors.b}`,
-              borderRadius: "6px",
+              borderRadius: "3px",
               padding: "10px",
               margin: "10px 0",
               boxShadow: `2px 1px 1px ${Colors.c}`,

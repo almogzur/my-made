@@ -46,27 +46,25 @@ const ProfileDialog = ({
                 />
       :
 
-      <div
-    
-      >
+      <div>
       
         <Dialog
             perentOpenModle={perentOpenModle}
             setPerentOpenModle={setPerentOpenModle}
             buttonText={"עדכון פרטים"}
             buttonStyle={{
-                   height: "70px", 
+                   height: "50px", 
                    marginTop: "15px",
                    width: '40%',
                    border: "1px solid",
-                   borderRadius: "15px",
+                   borderRadius: "3px",
                    background: "#fff",
                    fontSize: "20px",
                    color: "#fff",
                    cursor: "pointer",
                    textAlign: "center",
                    color:Colors.b,
-                   boxShadow:`3px 3px 3px 3px ${Colors.c}`
+                   boxShadow:`0px 2px 4px ${Colors.a}`
 
           }}
           wrapperStyle={{

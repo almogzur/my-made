@@ -178,8 +178,8 @@ const CustomerFrom = ({ STATE_KEY }) => {
           <m.button
             type="submit"
             style={{
-              height: "70px",
-              width: '200px',
+              height: "60px",
+              width: '150px',
               border: "1px solid",
               borderRadius: "3px",
               background: "#fff",

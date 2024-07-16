@@ -62,7 +62,7 @@ const VendorDisplay = ({
         <button
           type="button"
           style={{
-            height: "70px",
+            height: "60px",
             width: '150px',
             border: `1px solid ${Colors.border}`,
             borderRadius: "3px",

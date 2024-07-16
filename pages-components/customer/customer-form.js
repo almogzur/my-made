@@ -11,7 +11,7 @@ import Colors from '../../lib/colors'
 import {m,LazyMotion} from 'framer-motion'
 import f from "../../lib/features"
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
-import TSwitch from '../../components/t-switch'
+import TSwitch from '../../components/t-switch/switch'
 
 const headelinStyle = { textAlign: "center" };
 
@@ -55,6 +55,7 @@ const headelinStyle = { textAlign: "center" };
           PriceRange:resolvedUser.state[STATE_KEY].PriceRange,
           JobDescription: resolvedUser.state[STATE_KEY].JobDescription ,
           addres: resolvedUser.state[STATE_KEY].addres,
+          IsCustomer:resolvedUser.state[STATE_KEY].IsCustomer
 
         }
       }));
@@ -111,7 +112,37 @@ const headelinStyle = { textAlign: "center" };
             <h2 style={headelinStyle}> {`שלום ${session?.user?.name} `}</h2>
             <h3 style={headelinStyle}>{`הזמן משק בית `}</h3>
 
-         
+            <div> פרטי קשר 
+    
+                <InputElemnt
+                text={"כתובת"}
+                type={"location"}
+                contextType={"Customer"}
+                id={"addres"}
+                STATE_KEY={STATE_KEY}
+                value={state[STATE_KEY].addres}
+                onChange={handleChange}
+            />
+                    <InputElemnt
+                id={"phone"}
+                text={"טלפון"}
+                required={true}
+                STATE_KEY={STATE_KEY}
+                onChange={handleChange}
+                value={state[STATE_KEY].phone}
+
+            />
+
+            <InputElemnt
+                id={"addphone"}
+                text={"טלפון נוסף"}
+                STATE_KEY={STATE_KEY}
+                onChange={handleChange}
+                value={state[STATE_KEY].addphone}
+
+             />
+             </div>
+            <div>פרטי בית 
             <InputElemnt
                 type={"number"}
                 text={"מספר חדרים "}
@@ -132,24 +163,8 @@ const headelinStyle = { textAlign: "center" };
 
 
             />
-            <InputElemnt
-                id={"phone"}
-                text={"טלפון"}
-                required={true}
-                STATE_KEY={STATE_KEY}
-                onChange={handleChange}
-                value={state[STATE_KEY].phone}
-
-            />
-            <InputElemnt
-                id={"addphone"}
-                text={"טלפון נוסף"}
-                STATE_KEY={STATE_KEY}
-                onChange={handleChange}
-                value={state[STATE_KEY].addphone}
-
-
-            />
+    
+  
              <Calinder
                 text={"תאירך ושעה"}
                 id={"ResurveDate"}
@@ -159,18 +174,7 @@ const headelinStyle = { textAlign: "center" };
                 value={state[STATE_KEY].ResurveDate}
             />
 
-            <RangeElemnt
-                label={"מחיר מ"}
-                STATE_KEY={STATE_KEY}
-                onChange={handleChange}
-                
-            />
-               <RangeElemnt
-                label={"עד"}
-                STATE_KEY={STATE_KEY}
-                onChange={handleChange}
-
-            />
+ 
 
             <TextArea
                   id={"JobDescription"} 
@@ -182,16 +186,18 @@ const headelinStyle = { textAlign: "center" };
             />
 
             <InputElemnt
-                text={"כתובת"}
-                type={"location"}
-                contextType={"Customer"}
-                id={"addres"}
-                STATE_KEY={STATE_KEY}
-                value={state[STATE_KEY].addres}
-                onChange={handleChange}
-            />
+              text={"מחיר לשעת עבודה או בגלובלי"}
+              id={""}
+              value={state[STATE_KEY].IsCustomer}
+              onChange={handleChange}
+             />
 
-                <TSwitch/>
+        
+
+            </div>
+
+
+        <TSwitch/>
 
       {/** User Data Save to db  */}
       <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
@@ -212,7 +218,7 @@ const headelinStyle = { textAlign: "center" };
             whileHover={{
               boxShadow: `3px 3px 3px inset`,
             }}
-          >{resolvedUser?"עדכון":"רישום"}
+          >שלח הזמנה
           </m.button>
         </div>
             </form>

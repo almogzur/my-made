@@ -3,13 +3,12 @@ import { LazyMotion, m } from "framer-motion";
 import Colors from '../../lib/colors';
 import f from "../../lib/features";
 
-const InfoDisplay = ({ age, about, phone, setShowInfo, setPerentOpenModle }) => {
+const InfoDisplay = ({  phone, setShowInfo, setPerentOpenModle }) => {
   const [visibleButtonIndex, setVisibleButtonIndex] = useState(null);
 
   const userInfo = [
-    ["גיל", age],
     ["טלפון", phone],
-    ["עלי", about],
+    ,
   ];
 
   const handleDivClick = (index) => {

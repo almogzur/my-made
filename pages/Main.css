@@ -1,3 +1,10 @@
+:root {
+    --a:#1A3636;
+    --b:#40534C;
+    --c:#677D6A;
+    --d:#D6BD98;
+  }
+
 *{
     font-family: system-ui;
     
@@ -7,24 +14,8 @@ body{
     position: relative;
     margin: 0;
     padding:0;
-    background:#F2F4F6;
+    background:#f2f4f6;
     overflow-x: hidden;
 
 }
 
-.main{
-    display:flex;
-    width:80%;
-    box-sizing: border-box;
-    margin-right:10%
-   
-    
-
-}
-.ad-text{
-  margin:25px;
-  display:flex;
-  justify-content:center;
-
-  margin-right:5%;
-}

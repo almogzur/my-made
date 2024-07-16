@@ -2,26 +2,23 @@ const State = {
     Info:{
      about:"",
      phone:"",
-     age:"",
     },
     Vendor:{
        BussniseName:"",
        price:"",
-       OpenDate:null,
-       EndDate:null,
        description:"",
        isVendor:false,
      },
     Customer: { 
-       ApartmentRoomsSize:"",
-       NumberOfBathRooms:0,
+       addres:"",
        phone:0,
        addphone:0,
+       ApartmentRoomsSize:"",
+       NumberOfBathRooms:0,
        ResurveDate:null,
-       PriceRange:[],
+       PriceRange:0,
        JobDescription:"",
-       addres:"",
-        IsCustomer:false
+       IsCustomer:false
      },
      IsBlock:false,
   }

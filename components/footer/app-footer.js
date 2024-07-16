@@ -19,6 +19,7 @@ const Footer = ({children,style,className})  => {
       height: "55px",
       background: Colors.b,
       display: "flex",
+      zIndex:"2"
     }
 
     return ( 

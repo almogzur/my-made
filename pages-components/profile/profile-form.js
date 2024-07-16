@@ -26,9 +26,7 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
     setState(prevState => ({
       ...prevState,
       [STATE_KEY]: {
-        age: dbAge || prevState[STATE_KEY].age,
         phone: dbPhone || prevState[STATE_KEY].phone,
-        about: dbAbout || prevState[STATE_KEY].about,
       }
     }));
   }, [dbAge, dbPhone, dbAbout, setState]);
@@ -83,17 +81,10 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
       
       }}
     >
-         <h2 style={{textAlign:"center"}}>עדכון פרטי משתמש</h2> 
+         <h2 style={{textAlign:"center"}}>עדכון משתמש</h2> 
 
 
-        <InputElemnt
-          type="text"
-          text="גיל"
-          id="age"
-          required
-          value={state.Info.age}
-          onChange={handleChange}
-        />
+
         <InputElemnt
           type="text"
           text="טלפון"
@@ -102,14 +93,7 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
           value={state.Info.phone}
           onChange={handleChange}
         />
-        <TextArea
-          id="about"
-          text="עלי"
-          value={state.Info.about}
-          onChange={handleChange} 
-          resize={false}
-          
-      />
+
       
 
      <m.button

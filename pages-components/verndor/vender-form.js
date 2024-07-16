@@ -9,11 +9,11 @@ import Colors from '../../lib/colors'
 import useGetUser from '../../lib/hooks/use-get-user'
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
 import { m, LazyMotion } from 'framer-motion';
-import TSwitch from '../../components/t-switch/index'
+import TSwitch from '../../components/t-switch/switch'
 import f from '../../lib/features'
 
 const descriptionPlaceholder = 
-` המחיר המבוקש הוא עבור ... 
+` המחיר המבוקש הוא לשעה או גלובלי  ... 
  מלל חופשי`;
 
 const headelinStyle = { textAlign: "center" };
@@ -44,11 +44,10 @@ const VendorForm = ({ STATE_KEY }) => {
         ...prevState,
         [STATE_KEY]: {
           ...prevState[STATE_KEY],
-          BussniseName: resolvedUser.state[STATE_KEY].BussniseName || "",
-          price: resolvedUser.state[STATE_KEY].price || "",
-          description: resolvedUser.state[STATE_KEY].description || "",
-          OpenDate: resolvedUser.state[STATE_KEY].OpenDate ,
-          EndDate: resolvedUser.state[STATE_KEY].EndDate 
+          BussniseName: resolvedUser.state[STATE_KEY].BussniseName ,
+          price: resolvedUser.state[STATE_KEY].price ,
+          description: resolvedUser.state[STATE_KEY].description,
+          isVendor : resolvedUser.state[STATE_KEY].isVendor
         }
       }));
     }
@@ -92,9 +91,10 @@ const VendorForm = ({ STATE_KEY }) => {
         <h2 style={headelinStyle}>{`שלום ${session?.user?.name}`}</h2>
         <h3 style={headelinStyle}>{`הרשם כנותן שירות משק`}</h3>
 
+
         <InputElement
           type={"text"}
-          text={"שם העסק"}
+          text={"שם"}
           id={"BussniseName"}
           STATE_KEY={STATE_KEY}
           value={state[STATE_KEY]?.BussniseName || ""}
@@ -122,26 +122,11 @@ const VendorForm = ({ STATE_KEY }) => {
           placeholder={descriptionPlaceholder}
         />
 
-        <Calinder
-          id={"OpenDate"}
-          text={"מ תאריך "}
-          value={state[STATE_KEY]?.OpenDate}
-          onChange={handleChange}
-          required
-          STATE_KEY={STATE_KEY}
-          
-        />
 
-        <Calinder
-          id={"EndDate"}
-          text={"עד תאריך"}
-          value={state[STATE_KEY].EndDate}
-          onChange={handleChange}
-          STATE_KEY={STATE_KEY}
+        <TSwitch
+
 
         />
-
-        <TSwitch/>
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
           <m.button
@@ -161,7 +146,8 @@ const VendorForm = ({ STATE_KEY }) => {
             whileHover={{
               boxShadow: `3px 3px 3px inset`,
             }}
-          >{resolvedUser?"עדכון":"רישום"}
+            onChange={{}}
+          >{resolvedUser?"הרשמה ":null}
           </m.button>
         </div>
       </form>

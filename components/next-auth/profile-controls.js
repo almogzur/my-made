@@ -4,7 +4,7 @@ import { m, LazyMotion } from 'framer-motion';
 import Image from "next/image";
 import { FaPowerOff } from "react-icons/fa";
 import Colors from "../../lib/colors";
-import f from '../../lib/features'
+import f from '../../lib/features';
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -22,29 +22,24 @@ function ProfileControls() {
   if (!session) {
     return (
       <LazyMotion features={f}>
-        
-          <m.button
-            style={{
-              
-              width:"150px",
-              height: '60px',
-              border: "none",
-              background: Colors.c,
-              borderRadius: "6px",
-           
-            }}
-            transition={{ duration: 1 }}
-            whileHover={{
-              borderRadius: "15px",
-              background: Colors.d,
-            }}
-            animate={{ opacity: [0, 0.5, 1] }}
-            
-            onClick={() => signIn(undefined, { callbackUrl: "/profile" })}
-          >
+        <m.button
+          style={{
+            width: "150px",
+            height: '60px',
+            border: "none",
+            background: Colors.c,
+            borderRadius: "6px",
+          }}
+          transition={{ duration: 1 }}
+          whileHover={{
+            borderRadius: "15px",
+            background: Colors.d,
+          }}
+          animate={{ opacity: [0, 0.5, 1] }}
+          onClick={() => signIn(undefined, { callbackUrl: "/profile" })}
+        >
           <strong>כניסה</strong>
-          </m.button>
-        
+        </m.button>
       </LazyMotion>
     );
   } else if (pathname === "/") {
@@ -73,10 +68,10 @@ function ProfileControls() {
               background: Colors.d,
               color: Colors.c,
             }}
-          >
-            פרופיל
+          >פרופיל
           </m.div>
         </Link>
+
         <m.button
           style={{
             position: "fixed",
@@ -109,7 +104,7 @@ function ProfileControls() {
     return (
       <LazyMotion features={f}>
         <m.div
-          animate={{ opacity: [0, 0.5, 1] }}
+          animate={{ opacity: [0, 1] }}
           transition={{ duration: 2 }}
           style={{
             position: "absolute",
@@ -121,22 +116,27 @@ function ProfileControls() {
           }}
         >
           <m.div
+          animate={ {rotate:360}}
             style={{
+              marginTop:"3px",
               borderRadius: "5px",
-              height: "60px",
+              height: "50px",
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
               alignContent: 'center',
+              background: Colors.d,
+              width:"100px",
+             
             }}
             transition={{ type: "spring", duration: 1 }}
           >
             <Link href={"/profile"} shallow={true}>
               <Image
                 src={session.user.image}
-                height={50}
-                width={50}
+                height={40}
+                width={40}
                 style={{ borderRadius: "15px" }}
                 alt="User Profile Link"
                 fetchPriority="auto"
@@ -144,8 +144,10 @@ function ProfileControls() {
             </Link>
           </m.div>
 
+
           <m.button
             style={{
+              marginTop:"7px",
               border: "none",
               background: "none",
               width: "inherit",

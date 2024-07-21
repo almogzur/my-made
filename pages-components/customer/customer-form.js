@@ -14,13 +14,7 @@ import TSwitch from '../../components/t-switch/switch';
 
 const headelinStyle = { textAlign: "center" };
 
-const wrappingDivStyle = {
-  padding: '20px',
-  marginBottom: '20px',
-  border:`0.5px solid ${Colors.c} `,
-  borderRadius: '4px',
-  boxShadow: `0 2px 2px 2px  ${Colors.c}`,
-};
+
 
 const CustomerFrom = ({ STATE_KEY }) => {
   const { data: session, status, update } = useSession();
@@ -103,7 +97,7 @@ const CustomerFrom = ({ STATE_KEY }) => {
         <h2 style={headelinStyle}> {`שלום ${session?.user?.name} `}</h2>
         <h3 style={headelinStyle}>{`הזמן משק בית `}</h3>
 
-        <div style={wrappingDivStyle}>
+        <div >
           <h4>פרטי קשר</h4>
           <InputElemnt
             id={"phone"}
@@ -115,7 +109,7 @@ const CustomerFrom = ({ STATE_KEY }) => {
           />
         </div>
 
-        <div style={wrappingDivStyle}>
+        <div >
           <h4>פרטי הזמנה</h4>
           <Calinder
             text={"תאירך ושעה"}
@@ -134,14 +128,11 @@ const CustomerFrom = ({ STATE_KEY }) => {
             placeholder={""}
           />
 
-             <TSwitch 
-             STATE_KEY={STATE_KEY}
-             
-             />
+           
         </div>
 
 
-        <div style={wrappingDivStyle}>
+        <div >
           <h4>פרטי בית</h4>
           <InputElemnt
             text={"כתובת"}
@@ -169,6 +160,15 @@ const CustomerFrom = ({ STATE_KEY }) => {
             onChange={handleChange}
             value={state[STATE_KEY].NumberOfBathRooms}
           />
+
+
+          <TSwitch
+             PropsOnChange={handleChange}
+             id={"isCustomer"}
+             value={state[STATE_KEY].isCustomer}
+
+          />
+
         </div>
 
        

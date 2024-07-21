@@ -107,7 +107,7 @@ const VendorForm = ({ STATE_KEY }) => {
           text={"שם"}
           id={"BussniseName"}
           STATE_KEY={STATE_KEY}
-          value={state[STATE_KEY]?.BussniseName || ""}
+          value={state[STATE_KEY]?.BussniseName }
           onChange={handleChange}
           required={true}
         />
@@ -117,7 +117,7 @@ const VendorForm = ({ STATE_KEY }) => {
           text={"מחיר"}
           id={"price"}
           contextType={"Vendor"}
-          value={state[STATE_KEY]?.price || ""}
+          value={state[STATE_KEY]?.price }
           onChange={handleChange}
           min="0.00"
           max="300.00"
@@ -127,12 +127,17 @@ const VendorForm = ({ STATE_KEY }) => {
         <TextArea
           id={"description"}
           text={"תיאור"}
-          value={state[STATE_KEY]?.description || ""}
+          value={state[STATE_KEY]?.description}
           onChange={handleChange}
           placeholder={descriptionPlaceholder}
         />
 
-        <TSwitch />
+        <TSwitch 
+         id={"isVendor"}
+          value={state[STATE_KEY].IsVendor }
+          PropsOnChange={handleChange}
+
+        />
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
           <m.button

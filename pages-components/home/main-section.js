@@ -142,7 +142,7 @@ function Main() {
       </div>
 
       <div style={styles.main}>
-        <h1 style={styles.headline}>{session? session.user.name + " ברוכים הביאים ל MadeIt" : Headline}</h1>
+        <h1 style={styles.headline}>{ Headline}</h1>
         <p style={styles.adText}>{AdText}</p>
 
       </div>

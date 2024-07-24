@@ -1,16 +1,19 @@
 import Head from 'next/head';
 import Header from '../components/app-head/app-head';
-import Footer from '../components/footer/app-footer';
 import MainSection from '../pages-components/home/main-section'
-import ProfileControls from '../components/next-auth/profile-controls';
-
-
+import ProfileControls from '../components/profile-sing-in-out/profile-controls';
+import useGetUser from '../lib/hooks/use-get-user';
+import { useSession } from 'next-auth/react';
 
 export default function Home() {
+  const { data: session } = useSession();
+
+  const { UserData, dbloading, profileError } = useGetUser(session?.user?.email);
+
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>MadeIt</title>
       </Head>
       <Header />
       <MainSection/>
@@ -28,9 +31,7 @@ export default function Home() {
         }
       }>
       <ProfileControls
-        LogInStyleProps = {{}}
-        LogOutStyleProps ={{}}
-        ProfileLinkStyleProps = {{}}
+
 
       />     
       </div>

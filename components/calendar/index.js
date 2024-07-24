@@ -17,7 +17,7 @@ const Calinder = ({
     text,
     placeholder,
     title,
-    onChange,
+    PropsOnChange,
     required,
     STATE_KEY
     }
@@ -50,7 +50,7 @@ const Calinder = ({
   const handleChange = (e) => {
     
     const value = e
-    onChange(id, value);
+    PropsOnChange(id, value);
   };
 
   

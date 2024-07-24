@@ -1,24 +1,23 @@
 const State = {
-    Info:{
-     about:"",
-     phone:"",
-    },
-    Vendor:{
-       BussniseName:"",
-       price:"",
-       description:"",
+  IsBlock:false,
+  Info:{
+     phone:null,  
+ },
+  Vendor:{
+       BussniseName:null,
+       price:0,
+       description:null,
        isVendor:false,
-     },
-    Customer: { 
-       addres:"",
+ },
+  Customer: { 
+       addres:null,
        phone:0,
-       ApartmentRoomsSize:"",
+       ApartmentRoomsSize:null,
        NumberOfBathRooms:0,
        ResurveDate:null,
        PriceRange:0,
-       JobDescription:"",
-       IsCustomer:false
-     },
-     IsBlock:false,
+       JobDescription:null,
+ },
+     
   }
   export default State

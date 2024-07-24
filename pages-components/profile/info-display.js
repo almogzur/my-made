@@ -4,6 +4,7 @@ import Colors from '../../lib/colors';
 import f from "../../lib/features";
 
 const InfoDisplay = ({  phone, setShowInfo, setPerentOpenModle }) => {
+
   const [visibleButtonIndex, setVisibleButtonIndex] = useState(null);
 
   const userInfo = [
@@ -26,7 +27,7 @@ const InfoDisplay = ({  phone, setShowInfo, setPerentOpenModle }) => {
         }}
       >
         {userInfo.map(([label, value], index) => (
-          <m.div
+          <div
             key={index}
             style={{
               width: '100%',
@@ -43,7 +44,7 @@ const InfoDisplay = ({  phone, setShowInfo, setPerentOpenModle }) => {
           >
             <strong>{label}: {value}</strong>
             {visibleButtonIndex === index && (
-              <m.button
+              <button
                 style={{
                   height: "30px",
                   width: '100px',
@@ -71,9 +72,9 @@ const InfoDisplay = ({  phone, setShowInfo, setPerentOpenModle }) => {
                 }}
               >
                 <strong>ערוך פרטים</strong>
-              </m.button>
+              </button>
             )}
-          </m.div>
+          </div>
         ))}
       </div>
     </LazyMotion>

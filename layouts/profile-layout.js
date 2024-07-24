@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { faBroom, faPerson } from "@fortawesome/free-solid-svg-icons";
+import { faBroom, faPerson , faClipboard} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Colors from "../lib/colors";
 import SideBar from '../components/side-bar/side-bar';
@@ -63,13 +63,24 @@ const ProfileLayout = ({ children }) => {
  
             />
         </CostumeLink>
+
+        <CostumeLink
+        text={"לוח"}
+              href={"/board"}
+
+              linkStyle={DefaultLinkStyle}
+              divStyle={DivDefaultStyle}
+     
+        
+          >
+           <FontAwesomeIcon size="1x" color={Colors.d} icon={faClipboard}/>
+        </CostumeLink>
+
       </SideBar>
 
       {children}
 
-      <Footer
-        
-      />
+      <Footer  />
     </>
   )
 }

@@ -24,7 +24,7 @@ const handler = async (req, res) => {
   const userEmail = session.user.email;
   const database = client.db('my-made');
   const users = database.collection('users');
-  const { BussniseName, price, IsVendor, description } = req.body;
+  const { BussniseName, price, isVendor, description } = req.body;
 
   try {
     // Find the user by their email and update their vendor information
@@ -34,7 +34,7 @@ const handler = async (req, res) => {
         "state.Vendor.BussniseName": BussniseName,
         "state.Vendor.price": price,
         "state.Vendor.description": description,
-        'state.Vendor.IsVendor': IsVendor
+        'state.Vendor.isVendor': isVendor
       }
     };
 

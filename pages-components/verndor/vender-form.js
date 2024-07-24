@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StateContext } from '../../context';
 import { useSession } from "next-auth/react";
-import LoadingSpinner from '../../components/spining-loader/spining-loader';
 import InputElement from '../../components/input-elemnt';
 import TextArea from '../../components/text-area';
 import Colors from '../../lib/colors';
 import useGetUser from '../../lib/hooks/use-get-user';
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
 import { m, LazyMotion } from 'framer-motion';
-import TSwitch from '../../components/t-switch/switch';
 import f from '../../lib/features';
-import VendorDisplay from "./user-is-vendor";
+import VendorDisplay from "./vendor-display";
+import Link from "next/link";
 
 const descriptionPlaceholder = 
 ` המחיר המבוקש הוא לשעה או גלובלי  ... 
@@ -19,14 +18,17 @@ const descriptionPlaceholder =
 const headelinStyle = { textAlign: "center" };
 
 const VendorForm = ({ STATE_KEY }) => {
+
   const [state, setState] = useContext(StateContext);
   const { data: session, status } = useSession();
   const { UserData, dbloading, profileError } = useGetUser(session?.user?.email);
   const [resolvedUser, setResolvedUser] = useState(null);
+
+  //  toogel to render back the form 
   const [edit ,setEdit] = useState(true)
 
   useEffect(() => {
-    console.log(STATE_KEY, state[STATE_KEY]);
+ 
     if (UserData) {
       setResolvedUser(UserData);
     }
@@ -48,13 +50,17 @@ const VendorForm = ({ STATE_KEY }) => {
   }, [resolvedUser, STATE_KEY, setState]);
 
   const handleChange = (id, value) => {
+
     setState(prevState => ({
       ...prevState,
       [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value }
     }));
   };
 
+  
+
   const handleIVenderSave = async (e) => {
+    setState(state[STATE_KEY].isVendor = true )
 
     try {
       const response = await fetch('/api/vendor/save-vendor', {
@@ -74,30 +80,38 @@ const VendorForm = ({ STATE_KEY }) => {
     }
   };
 
-  if (status === "loading") {
-    return <LoadingSpinner />;
-  } else if (dbloading) {
+  if (status === "loading" || dbloading === "loading" ) {
     return <MongoSpinner />;
-  }
+  } 
+  
+  else if (resolvedUser && edit) {
 
-  if (resolvedUser && edit) {
     const { Vendor } = resolvedUser.state;
      
     const { BussniseName, price, description, isVendor } = Vendor;
-      if(BussniseName && price){
-    return <VendorDisplay 
-        BussniseName={BussniseName}
-        price={price}
-        descriptionm={description}
-        isVendor={isVendor}
-        phone={resolvedUser.state.Info.phone}
-        setEdit={setEdit}
-    />
+
+      if(BussniseName && price && isVendor ){
+
+          return   <VendorDisplay 
+                      BussniseName={BussniseName}
+                      price={price}
+                      description={description}
+                      isVendor={isVendor}
+                      phone={
+                        resolvedUser.state.Info.phone ||
+                      <Link
+                       style={{textDecoration:"none", color:`blue`}} 
+                       href="/profile"
+                       > לחץ כאן לעדכון טלפון 
+                    </Link> }
+                   setEdit={setEdit}
+                   STATE_KEY={STATE_KEY}
+                  />
       }
   }
 
   return (
-    <LazyMotion features={f}>
+
       <form style={{ marginBottom: "150px" }} onSubmit={handleIVenderSave}>
         <h2 style={headelinStyle}>{`שלום ${session?.user?.name}`}</h2>
         <h3 style={headelinStyle}>{`הרשם כנותן שירות משק`}</h3>
@@ -108,7 +122,7 @@ const VendorForm = ({ STATE_KEY }) => {
           id={"BussniseName"}
           STATE_KEY={STATE_KEY}
           value={state[STATE_KEY]?.BussniseName }
-          onChange={handleChange}
+          PropsOnChange={handleChange}
           required={true}
         />
 
@@ -118,7 +132,7 @@ const VendorForm = ({ STATE_KEY }) => {
           id={"price"}
           contextType={"Vendor"}
           value={state[STATE_KEY]?.price }
-          onChange={handleChange}
+          PropsOnChange={handleChange}
           min="0.00"
           max="300.00"
           required={true}
@@ -128,18 +142,14 @@ const VendorForm = ({ STATE_KEY }) => {
           id={"description"}
           text={"תיאור"}
           value={state[STATE_KEY]?.description}
-          onChange={handleChange}
+          PropsOnChange={handleChange}
           placeholder={descriptionPlaceholder}
         />
 
-        <TSwitch 
-         id={"isVendor"}
-          value={state[STATE_KEY].IsVendor }
-          PropsOnChange={handleChange}
-
-        />
+  
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
+         <LazyMotion features={f}>
           <m.button
             type="submit"
             style={{
@@ -160,9 +170,10 @@ const VendorForm = ({ STATE_KEY }) => {
           >
             {resolvedUser ? "הרשמה " : "עדכון"}
           </m.button>
+          </LazyMotion>
         </div>
       </form>
-    </LazyMotion>
+
   );
 };
 

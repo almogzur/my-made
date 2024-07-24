@@ -7,10 +7,10 @@ import { useSession } from 'next-auth/react';
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
 import ProfileLayout from '../../layouts/profile-layout'
 import ProfileHeader from '../../pages-components/profile/profile-heder'
-import ProfileDialog from '../../pages-components/profile/profile-dialog'
 import useSaveUserState from '../../lib/hooks/use-save-user-state';
 import Head from 'next/head';
-
+import FormDisplayWrapper from '../../pages-components/profile/form-display-wrapper'
+import VenderActiveOrEdit from '../../pages-components/profile/profile-vendor-active-edit';
 
 
 
@@ -35,11 +35,8 @@ const ProfilePage = () => {
 
 
 
-  if (status === 'loading') {
+  if (status === 'loading' || dbsaving) {
     return <MongoSpinner/>;
-  }
-  else if(dbsaving){
-    return <MongoSpinner/>
   }
   else if(profileError){
     router.push("/error")
@@ -57,8 +54,13 @@ const ProfilePage = () => {
  
     <ProfileLayout>
         <ProfileHeader />
-        <ProfileDialog />
-      </ProfileLayout>
+        <FormDisplayWrapper />
+        { state.Vendor.isVendor ?
+          <VenderActiveOrEdit/>
+          :
+          null
+        }
+        </ProfileLayout>
       
       </>
 

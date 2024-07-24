@@ -103,11 +103,12 @@ function Main() {
   };
 
   if (status === "loading") {
-    return <MongoSpinner />;
+    return <h1>Loading...</h1>;
   }
 
   return (
-    <div style={styles.container}>
+    <div 
+    style={styles.container}>
       <div
         style={{
           ...styles.floatingShape,

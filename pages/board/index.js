@@ -12,7 +12,8 @@
 import { useSession } from 'next-auth/react'
 import {useEffect,useState} from 'react'
 import { useRouter } from 'next/router'
-import BoarfLayout from '../../layouts/board-layout'
+
+import ProfileLayout from '../../layouts/profile-layout'
 
 const BoardPage=()=>{
 
@@ -28,9 +29,9 @@ const BoardPage=()=>{
 }
 
 return (
-    <BoarfLayout>
+    <ProfileLayout>
       
-    </BoarfLayout>
+    </ProfileLayout>
 ) 
 }
 

@@ -9,15 +9,16 @@ const InputElement = ({
   text,
   id,
   required,
-  STATE_KEY,
   value,
-  onChange,
+  PropsOnChange,
   min,
   max,
   step,
 }) => {
   const [width, setWidth] = useState("");
   const { md, sm } = useContext(WindowWidthContaxt);
+
+
   const handleResize = () => {
     if (sm) {
         setWidth("90%");
@@ -50,7 +51,7 @@ const InputElement = ({
 
   const handleChange = (e) => {
     const { value } = e.target;
-    onChange(id, value, STATE_KEY);
+    PropsOnChange(id, value);
   };
 
   return (
@@ -65,12 +66,16 @@ const InputElement = ({
           placeholder={required ? "*" : null}
           type={type}
           id={id}
-          max={type === "number" ? max : null}
-          min={type === "number" ? min : null}
-          step={type === "number" ? step : null}
-          pattern={type === "number" ? "^\\$\\d{1,3}(,\\d{3})*(\\.\\d+)?$" : null}
+          max={typeof type === "number" ? max : null}
+          min={typeof type === "number" ? min : null}
+          step={typeof type === "number" ? step : null}
+          pattern={
+              type === "number" ? "^\\$\\d{1,3}(,\\d{3})*(\\.\\d+)?$" : 
+              type === "tel" ? "[0-9]{10}" :
+              null  
+              }
           onChange={handleChange}
-          value={value || ""}
+          value={value}
         />
      </label>
 

@@ -11,13 +11,11 @@ import f from "../../lib/features"
 
 
 
-const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
+const ProfileForm = ({dbPhone}) => {
 
    const STATE_KEY = "Info"
    const { data: session ,status ,update} = useSession()
    const [ state,setState]=useContext(StateContext)
-   const [width, setWidth] = useState("");
-   const {md,sm} =useContext(WindowWidthContaxt)
  
 
 
@@ -26,10 +24,10 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
     setState(prevState => ({
       ...prevState,
       [STATE_KEY]: {
-        phone: dbPhone || prevState[STATE_KEY].phone,
-      }
+        phone: dbPhone || prevState[STATE_KEY].phone
+        }
     }));
-  }, [dbAge, dbPhone, dbAbout, setState]);
+  }, [ dbPhone,  setState]);
 
    const handleChange = (id, value) => {
     setState(prevState => ({
@@ -40,16 +38,15 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
       }
     }));
   };
-    const handleInfoSave = async () => {
+   const handleInfoSave = async () => {
        try {
-         const response = await fetch('/api/saveuserinfo', 
-          { 
-             method: 'POST',
-              headers: {
-                 'Content-Type': 'application/json',
-                    },
-                   body : JSON.stringify(state.Info)  
-           });
+        const options = { 
+          method: 'POST',
+          headers: {'Content-Type': 'application/json' },
+          body : JSON.stringify(state.Info)  
+          }
+         const response = await fetch('/api/saveuserinfo',options );
+
          if (response.ok) {
                  // Handle success
               console.log('Profile updated successfully');
@@ -64,11 +61,7 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
                }
   }
 
-
-
-
   return (
-    <LazyMotion features={f}>
 
     <form 
       onSubmit={ handleInfoSave} 
@@ -76,29 +69,24 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
         display:'flex',
         flexDirection:'column',
         justifyContent:'center',
-
-      
-      
       }}
-    >
-         <h2 style={{textAlign:"center"}}>עדכון משתמש</h2> 
+      >
+       <h2 style={{textAlign:"center"}}>עדכון משתמש</h2> 
 
-
-
-        <InputElemnt
-          type="text"
+       <InputElemnt
+          type="tel"
           text="טלפון"
           id="phone"
           required
           value={state.Info.phone}
-          onChange={handleChange}
+          PropsOnChange={handleChange}
         />
 
       
-
-     <m.button
-          type='submit'
-          style={{  
+        <LazyMotion features={f}>
+          <m.button
+         type='submit'
+         style={{  
               border: `1px solid ${Colors.b}`,
               borderRadius: "3px",
               padding: "10px",
@@ -109,12 +97,12 @@ const ProfileForm = ({dbAge,dbPhone,dbAbout}) => {
               }}
           whileHover={{scale:1.1 ,  duration:1}} 
           transition={{ duration: 1 }}
-        ><strong>עדכון פרטים</strong>
-          
-        </m.button>
-
+        >
+        <strong>עדכון פרטים</strong>  
+          </m.button>
+        </LazyMotion>
+ 
     </form>
-    </LazyMotion>
   );
 };
 

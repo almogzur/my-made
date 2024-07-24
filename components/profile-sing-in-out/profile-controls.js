@@ -9,17 +9,17 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 function ProfileControls() {
-  const { data: session } = useSession();
+  const { data: session , status } = useSession();
   const router = useRouter();
   const { pathname } = router;
+
 
   useEffect(() => {
     console.log(pathname);
   }, [pathname]);
 
-  const linkDefaultStyle = { textDecoration: "none", color: Colors.d };
 
-  if (!session) {
+  if ( !session && status !=="loading" ) {
     return (
       <LazyMotion features={f}>
         <m.button
@@ -42,7 +42,9 @@ function ProfileControls() {
         </m.button>
       </LazyMotion>
     );
-  } else if (pathname === "/") {
+  }
+
+  else if ( pathname === "/"  ) {
     return (
       <>
         <Link href={"/profile"} passHref>
@@ -100,19 +102,20 @@ function ProfileControls() {
         </m.button>
       </>
     );
-  } else {
+
+  }
+
+  else {
     return (
       <LazyMotion features={f}>
         <m.div
           animate={{ opacity: [0, 1] }}
           transition={{ duration: 2 }}
           style={{
-            position: "absolute",
-            top: "0px",
-            left: "0px",
-            width: "150px",
             display: "flex",
             flexDirection: "row",
+            justifyContent:"space-between",
+            width:"100%"
           }}
         >
           <m.div
@@ -127,7 +130,7 @@ function ProfileControls() {
               alignItems: 'center',
               alignContent: 'center',
               background: Colors.d,
-              width:"100px",
+              width:"70px",
              
             }}
             transition={{ type: "spring", duration: 1 }}
@@ -147,12 +150,13 @@ function ProfileControls() {
 
           <m.button
             style={{
+       
               marginTop:"7px",
               border: "none",
               background: "none",
-              width: "inherit",
               height: "inherit",
               color: Colors.d,
+              width:"70px"
             }}
             transition={{ duration: 1 }}
             whileHover={{ rotate: 360 }}
@@ -160,6 +164,7 @@ function ProfileControls() {
           >
             <FaPowerOff size={40} />
           </m.button>
+
         </m.div>
       </LazyMotion>
     );

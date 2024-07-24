@@ -92,56 +92,49 @@ const CustomerFrom = ({ STATE_KEY }) => {
   }
 
   return (
-    <LazyMotion features={f}>
       <form style={{ marginBottom: "150px" }} onSubmit={handleSubmit}>
         <h2 style={headelinStyle}> {`שלום ${session?.user?.name} `}</h2>
         <h3 style={headelinStyle}>{`הזמן משק בית `}</h3>
 
-        <div >
-          <h4>פרטי קשר</h4>
+        <div >  <h4>פרטי קשר</h4>
           <InputElemnt
             id={"phone"}
             text={"טלפון"}
             required={true}
             STATE_KEY={STATE_KEY}
-            onChange={handleChange}
+            PropsOnChange={handleChange}
             value={state[STATE_KEY].phone}
           />
         </div>
 
-        <div >
-          <h4>פרטי הזמנה</h4>
+        <div > <h4>פרטי הזמנה</h4>
           <Calinder
             text={"תאירך ושעה"}
             id={"ResurveDate"}
             placeholder={""}
             STATE_KEY={STATE_KEY}
-            onChange={handleChange}
+            PropsOnChange={handleChange}
             value={state[STATE_KEY].ResurveDate}
           />
           <TextArea
             id={"JobDescription"}
             value={state[STATE_KEY].JobDescription}
-            onChange={handleChange}
+            PropsOnChange={handleChange}
             resize={false}
             text={" תיאור "}
             placeholder={""}
-          />
-
-           
+          />           
         </div>
 
 
-        <div >
-          <h4>פרטי בית</h4>
+        <div >   <h4>פרטי בית</h4>
           <InputElemnt
             text={"כתובת"}
             type={"location"}
-            contextType={"Customer"}
             id={"addres"}
             STATE_KEY={STATE_KEY}
             value={state[STATE_KEY].addres}
-            onChange={handleChange}
+            PropsOnChange={handleChange}
           />
           <InputElemnt
             type={"number"}
@@ -150,32 +143,27 @@ const CustomerFrom = ({ STATE_KEY }) => {
             id="ApartmentRoomsSize"
             required
             value={state[STATE_KEY].ApartmentRoomsSize}
-            onChange={handleChange}
+            PropsOnChange={handleChange}
           />
           <InputElemnt
             type={"number"}
             text={"מספר מקלחות"}
             STATE_KEY={STATE_KEY}
             id={"NumberOfBathRooms"}
-            onChange={handleChange}
+            PropsOnChange={handleChange}
             value={state[STATE_KEY].NumberOfBathRooms}
           />
 
 
-          <TSwitch
-             PropsOnChange={handleChange}
-             id={"isCustomer"}
-             value={state[STATE_KEY].isCustomer}
 
-          />
 
         </div>
 
        
   
-
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
-          <m.button
+        <LazyMotion features={f}>
+         <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
+           <m.button
             type="submit"
             style={{
               height: "60px",
@@ -194,10 +182,11 @@ const CustomerFrom = ({ STATE_KEY }) => {
             }}
           >
             שלח הזמנה
-          </m.button>
-        </div>
+           </m.button>      
+         </div>
+        </LazyMotion>
+
       </form>
-    </LazyMotion>
   );
 };
 

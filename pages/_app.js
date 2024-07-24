@@ -14,7 +14,7 @@ import "../components/spining-loader/spining-loader.css"
 import "../components/mongo-spinner/mongo-spinner.css"
 
 import { SessionProvider } from "next-auth/react"
-import { WindowWidthContaxt, StateContext} from '../context'
+import { WindowWidthContaxt, StateContext , ResolvedUserContext} from '../context'
 import {  useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import State from '../state'
@@ -62,16 +62,19 @@ export default function App({
    const md = useMediaQuery('(max-width: 900px)')
    const sm = useMediaQuery('(max-width: 600px)')
    const [showModal, setShowModal] = useState(false);
+   const [contextValue, setContextValue] = useState();
 
 
 
   return (
       <SessionProvider session={session}>    
+      <ResolvedUserContext value={[contextValue,setContextValue]}>
       <StateContext.Provider value={[state,setState]}>
       <WindowWidthContaxt.Provider value={{md,sm}}>
           <Component {...pageProps} />
       </WindowWidthContaxt.Provider>
       </StateContext.Provider>
+      </ResolvedUserContext>
       </SessionProvider>
      
 

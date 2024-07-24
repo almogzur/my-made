@@ -9,7 +9,7 @@ const TextArea = ({
   rows,
   cols,
   value,
-  onChange,
+  PropsOnChange,
   resize,
   text,
   placeholder,
@@ -45,7 +45,7 @@ const TextArea = ({
 
   const handleChange = (e) => {
     const { value } = e.target;
-    onChange(id, value);
+    PropsOnChange(id, value);
   };
 
   return (

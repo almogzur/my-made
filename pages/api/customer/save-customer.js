@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 
 const handler = async (req, res) => {
-  const API_NAME = "UPDATE CUSTOMER INFO ";
+  const API_NAME = "UPDATE CUSTOMER INFO";
 
   console.log(API_NAME);
 
@@ -31,7 +31,6 @@ const handler = async (req, res) => {
          ResurveDate,
          PriceRange, 
          JobDescription,
-         IsCustomer,
         } = req.body;
 
   try {
@@ -46,7 +45,6 @@ const handler = async (req, res) => {
         "state.Customer.PriceRange": PriceRange,
         "state.Customer.JobDescription": JobDescription,
         "state.Customer.addres": addres,
-        "state.Customer.IsCustomer" : IsCustomer
 
       }
     };

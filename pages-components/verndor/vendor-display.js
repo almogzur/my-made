@@ -1,8 +1,10 @@
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import {useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Colors from '../../lib/colors';
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
+import TSwitch from '../../components/t-switch/switch';
+
 
 const VendorDisplay = ({ 
                 BussniseName, 
@@ -10,7 +12,8 @@ const VendorDisplay = ({
                 description,
                 isVendor,
                 setEdit,
-                phone
+                phone,
+                STATE_KEY
    }) => {
   const router = useRouter();
   const { data: session, status, update } = useSession();
@@ -27,12 +30,12 @@ const VendorDisplay = ({
   const displayStyle = {
     padding: "5px",
     borderRadius: "5px",
-    marginBottom: "10px",
+    marginBottom: "10 x",
     boxShadow: `0 2px 4px ${Colors.c}`,
   };
 
   return (
-    <div style={{ marginBottom: "150px", padding: '20px', backgroundColor: Colors.background }}>
+    <div style={{ marginBottom: "0px", padding: '10px', }}>
       <h2 style={headlineStyle}>{`שלום ${session?.user?.name}`}</h2>
       <h3 style={headlineStyle}>{ `נרשמת כנותן שירות להלן הפרטים `}</h3>
 
@@ -54,9 +57,10 @@ const VendorDisplay = ({
       </div>
       
       <div style={displayStyle}>
-        <div style={{ color: Colors.c }}>זמין</div>
+        <div style={{ color: Colors.c }}> זמין (ניתן לערוך בדף הפרופיל)</div>
         <div>{isVendor ? 'כן' : 'לא'}</div>
       </div>
+
 
       <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
         <button

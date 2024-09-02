@@ -3,7 +3,9 @@ import {useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Colors from '../../lib/colors';
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
-import TSwitch from '../../components/t-switch/switch';
+
+
+const STATE_KEY = "Vendor";
 
 
 const VendorDisplay = ({ 
@@ -13,10 +15,11 @@ const VendorDisplay = ({
                 isVendor,
                 setEdit,
                 phone,
-                STATE_KEY
-   }) => {
-  const router = useRouter();
+                }) =>
+     {
   const { data: session, status, update } = useSession();
+
+  
   const headlineStyle = { textAlign: "center", color: Colors.primary, fontSize: '24px', marginBottom: '20px' };
 
   useEffect(() => {
@@ -78,7 +81,7 @@ const VendorDisplay = ({
             boxShadow: `3px 3px 3px 3px ${Colors.c}`,
             transition: 'box-shadow 0.3s ease-in-out',
           }}
-          onClick={() => {setEdit(false)}}
+          onClick={() => {setEdit(true)}}
           onMouseOver={(e) => e.target.style.boxShadow = `0px 0px 0px 0px ${Colors.a}` }
           onMouseOut={(e) => e.target.style.boxShadow =  `0px 4px 8px ${Colors.c}`}
         >

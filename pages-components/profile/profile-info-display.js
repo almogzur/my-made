@@ -3,7 +3,7 @@ import { LazyMotion, m } from "framer-motion";
 import Colors from '../../lib/colors';
 import f from "../../lib/features";
 
-const InfoDisplay = ({  phone, setShowInfo, setPerentOpenModle }) => {
+const InfoDisplay = ({  phone, setEditInfo }) => {
 
   const [visibleButtonIndex, setVisibleButtonIndex] = useState(null);
 
@@ -18,7 +18,7 @@ const InfoDisplay = ({  phone, setShowInfo, setPerentOpenModle }) => {
 
   return (
     <LazyMotion features={f}>
-      <div
+      <m.div
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -27,7 +27,7 @@ const InfoDisplay = ({  phone, setShowInfo, setPerentOpenModle }) => {
         }}
       >
         {userInfo.map(([label, value], index) => (
-          <div
+          <m.div
             key={index}
             style={{
               width: '100%',
@@ -44,7 +44,7 @@ const InfoDisplay = ({  phone, setShowInfo, setPerentOpenModle }) => {
           >
             <strong>{label}: {value}</strong>
             {visibleButtonIndex === index && (
-              <button
+              <m.button
                 style={{
                   height: "30px",
                   width: '100px',
@@ -66,17 +66,16 @@ const InfoDisplay = ({  phone, setShowInfo, setPerentOpenModle }) => {
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.5 }}
                 onClick={(e) => {
-                  e.stopPropagation();
-                  setShowInfo(false);
-                  setPerentOpenModle(true);
+                  //e.stopPropagation();
+                  setEditInfo(true)
                 }}
               >
                 <strong>ערוך פרטים</strong>
-              </button>
+              </m.button>
             )}
-          </div>
+          </m.div>
         ))}
-      </div>
+      </m.div>
     </LazyMotion>
   );
 };

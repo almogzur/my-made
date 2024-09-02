@@ -1,22 +1,21 @@
 const State = {
   IsBlock:false,
   Info:{
-     phone:null,  
+     phone:"",  
  },
   Vendor:{
-       BussniseName:null,
+       BussniseName:"",
        price:0,
-       description:null,
-       isVendor:false,
+       description:"",
  },
   Customer: { 
-       addres:null,
+       addres:"",
        phone:0,
-       ApartmentRoomsSize:null,
+       ApartmentRoomsSize:"",
        NumberOfBathRooms:0,
-       ResurveDate:null,
+       ResurveDate:"",
        PriceRange:0,
-       JobDescription:null,
+       JobDescription:"",
  },
      
   }

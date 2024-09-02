@@ -14,6 +14,7 @@ const InputElement = ({
   min,
   max,
   step,
+  name
 }) => {
   const [width, setWidth] = useState("");
   const { md, sm } = useContext(WindowWidthContaxt);
@@ -59,6 +60,7 @@ const InputElement = ({
       <label style={defaultStyle.label} htmlFor={id}>
         <strong>{text}</strong>
         <m.input
+          name={name?name:null}
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 1 }}
           style={defaultStyle.input}

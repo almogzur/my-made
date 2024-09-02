@@ -19,7 +19,8 @@ export const authOptions = {
     // extanding Session Object 
     // passiong user id for db calls from Front end as slug quary 
       session.user.id = user.id
-     // session.state = State
+     // session.user.state = {}
+      
       return session
    },
   /////////////////////////////////////////////////////////////////////////////

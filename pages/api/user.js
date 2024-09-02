@@ -1,13 +1,12 @@
 import clientPromise from '../../lib/db';
 import { getServerSession } from "next-auth/next";
-import { authOptions } from '../api/auth/[...nextauth]'
+import { authOptions } from './auth/[...nextauth]'
 
 
-const API_NAME = "GET USER API";
+const API_NAME = "USER API";
 
 const handler = async (req, res) => {
   
-  console.log(API_NAME);
 
   if (req.method !== 'GET') {
     res.setHeader('Allow', ['GET']);
@@ -40,13 +39,13 @@ const handler = async (req, res) => {
     // Find the user by their session ID
     const user = await users.findOne(query,{},{});
 
-    console.log(user,"DB USER")
+    console.log(API_NAME,"Returning DB USER")
+    
     if (!user) {
-      console.log("User not found");
+       console.log("User not found");
       return res.status(404).json({ message: 'User not found' });
     }
 
-    console.log("User Info Retrieved");
     return res.status(200).json(user);
   } catch (error) {
     console.error('Error retrieving user info:', error);

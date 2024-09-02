@@ -35,8 +35,7 @@ const SideBar = ({
       case 'customer':
         return { x: [-200, 0] }; // Example animation for customer
       default:
-        return { y: [200, 0] }; // Default animation
-    }
+console.log("defual nav location")    }
   };
 
   return (

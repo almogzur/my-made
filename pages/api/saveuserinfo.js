@@ -11,9 +11,6 @@ const handler = async (req, res) => {
 
   const API_NAME = "SAVE USER INFO FORM"
 
-
-  console.log(API_NAME);
-
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
     console.log(`Method ${req.method} Not Allowed`);
@@ -33,17 +30,15 @@ const handler = async (req, res) => {
   const userEmail = session.user.email;
   const database = client.db('my-made');
   const users = database.collection('users');
-  const { age, phone, about } = req.body;
-
-
+  const { phone } = req.body
+    
+  
   try {
     // Find the user by their email and update their information
     const filter = { email: userEmail };
     const updateDoc = {
       $set: {
-        "state.Info.age": age,
         "state.Info.phone": phone,
-        "state.Info.about": about
       }
     };
     
@@ -56,7 +51,7 @@ const handler = async (req, res) => {
       return res.status(200).json({ message: 'Profile updated successfully' });
     } else {
       console.log("User not found or no changes made");
-      return res.status(404).json({ message: 'User not found or no changes made' });
+      return res.status(200).json({ message: 'User not found or no changes made' });
     }
   } catch (error) {
     console.error(API_NAME,'Error updating profile:', error);
@@ -67,3 +62,4 @@ const handler = async (req, res) => {
 }
 
 export default handler;
+

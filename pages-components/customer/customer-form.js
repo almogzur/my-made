@@ -5,59 +5,53 @@ import Calinder from '../../components/calendar/index';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import TextArea from '../../components/text-area/index';
-import useGetUser from '../../lib/hooks/use-get-user';
 import Colors from '../../lib/colors';
 import { m, LazyMotion } from 'framer-motion';
 import f from "../../lib/features";
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
 import TSwitch from '../../components/t-switch/switch';
+import useUser from '../../lib/hooks/useUser';
 
 const headelinStyle = { textAlign: "center" };
 
 
-
 const CustomerFrom = ({ STATE_KEY }) => {
+
   const { data: session, status, update } = useSession();
-  const [state, setState] = useContext(StateContext);
-  const { UserData, dbloading, profileError } = useGetUser(session?.user?.email);
-  const [resolvedUser, setResolvedUser] = useState(null);
+  const [ state, setState ] = useContext(StateContext);
+  //const { ApartmentRoomsSize , NumberOfBathRooms , ResurveDate, PriceRange , JobDescription , addres } = user?.state
+  const { user, isLoading, isError } = useUser(session?.user?.email);
   const router = useRouter();
 
   // No Session
   useEffect(() => {
-    console.log(STATE_KEY, state[STATE_KEY]);
     if (status === "unauthenticated") {
       router.push("/");
     }
   }, [state]);
 
   // if Successful User Fetch
-  useEffect(() => {
-    if (UserData) {
-      setResolvedUser(UserData);
-    }
-  }, [UserData, state]);
 
   // if dbUser set it as State
   useEffect(() => {
-    if (resolvedUser) {
+    if (!isError && !isLoading) {
       setState(prevState => ({
         ...prevState,
         [STATE_KEY]: {
           ...prevState[STATE_KEY],
-          phone: resolvedUser.state[STATE_KEY].phone,
-          addphone: resolvedUser.state[STATE_KEY].addphone,
-          ApartmentRoomsSize: resolvedUser.state[STATE_KEY].ApartmentRoomsSize,
-          NumberOfBathRooms: resolvedUser.state[STATE_KEY].NumberOfBathRooms,
-          ResurveDate: resolvedUser.state[STATE_KEY].ResurveDate,
-          PriceRange: resolvedUser.state[STATE_KEY].PriceRange,
-          JobDescription: resolvedUser.state[STATE_KEY].JobDescription,
-          addres: resolvedUser.state[STATE_KEY].addres,
-          IsCustomer: resolvedUser.state[STATE_KEY].IsCustomer,
+          phone: user?.state?.STATE_KEY?.phone,
+          addphone: user?.state?.STATE_KEY?.addphone,
+          ApartmentRoomsSize: user?.state?.STATE_KEY?.ApartmentRoomsSize,
+          NumberOfBathRooms: user?.state?.STATE_KEY?.NumberOfBathRooms,
+          ResurveDate: user?.state?.STATE_KEY?.ResurveDate,
+          PriceRange: user?.state?.STATE_KEY?.PriceRange,
+          JobDescription: user?.state?.STATE_KEY?.JobDescription,
+          addres: user?.state?.STATE_KEY?.addres,
+          
         },
       }));
     }
-  }, [resolvedUser, STATE_KEY, setState]);
+  }, [user, STATE_KEY, setState, isError , isLoading]);
 
   const handleChange = (id, value) => {
     setState(prevState => ({
@@ -67,7 +61,7 @@ const CustomerFrom = ({ STATE_KEY }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+   // e.preventDefault();
     try {
       const response = await fetch('/api/customer/save-customer', {
         method: 'POST',
@@ -78,16 +72,18 @@ const CustomerFrom = ({ STATE_KEY }) => {
       });
       const result = await response.json();
       if (response.ok) {
+        console.log(response);
+        
         console.log(result.message);
       } else {
-        console.error(result.message);
-      }
+        alert("bad resopnce ")
+     }
     } catch (error) {
       console.error('Failed to update customer information', error);
     }
   };
 
-  if (status === "loading" || dbloading) {
+  if (status === "loading" ) {
     return <MongoSpinner />;
   }
 

@@ -15,7 +15,7 @@ function ProfileControls() {
 
 
   useEffect(() => {
-    console.log(pathname);
+   // console.log(pathname);
   }, [pathname]);
 
 
@@ -137,7 +137,7 @@ function ProfileControls() {
           >
             <Link href={"/profile"} shallow={true}>
               <Image
-                src={session.user.image}
+                src={session?.user?.image}
                 height={40}
                 width={40}
                 style={{ borderRadius: "15px" }}

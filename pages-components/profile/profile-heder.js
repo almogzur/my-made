@@ -5,10 +5,16 @@ import defulteUserImg from '../../public/User.jpg';
 import ColorsH1 from '../../components/gradient-headline/index';
 import Colors from '../../lib/colors';
 import f from "../../lib/features"
+import MongoSpinner from "../../components/mongo-spinner/mongo-spinner";
 
-const ProfileHeader = () => {
+const ProfileHeader = ({UserData}) => {
 
-    const { data: session, status } = useSession()
+//const {} = UserData
+const { data: session ,status ,update} = useSession()
+
+  if( status === "loading"){
+    <MongoSpinner/>
+  }
 
  return (
    <LazyMotion features={f}>
@@ -24,10 +30,7 @@ const ProfileHeader = () => {
              -119deg, 
              ${Colors.a} , 
              ${Colors.c} ,
-             ${"#fff"}
-         
-            
-          
+             ${"#fff"}        
            )
            `,
            boxShadow: '0 4px 8px #404040'
@@ -69,9 +72,10 @@ const ProfileHeader = () => {
                  rotate:30
              }}
              animate={{ rotate:360 }}
-             transition={{ type: "spring" ,duration:5 }}
-            ><Image
-                src={session?.user?.image || defulteUserImg}
+            transition={{ type: "spring" ,duration:5 }}
+            >
+            <Image
+               src={session?.user?.image || defulteUserImg}
                 height={70}
                 width={70}
                 alt='profile image'

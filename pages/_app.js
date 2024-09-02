@@ -14,17 +14,32 @@ import "../components/spining-loader/spining-loader.css"
 import "../components/mongo-spinner/mongo-spinner.css"
 
 import { SessionProvider } from "next-auth/react"
-import { WindowWidthContaxt, StateContext , ResolvedUserContext} from '../context'
+import { WindowWidthContaxt, StateContext ,  ResolvedUserContext} from '../context'
 import {  useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import State from '../state'
 
-  //           STATE  HENDLING
-////////////////////////////////////////////////////////
-// / from (perent) hendle state change by pasing       ///
-///      onChange callback to the component         /////
-//             with children id and value           ////
-  ////////////////////////////////////////////////////////
+
+  //           STATE  HENDLING (update 17.8.24)
+  // state is going to be in componenty to create component and children 
+  // isolation and preventing perent compon ets from updateing state 
+  
+
+
+////////////////////////////////////////////////////////////////////////
+//////  insted of saving the state to db on init pro file load ///////
+//////  evry form will update the db and the component will use /////
+///// useGetUserHook (will use context to not reFetch if data) ///////
+//////              with suspence .                            ////// 
+////// the current state fomate fill be divided in to ecth form index /// 
+//////         profile vendor and costumer                    ////
+//////////////////////////////////////////////////////////////////////
+
+// insted of using state in the elemnt im going to use the 
+//  onSubmit e target and create new from 
+// then extrac the data at the api and update the db
+
+
 
  //              STYLE 
 //////////////////////////////////////////////////////////////////////////
@@ -58,25 +73,19 @@ export default function App({
 }) {
 
    const [state,setState] = useState(State)
-
    const md = useMediaQuery('(max-width: 900px)')
    const sm = useMediaQuery('(max-width: 600px)')
-   const [showModal, setShowModal] = useState(false);
-   const [contextValue, setContextValue] = useState();
 
 
 
   return (
+    <StateContext.Provider value={[state,setState]}>
       <SessionProvider session={session}>    
-      <ResolvedUserContext value={[contextValue,setContextValue]}>
-      <StateContext.Provider value={[state,setState]}>
       <WindowWidthContaxt.Provider value={{md,sm}}>
           <Component {...pageProps} />
       </WindowWidthContaxt.Provider>
-      </StateContext.Provider>
-      </ResolvedUserContext>
       </SessionProvider>
-     
+      </StateContext.Provider>
 
   )
 }

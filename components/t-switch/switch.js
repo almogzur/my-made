@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { StateContext } from '../../context';
+
 
 const switchWrapperStyle = {
   display: 'flex',
@@ -39,33 +39,28 @@ const sliderBeforeStyle = (cssIsChecked) => ({
   borderRadius: '10px',
 });
 
-export default function ToggleSwitch({
-         textOn,
-         textOff, 
-         PropsOnChange,
-         id ,
-         STATE_KEY,
-         value
-      }) {
-   const [cssIsChecked, setCssIsChecked] = useState( value || false );
-   
 
+ const ToggleSwitch = ({textOn,textOff, PropsOnChange,id ,value})=>
+   {
+   const [cssIsChecked, setCssIsChecked] = useState( false  );
+   
 
    const handleChange = (e) => {
        setCssIsChecked(!cssIsChecked);
        console.log(cssIsChecked,"befor its passed to state");
-       PropsOnChange(id, cssIsChecked);
+       PropsOnChange(id, e.target.value);
   };
 
   return (
     <div style={switchWrapperStyle}>
-       <h5>{cssIsChecked ? textOn : textOff}</h5>
+       <h5 style={{margin:"5px"}}>{cssIsChecked ? textOn : textOff}</h5>
       <label style={switchStyle}>
         <input
           id={id}
           type="checkbox"
           onChange={handleChange}
           style={{ display: 'none' }}
+          value={value}
         />
         <span style={sliderStyle(cssIsChecked)}>
           <span style={sliderBeforeStyle(cssIsChecked)}></span>
@@ -74,3 +69,4 @@ export default function ToggleSwitch({
     </div>
   );
 }
+export default ToggleSwitch

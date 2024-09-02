@@ -68,7 +68,7 @@ const styles = {
   }
 };
 
-function Main() {
+function  Main() {
   const [scrollY, setScrollY] = useState(0);
   const [rotation, setRotation] = useState(0);
   const { data: session, status } = useSession();

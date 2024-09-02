@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { faBroom, faPerson , faClipboard} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Colors from "../lib/colors";
@@ -65,7 +64,7 @@ const ProfileLayout = ({ children }) => {
         </CostumeLink>
 
         <CostumeLink
-        text={"לוח"}
+             text={"לוח"}
               href={"/board"}
 
               linkStyle={DefaultLinkStyle}

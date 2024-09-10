@@ -11,40 +11,14 @@ const SideBar = ({
 }) => {
   const router = useRouter();
   const { pathname } = router;
-  const [sideBarTLocation, setSideBarLocation] = useState('default');
-
-  useEffect(() => {
-    if(pathname){
-    const inVendor = pathname.split("/").indexOf("vendor") !== -1;
-    const inCustomer = pathname.split("/").indexOf("customer") !== -1;
-
-    if (inVendor) {
-        setSideBarLocation('vendor');
-    } else if (inCustomer) {
-        setSideBarLocation('customer');
-    } else {
-        setSideBarLocation('default');
-    }
-  }
-  }, [pathname]); 
-
-  const getAnimation = () => {
-    switch (sideBarTLocation) {
-      case 'vendor':
-        return { x: [100, 0] }; // Example animation for vendor
-      case 'customer':
-        return { x: [-200, 0] }; // Example animation for customer
-      default:
-console.log("defual nav location")    }
-  };
 
   return (
     <LazyMotion features={f}>
       <m.aside
         className={className || null}
         style={{ ...style }}
-        animate={getAnimation()}
-        transition={{ duration: 1.5 }}
+        animate={{ opacity : [0,1]}}
+        transition={{ duration: 1}}
       >
         {children}
       </m.aside>

@@ -26,16 +26,13 @@ export default function CostumeLink ({
          id="thiss"
           href={href}
           style={{...linkStyle}}
-          
+        >
+          <div 
+             style={{...divStyle}} 
            >
-   
-           <div 
-             
-              style={{...divStyle}} 
-               >
-                {text?text:null}     
-                {children}
-             </div>
+             {text?text:null}     
+             {children}
+          </div>
        </Link>
     </div>
 </LazyMotion>

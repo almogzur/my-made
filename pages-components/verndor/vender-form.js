@@ -3,7 +3,7 @@ import { StateContext } from '../../context';
 import { useSession } from "next-auth/react";
 import InputElement from '../../components/input-elemnt';
 import TextArea from '../../components/text-area';
-import Colors from '../../lib/colors';
+import Colors from '../../lib/colors'
 import { m, LazyMotion } from 'framer-motion';
 import f from '../../lib/features';
 import useUser from '../../lib/hooks/useUser'

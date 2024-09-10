@@ -9,7 +9,6 @@ import Colors from '../../lib/colors';
 import { m, LazyMotion } from 'framer-motion';
 import f from "../../lib/features";
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
-import TSwitch from '../../components/t-switch/switch';
 import useUser from '../../lib/hooks/useUser';
 
 const headelinStyle = { textAlign: "center" };
@@ -93,6 +92,7 @@ const CustomerFrom = ({ STATE_KEY }) => {
         <h3 style={headelinStyle}>{`הזמן משק בית `}</h3>
 
         <div >  <h4>פרטי קשר</h4>
+
           <InputElemnt
             id={"phone"}
             text={"טלפון"}
@@ -100,6 +100,7 @@ const CustomerFrom = ({ STATE_KEY }) => {
             STATE_KEY={STATE_KEY}
             PropsOnChange={handleChange}
             value={state[STATE_KEY].phone}
+            
           />
         </div>
 
@@ -149,10 +150,6 @@ const CustomerFrom = ({ STATE_KEY }) => {
             PropsOnChange={handleChange}
             value={state[STATE_KEY].NumberOfBathRooms}
           />
-
-
-
-
         </div>
 
        

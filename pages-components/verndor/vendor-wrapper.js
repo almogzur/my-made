@@ -6,7 +6,6 @@ import VendorForm from './vender-form'
 import Link from "next/link";
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
 import useUser from '../../lib/hooks/useUser'
-import { tr } from 'date-fns/locale'
 
 
 const VendorWrapper=()=>{
@@ -28,7 +27,7 @@ const VendorWrapper=()=>{
   }, [user]);
 
   if (status === 'loading' || isLoading  ) {
-      return <h1>Loading...</h1>
+      return <MongoSpinner/>
   }
 
   else if (!edit && Vendor ) {

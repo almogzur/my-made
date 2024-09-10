@@ -8,11 +8,9 @@ import Footer from '../components/footer/app-footer';
 
 const ProfileLayout = ({ children }) => {
 
-
-
   const DefaultLinkStyle = {
-    textDecoration: "none",
-    color:Colors.d
+      textDecoration: "none",
+      color:Colors.d
   }
 
   const DivDefaultStyle = {
@@ -22,7 +20,8 @@ const ProfileLayout = ({ children }) => {
     alignItems: 'center',
     alignContent: 'center',
     width: "100%",
-    height: "70px",
+    height: "45px",
+    borderBottom:`solid ${Colors.d}`,
     color:Colors.d
   }
 
@@ -34,9 +33,10 @@ const ProfileLayout = ({ children }) => {
           position: "fixed",
           bottom: "60px",
           left: "5px",
-          width: "70px",
+          width: "40px",
           background: Colors.b,
-          zIndex:2
+          zIndex:2,
+         
         }}
       >
         <CostumeLink
@@ -66,11 +66,8 @@ const ProfileLayout = ({ children }) => {
         <CostumeLink
              text={"לוח"}
               href={"/board"}
-
               linkStyle={DefaultLinkStyle}
               divStyle={DivDefaultStyle}
-     
-        
           >
            <FontAwesomeIcon size="1x" color={Colors.d} icon={faClipboard}/>
         </CostumeLink>

@@ -9,14 +9,10 @@ import f from '../../lib/features'
 const Dialog = ({
   children,
   buttonText,
-  buttonStyle,
+  CloseDialogButtonStyle,
   wrapperStyle,
-  wrapperClassName,
-  buttonClassName,
   perentOpenModle,
   setPerentOpenModle
-
-
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -27,34 +23,28 @@ const Dialog = ({
     setShowModal(!showModal);
      }
   }
-
-
-
+  
   return (
     <div
-      className={wrapperClassName ? wrapperClassName : null}
       style={wrapperStyle ? wrapperStyle : null}
     >
-      {/** Open Dialog */}
+      {/** Closed*/}
       <m.button
           transition={{duration:0.5, stiffness:50}}
-        whileHover={{
-          boxShadow: `4px 4px 2px  ${Colors.c} inset `,
-          scale:1.1
-        }}
-        whileTap={{
-          boxShadow: `1px 1px 1px  ${Colors.c} inset `,
-
-        }}
-        
-        style={buttonStyle ? buttonStyle : null}
-        className={buttonClassName ? buttonClassName : null}
-        onClick={handleModal}
+          whileHover={{
+             boxShadow: `4px 4px 2px  ${Colors.c} inset `,
+             scale:1.1
+           }}
+          whileTap={{
+             boxShadow: `1px 1px 1px  ${Colors.c} inset `,
+           }}
+          style={CloseDialogButtonStyle ? CloseDialogButtonStyle : null}
+          onClick={handleModal}
       >
         <strong>{buttonText}</strong>
       </m.button>
 
-      {/** Dialog */}
+      {/** Open */}
       <ReactModal
         ariaHideApp={false}
         isOpen={ perentOpenModle ? perentOpenModle :  showModal}
@@ -62,10 +52,10 @@ const Dialog = ({
         style={{
           content: {
             position: "absolute",
-            top: "5px",
-            left: "5px",
-            right: "5px",
-            bottom: '5px',
+            top: "3px",
+            left: "3px",
+            right: "3px",
+            bottom: '3px',
             background: 'rgb(52,124,207)',
             background: `radial-gradient(circle, ${Colors.c} 0%, ${"#fff"} 100%)`,
             display: "flex",
@@ -74,14 +64,14 @@ const Dialog = ({
             alignItems: "center",
             alignContent: 'center',
             borderRadius: "2px",
-            overflow: "clip",
+            overflowX:"scroll"
           },
           overlay: {
             position: 'fixed',
-            top: "100px",
-            left: "25px",
-            right: "25px",
-            bottom: "100px",
+            top: "50px",
+            left: "5px",
+            right: "5px",
+            bottom: "70px",
             borderRadius:"8px"
           }
         }}

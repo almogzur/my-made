@@ -16,10 +16,10 @@ const InputElement = ({
   step,
   name
 }) => {
+
   const [width, setWidth] = useState("");
   const { md, sm } = useContext(WindowWidthContaxt);
-
-
+  
   const handleResize = () => {
     if (sm) {
         setWidth("90%");

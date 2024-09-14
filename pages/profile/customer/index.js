@@ -1,7 +1,7 @@
 import { useEffect, useContext , useState } from "react";
 import { useRouter } from "next/router";
 import { useSession  } from "next-auth/react";
-import CustomerFrom from "../../../pages-components/customer/customer-form";
+import NewOrder from "../../../pages-components/customer/new-order";
 import  ProfileLayout from '../../../layouts/profile-layout'
 import Head from "next/head";
 import MongoSpinner from "../../../components/mongo-spinner/mongo-spinner";
@@ -63,7 +63,7 @@ const CostumerPage = () => {
           CloseDialogButtonStyle={Style.CloseDialogButton}
           wrapperStyle={Style.Wrapper}
          >
-           <CustomerFrom 
+           <NewOrder 
              STATE_KEY={STATE_KEY}
            />
         </UiDialog> 

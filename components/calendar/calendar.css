@@ -6,33 +6,32 @@
 }
 
 
-.vendor-calindre{
+.calindre{
     border:unset;
-    
     border:1px solid;
     padding: 10px;
-    margin: 20px 0;
+    margin: 10px 0;
     box-shadow: 2px 1px 1px var(--therd);
     border-color:var(--therd);
     border-radius:3px;
-    width:300px;
+    width:100%;
     transform: scale(1);
-
+    
      
 }
-.vendor-calindre:hover{
-
+.calindre:hover{
     transform: scale(1.1);
     transition: all 2s ease-out;
-
 }
 
-.vendor-calinder-clear-btn{
+.calinder-clear-btn{
   position:unset;
   position:absolute;
-  right:90%
+  right:90%;
+  
+  
 }
-.vendor-calinder-clear-btn:hover{
+.calinder-clear-btn:hover{
 
     transform: scale(1.1);
     transition: all 1s ease-out;
@@ -40,13 +39,13 @@
 }
 
 @media  (min-width: 600px)  {
-    .vendor-calindre{
+    .calindre{
         width:500px;
     }
   }
 
 @media (min-width: 900px)  {
-    .vendor-calindre{
+    .calindre{
         width:700px;
     }
   }

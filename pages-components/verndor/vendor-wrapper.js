@@ -18,11 +18,11 @@ const VendorWrapper=()=>{
 
 // updates to DOM
   const [edit ,setEdit] = useState(false)
-  const [Vendor, setVendor] = useState(user?.state?.[STATE_KEY]?.isVendor || false);
+  const [Vendor, setVendor] = useState(user?.[STATE_KEY]?.isVendor || false);
 
   useEffect(() => {
-    if (user?.state?.[STATE_KEY]?.isVendor) {
-      setVendor(user.state[STATE_KEY].isVendor);
+    if (user?.[STATE_KEY]?.isVendor) {
+      setVendor(user?.[STATE_KEY].isVendor);
     }
   }, [user]);
 
@@ -33,7 +33,7 @@ const VendorWrapper=()=>{
   else if (!edit && Vendor ) {
            return  <VendorDisplay      
                      phone={
-                         user?.state?.Info?.phone ||
+                         user?.Info?.phone ||
                          <Link
                            style={{textDecoration:"none", color:`blue`}} 
                            href="/profile"
@@ -42,9 +42,9 @@ const VendorWrapper=()=>{
                          }
                      setEdit={setEdit}
                      STATE_KEY={STATE_KEY}
-                     BussniseName={user.state[STATE_KEY].BussniseName}
-                     price={user.state[STATE_KEY].price}
-                     description={user.state[STATE_KEY].description}
+                     BussniseName={user[STATE_KEY].BussniseName}
+                     price={user[STATE_KEY].price}
+                     description={user[STATE_KEY].description}
                      isVendor={Vendor}
                    />
   }

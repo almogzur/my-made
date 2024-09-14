@@ -15,11 +15,10 @@ registerLocale('he', he )
 const Calinder = ({
     id,
     text,
-    placeholder,
-    title,
     PropsOnChange,
     required,
-    STATE_KEY
+    STATE_KEY,
+    lableStyle,
     }
     ) => {
   
@@ -37,35 +36,25 @@ const Calinder = ({
  },[state[STATE_KEY][id]])
 
 
-  
-  const labelStyle = {       
-      display:'flex',
-      flexDirection:'column',
-      justifyContent:'center',
-      alignItems:'center', 
-      width:"100%",
-
-      }
-
   const handleChange = (e) => {
     
     const value = e
     PropsOnChange(id, value);
   };
 
-  
 
 
   return (
+    <>
    <label 
-   htmlFor={id}
-     style={labelStyle}
+     htmlFor={id}
+      
      >
     <strong>{text}</strong>
+    </label>
      <DatePicker 
         locale={he}
         required={required? true:false}
-        title={title}
         withPortal
         id={id} 
         selected={startDate} 
@@ -83,22 +72,15 @@ const Calinder = ({
         showFullMonthYearPicker
         showPreviousMonths
         showPopperArrow
-        placeholderText={placeholder}
-     
         isClearable
         containerRef={"main"}
-        className="vendor-calindre"
+        className="calindre"
         clearButtonClassName="vendor-calinder-clear-btn"
         popperClassName="vendor-calindr"
         timeIntervals={15}
-        dateFormat="PPp"
-        
-
-   
-
-        
+        dateFormat="PPp"        
        />
-    </label>
+</>
   );
 };
 

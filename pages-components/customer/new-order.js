@@ -1,18 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { StateContext } from '../../context';
-import InputElemnt from '../../components/input-elemnt';
-import Calinder from '../../components/calendar/index';
+import { StateContext } from '../../context.js';
+import Calinder from '../../components/calendar/cal';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import TextArea from '../../components/text-area/index';
-import Colors from '../../lib/colors';
+import TextArea from  '../../components/text-area/t-area.js'
+import Colors from '../../lib/colors.js';
 import { m, LazyMotion } from 'framer-motion';
-import f from "../../lib/features";
-import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
-import useUser from '../../lib/hooks/useUser';
+import f from "../../lib/features.js";
+import MongoSpinner from '../../components/mongo-spinner/mongo-spinner.js';
+import useUser from '../../lib/hooks/useUser.js';
 
-const headelinStyle = { textAlign: "center" };
-
+const textInputStyle = {
+  width:"100%",
+  padding:"10px",
+  marginTop:"10px",
+  marginBottom:"10px"
+}
 
 const CustomerFrom = ({ STATE_KEY }) => {
 
@@ -87,24 +90,35 @@ const CustomerFrom = ({ STATE_KEY }) => {
   }
 
   return (
-      <form style={{ marginBottom: "150px" }} onSubmit={handleSubmit}>
-        <h2 style={headelinStyle}> {`שלום ${session?.user?.name} `}</h2>
-        <h3 style={headelinStyle}>{`הזמן משק בית `}</h3>
+      <form style={{   }}
+           onSubmit={handleSubmit}
+      >
+        <h2 > 
+          {`שלום ${session?.user?.name} `}
+        </h2>
 
-        <div >  <h4>פרטי קשר</h4>
+        <h3 > הזמן משק בית </h3>
 
-          <InputElemnt
+        <label>          
+
+        <strong>טלפון</strong>
+
+        <br/>
+
+          <input
+            type='tele'
             id={"phone"}
-            text={"טלפון"}
             required={true}
             STATE_KEY={STATE_KEY}
             PropsOnChange={handleChange}
             value={state[STATE_KEY].phone}
+            style={textInputStyle}
             
           />
-        </div>
-
-        <div > <h4>פרטי הזמנה</h4>
+          
+        </label>
+        
+     <br/>
           <Calinder
             text={"תאירך ושעה"}
             id={"ResurveDate"}
@@ -112,43 +126,69 @@ const CustomerFrom = ({ STATE_KEY }) => {
             STATE_KEY={STATE_KEY}
             PropsOnChange={handleChange}
             value={state[STATE_KEY].ResurveDate}
+            lableStyle={{background:"red" ,width:"100%",height:"200px"}}
+
+            // Style in Css 
           />
           <TextArea
             id={"JobDescription"}
             value={state[STATE_KEY].JobDescription}
             PropsOnChange={handleChange}
             resize={false}
-            text={" תיאור "}
+            labelText="תיאור"
             placeholder={""}
+            StyleLable={{
+              display:'flex',
+              flexDirection:'column',
+      
+               }}
+              StyleTextArea={{
+
+              }}
           />           
-        </div>
 
 
-        <div >   <h4>פרטי בית</h4>
-          <InputElemnt
-            text={"כתובת"}
+        <div >  
+         <h4>פרטי בית</h4>
+
+         <label>כתובת
+
+          <input
             type={"location"}
             id={"addres"}
             STATE_KEY={STATE_KEY}
             value={state[STATE_KEY].addres}
             PropsOnChange={handleChange}
+            style={textInputStyle}
+
           />
-          <InputElemnt
-            type={"number"}
-            text={"מספר חדרים "}
-            STATE_KEY={"Customer"}
-            id="ApartmentRoomsSize"
-            required
-            value={state[STATE_KEY].ApartmentRoomsSize}
-            PropsOnChange={handleChange}
+         </label>
+
+         
+          <label>
+
+            <input
+              type={"number"}
+              text={"מספר חדרים "}
+              STATE_KEY={"Customer"}
+              id="ApartmentRoomsSize"
+              required
+              value={state[STATE_KEY].ApartmentRoomsSize}
+              PropsOnChange={handleChange}
+              style={textInputStyle}
           />
-          <InputElemnt
+          </label>
+
+
+          <input
             type={"number"}
             text={"מספר מקלחות"}
             STATE_KEY={STATE_KEY}
             id={"NumberOfBathRooms"}
             PropsOnChange={handleChange}
             value={state[STATE_KEY].NumberOfBathRooms}
+            style={textInputStyle}
+
           />
         </div>
 

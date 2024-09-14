@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { StateContext } from '../../context';
 import { useSession } from "next-auth/react";
 import InputElement from '../../components/input-elemnt';
-import TextArea from '../../components/text-area';
+import TextArea from '../../components/text-area/t-area';
 import Colors from '../../lib/colors'
 import { m, LazyMotion } from 'framer-motion';
 import f from '../../lib/features';

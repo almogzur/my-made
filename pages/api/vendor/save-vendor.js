@@ -31,10 +31,10 @@ const handler = async (req, res) => {
     const filter = { email: userEmail };
     const updateDoc = {
       $set: {
-        "state.Vendor.BussniseName": BussniseName,
-        "state.Vendor.price": price,
-        "state.Vendor.description": description,
-        'state.Vendor.isVendor': true // on saving to db 
+        "Vendor.BussniseName": BussniseName,
+        "Vendor.price": price,
+        "Vendor.description": description,
+        'Vendor.isVendor': true // on saving to db 
       }
     };
 

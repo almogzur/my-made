@@ -3,6 +3,7 @@ import {useEffect,useState} from 'react'
 import { useRouter } from 'next/router'
 import useUser from '../../lib/hooks/useUser'
 import Colors from '../../lib/colors'
+import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
 
 
 
@@ -12,10 +13,7 @@ const CustomerOrderList=()=>{
     Wrapper:{
       paddingL:"0px",
       borderBottom:" solid 1px black",
-      width:"100%",
-
-    
-    },
+  },
     table:{      
       height:"70%",
       width:"100%",
@@ -39,14 +37,20 @@ const CustomerOrderList=()=>{
   const { data: session ,status ,update} = useSession()
   const { user , isLoading , isError } = useUser(session?.user?.email)
 
+  
   //useEffect(()=>{   })
 
-    if (status === 'loading') {
-     return <h1 style={{textAlign:'center'}}>Loading...</h1>
+  if (status === 'loading' || isLoading ) {
+     return <MongoSpinner propsname={"הזמנות"}/>
 }
 
+  
+
+    
+
 return (
-   <div style={Style.Wrapper}>
+
+     <div style={Style.Wrapper}>
    
      <h3 style={{ textAlign:"center"}}> הזמנות</h3>
      <table style={Style.table } >
@@ -66,23 +70,23 @@ return (
 
           <tr scope="col" style={Style.tableRow}>
              <td style={Style.cell}>1</td>
-             <td s>data</td>
-             <td>data</td>
-             <td>data</td>
+             <td s>...</td>
+             <td>...</td>
+             <td>...</td>
           </tr>
 
        <tr style={Style.tableRow}>
          <td style={Style.cell}>2</td>
-         <td>data</td>
-         <td>data</td>
-         <td>data</td>
+         <td>...</td>
+         <td>...</td>
+         <td>...</td>
        </tr>
        
       <tr style={Style.tableRow}>
         <td style={Style.cell}>3</td>
-        <td>data</td>
-        <td>data</td>
-        <td>data</td>
+        <td>...</td>
+        <td>...</td>
+        <td>...</td>
       </tr>
 
          </tbody>

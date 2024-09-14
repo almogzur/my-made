@@ -19,11 +19,11 @@ const FormDisplayWrapper = () => {
     return <MongoSpinner/>
   }
 
-  else if (!user.state || editInfo)  {
+  else if (!user || editInfo)  {
       return <ProfileForm setShowInfo={setEditInfo} /> 
   }
   
-     const { Info } = user?.state
+     const { Info } = user
    
       return <InfoDisplay
                  phone={Info?.phone}       

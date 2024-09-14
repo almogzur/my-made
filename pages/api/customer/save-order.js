@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 
 const handler = async (req, res) => {
-  const API_NAME = "UPDATE CUSTOMER INFO";
+  const API_NAME = "Save Orders APi ";
 
   console.log(API_NAME);
 
@@ -24,6 +24,7 @@ const handler = async (req, res) => {
   const userEmail = session.user.email;
   const database = client.db('my-made');
   const users = database.collection('users');
+
   const { phone, 
          addres, 
          ApartmentRoomsSize,
@@ -38,13 +39,13 @@ const handler = async (req, res) => {
     const filter = { email: userEmail };
     const updateDoc = {
       $set: {
-        "state.Customer.phone": phone,
-        "state.Customer.ApartmentRoomsSize": ApartmentRoomsSize,
-        "state.Customer.NumberOfBathRooms": NumberOfBathRooms,
-        "state.Customer.ResurveDate": ResurveDate,
-        "state.Customer.PriceRange": PriceRange,
-        "state.Customer.JobDescription": JobDescription,
-        "state.Customer.addres": addres,
+        "Customer.phone": phone,
+        "Customer.ApartmentRoomsSize": ApartmentRoomsSize,
+        "Customer.NumberOfBathRooms": NumberOfBathRooms,
+        "Customer.ResurveDate": ResurveDate,
+        "Customer.PriceRange": PriceRange,
+        "Customer.JobDescription": JobDescription,
+        "Customer.addres": addres,
 
       }
     };

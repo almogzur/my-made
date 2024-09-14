@@ -38,7 +38,7 @@ const handler = async (req, res) => {
     const filter = { email: userEmail };
     const updateDoc = {
       $set: {
-        "state.Info.phone": phone,
+        "Info.phone": phone,
       }
     };
     

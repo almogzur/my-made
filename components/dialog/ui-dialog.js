@@ -56,23 +56,19 @@ const Dialog = ({
             left: "3px",
             right: "3px",
             bottom: '3px',
-            background: 'rgb(52,124,207)',
-            background: `radial-gradient(circle, ${Colors.c} 0%, ${"#fff"} 100%)`,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            alignContent: 'center',
+            background: `radial-gradient(circle, ${Colors.c} 0%, ${"#fff"} 100%)`, 
             borderRadius: "2px",
-            overflowX:"scroll"
+            overflowX:"hidden"
+
           },
           overlay: {
             position: 'fixed',
-            top: "50px",
+            top: "20px",
             left: "5px",
             right: "5px",
-            bottom: "70px",
-            borderRadius:"8px"
+            bottom: "60px",
+            borderRadius:"8px",
+            overflowX:"hidden"
           }
         }}
       >
@@ -84,7 +80,7 @@ const Dialog = ({
             style={{
               position: "absolute",
               top: "10px",
-              right: "10px",
+              left: "10px",
               borderRadius: "15px"
             }}
           >

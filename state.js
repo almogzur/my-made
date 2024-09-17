@@ -8,14 +8,14 @@ const State = {
        description:"",
  },
   Order: { 
-      orderPhone:0,
+      orderPhone:Number,
       ResurveDate:"",
       JobDescription:"",
       addres:"",
-      ApartmentSize:0,
-      ApartmentRoomsNumber:0,
-      NumberOfBaths:0,
-      orderPrice:0
+      ApartmentSize:Number,
+      ApartmentRoomsNumber:Number,
+      NumberOfBaths:Number,
+      orderPrice:Number
 
  },
  Orders:[]

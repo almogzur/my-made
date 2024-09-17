@@ -46,9 +46,8 @@ const NewOrder = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    console.log(state[STATE_KEY]);
-    
+  const handleSubmit = async () => {
+  
    // e.preventDefault();
     try {
       const response = await fetch('/api/customer/save-order', {
@@ -60,11 +59,9 @@ const NewOrder = () => {
       });
       const result = await response.json();
       if (response.ok) {
-        console.log(response);
         
-        console.log(result.message);
       } else {
-        alert("bad resopnce ")
+        alert("bad resopnce")
      }
     } catch (error) {
       console.error('Failed to update customer information', error);

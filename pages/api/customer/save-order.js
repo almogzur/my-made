@@ -38,31 +38,28 @@ const handler = async (req, res) => {
   } = req.body;
 
   try {
-    // Retrieve the user's phone number from the database
-    const user = await users.findOne({ email: userEmail });
-    
-    // Define the new order data, including the phone number from user info
+
     const newOrder = {
-      phone: orderPhone  ,   // Adding the user's phone number to the new order
+      orderPhone,  
       addres,
       ApartmentRoomsNumber,
       NumberOfBaths,
       ResurveDate,
       orderPrice,
       JobDescription,
-      createdAt: new Date()  // Add a timestamp for when the order was created
+      createdAt: new Date()  
     };
 
     // Find the user by their email and push the new order into the Orders array
     const filter = { email: userEmail };
     const updateDoc = {
-      $push: { Orders: newOrder }  // Push the new order into the Orders array
+      $push: { Orders: newOrder } 
     };
 
     const result = await users.updateOne(filter, updateDoc);
 
     if (result.modifiedCount >= 1) {
-      console.log("Order added successfully");
+       console.log("Order added successfully");
       return res.status(200).json({ message: 'Order added successfully' });
     } else {
       console.log("User not found or no changes made");

@@ -43,9 +43,7 @@ const ProfilePage = () => {
 
      <ProfileLayout>
         <ProfileHeader />
-        
         <FormDisplayWrapper  />
-        {/*<VenderActiveOrEdit  STATE_KEY={"Vendor"}  />**/}
      </ProfileLayout>
  
       </>

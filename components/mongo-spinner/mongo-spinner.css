@@ -9,10 +9,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction:column;
     background: rgb(0,104,75);
     background: linear-gradient(216deg, var(--a) 0%, var(--b) 58%, rgba(255,255,255,1) 100%);
-    
-    color:#00684b
+    color:#00684b;
   }
   
   .mongo-logo {
@@ -20,6 +20,10 @@
     height: 100px; /* Adjust size as needed */
     animation: spin 10s linear infinite;
     
+  }
+  .mongo-spinner-text{
+    color:#fff;
+    font-size:55px;
   }
   
   @keyframes spin {

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StateContext } from '../../context';
 import { useSession } from "next-auth/react";
-import InputElement from '../../components/input-elemnt';
 import TextArea from '../../components/text-area/t-area';
 import Colors from '../../lib/colors'
 import { m, LazyMotion } from 'framer-motion';
@@ -10,7 +9,12 @@ import useUser from '../../lib/hooks/useUser'
 import MongoSpinner from "../../components/mongo-spinner/mongo-spinner";
 
 
-const headelinStyle = { textAlign: "center" };
+const Style = {
+   headelinStyle : { textAlign: "center" },
+    FormStyle:  {display:'flex', flexDirection:'column',justifyContent:'center',},
+    InputStyle: { width:"100%", padding:"10px", marginTop : "10px", marginBottom:"10px" }
+
+}
 const descriptionPlaceholder = 
 ` המחיר המבוקש הוא לשעה או גלובלי  ... 
  מלל חופשי`;
@@ -47,7 +51,11 @@ const VendorForm = ({ setEdit }) => {
   }, [user, setState, isLoading, isError]);
   
 
-  const handleChange = (id, value) => {
+  const handleChange = (e) => {
+   
+    const id = e.target.id
+    const value = e.target.value
+
 
     setState(prevState => ({
         ...prevState,
@@ -82,48 +90,63 @@ const VendorForm = ({ setEdit }) => {
 
   };
 
+  const childrenOnChange = ( id,value)=>{
+    setState(prevState => ({
+      ...prevState,
+     [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value },
+
+  }));
+  }
+
 
 
   if (isLoading){
-    return <MongoSpinner/>
+    return <MongoSpinner propsname={STATE_KEY}/>
   }
 
  return (
       <form 
-         style={{ marginBottom: "150px" }}
+         style={Style.FormStyle}
          onSubmit={handleSubmit}
          >
-        <h2 style={headelinStyle}>{`שלום ${session?.user?.name}`}</h2>
-        <h3 style={headelinStyle}>{`הרשם כנותן שירות משק`}</h3>
+        <h2 style={Style.headelinStyle}>{`שלום ${session?.user?.name}`}</h2>
+        <h3 style={Style.headelinStyle}>{`הרשם כנותן שירות משק`}</h3>
 
-        <InputElement
-          type={"text"}
-          text={"שם"}
-          id={"BussniseName"}
-          STATE_KEY={STATE_KEY}
+
+      <label>שם
+           <input
+          type="text"
+          id="BussniseName"
           value={state[STATE_KEY].BussniseName }
-          PropsOnChange={handleChange}
-          required={true}
+          onChange={handleChange}
+          style={Style.InputStyle}
         />
+       </label>
 
-        <InputElement
-          type={"number"}
-          text={"מחיר"}
-          id={"price"}
-          contextType={"Vendor"}
+
+       <label>מחיר לשעת עבודה 
+        <input
+          type="number"
+          id="price"
           value={state[STATE_KEY].price }
-          PropsOnChange={handleChange}
+          onChange={handleChange}
           min="0.00"
           max="300.00"
-          required={true}
+          required
+          style={Style.InputStyle}
+
         />
+       </label>    
 
         <TextArea
           id={"description"}
           text={"תיאור"}
           value={state[STATE_KEY].description}
-          PropsOnChange={handleChange}
+          PropsOnChange={childrenOnChange}
           placeholder={descriptionPlaceholder}
+          resize={false}
+          StyleTextArea={Style.InputStyle}
+
         />
 
         <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>

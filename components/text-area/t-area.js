@@ -1,6 +1,5 @@
 import Colors from "../../lib/colors";
-import f from "../../lib/features";
-import { m, LazyMotion } from "framer-motion";
+
 
 const TextArea = ({
   id,
@@ -8,7 +7,6 @@ const TextArea = ({
   cols,
   value,
   PropsOnChange,
-  resize,
   labelText,
   placeholder,
   StyleLable,
@@ -22,14 +20,13 @@ const TextArea = ({
   };
 
   return (
-    <LazyMotion features={f}>
       <label
         style={StyleLable}
         htmlFor={id}
       >
         <strong>{ labelText}</strong>
 
-          <m.textarea
+          <textarea
             id={id}
             value={value}
             rows={rows || 4}
@@ -43,12 +40,11 @@ const TextArea = ({
             placeholder={placeholder ? placeholder : null}
             onChange={handleChange}
             style={StyleTextArea}
-            transition={{ duration: 1 }}
-            whileHover={{ scale: 1.1 }}
-            resize={resize?resize:null}
+        
+       
           />
       </label>
-        </LazyMotion>
+
 
   );
 };

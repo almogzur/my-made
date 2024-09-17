@@ -1,5 +1,4 @@
 const State = {
-  IsBlock:false,
   Info:{
      phone:"",  
  },
@@ -8,14 +7,16 @@ const State = {
        price:0,
        description:"",
  },
-  Customer: { 
-       addres:"",
-       phone:0,
-       ApartmentRoomsSize:"",
-       NumberOfBathRooms:0,
-       ResurveDate:"",
-       PriceRange:0,
-       JobDescription:"",
+  Order: { 
+      orderPhone:0,
+      ResurveDate:"",
+      JobDescription:"",
+      addres:"",
+      ApartmentSize:0,
+      ApartmentRoomsNumber:0,
+      NumberOfBaths:0,
+      orderPrice:0
+
  },
  Orders:[]
      

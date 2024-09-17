@@ -51,7 +51,7 @@ const VendorDisplay = ({
         <div>{phone}</div>
       </div>
       <div style={displayStyle}>
-        <div style={{ color: Colors.c }}>מחיר</div>
+        <div style={{ color: Colors.c }}>מחיר לשעת עבודה</div>
         <div>{price}</div>
       </div>
       <div style={displayStyle}>

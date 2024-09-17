@@ -10,14 +10,17 @@ import f from "../../lib/features.js";
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner.js';
 import useUser from '../../lib/hooks/useUser.js';
 
-const textInputStyle = {
+
+const STATE_KEY = "Order";
+
+const InputStyle = {
   width:"100%",
   padding:"10px",
   marginTop:"10px",
   marginBottom:"10px"
 }
 
-const CustomerFrom = ({ STATE_KEY }) => {
+const NewOrder = () => {
 
   const { data: session, status, update } = useSession();
   const [ state, setState ] = useContext(StateContext);
@@ -26,36 +29,17 @@ const CustomerFrom = ({ STATE_KEY }) => {
   const router = useRouter();
 
   // No Session
-  useEffect(() => {
+  useEffect(() => {   
     if (status === "unauthenticated") {
       router.push("/");
     }
-  }, [state]);
+  }, [status]);
 
-  // if Successful User Fetch
+  const handleChange = (e) => {
+     
+   const id = e.target.id
+   const value = e.target.value
 
-  // if dbUser set it as State
-  useEffect(() => {
-    if (!isError && !isLoading) {
-      setState(prevState => ({
-        ...prevState,
-        [STATE_KEY]: {
-          ...prevState[STATE_KEY],
-          phone: user?.state?.STATE_KEY?.phone,
-          addphone: user?.state?.STATE_KEY?.addphone,
-          ApartmentRoomsSize: user?.state?.STATE_KEY?.ApartmentRoomsSize,
-          NumberOfBathRooms: user?.state?.STATE_KEY?.NumberOfBathRooms,
-          ResurveDate: user?.state?.STATE_KEY?.ResurveDate,
-          PriceRange: user?.state?.STATE_KEY?.PriceRange,
-          JobDescription: user?.state?.STATE_KEY?.JobDescription,
-          addres: user?.state?.STATE_KEY?.addres,
-          
-        },
-      }));
-    }
-  }, [user, STATE_KEY, setState, isError , isLoading]);
-
-  const handleChange = (id, value) => {
     setState(prevState => ({
       ...prevState,
       [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value }
@@ -63,9 +47,11 @@ const CustomerFrom = ({ STATE_KEY }) => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(state[STATE_KEY]);
+    
    // e.preventDefault();
     try {
-      const response = await fetch('/api/customer/save-customer', {
+      const response = await fetch('/api/customer/save-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -85,8 +71,16 @@ const CustomerFrom = ({ STATE_KEY }) => {
     }
   };
 
+  const childrenOnChange = ( id,value)=>{
+    setState(prevState => ({
+      ...prevState,
+     [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value },
+
+  }));
+  }
+
   if (status === "loading" ) {
-    return <MongoSpinner />;
+    return <MongoSpinner propsname={STATE_KEY} />;
   }
 
   return (
@@ -99,98 +93,108 @@ const CustomerFrom = ({ STATE_KEY }) => {
 
         <h3 > הזמן משק בית </h3>
 
-        <label>          
-
-        <strong>טלפון</strong>
-
+        <label> <strong>טלפון</strong>
         <br/>
-
           <input
-            type='tele'
-            id={"phone"}
-            required={true}
-            STATE_KEY={STATE_KEY}
-            PropsOnChange={handleChange}
-            value={state[STATE_KEY].phone}
-            style={textInputStyle}
+            type='tel'
+            id={"orderPhone"}
+            required
+            onChange={handleChange}
+            value={state[STATE_KEY].orderPhone}
+            style={{...InputStyle ,  background : user?.Info?.phone ? "lightgray ": null }}
+            
             
           />
           
         </label>
         
-     <br/>
-          <Calinder
-            text={"תאירך ושעה"}
-            id={"ResurveDate"}
-            placeholder={""}
+   
+          <Calinder  text={"תאירך ושעה"}
+            id="ResurveDate"
             STATE_KEY={STATE_KEY}
-            PropsOnChange={handleChange}
+            PropsOnChange={childrenOnChange}
             value={state[STATE_KEY].ResurveDate}
             lableStyle={{background:"red" ,width:"100%",height:"200px"}}
-
             // Style in Css 
           />
-          <TextArea
-            id={"JobDescription"}
-            value={state[STATE_KEY].JobDescription}
-            PropsOnChange={handleChange}
-            resize={false}
-            labelText="תיאור"
-            placeholder={""}
-            StyleLable={{
-              display:'flex',
-              flexDirection:'column',
-      
-               }}
-              StyleTextArea={{
 
-              }}
+
+          <TextArea  labelText="תיאור"
+            id="JobDescription"
+            value={state[STATE_KEY].JobDescription}
+            PropsOnChange={childrenOnChange}
+            placeholder={" תיאור העבודה בקצרה "}
+            StyleLable={{ display:'flex',flexDirection:'column',}}
+            StyleTextArea={{}}
           />           
 
 
-        <div >  
+       
          <h4>פרטי בית</h4>
 
-         <label>כתובת
+         <label ><strong>כתובת</strong>
 
           <input
-            type={"location"}
-            id={"addres"}
-            STATE_KEY={STATE_KEY}
+            type="text"
+            id="addres"
             value={state[STATE_KEY].addres}
-            PropsOnChange={handleChange}
-            style={textInputStyle}
+            onChange={handleChange}
+            style={InputStyle}
+            required
 
           />
          </label>
 
          
-          <label>
-
-            <input
-              type={"number"}
-              text={"מספר חדרים "}
-              STATE_KEY={"Customer"}
-              id="ApartmentRoomsSize"
+          <label><strong>מספר חדרים</strong> 
+           <input
+              type="number"
+              id="ApartmentRoomsNumber"
               required
-              value={state[STATE_KEY].ApartmentRoomsSize}
-              PropsOnChange={handleChange}
-              style={textInputStyle}
+              value={state[STATE_KEY].ApartmentRoomsNumber}
+              onChange={handleChange}
+              style={InputStyle}
           />
           </label>
 
-
-          <input
-            type={"number"}
-            text={"מספר מקלחות"}
-            STATE_KEY={STATE_KEY}
-            id={"NumberOfBathRooms"}
-            PropsOnChange={handleChange}
-            value={state[STATE_KEY].NumberOfBathRooms}
-            style={textInputStyle}
+          <label><strong>מספר מקלחות </strong> 
+         <input
+            type="number"
+            id="NumberOfBaths"
+            onChange={handleChange}
+            value={state[STATE_KEY].NumberOfBaths}
+            style={InputStyle}
 
           />
-        </div>
+          </label>
+
+          <label><strong>מחיר שעתי</strong>
+          
+            <input
+              id="orderPrice"
+              type='number'
+              style={InputStyle}
+              value={state[STATE_KEY].orderPrice}
+              onChange={handleChange}
+            />
+          </label>
+
+          <label><strong>גודל הדירה במטרים </strong>
+            <input
+            
+              type="text"
+              id="ApartmentSize"
+              style={InputStyle}
+              value={state[STATE_KEY].ApartmentSize}
+              onChange={handleChange}
+            />
+
+
+
+          </label>
+
+
+      
 
        
   
@@ -223,4 +227,4 @@ const CustomerFrom = ({ STATE_KEY }) => {
   );
 };
 
-export default CustomerFrom;
+export default NewOrder;

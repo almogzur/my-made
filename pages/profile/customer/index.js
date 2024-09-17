@@ -14,7 +14,6 @@ const CostumerPage = () => {
 
 
 
-  const STATE_KEY = "Customer";
   const router = useRouter();
    const { data: session, status } = useSession()
 
@@ -63,9 +62,7 @@ const CostumerPage = () => {
           CloseDialogButtonStyle={Style.CloseDialogButton}
           wrapperStyle={Style.Wrapper}
          >
-           <NewOrder 
-             STATE_KEY={STATE_KEY}
-           />
+           <NewOrder/>
         </UiDialog> 
       </ProfileLayout>
 

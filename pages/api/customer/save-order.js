@@ -3,9 +3,11 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 
 const handler = async (req, res) => {
-  const API_NAME = "Save Orders APi ";
+
+  const API_NAME = "Save Orders API ";
 
   console.log(API_NAME);
+  console.log(req.body);
 
   if (req.method !== 'POST') {
     res.setHeader('Allow', ['POST']);
@@ -25,45 +27,50 @@ const handler = async (req, res) => {
   const database = client.db('my-made');
   const users = database.collection('users');
 
-  const { phone, 
-         addres, 
-         ApartmentRoomsSize,
-         NumberOfBathRooms,
-         ResurveDate,
-         PriceRange, 
-         JobDescription,
-        } = req.body;
+  const {  
+    orderPhone,
+    addres, 
+    ApartmentRoomsNumber,
+    NumberOfBaths,
+    ResurveDate,
+    orderPrice, 
+    JobDescription,
+  } = req.body;
 
   try {
-    // Find the user by their email and update their customer information
+    // Retrieve the user's phone number from the database
+    const user = await users.findOne({ email: userEmail });
+    
+    // Define the new order data, including the phone number from user info
+    const newOrder = {
+      phone: orderPhone  ,   // Adding the user's phone number to the new order
+      addres,
+      ApartmentRoomsNumber,
+      NumberOfBaths,
+      ResurveDate,
+      orderPrice,
+      JobDescription,
+      createdAt: new Date()  // Add a timestamp for when the order was created
+    };
+
+    // Find the user by their email and push the new order into the Orders array
     const filter = { email: userEmail };
     const updateDoc = {
-      $set: {
-        "Customer.phone": phone,
-        "Customer.ApartmentRoomsSize": ApartmentRoomsSize,
-        "Customer.NumberOfBathRooms": NumberOfBathRooms,
-        "Customer.ResurveDate": ResurveDate,
-        "Customer.PriceRange": PriceRange,
-        "Customer.JobDescription": JobDescription,
-        "Customer.addres": addres,
-
-      }
+      $push: { Orders: newOrder }  // Push the new order into the Orders array
     };
 
     const result = await users.updateOne(filter, updateDoc);
 
     if (result.modifiedCount >= 1) {
-      console.log("Customer Info Updated");
-      return res.status(200).json({ message: 'Customer profile updated successfully' });
+      console.log("Order added successfully");
+      return res.status(200).json({ message: 'Order added successfully' });
     } else {
       console.log("User not found or no changes made");
       return res.status(200).json({ message: 'User not found or no changes made' });
     }
   } catch (error) {
-    console.error(API_NAME, 'Error updating customer profile:', error);
-    return res.status(500).json({ message: 'Error updating customer profile', error });
-  } finally {
-    // Close the database connection if needed
+    console.error(API_NAME, 'Error adding order:', error);
+    return res.status(500).json({ message: 'Error adding order', error });
   }
 };
 

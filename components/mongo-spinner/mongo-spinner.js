@@ -7,7 +7,7 @@ const MongoSpinner = ({propsname}) => {
   return (
     <div className="mongo-spinner">
         <DiMongodb className="mongo-logo"/><br/>
-        <h2 className="mongo-spinner-text" >{propsname}</h2>
+        <h6 className="mongo-spinner-text" >{propsname}</h6>
     </div>
   );
 };

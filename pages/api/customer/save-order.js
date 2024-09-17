@@ -1,6 +1,7 @@
 import clientPromise from '../../../lib/db';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
+import { v4 as uuidv4 } from 'uuid'; // Import UUID
 
 const handler = async (req, res) => {
 
@@ -35,6 +36,7 @@ const handler = async (req, res) => {
     ResurveDate,
     orderPrice, 
     JobDescription,
+
   } = req.body;
 
   try {
@@ -47,7 +49,10 @@ const handler = async (req, res) => {
       ResurveDate,
       orderPrice,
       JobDescription,
-      createdAt: new Date()  
+      createdAt: new Date()  ,
+      orderId: uuidv4(), 
+      orderStatus:"Open" // this will be toogel by Vendor to | padding | close 
+
     };
 
     // Find the user by their email and push the new order into the Orders array

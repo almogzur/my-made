@@ -16,7 +16,7 @@ const FormDisplayWrapper = () => {
   if (isError){return <p>error</p>}
 
   else if (status ==="loading" || isLoading ){
-    return <MongoSpinner/>
+    return <MongoSpinner propsname={"עדכון טלפון"}/>
   }
 
   else if (!user || editInfo)  {

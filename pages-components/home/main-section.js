@@ -102,8 +102,8 @@ function  Main() {
     transform: `translateY(${scrollY * 0.7}px) rotate(${rotation}deg)`,
   };
 
-  if (status === "loading") {
-    return <h1>Loading...</h1>;
+  if (status === "loading" ) {
+    return <MongoSpinner propsname={"בודק נתונים"}/>;
   }
 
   return (

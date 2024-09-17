@@ -22,8 +22,8 @@
     
   }
   .mongo-spinner-text{
-    color:#fff;
-    font-size:55px;
+    color:#00684b;
+    font-size:35px;
   }
   
   @keyframes spin {

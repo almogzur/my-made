@@ -63,14 +63,7 @@ const ProfileLayout = ({ children }) => {
             />
         </CostumeLink>
 
-        <CostumeLink
-             text={"לוח"}
-              href={"/board"}
-              linkStyle={DefaultLinkStyle}
-              divStyle={DivDefaultStyle}
-          >
-           <FontAwesomeIcon size="1x" color={Colors.d} icon={faClipboard}/>
-        </CostumeLink>
+    
 
       </SideBar>
 

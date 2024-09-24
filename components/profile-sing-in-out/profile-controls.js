@@ -1,4 +1,5 @@
 import { useSession, signIn, signOut } from "next-auth/react";
+import useUser from "../../lib/hooks/useUser";
 import Link from "next/link";
 import { m, LazyMotion } from 'framer-motion';
 import Image from "next/image";
@@ -7,9 +8,13 @@ import Colors from "../../lib/colors";
 import f from '../../lib/features';
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import CostumeLink from "../costume-link/costume-link";
+import {faClipboard} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function ProfileControls() {
   const { data: session , status } = useSession();
+  const { user, isLoading, isError } = useUser(session?.user?.email);
   const router = useRouter();
   const { pathname } = router;
 
@@ -19,7 +24,9 @@ function ProfileControls() {
   }, [pathname]);
 
 
-  if ( !session && status !=="loading" ) {
+  if ( !session  ) {
+
+    // no Session
     return (
       <LazyMotion features={f}>
         <m.button
@@ -44,6 +51,7 @@ function ProfileControls() {
     );
   }
 
+   // pathName
   else if ( pathname === "/"  ) {
     return (
       <>
@@ -104,6 +112,7 @@ function ProfileControls() {
     );
 
   }
+  
 
   else {
     return (
@@ -119,6 +128,7 @@ function ProfileControls() {
           }}
         >
           <m.div
+         
           animate={ {rotate:360}}
             style={{
               marginTop:"3px",
@@ -133,7 +143,7 @@ function ProfileControls() {
               width:"70px",
              
             }}
-            transition={{ type: "spring", duration: 1 }}
+          transition={{ type: "spring", duration: 1 }}
           >
             <Link href={"/profile"} shallow={true}>
               <Image
@@ -145,9 +155,20 @@ function ProfileControls() {
                 fetchPriority="auto"
               />
             </Link>
+ 
           </m.div>
 
-
+          {/* {  Object.entries(user.Vendore)?  // this will render only if yser is vendor 
+             <CostumeLink
+                text={"לוח"}
+                href={"/board"}  
+                divStyle={{}}
+          >
+           <FontAwesomeIcon size="1x" color={Colors.d} icon={faClipboard}/>
+             </CostumeLink>
+             :
+             null
+           } */}
           <m.button
             style={{
        
@@ -158,9 +179,9 @@ function ProfileControls() {
               color: Colors.d,
               width:"70px"
             }}
-            transition={{ duration: 1 }}
-            whileHover={{ rotate: 360 }}
-            onClick={() => signOut({ callbackUrl: "/" })}
+              transition={{ duration: 1 }}
+              whileHover={{ rotate: 360 }}
+              onClick={() => signOut({ callbackUrl: "/" })}
           >
             <FaPowerOff size={40} />
           </m.button>

@@ -1,16 +1,11 @@
 
 
 
+board link will only be seen by Vendors 
+and will link out if not 
 
-  * config TSwitch css and state 
+change the nav 
 
-* user is customer  will render as a div under profile page i user updated hes info 
-* and the vendor page itself will be gray if IS vendor is true
-* and a button to chnage back or edit 
+create board layout 
 
-
-* buld Board db quary and UI
-
-* add comment section to user Profile 
-
-*  ad location and map component
+hendel order update from new order component

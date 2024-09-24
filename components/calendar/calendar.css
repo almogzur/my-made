@@ -38,16 +38,5 @@
     
 }
 
-@media  (min-width: 600px)  {
-    .calindre{
-        width:500px;
-    }
-  }
 
-@media (min-width: 900px)  {
-    .calindre{
-        width:700px;
-    }
-  }
-  
   

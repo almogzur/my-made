@@ -36,6 +36,8 @@ const handler = async (req, res) => {
     ResurveDate,
     orderPrice, 
     JobDescription,
+    city,
+    ApartmentSize
 
   } = req.body;
 
@@ -43,16 +45,17 @@ const handler = async (req, res) => {
 
     const newOrder = {
       orderPhone,  
+      ResurveDate,
+      JobDescription,
+      city,
       addres,
       ApartmentRoomsNumber,
       NumberOfBaths,
-      ResurveDate,
       orderPrice,
-      JobDescription,
       createdAt: new Date()  ,
       orderId: uuidv4(), 
-      orderStatus:"Open" // this will be toogel by Vendor to | padding | close 
-
+      orderStatus:"Open", // this will be toogel by Vendor to | padding | close 
+      ApartmentSize
     };
 
     // Find the user by their email and push the new order into the Orders array

@@ -15,7 +15,9 @@ const State = {
       ApartmentSize:Number,
       ApartmentRoomsNumber:Number,
       NumberOfBaths:Number,
-      orderPrice:Number
+      orderPrice:Number,
+      city:""
+      
 
  },
  Orders:[]

@@ -20,9 +20,10 @@ const CostumerPage = () => {
 
    const Style =  {
       Wrapper:{
+        
         marginTop:"20px",
         margingBottom:"20px",
-        height:"70px",
+        height:"40px",
         display:'flex',
         flexDirection:'row',
         justifyContent:'center',
@@ -31,7 +32,8 @@ const CostumerPage = () => {
       CloseDialogButton:{
         border:"none",
         background:Colors.b,
-        color:Colors.d
+        color:Colors.d,
+        width:"150px"
       },
 
     }
@@ -50,7 +52,7 @@ const CostumerPage = () => {
     <>
           <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Your Page Title</title>
+        <title>לקוח</title>
         
     </Head>
     <AppHead/>
@@ -61,8 +63,10 @@ const CostumerPage = () => {
           buttonText={"הזמנה חדשה "}
           CloseDialogButtonStyle={Style.CloseDialogButton}
           wrapperStyle={Style.Wrapper}
+          
          >
-           <NewOrder/>
+           <NewOrder newOrder={true}/>
+           
         </UiDialog> 
       </ProfileLayout>
 

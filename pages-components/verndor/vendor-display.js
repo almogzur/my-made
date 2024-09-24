@@ -3,10 +3,7 @@ import {useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Colors from '../../lib/colors';
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
-
-
-const STATE_KEY = "Vendor";
-
+import Header from '../../components/app-head/app-head';
 
 const VendorDisplay = ({ 
                 BussniseName, 
@@ -18,8 +15,6 @@ const VendorDisplay = ({
                 }) =>
      {
   const { data: session, status, update } = useSession();
-
-  
   const headlineStyle = { textAlign: "center", color: Colors.primary, fontSize: '24px', marginBottom: '20px' };
 
   useEffect(() => {
@@ -38,9 +33,11 @@ const VendorDisplay = ({
   };
 
   return (
+    <>   
+
+     <Header/>
     <div style={{ marginBottom: "0px", padding: '10px', }}>
-      <h2 style={headlineStyle}>{`שלום ${session?.user?.name}`}</h2>
-      <h3 style={headlineStyle}>{ `נרשמת כנותן שירות להלן הפרטים `}</h3>
+      <h3 style={headlineStyle}>{ ` פרטים `}</h3>
 
       <div style={displayStyle}>
         <div style={{ color: Colors.c }}>שם</div>
@@ -63,7 +60,6 @@ const VendorDisplay = ({
         <div style={{ color: Colors.c }}> זמין (ניתן לערוך בדף הפרופיל)</div>
         <div>{isVendor ? 'כן' : 'לא'}</div>
       </div>
-
 
       <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
         <button
@@ -89,6 +85,8 @@ const VendorDisplay = ({
         </button>
       </div>
     </div>
+    </>
+
   );
 };
 

@@ -145,7 +145,7 @@ const VendorForm = ({ setEdit }) => {
           PropsOnChange={childrenOnChange}
           placeholder={descriptionPlaceholder}
           resize={false}
-          StyleTextArea={Style.InputStyle}
+          StyleTextArea={{...Style.InputStyle, resize:"nonc" }}
 
         />
 

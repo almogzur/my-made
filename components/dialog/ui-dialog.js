@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { m, LazyMotion } from "framer-motion";
+import { m, LazyMotion, color } from "framer-motion";
 import ReactModal from "react-modal";
 import Colors from "../../lib/colors";
 import f from '../../lib/features'
@@ -12,23 +12,24 @@ const Dialog = ({
   CloseDialogButtonStyle,
   wrapperStyle,
   perentOpenModle,
-  setPerentOpenModle
+  perntHendler,  
 }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleModal = () => {
-     if(perentOpenModle){
-        setPerentOpenModle(!perentOpenModle)
-     }else{
-    setShowModal(!showModal);
-     }
+     console.log(" children click");
+     
+          setShowModal(!showModal); 
   }
   
   return (
     <div
       style={wrapperStyle ? wrapperStyle : null}
     >
-      {/** Closed*/}
+      { /** Closed*/}
+  
+  {
+    perentOpenModle? null:
       <m.button
           transition={{duration:0.5, stiffness:50}}
           whileHover={{
@@ -43,12 +44,12 @@ const Dialog = ({
       >
         <strong>{buttonText}</strong>
       </m.button>
-
+      }
       {/** Open */}
       <ReactModal
         ariaHideApp={false}
-        isOpen={ perentOpenModle ? perentOpenModle :  showModal}
-        onRequestClose={handleModal}
+        isOpen={perentOpenModle ? perentOpenModle : showModal }
+        onRequestClose={perentOpenModle ? perentOpenModle : showModal}
         style={{
           content: {
             position: "absolute",
@@ -56,9 +57,11 @@ const Dialog = ({
             left: "3px",
             right: "3px",
             bottom: '3px',
-            background: `radial-gradient(circle, ${Colors.c} 0%, ${"#fff"} 100%)`, 
             borderRadius: "2px",
-            overflowX:"hidden"
+            overflowX:"hidden",
+            background:Colors.b,
+            color:Colors.d,
+          
 
           },
           overlay: {
@@ -68,23 +71,24 @@ const Dialog = ({
             right: "5px",
             bottom: "60px",
             borderRadius:"8px",
-            overflowX:"hidden"
+            overflowX:"hidden",
+            background:Colors.d
           }
         }}
       >
         {children}
         <LazyMotion features={f}>
           <m.button
-            whileHover={{ background: "red" }}
-            onClick={handleModal}
+            whileHover={{ background: Colors.d }}
+            onClick={perentOpenModle? perntHendler: handleModal}
             style={{
               position: "absolute",
-              top: "10px",
-              left: "10px",
-              borderRadius: "15px"
+              top: "25px",
+              left: "25px",
+              borderRadius: "5px"
             }}
           >
-            <FontAwesomeIcon size="2x" icon={faTimes} />
+            <FontAwesomeIcon size="3x" icon={faTimes} />
           </m.button>
         </LazyMotion>
       </ReactModal>

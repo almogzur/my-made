@@ -1,9 +1,19 @@
 import { useSession } from 'next-auth/react';
 import {useContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation'
+
 import Colors from '../../lib/colors';
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
-import Header from '../../components/app-head/app-head';
+import AppHeader from '../../components/app-head/app-head';
+import CostumeLink from '../../components/costume-link/costume-link'
+import { FaRegClipboard } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
+
+import useUser from '../../lib/hooks/useUser';
+
+
+
+
 
 const VendorDisplay = ({ 
                 BussniseName, 
@@ -14,77 +24,128 @@ const VendorDisplay = ({
                 phone,
                 }) =>
      {
+  const router = useRouter()
   const { data: session, status, update } = useSession();
-  const headlineStyle = { textAlign: "center", color: Colors.primary, fontSize: '24px', marginBottom: '20px' };
+  const { user , isLoading , isError } = useUser(session?.user?.email)
 
-  useEffect(() => {
-    // Add any required effect here
-  }, []);
+
 
   if (status === 'loading') {
     return <MongoSpinner />;
   }
 
-  const displayStyle = {
+
+  const Style = {
+   headline: { 
+       textAlign: "center",
+       fontSize: '24px',
+       marginBottom: '20px',
+   },
+   wrapper:{ 
+    marginBottom: "0px",
+     display:'flex',
+     flexWrap:"wrap",
+     flexDirection:"row",
+     justifyContent:"space-around",
+
+   },
+   div:{
     padding: "5px",
     borderRadius: "5px",
     marginBottom: "10 x",
     boxShadow: `0 2px 4px ${Colors.c}`,
-  };
+    margin:"5px",
+    height:"70px",
+    width: '150px',
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'space-evenly',
+    overflow:"clip"
+
+   },
+   buttonWrsapper:{ 
+       display: "flex",
+       justifyContent: "center",
+       marginTop: "15px",
+   },
+   button:{
+      height: "70px",
+      width: '150px',
+      borderRadius: "5px",
+      border:"none",
+      boxShadow: `0 2px 4px ${Colors.c}`,
+      background:"none",
+      fontSize: "20px",
+      cursor: "pointer",
+      textAlign: "center",
+      color: Colors.a,
+
+   }
+}
 
   return (
     <>   
 
-     <Header/>
-    <div style={{ marginBottom: "0px", padding: '10px', }}>
-      <h3 style={headlineStyle}>{ ` פרטים `}</h3>
+   <AppHeader/>
+   <h3 style={Style.headline}>{ ` פרטים `}</h3>
+    <div style={Style.wrapper}>
 
-      <div style={displayStyle}>
+      <div style={Style.div}>
         <div style={{ color: Colors.c }}>שם</div>
         <div>{BussniseName}</div>
       </div>
-      <div style={displayStyle}>
+      <div style={Style.div}>
         <div style={{ color: Colors.c }}>טלפון</div>
         <div>{phone}</div>
       </div>
-      <div style={displayStyle}>
-        <div style={{ color: Colors.c }}>מחיר לשעת עבודה</div>
+      <div style={Style.div}>
+        <div style={{ color: Colors.c }}>מחיר לשעת </div>
         <div>{price}</div>
       </div>
-      <div style={displayStyle}>
+      <div style={Style.div}>
+        <div style={{ color: Colors.c }}> זמין </div>
+        <div>{isVendor ? 'כן' : 'לא'}</div>
+      </div>
+      <div style={{...Style.div, width:"100%"}}>
         <div style={{ color: Colors.c }}>תיאור</div>
         <div>{description}</div>
       </div>
       
-      <div style={displayStyle}>
-        <div style={{ color: Colors.c }}> זמין (ניתן לערוך בדף הפרופיל)</div>
-        <div>{isVendor ? 'כן' : 'לא'}</div>
-      </div>
-
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
-        <button
+  
+  
+    </div>
+   
+    <div 
+         style={Style.buttonWrsapper}
+         >
+         <button
           type="button"
-          style={{
-            height: "60px",
-            width: '150px',
-            border: `1px solid ${Colors.border}`,
-            borderRadius: "3px",
-            background: Colors.buttonBackground,
-            fontSize: "20px",
-            cursor: "pointer",
-            textAlign: "center",
-            color: Colors.buttonText,
-            boxShadow: `3px 3px 3px 3px ${Colors.c}`,
-            transition: 'box-shadow 0.3s ease-in-out',
-          }}
+          style={Style.button}
           onClick={() => {setEdit(true)}}
-          onMouseOver={(e) => e.target.style.boxShadow = `0px 0px 0px 0px ${Colors.a}` }
-          onMouseOut={(e) => e.target.style.boxShadow =  `0px 4px 8px ${Colors.c}`}
         >
+        <MdEdit  size={"40px"} color={Colors.c} />
+        <br/>
+
           ערוך
         </button>
-      </div>
+        { 
+            user?.Vendor?.isVendor ? 
+    
+             <button
+                style={{...Style.button  }}
+                onClick={() => router.push('/board')}
+             >
+                   <FaRegClipboard   size={"40px"} color={Colors.c} />
+                   <br/>
+                   לוח
+             </button>
+             :
+             null
+
+          } 
     </div>
+
+
     </>
 
   );

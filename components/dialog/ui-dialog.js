@@ -1,6 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faTimes  } from "@fortawesome/free-solid-svg-icons";
+import { IoCloseCircle } from "react-icons/io5";
+
+
 import { m, LazyMotion, color } from "framer-motion";
 import ReactModal from "react-modal";
 import Colors from "../../lib/colors";
@@ -8,11 +11,12 @@ import f from '../../lib/features'
 
 const Dialog = ({
   children,
-  buttonText,
   CloseDialogButtonStyle,
   wrapperStyle,
   perentOpenModle,
-  perntHendler,  
+  perntHendler, 
+  buttonText,
+  Icon
 }) => {
   const [showModal, setShowModal] = useState(false);
 
@@ -41,15 +45,15 @@ const Dialog = ({
            }}
           style={CloseDialogButtonStyle ? CloseDialogButtonStyle : null}
           onClick={handleModal}
-      >
-        <strong>{buttonText}</strong>
+      >  
+      {   Icon? Icon: <strong> {buttonText}</strong>}
       </m.button>
       }
       {/** Open */}
       <ReactModal
         ariaHideApp={false}
         isOpen={perentOpenModle ? perentOpenModle : showModal }
-        onRequestClose={perentOpenModle ? perentOpenModle : showModal}
+        onRequestClose={handleModal}
         style={{
           content: {
             position: "absolute",
@@ -59,10 +63,7 @@ const Dialog = ({
             bottom: '3px',
             borderRadius: "2px",
             overflowX:"hidden",
-            background:Colors.b,
-            color:Colors.d,
-          
-
+            background:` linear-gradient(320deg, ${Colors.c} 11%, #fff 100%)`
           },
           overlay: {
             position: 'fixed',
@@ -72,8 +73,7 @@ const Dialog = ({
             bottom: "60px",
             borderRadius:"8px",
             overflowX:"hidden",
-            background:Colors.d
-          }
+            background:"gray"          }
         }}
       >
         {children}
@@ -83,16 +83,23 @@ const Dialog = ({
             onClick={perentOpenModle? perntHendler: handleModal}
             style={{
               position: "absolute",
-              top: "25px",
-              left: "25px",
-              borderRadius: "5px"
+              top: "15px",
+              left: "15px",
+              background:Colors.b,
+              color:Colors.d,
+              width:"40px",
+              height:"40px",
+              borderRadius:"10px",
+              display:'flex',
+              justifyContent:'center',
+              alignItems:'center',
+              alignContent:'center',     
             }}
           >
-            <FontAwesomeIcon size="3x" icon={faTimes} />
-          </m.button>
+          <IoCloseCircle  size="x2" />
+        </m.button>
         </LazyMotion>
       </ReactModal>
-
     </div>
   );
 }

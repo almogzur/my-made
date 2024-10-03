@@ -9,6 +9,8 @@ import AppHead from '../../../components/app-head/app-head'
 import CustomerOrderList from '../../../pages-components/customer/customer-order-list'
 import UiDialog from '../../../components/dialog/ui-dialog'
 import Colors from "../../../lib/colors";
+import { IoMdAddCircle } from "react-icons/io";
+import OldOrderList from "../../../pages-components/customer/customer-old-order-list";
 
 const CostumerPage = () => {
 
@@ -30,10 +32,20 @@ const CostumerPage = () => {
    
       },
       CloseDialogButton:{
+        position:"absolute",
+        top:"45px",
+        left:"5px",
         border:"none",
         background:Colors.b,
         color:Colors.d,
-        width:"150px"
+        width:"40px",
+        height:"40px",
+        borderRadius:"10px",
+        display:'flex',
+        justifyContent:'center',
+        alignItems:'center',
+        alignContent:'center',
+        
       },
 
     }
@@ -52,24 +64,21 @@ const CostumerPage = () => {
     <>
           <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>לקוח</title>
-        
+      <title>לקוח</title>
     </Head>
     <AppHead/>
-      <ProfileLayout>      
-        
+    <ProfileLayout>      
         <CustomerOrderList/>
         <UiDialog
-          buttonText={"הזמנה חדשה "}
           CloseDialogButtonStyle={Style.CloseDialogButton}
           wrapperStyle={Style.Wrapper}
-          
+          Icon={<IoMdAddCircle  size="2em"/>}
          >
            <NewOrder newOrder={true}/>
            
         </UiDialog> 
-      </ProfileLayout>
-
+        <OldOrderList/>
+    </ProfileLayout>
     </>
   );
 };

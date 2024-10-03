@@ -17,20 +17,30 @@ const InputStyle = {
   width: "100%",
   padding: "10px",
   marginTop: "10px",
-  marginBottom: "10px"
+  marginBottom: "10px",
+  fontWeight: "bold"
+
 };
 
 const NewOrder = ({ orderId, newOrder }) => {
+
   const { data: session, status } = useSession();
   const [state, setState] = useContext(StateContext);
   const { user, isLoading, isError } = useUser(session?.user?.email);
   const router = useRouter();
 
-  // Reset state when newOrder is true
 
+  // No Session
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  });
 
   // Fetch the order if orderId is provided
   useEffect(() => {
+   
+   
     if (orderId) { // Fetch order only if it's not a new order
       const existingOrder = user?.Orders?.find(order => order.orderId === orderId);
       if (existingOrder) {
@@ -40,22 +50,18 @@ const NewOrder = ({ orderId, newOrder }) => {
         }));
       }
 
-      return ()=>  
-
-           setState(prevState => ({
-        ...prevState,
-        [STATE_KEY]: []
-      }));
 
     }
+ 
+
+  // Component Will UnMounte Clear the State Oreder
+    return ()=> setState(prevState => ({
+      ...prevState,
+       [STATE_KEY]: []
+    }));
+
   }, [orderId, user, newOrder]);
 
-  // No Session
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/");
-    }
-  }, [status]);
 
   const handleChange = (e) => {
     const id = e.target.id;
@@ -66,28 +72,49 @@ const NewOrder = ({ orderId, newOrder }) => {
       [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value }
     }));
   };
+  
 
-  const handleSubmit = async (e) => {
-  //  e.preventDefault();
+  const createNewOrder = async () => {
     try {
       const response = await fetch('/api/customer/save-order', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(state[STATE_KEY])
+        body: JSON.stringify(state[STATE_KEY]),
       });
-
+  
       if (response.ok) {
-        console.log('Order saved successfully');
+        console.log('New order created successfully');
       } else {
-        alert("Failed to save order");
+        alert('Failed to create new order');
       }
     } catch (error) {
-      console.error('Failed to save order', error);
+      console.error('Failed to create new order', error);
     }
   };
 
+
+  const updateExistingOrder = async () => {
+    try {
+      const response = await fetch('/api/customer/edit-order', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...state[STATE_KEY], orderId }),
+      });
+  
+      if (response.ok) {
+        console.log('Order updated successfully');
+      } else {
+        alert('Failed to update order');
+      }
+    } catch (error) {
+      console.error('Failed to update order', error);
+    }
+  };
+  
   const childrenOnChange = (id, value) => {
     setState(prevState => ({
       ...prevState,
@@ -100,8 +127,7 @@ const NewOrder = ({ orderId, newOrder }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>{`שלום ${session?.user?.name}`}</h2>
+    <form onSubmit={orderId? updateExistingOrder: createNewOrder}>
       <h3>הזמן משק בית</h3>
 
       <label>
@@ -112,7 +138,7 @@ const NewOrder = ({ orderId, newOrder }) => {
           id="orderPhone"
           required
           onChange={handleChange}
-          value={state[STATE_KEY]?.orderPhone}
+          value={state[STATE_KEY].orderPhone}
           style={{ ...InputStyle }}
         />
       </label>
@@ -123,7 +149,7 @@ const NewOrder = ({ orderId, newOrder }) => {
         STATE_KEY={STATE_KEY}
         PropsOnChange={childrenOnChange}
         value={state[STATE_KEY]?.ResurveDate}
-        lableStyle={{ background: "red", width: "100%", height: "200px" }}
+        lableStyle={{  width: "100%", height: "200px" }}
       />
 
       <TextArea
@@ -133,7 +159,7 @@ const NewOrder = ({ orderId, newOrder }) => {
         PropsOnChange={childrenOnChange}
         placeholder="תיאור העבודה בקצרה"
         StyleLable={{ display: 'flex', flexDirection: 'column' }}
-        StyleTextArea={{ resize: "none" }}
+        StyleTextArea={{ resize: "none" ,   fontWeight: "bold"        }}
       />
 
       <RegionSelect
@@ -145,7 +171,7 @@ const NewOrder = ({ orderId, newOrder }) => {
         <input
           type="text"
           id="addres"
-          value={state[STATE_KEY]?.addres}
+          value={state[STATE_KEY].addres}
           onChange={handleChange}
           style={InputStyle}
           required
@@ -157,7 +183,7 @@ const NewOrder = ({ orderId, newOrder }) => {
           type="number"
           id="ApartmentRoomsNumber"
           required
-          value={state[STATE_KEY]?.ApartmentRoomsNumber}
+          value={state[STATE_KEY].ApartmentRoomsNumber}
           onChange={handleChange}
           style={InputStyle}
         />
@@ -167,7 +193,7 @@ const NewOrder = ({ orderId, newOrder }) => {
         <input
           type="number"
           id="NumberOfBaths"
-          value={state[STATE_KEY]?.NumberOfBaths || ''}
+          value={state[STATE_KEY].NumberOfBaths}
           onChange={handleChange}
           style={InputStyle}
         />
@@ -178,7 +204,7 @@ const NewOrder = ({ orderId, newOrder }) => {
           id="orderPrice"
           type="number"
           style={InputStyle}
-          value={state[STATE_KEY]?.orderPrice || ''}
+          value={state[STATE_KEY].orderPrice}
           onChange={handleChange}
         />
       </label>
@@ -188,7 +214,7 @@ const NewOrder = ({ orderId, newOrder }) => {
           type="text"
           id="ApartmentSize"
           style={InputStyle}
-          value={state[STATE_KEY]?.ApartmentSize || ''}
+          value={state[STATE_KEY].ApartmentSize}
           onChange={handleChange}
         />
       </label>
@@ -211,8 +237,8 @@ const NewOrder = ({ orderId, newOrder }) => {
             }}
             whileHover={{ boxShadow: `3px 3px 3px inset` ,background: Colors.d }}
           >
-            שלח הזמנה
-          </m.button>
+        {orderId? "עדכן ":" שלח הזמנה "}  
+        </m.button>
         </div>
       </LazyMotion>
     </form>

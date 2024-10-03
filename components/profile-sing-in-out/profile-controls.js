@@ -8,9 +8,12 @@ import Colors from "../../lib/colors";
 import f from '../../lib/features';
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import CostumeLink from "../costume-link/costume-link";
-import {faClipboard} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+
+
+
+
+
 
 function ProfileControls() {
   const { data: session , status } = useSession();
@@ -24,9 +27,10 @@ function ProfileControls() {
   }, [pathname]);
 
 
-  if ( !session  ) {
 
-    // no Session
+
+
+  if ( !session  ) {
     return (
       <LazyMotion features={f}>
         <m.button
@@ -51,8 +55,9 @@ function ProfileControls() {
     );
   }
 
-   // pathName
-  else if ( pathname === "/"  ) {
+   // ther is no direct pathing to Home with an active sesstion  
+   // BUT it you do manage to go ther this will render 
+   else if ( pathname === "/" && session  ) {
     return (
       <>
         <Link href={"/profile"} passHref>
@@ -112,6 +117,8 @@ function ProfileControls() {
     );
 
   }
+  ////////////////////////////////////////////////
+  ////////////////////////////////////////////////
   
 
   else {
@@ -124,7 +131,8 @@ function ProfileControls() {
             display: "flex",
             flexDirection: "row",
             justifyContent:"space-between",
-            width:"100%"
+            width:"100%",
+            
           }}
         >
           <m.div
@@ -158,17 +166,7 @@ function ProfileControls() {
  
           </m.div>
 
-          {/* {  Object.entries(user.Vendore)?  // this will render only if yser is vendor 
-             <CostumeLink
-                text={"לוח"}
-                href={"/board"}  
-                divStyle={{}}
-          >
-           <FontAwesomeIcon size="1x" color={Colors.d} icon={faClipboard}/>
-             </CostumeLink>
-             :
-             null
-           } */}
+ 
           <m.button
             style={{
        

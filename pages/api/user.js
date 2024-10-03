@@ -39,7 +39,7 @@ const handler = async (req, res) => {
     // Find the user by their session ID
     const user = await users.findOne(query,{},{});
 
-    console.log(API_NAME,"Returning DB USER")
+    //console.log(API_NAME,"Returning DB USER")
     
     if (!user) {
        console.log("User not found");

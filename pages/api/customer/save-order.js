@@ -45,11 +45,11 @@ const handler = async (req, res) => {
 
     const newOrder = {
       orderPhone,  
+      addres,
+      ApartmentRoomsNumber,
       ResurveDate,
       JobDescription,
       city,
-      addres,
-      ApartmentRoomsNumber,
       NumberOfBaths,
       orderPrice,
       createdAt: new Date()  ,

@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react';
-import { useContext, useState } from 'react';
+import { useContext, useState , Fragment } from 'react';
 import useUser from '../../lib/hooks/useUser';
 import Colors from '../../lib/colors';
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
@@ -48,14 +48,11 @@ const Style = {
     height: "35px",
     marginBottom: "15px",
   },
-  editButton: {
-    background: Colors.b,
-    color: Colors.c,
-    marginLeft: "10px",
-  },
+
 };
 
 const CustomerOrderList = () => {
+
   const { data: session, status, update } = useSession();
   const [state, setState] = useContext(StateContext)
   const { user, isLoading } = useUser(session?.user?.email);
@@ -64,7 +61,7 @@ const CustomerOrderList = () => {
   const [openDialog, setOpenDialog] = useState(false); // Track dialog state
 
   if (status === 'loading' || isLoading) {
-    return <MongoSpinner propsname={"רושם הזמנה חדשה"} />;
+    return <MongoSpinner/>;
   }
 
   const handleRowClick = (index) => {
@@ -73,17 +70,13 @@ const CustomerOrderList = () => {
 
   const handleRemoveOrder = async (orderId) => {
     setIsRemoving(true);
+  
+    const url = `/api/customer/removeorder?orderId=${orderId} `
     try {
-      const res = await fetch('/api/customer/remove-order', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ orderId }),
-      });
-
-      const data = await res.json();
-
+      const res = await fetch(url ,{ method:'DELETE'});
+      const data = await res.json()
+      console.log(data);
+  
       if (res.ok) {
         console.log('Order removed:', data.message);
         update(); 
@@ -100,19 +93,14 @@ const CustomerOrderList = () => {
 
   const closeDialog = () => {
 
-    setOpenDialog(false); // Close dialog
-
-    setState(prevState => ({
-      ...prevState,
-      Order: []// Resetting the state for a new order
-    }));
+    setOpenDialog(false)
   };
 
   return (
     <>
       {user?.Orders ? (
         <div style={Style.Wrapper}>
-          <h3 style={{ textAlign: "center" }}>הזמנות</h3>
+          <h3 style={{ textAlign: "center" }}>הזמנות פתוחות</h3>
           <table style={Style.table}>
             <thead style={Style.tableHead}>
               <tr style={Style.tableRow}>
@@ -124,7 +112,8 @@ const CustomerOrderList = () => {
             </thead>
             <tbody>
               {user?.Orders.map((order, index) => (
-                <>
+                <Fragment key={order.orderId}> 
+                {/* too add key to fragment need to import it can't use " <></>"" */}
                   <tr 
                     key={index} 
                     style={Style.tableRow} 
@@ -137,45 +126,56 @@ const CustomerOrderList = () => {
                   </tr>
 
                   {expandedOrder === index && (
-                    <tr style={{ ...Style.tableRow, ...Style.expandedRow , background:Colors.a , color:Colors.d , lineHeight:"25px"}}>
-                      <td colSpan="4">
+                    <tr
+                     style={{ ...Style.tableRow, ...Style.expandedRow , background:Colors.a , color:Colors.d , lineHeight:"25px"}}
+                     key={`expanded-${order.orderId}`}
+                     >
+                      <td colSpan="4"
+                  
+
+                      >
                           <strong> מחיר הזמנה : </strong> {order.orderPrice || "N/A"}<br/>
-                          <strong>תיאור :</strong> {order.JobDescription || "N/A"}<br/>
-                          <strong>מספר חדרים :</strong> {order.ApartmentRoomsNumber || "N/A"}<br/>
-                          <strong>מספר מקלחות : </strong> {order.NumberOfBaths || "N/A"}<br/>
-                          <strong>כתובת :</strong> {order.addres || "N/A"}<br/> {/* Address field */}
-                          <strong>עיר :</strong> {order.city || "N/A"}<br/>
-                          <strong>גודל הדירה במטרים :</strong> {order.ApartmentSize || "N/A"}<br/> {/* Apartment size */}
-                          <strong>תאריך ושעה :</strong> {new Date(order.ResurveDate).toLocaleString('he-IL') || "N/A"}<br/> {/* Reservation date */}
-                          <strong>נוצרה ב :</strong> {new Date(order.createdAt).toLocaleString('he-IL') || "N/A"}<br/>
-                          <strong>סטטוס הזמנה :</strong> {order.orderStatus || "N/A"}<br/> {/* Order status */}
-                          <strong>מזהה הזמנה :</strong> {order.orderId.slice(0,20) + " ... " || "N/A"}<br/>
+                          <strong> תיאור :</strong> {order.JobDescription || "N/A"}<br/>
+                          <strong> מספר חדרים  : </strong> {order.ApartmentRoomsNumber || "N/A"}<br/>
+                          <strong > מספר מקלחות : </strong> {order.NumberOfBaths || "N/A"}<br/>
+                          <strong >כתובת :</strong> {order.addres || "N/A"}<br/> {/* Address field */}
+                          <strong >עיר :</strong> {order.city || "N/A"}<br/>
+                          <strong >גודל הדירה במטרים :</strong> {order.ApartmentSize || "N/A"}<br/> {/* Apartment size */}
+                          <strong >תאריך ושעה :</strong> {new Date(order.ResurveDate).toLocaleString('he-IL') || "N/A"}<br/> {/* Reservation date */}
+                          <strong >נוצרה ב :</strong> {new Date(order.createdAt).toLocaleString('he-IL') || "N/A"}<br/>
+                          <strong >סטטוס הזמנה :</strong> {order.orderStatus || "N/A"}<br/> {/* Order status */}
+                          <strong >מזהה הזמנה :</strong> {order.orderId.slice(0,20) + " ... " || "N/A"}<br/>
+                          {order.updateAt ? <strong  >"עודכנה ב ": {new Date(order.updateAt).toLocaleString('he-IL')}</strong>  : null}
                       <div style={{display:"flex"}}>
+                      
+                        { /**n Remove Order  */}
                         <button 
                           onClick={() => handleRemoveOrder(order.orderId)} 
                           disabled={isRemoving}
                           style={Style.button}
                         >
-                          {isRemoving ? 'מוחק...' : 'מחק הזמנה'}
+                          <strong>{isRemoving ? 'מוחק...' : 'מחק הזמנה'}</strong>
                         </button>
 
+
+                          {/** Edit Order dialog  */}
                         <Dialogui
                           perentOpenModle={openDialog}
                           perntHendler={closeDialog}
                           buttonText={"ערוך הזמנה "}
-                          CloseDialogButtonStyle={{ ...Style.button, ...Style.editButton }}
+                          CloseDialogButtonStyle={Style.button }
                         >
                           <NewOrder
                             orderId={order.orderId}
                        
                           />
                         </Dialogui>
-                        </div>
-     
+
+                        </div>     
                       </td>
                     </tr>
                   )}
-                </>
+                </Fragment>
               ))}
             </tbody>
           </table>

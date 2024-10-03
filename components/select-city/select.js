@@ -9,7 +9,7 @@ const israelRegions = [
   { value: 'מרכז', label: 'מרכז' },
   { value: 'דרום', label: 'דרום' },
   { value: 'ירושלים', label: 'ירושלים' },
-  { value: 'teתל אביב', label: 'תל אביב' },
+  { value: 'תל אביב', label: 'תל אביב' },
   { value: 'חיפה', label: 'חיפה' },
   { value: 'אילת', label: 'אילת והסביבה' }
 ];
@@ -33,13 +33,13 @@ const RegionSelect = ({ value, PropsOnChange }) => {
   };
 
   return (
-    <div style={{ marginBottom: "10px" }}>
-      <h3>{}</h3>
-      <Select
+    <div style={{marginBottom:"15px",marginTop:"15px", fontWeight: "bold"}}>
+
+            <Select
         value={israelRegions.find(option => option.value === value)}
         onChange={handleChange}
         options={israelRegions}
-        placeholder="בחר אזור"
+        placeholder="אזור"
         isClearable
       />
     </div>

@@ -4,6 +4,7 @@ import Colors from "../lib/colors";
 import SideBar from '../components/side-bar/side-bar';
 import CostumeLink from '../components/costume-link/costume-link'
 import Footer from '../components/footer/app-footer';
+import ProfileControls from '../components/profile-sing-in-out/profile-controls'
 
 
 const ProfileLayout = ({ children }) => {
@@ -69,7 +70,10 @@ const ProfileLayout = ({ children }) => {
 
       {children}
 
-      <Footer  />
+      <Footer  >
+         <ProfileControls  />
+      </Footer>
+
     </>
   )
 }

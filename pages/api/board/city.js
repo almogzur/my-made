@@ -1,5 +1,5 @@
 // pages/api/board/[city].js
-import clientPromise from '../../../../lib/db';
+import clientPromise from '../../../lib/db'
 
 const handler = async (req, res) => {
   const { city } = req.query;

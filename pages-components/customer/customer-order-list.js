@@ -32,7 +32,6 @@ const Style = {
     
   },
   cell: {
-    border: "solid",
     cursor: "pointer",
     border: "solid 1px",
   },
@@ -132,16 +131,16 @@ const CustomerOrderList = () => {
                      >
                       <td colSpan="4"
                   
-
+                        
                       >
+                          <strong >עיר :</strong> {order.city || "N/A"}<br/>
+                          <strong> שם מזמין: </strong> {order.name}<br/>
                           <strong> מחיר הזמנה : </strong> {order.orderPrice || "N/A"}<br/>
-                          <strong> תיאור :</strong> {order.JobDescription || "N/A"}<br/>
+                          <strong >כתובת :</strong> {order.addres || "N/A"}<br/> {/* Address field */}
                           <strong> מספר חדרים  : </strong> {order.ApartmentRoomsNumber || "N/A"}<br/>
                           <strong > מספר מקלחות : </strong> {order.NumberOfBaths || "N/A"}<br/>
-                          <strong >כתובת :</strong> {order.addres || "N/A"}<br/> {/* Address field */}
-                          <strong >עיר :</strong> {order.city || "N/A"}<br/>
-                          <strong >גודל הדירה במטרים :</strong> {order.ApartmentSize || "N/A"}<br/> {/* Apartment size */}
                           <strong >תאריך ושעה :</strong> {new Date(order.ResurveDate).toLocaleString('he-IL') || "N/A"}<br/> {/* Reservation date */}
+                          <strong> תיאור :</strong> {order.JobDescription || "N/A"}<br/>
                           <strong >נוצרה ב :</strong> {new Date(order.createdAt).toLocaleString('he-IL') || "N/A"}<br/>
                           <strong >סטטוס הזמנה :</strong> {order.orderStatus || "N/A"}<br/> {/* Order status */}
                           <strong >מזהה הזמנה :</strong> {order.orderId.slice(0,20) + " ... " || "N/A"}<br/>

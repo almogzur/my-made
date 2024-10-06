@@ -12,11 +12,10 @@ const State = {
       ResurveDate:"",
       JobDescription:"",
       addres:"",
-      ApartmentSize:Number,
+      city:"",
       ApartmentRoomsNumber:Number,
       NumberOfBaths:Number,
       orderPrice:Number,
-      city:""
       
 
  },

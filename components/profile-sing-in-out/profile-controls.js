@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 
 
 
-function ProfileControls() {
+function ProfileControls( {children}) {
   const { data: session , status } = useSession();
   const { user, isLoading, isError } = useUser(session?.user?.email);
   const router = useRouter();
@@ -85,7 +85,10 @@ function ProfileControls() {
             }}
           >פרופיל
           </m.div>
+          
         </Link>
+        
+   
 
         <m.button
           style={{
@@ -165,7 +168,7 @@ function ProfileControls() {
             </Link>
  
           </m.div>
-
+          {children? children :null}
  
           <m.button
             style={{

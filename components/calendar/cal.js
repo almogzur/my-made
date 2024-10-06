@@ -46,6 +46,8 @@ const Calinder = ({
 
   return (
     <>
+
+
    <label 
      htmlFor={id}
       
@@ -54,7 +56,7 @@ const Calinder = ({
     </label>
      <DatePicker 
         locale={he}
-        required={required? true:false}
+        required
         withPortal
         id={id} 
         selected={startDate} 
@@ -64,7 +66,7 @@ const Calinder = ({
             setStartDate(date)
             handleChange(date)
             }}
-       
+          
         closeOnScroll
         showYearDropdown
         showMonthDropdown

@@ -1,10 +1,9 @@
 import clientPromise from '../../../lib/db';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
-import { v4 as uuidv4 } from 'uuid'; // Import UUID
+import { v4 as uuidv4 } from 'uuid';
 
 const handler = async (req, res) => {
-
   const API_NAME = "Save Orders API ";
 
   console.log(API_NAME);
@@ -26,48 +25,47 @@ const handler = async (req, res) => {
   const client = await clientPromise;
   const userEmail = session.user.email;
   const database = client.db('my-made');
+  const areadatabase = client.db("my-made-Areas");
   const users = database.collection('users');
 
-  const {  
+  const {
     orderPhone,
-    addres, 
+    addres,
     ApartmentRoomsNumber,
     NumberOfBaths,
     ResurveDate,
-    orderPrice, 
+    orderPrice,
     JobDescription,
     city,
-    ApartmentSize
-
   } = req.body;
 
-  try {
+  const name = session.user.name;
 
+  try {
     const newOrder = {
-      orderPhone,  
+      name,
+      orderPhone,
       addres,
       ApartmentRoomsNumber,
+      NumberOfBaths,
       ResurveDate,
       JobDescription,
-      city,
-      NumberOfBaths,
       orderPrice,
-      createdAt: new Date()  ,
-      orderId: uuidv4(), 
-      orderStatus:"Open", // this will be toogel by Vendor to | padding | close 
-      ApartmentSize
+      city,
+      createdAt: new Date(),
+      orderId: uuidv4(),
+      orderStatus: "Open",
     };
 
-    // Find the user by their email and push the new order into the Orders array
-    const filter = { email: userEmail };
-    const updateDoc = {
-      $push: { Orders: newOrder } 
-    };
+    // Add the order to the user's Orders array
+    const userFilter = { email: userEmail };
+    const updateUser = { $push: { Orders: newOrder }};
+    const userResult = await users.updateOne(userFilter, updateUser);
+    const areaCollection = areadatabase.collection(city);
+    const addOrderToArea = await areaCollection.insertOne(newOrder);
 
-    const result = await users.updateOne(filter, updateDoc);
-
-    if (result.modifiedCount >= 1) {
-       console.log("Order added successfully");
+    if (userResult.modifiedCount >= 1 && addOrderToArea.insertedCount >= 1) {
+      console.log("Order added successfully");
       return res.status(200).json({ message: 'Order added successfully' });
     } else {
       console.log("User not found or no changes made");

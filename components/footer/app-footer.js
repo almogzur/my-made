@@ -2,7 +2,7 @@
 import Colors from '../../lib/colors'
 
 
-const Footer = ({children,style,className})  => {
+const Footer = ({children,style})  => {
 
     const defualtStyle={
       position: "fixed",
@@ -10,7 +10,12 @@ const Footer = ({children,style,className})  => {
       width: "100%",
       height: "55px",
       background: Colors.b,
-      zIndex:"2"
+      zIndex:"2",
+      display:'flex',
+      flexDirection:'row'|'column',
+      justifyContent:'center',
+      alignItems:'center',
+      alignContent:'center',
     }
 
     return ( 

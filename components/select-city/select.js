@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Select from 'react-select';
 import { StateContext } from '../../context';
+import { log } from 'util';
 
 const STATE_KEY = "Order";
 
@@ -14,7 +15,15 @@ const israelRegions = [
   { value: 'אילת', label: 'אילת והסביבה' }
 ];
 
-const RegionSelect = ({ value, PropsOnChange }) => {
+
+const defualtStyle  = {
+   marginBottom:"15px",
+   marginTop:"15px",
+   fontWeight: "bold",
+  }
+
+const RegionSelect = ({ value, PropsOnChange , PropsStyle ,PropsPlaceholder }) => {
+  
   const [state, setState] = useContext(StateContext);
 
   const handleChange = (selectedOption) => {
@@ -33,14 +42,15 @@ const RegionSelect = ({ value, PropsOnChange }) => {
   };
 
   return (
-    <div style={{marginBottom:"15px",marginTop:"15px", fontWeight: "bold"}}>
+    <div style={PropsStyle? PropsStyle : defualtStyle}>
 
-            <Select
+       <Select
         value={israelRegions.find(option => option.value === value)}
         onChange={handleChange}
         options={israelRegions}
-        placeholder="אזור"
+        placeholder={PropsPlaceholder}
         isClearable
+      
       />
     </div>
   );

@@ -126,7 +126,7 @@ const VendorDisplay = ({
         <MdEdit  size={"40px"} color={Colors.c} />
         <br/>
 
-          ערוך
+          ערוך פרטים
         </button>
         { 
             user?.Vendor?.isVendor ? 
@@ -137,7 +137,7 @@ const VendorDisplay = ({
              >
                    <FaRegClipboard   size={"40px"} color={Colors.c} />
                    <br/>
-                   לוח
+                     לוח עבודות
              </button>
              :
              null

@@ -22,6 +22,19 @@ const InputStyle = {
 
 };
 
+const SubmitStyle = {
+  height: "60px",
+  width: '150px',
+  border: "1px solid",
+  borderRadius: "3px",
+  background: "#fff",
+  fontSize: "20px",
+  cursor: "pointer",
+  textAlign: "center",
+  color: Colors.b,
+  boxShadow: `3px 3px 3px 3px ${Colors.c}`,
+}
+
 const NewOrder = ({ orderId, newOrder }) => {
 
   const { data: session, status } = useSession();
@@ -130,6 +143,18 @@ const NewOrder = ({ orderId, newOrder }) => {
     <form onSubmit={orderId? updateExistingOrder: createNewOrder}>
       <h3>הזמן משק בית</h3>
 
+
+      <label>
+      <strong>שם</strong>
+      <input 
+        type="text" disabled 
+        style={InputStyle}
+        placeholder={session.user.name}
+        // cant be change and hrd coded in back end 
+      />
+      
+    </label>
+
       <label>
         <strong>טלפון</strong>
         <br />
@@ -139,7 +164,7 @@ const NewOrder = ({ orderId, newOrder }) => {
           required
           onChange={handleChange}
           value={state[STATE_KEY].orderPhone}
-          style={{ ...InputStyle }}
+          style={InputStyle }
         />
       </label>
 
@@ -165,6 +190,7 @@ const NewOrder = ({ orderId, newOrder }) => {
       <RegionSelect
            value={state[STATE_KEY]?.city}
            PropsOnChange={childrenOnChange}
+           PropsPlaceholder={"אזור מגורים"}
       />
 
       <label><strong>כתובת</strong>
@@ -209,32 +235,13 @@ const NewOrder = ({ orderId, newOrder }) => {
         />
       </label>
 
-      <label><strong>גודל הדירה במטרים</strong>
-        <input
-          type="text"
-          id="ApartmentSize"
-          style={InputStyle}
-          value={state[STATE_KEY].ApartmentSize}
-          onChange={handleChange}
-        />
-      </label>
+
 
       <LazyMotion features={f}>
         <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
           <m.button
             type="submit"
-            style={{
-              height: "60px",
-              width: '150px',
-              border: "1px solid",
-              borderRadius: "3px",
-              background: "#fff",
-              fontSize: "20px",
-              cursor: "pointer",
-              textAlign: "center",
-              color: Colors.b,
-              boxShadow: `3px 3px 3px 3px ${Colors.c}`,
-            }}
+            style={SubmitStyle}
             whileHover={{ boxShadow: `3px 3px 3px inset` ,background: Colors.d }}
           >
         {orderId? "עדכן ":" שלח הזמנה "}  

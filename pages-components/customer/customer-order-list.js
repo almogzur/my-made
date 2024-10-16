@@ -8,48 +8,6 @@ import NewOrder from './new-order';
 import { StateContext } from '../../context';
 import { background } from '@chakra-ui/react';
 
-const Style = { 
-  Wrapper: {
-    padding: "0px",
-    tran: "ease out 1s",
-    borderBottom: "solid 1px black",
-    width: "100%", 
-  },
-  table: {      
-    height: "70%",
-    border: "solid",
-    borderCollapse: "collapse",
-    width: "100%",
-  },
-  tableHead: {
-    background: Colors.d,
-  },
-  tableBody: {},
-  tableRow: {
-    height: "30px",
-    border: "solid",
-    borderCollapse: "collapse",
-    border: "solid 1px",
-    
-  },
-  cell: {
-    cursor: "pointer",
-    border: "solid 1px",
-  },
-  expandedRow: {
-    backgroundColor: '#f0f0f0',
-    border: "solid 1px",
-  },
-  button: {
-    background: Colors.d,
-    color: Colors.a,
-    marginTop: '15px',
-    width: "100px",
-    height: "35px",
-    marginBottom: "15px",
-  },
-
-};
 
 const CustomerOrderList = () => {
 
@@ -59,6 +17,55 @@ const CustomerOrderList = () => {
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [isRemoving, setIsRemoving] = useState(false);
   const [openDialog, setOpenDialog] = useState(false); // Track dialog state
+
+
+  const Style = { 
+    Wrapper: {
+      padding: "0px",
+      tran: "ease out 1s",
+      borderBottom: "solid 1px black",
+      width: "100%", 
+    },
+    table: {      
+      height: "70%",
+      border: "solid",
+      borderCollapse: "collapse",
+      width: "100%",
+    },
+    tableHead: {
+      background: Colors.d,
+    },
+    tableBody: {},
+    tableRow: {
+      height: "30px",
+      border: "solid",
+      borderCollapse: "collapse",
+      border: "solid 1px",
+
+
+      
+    },
+    cell: {
+      cursor: "pointer",
+      border: "solid 1px",
+  
+    },
+    expandedRow: {
+      backgroundColor: '#f0f0f0',
+      border: "solid 1px",
+
+    },
+    button: {
+      background: Colors.d,
+      color: Colors.a,
+      marginTop: '15px',
+      width: "100px",
+      height: "35px",
+      marginBottom: "15px",
+    },
+  
+  };
+  
 
   if (status === 'loading' || isLoading) {
     return <MongoSpinner/>;
@@ -101,23 +108,32 @@ const CustomerOrderList = () => {
       {user?.Orders ? (
         <div style={Style.Wrapper}>
           <h3 style={{ textAlign: "center" }}>הזמנות פתוחות</h3>
+
           <table style={Style.table}>
             <thead style={Style.tableHead}>
+
               <tr style={Style.tableRow}>
                 <td style={Style.cell}>&nbsp;</td>
                 <td>כתובת</td>
                 <td>טלפון</td>
                 <td>שעה ותאריך</td>
               </tr>
+
+
             </thead>
+
+
             <tbody>
+
               {user?.Orders.map((order, index) => (
+
                 <Fragment key={order.orderId}> 
-                {/* too add key to fragment need to import it can't use " <></>"" */}
+                   {/* too add key to fragment need to import it can't use " <></>"" */}
                   <tr 
                     key={index} 
-                    style={Style.tableRow} 
+                    style={{...Style.tableRow ,   background: expandedOrder === index ? ` lightblue ` : ""    }} 
                     onClick={() => handleRowClick(index)}
+                  
                   >
                     <td style={Style.cell}>{index + 1}</td>
                     <td>{order.addres}</td>
@@ -127,15 +143,13 @@ const CustomerOrderList = () => {
 
                   {expandedOrder === index && (
                     <tr
-                     style={{ ...Style.tableRow, ...Style.expandedRow , background:Colors.a , color:"black" , lineHeight:"25px"}}
+                     style={{ ...Style.tableRow, ...Style.expandedRow , background:Colors.a , color:"black" , lineHeight:"25px" , }}
                      key={`expanded-${order.orderId}`}
                      >
                       <td colSpan="4"
-                  
-                        
                       >
-                          <strong> שם מזמין: </strong> {order.userName}<br/>
-                          <strong> טלפון </strong> {order.orderPhone}<br/>
+                          <strong style={{color:"red"}}> שם מזמין: {order.userName}</strong> <br/>
+                          <strong> טלפון : </strong> {order.orderPhone}<br/>
                           <strong >תאריך ושעה :</strong> {new Date(order.ResurveDate).toLocaleString('he-IL') || "N/A"}<br/> {/* Reservation date */}
                           <strong >עיר :</strong> {order.city || "N/A"}<br/>
                           <strong >כתובת :</strong> {order.addres || "N/A"}<br/> {/* Address field */}
@@ -146,8 +160,10 @@ const CustomerOrderList = () => {
                           <strong >מזהה הזמנה :</strong> {order.orderId.slice(0,20) + " ... " || "N/A"}<br/>
                           <strong >נוצרה ב :</strong> {new Date(order.createdAt).toLocaleString('he-IL') || "N/A"}<br/>
                           {order.updateAt ? <strong  >"עודכנה ב ": {new Date(order.updateAt).toLocaleString('he-IL')}</strong>  : null}
-                         <strong > מחיר לשעה : {order.orderPrice || "N/A"}</strong> <br/>
-                      <div style={{display:"flex"}}>
+
+                         <strong style={{color:"red"}} > מחיר לשעה : {order.orderPrice || "N/A"}</strong> 
+
+                         <div style={{display:"flex" , background:"lightblue" , display:"flex" , justifyContent:"space-around"}}>
                       
                         { /**n Remove Order  */}
                         <button 
@@ -155,7 +171,7 @@ const CustomerOrderList = () => {
                           disabled={isRemoving}
                           style={{...Style.button,background:"red"}}
                         >
-                          <strong>{isRemoving ? 'מוחק...' : 'מחק הזמנה'}</strong>
+                          <strong>{isRemoving ? 'מוחק...' : 'מחק '}</strong>
                         </button>
 
 
@@ -163,7 +179,7 @@ const CustomerOrderList = () => {
                         <Dialogui
                           perentOpenModle={openDialog}
                           perntHendler={closeDialog}
-                          buttonText={"ערוך הזמנה "}
+                          buttonText={"ערוך  "}
                           CloseDialogButtonStyle={Style.button}
                         >
                           <NewOrder
@@ -173,6 +189,7 @@ const CustomerOrderList = () => {
                         </Dialogui>
 
                         </div>     
+
                       </td>
                     </tr>
                   )}

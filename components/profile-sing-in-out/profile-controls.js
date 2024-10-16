@@ -74,14 +74,14 @@ function ProfileControls( {children,inHomePage}) {
               bottom: "20px",
               left: "20px",
               borderRadius: "5px",
-              height: "60px",
+              height: "40px",
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
-              background: Colors.c,
+              background: Colors.d,
               padding: '10px',
-              color: Colors.d,
+              color: Colors.a,
               cursor: 'pointer',
             }}
             transition={{ duration: 1 }}
@@ -103,11 +103,11 @@ function ProfileControls( {children,inHomePage}) {
             bottom: "20px",
             right: "20px",
             border: "none",
-            background: Colors.c,
+            background: Colors.d,
             borderRadius: "5px",
             width: "60px",
             height: "60px",
-            color: Colors.d,
+            color: Colors.a,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
@@ -131,7 +131,7 @@ function ProfileControls( {children,inHomePage}) {
   ////////////////////////////////////////////////
   
 
-  else {
+  else if(session) {
     return (
       <LazyMotion features={f}>
         <m.div
@@ -197,6 +197,8 @@ function ProfileControls( {children,inHomePage}) {
         </m.div>
       </LazyMotion>
     );
+  }else {
+    return null
   }
 }
 

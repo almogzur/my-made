@@ -5,7 +5,8 @@ import Colors from '../../lib/colors'
 import { FaThList } from "react-icons/fa";
 import { PiCardsThin } from "react-icons/pi";
 import RegionSelect from '../../components/select-city/select'
-import PriceRange from './price-range';
+import MultiRangeSlider from './multi-range-piker';
+
 
 const Style = {
     Wrapper:{
@@ -96,12 +97,19 @@ return (
           >
           <RegionSelect 
             propsId="filter-date"
-            PropsStyle={{border:"none" , width:"100%",height:"25px"  }}
+            PropsStyle={{border:"none" , width:"100%",height:"50%"  }}
             PropsPlaceholder={"סינון לפי אזור"}
             PropsOnChange={cityHendler}
    
           />
-         <PriceRange/>
+    
+        <MultiRangeSlider
+           min={0}
+           max={1000}
+           onChange={({ min, max }) =>
+             console.log(`min = ${min}, max = ${max}`)
+          }
+        />
 
        
 

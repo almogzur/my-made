@@ -1,59 +1,59 @@
-import React, { useContext } from 'react';
-import Select from 'react-select';
-import { StateContext } from '../../context';
-import { log } from 'util';
+import React, { useContext, useEffect } from 'react';
+import { Select } from '@chakra-ui/react'
 
-const STATE_KEY = "Order";
 
 const israelRegions = [
-  { value: 'צפון', label: 'צפון' },
-  { value: 'מרכז', label: 'מרכז' },
-  { value: 'דרום', label: 'דרום' },
-  { value: 'ירושלים', label: 'ירושלים' },
-  { value: 'תל אביב', label: 'תל אביב' },
-  { value: 'חיפה', label: 'חיפה' },
-  { value: 'אילת', label: 'אילת והסביבה' }
+  { value: 'צפון' },
+  { value: 'חיפה' },
+  { value: 'ירושלים' },
+  { value: 'תל אביב' },
+  { value: 'מרכז' },
+  { value: 'באר שבע' },
+  { value: 'דרום' },
+  { value: 'אילת' },
+
+  
 ];
 
 
-const defualtStyle  = {
-   marginBottom:"15px",
-   marginTop:"15px",
-   fontWeight: "bold",
+const InputStyle = {
+  width: "102%",
+  padding: "10px",
+  marginTop: "10px",
+  marginBottom: "10px",
+  fontWeight: "bold"
+
+};
+
+
+
+const RegionSelect = ({value, PropsOnChange , PropsStyle  ,PropsPlaceholder, propsId }) => {
+
+
+
+  const handleChange = (e) =>{ 
+     const value =  e.target.value    
+      PropsOnChange(propsId,value)   
   }
 
-const RegionSelect = ({ value, PropsOnChange , PropsStyle ,PropsPlaceholder }) => {
-  
-  const [state, setState] = useContext(StateContext);
 
-  const handleChange = (selectedOption) => {
-    const newCity = selectedOption ? selectedOption.value : "";
-    setState((prevState) => ({
-      ...prevState,
-      [STATE_KEY]: {
-        ...prevState[STATE_KEY],
-        city: newCity,
-      },
-    }));
-
-    if (PropsOnChange) {
-      PropsOnChange(selectedOption); // Call optional prop function if provided
-    }
-  };
-
-  return (
-    <div style={PropsStyle? PropsStyle : defualtStyle}>
-
-       <Select
-        value={israelRegions.find(option => option.value === value)}
+  return(
+     <Select
+        icon={""}
+        value={value}
         onChange={handleChange}
-        options={israelRegions}
         placeholder={PropsPlaceholder}
-        isClearable
-      
-      />
-    </div>
-  );
-};
+        required
+        style={PropsStyle? PropsStyle: InputStyle}
+      >
+       {israelRegions.map((obj,i)=>{
+             const city = obj.value
+
+        return <option   id={propsId}  key={` ${city} ${i}`} value={city}>{city}</option>
+       })} 
+      </Select>
+
+      )
+}
 
 export default RegionSelect;

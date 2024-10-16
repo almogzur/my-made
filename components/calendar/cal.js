@@ -16,9 +16,7 @@ const Calinder = ({
     id,
     text,
     PropsOnChange,
-    required,
     STATE_KEY,
-    lableStyle,
     }
     ) => {
   
@@ -37,7 +35,6 @@ const Calinder = ({
 
 
   const handleChange = (e) => {
-    
     const value = e
     PropsOnChange(id, value);
   };
@@ -45,15 +42,12 @@ const Calinder = ({
 
 
   return (
-    <>
-
-
+    
    <label 
-     htmlFor={id}
-      
+     htmlFor={id}   
      >
     <strong>{text}</strong>
-    </label>
+    
      <DatePicker 
         locale={he}
         required
@@ -80,9 +74,10 @@ const Calinder = ({
         clearButtonClassName="vendor-calinder-clear-btn"
         popperClassName="vendor-calindr"
         timeIntervals={15}
-        dateFormat="PPp"        
+        dateFormat="PPp"      
        />
-</>
+     </label>
+
   );
 };
 

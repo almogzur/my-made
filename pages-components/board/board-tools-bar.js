@@ -4,9 +4,8 @@ import { useRouter } from 'next/router'
 import Colors from '../../lib/colors'
 import { FaThList } from "react-icons/fa";
 import { PiCardsThin } from "react-icons/pi";
-import Select from '../../components/select-city/select'
-
-
+import RegionSelect from '../../components/select-city/select'
+import PriceRange from './price-range';
 
 const Style = {
     Wrapper:{
@@ -31,13 +30,15 @@ const Style = {
       
     },
     Filter:{
-        width:"100%"
+      
+        height:"100%",
+   
+        width:"100%",
+        
+
     },
 }
-
-
-
-const BoardToolsBar=({
+const OrdersWrapper=({
         Mode,
         setMode,
         displayCity,
@@ -49,8 +50,26 @@ const BoardToolsBar=({
 
   useEffect(()=>{ })
 
+  const cityHendler = () => {}
+
+
+
+
     if (status === 'loading') {
      return <h1 style={{textAlign:'center'}}>Loading...</h1>
+
+
+   // add perent state hndler 
+     const handleChange = (e) => {
+      const id = e.target.id;
+      const value = e.target.value;
+  
+      setState(prevState => ({
+        ...prevState,
+        [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value }
+      }));
+    };
+    
 }
 
 return (
@@ -75,20 +94,26 @@ return (
        <div 
          style={Style.Filter}
           >
-          <Select 
-    
-            PropsStyle
+          <RegionSelect 
+            propsId="filter-date"
+            PropsStyle={{border:"none" , width:"100%",height:"25px"  }}
             PropsPlaceholder={"סינון לפי אזור"}
+            PropsOnChange={cityHendler}
+   
           />
-          <input 
-             type="number" 
-             placeholder='סינון לפי מחיר' 
-           />
-      </div>
+         <PriceRange/>
+
+       
+
+
+
+          
+
+ </div>
 
 
   </div>
 ) 
 }
 
-export default BoardToolsBar
+export default OrdersWrapper 

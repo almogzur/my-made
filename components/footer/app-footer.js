@@ -9,7 +9,7 @@ const Footer = ({children,style})  => {
       bottom: "0",
       width: "100%",
       height: "55px",
-      background: Colors.b,
+      background: Colors.d,
       zIndex:"2",
       display:'flex',
       flexDirection:'row'|'column',

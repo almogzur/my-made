@@ -6,6 +6,7 @@ import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
 import Dialogui from '../../components/dialog/ui-dialog';
 import NewOrder from './new-order';
 import { StateContext } from '../../context';
+import { background } from '@chakra-ui/react';
 
 const Style = { 
   Wrapper: {
@@ -70,7 +71,7 @@ const CustomerOrderList = () => {
   const handleRemoveOrder = async (orderId) => {
     setIsRemoving(true);
   
-    const url = `/api/customer/removeorder?orderId=${orderId} `
+    const url = `/api/customer/remove-order?orderId=${orderId} `
     try {
       const res = await fetch(url ,{ method:'DELETE'});
       const data = await res.json()
@@ -126,32 +127,33 @@ const CustomerOrderList = () => {
 
                   {expandedOrder === index && (
                     <tr
-                     style={{ ...Style.tableRow, ...Style.expandedRow , background:Colors.a , color:Colors.d , lineHeight:"25px"}}
+                     style={{ ...Style.tableRow, ...Style.expandedRow , background:Colors.a , color:"black" , lineHeight:"25px"}}
                      key={`expanded-${order.orderId}`}
                      >
                       <td colSpan="4"
                   
                         
                       >
+                          <strong> שם מזמין: </strong> {order.userName}<br/>
+                          <strong> טלפון </strong> {order.orderPhone}<br/>
+                          <strong >תאריך ושעה :</strong> {new Date(order.ResurveDate).toLocaleString('he-IL') || "N/A"}<br/> {/* Reservation date */}
                           <strong >עיר :</strong> {order.city || "N/A"}<br/>
-                          <strong> שם מזמין: </strong> {order.name}<br/>
-                          <strong> מחיר הזמנה : </strong> {order.orderPrice || "N/A"}<br/>
                           <strong >כתובת :</strong> {order.addres || "N/A"}<br/> {/* Address field */}
                           <strong> מספר חדרים  : </strong> {order.ApartmentRoomsNumber || "N/A"}<br/>
                           <strong > מספר מקלחות : </strong> {order.NumberOfBaths || "N/A"}<br/>
-                          <strong >תאריך ושעה :</strong> {new Date(order.ResurveDate).toLocaleString('he-IL') || "N/A"}<br/> {/* Reservation date */}
                           <strong> תיאור :</strong> {order.JobDescription || "N/A"}<br/>
-                          <strong >נוצרה ב :</strong> {new Date(order.createdAt).toLocaleString('he-IL') || "N/A"}<br/>
                           <strong >סטטוס הזמנה :</strong> {order.orderStatus || "N/A"}<br/> {/* Order status */}
                           <strong >מזהה הזמנה :</strong> {order.orderId.slice(0,20) + " ... " || "N/A"}<br/>
+                          <strong >נוצרה ב :</strong> {new Date(order.createdAt).toLocaleString('he-IL') || "N/A"}<br/>
                           {order.updateAt ? <strong  >"עודכנה ב ": {new Date(order.updateAt).toLocaleString('he-IL')}</strong>  : null}
+                         <strong > מחיר לשעה : {order.orderPrice || "N/A"}</strong> <br/>
                       <div style={{display:"flex"}}>
                       
                         { /**n Remove Order  */}
                         <button 
                           onClick={() => handleRemoveOrder(order.orderId)} 
                           disabled={isRemoving}
-                          style={Style.button}
+                          style={{...Style.button,background:"red"}}
                         >
                           <strong>{isRemoving ? 'מוחק...' : 'מחק הזמנה'}</strong>
                         </button>
@@ -162,7 +164,7 @@ const CustomerOrderList = () => {
                           perentOpenModle={openDialog}
                           perntHendler={closeDialog}
                           buttonText={"ערוך הזמנה "}
-                          CloseDialogButtonStyle={Style.button }
+                          CloseDialogButtonStyle={Style.button}
                         >
                           <NewOrder
                             orderId={order.orderId}

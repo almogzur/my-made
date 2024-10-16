@@ -14,7 +14,7 @@ import RegionSelect from '../../components/select-city/select.js';
 const STATE_KEY = "Order";
 
 const InputStyle = {
-  width: "100%",
+  width: "96%",
   padding: "10px",
   marginTop: "10px",
   marginBottom: "10px",
@@ -31,9 +31,11 @@ const SubmitStyle = {
   fontSize: "20px",
   cursor: "pointer",
   textAlign: "center",
-  color: Colors.b,
+  color: Colors.d,
   boxShadow: `3px 3px 3px 3px ${Colors.c}`,
 }
+
+const textAreaStyle ={ resize: "none" ,   fontWeight: "bold" , width:"100%" , borderRadius:"3px"   }
 
 const NewOrder = ({ orderId, newOrder }) => {
 
@@ -79,6 +81,7 @@ const NewOrder = ({ orderId, newOrder }) => {
   const handleChange = (e) => {
     const id = e.target.id;
     const value = e.target.value;
+
 
     setState(prevState => ({
       ...prevState,
@@ -129,6 +132,9 @@ const NewOrder = ({ orderId, newOrder }) => {
   };
   
   const childrenOnChange = (id, value) => {
+      console.log(id,value, "changed");
+      
+
     setState(prevState => ({
       ...prevState,
       [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value }
@@ -164,7 +170,7 @@ const NewOrder = ({ orderId, newOrder }) => {
           required
           onChange={handleChange}
           value={state[STATE_KEY].orderPhone}
-          style={InputStyle }
+          style={InputStyle}
         />
       </label>
 
@@ -174,7 +180,6 @@ const NewOrder = ({ orderId, newOrder }) => {
         STATE_KEY={STATE_KEY}
         PropsOnChange={childrenOnChange}
         value={state[STATE_KEY]?.ResurveDate}
-        lableStyle={{  width: "100%", height: "200px" }}
       />
 
       <TextArea
@@ -183,12 +188,12 @@ const NewOrder = ({ orderId, newOrder }) => {
         value={state[STATE_KEY]?.JobDescription}
         PropsOnChange={childrenOnChange}
         placeholder="תיאור העבודה בקצרה"
-        StyleLable={{ display: 'flex', flexDirection: 'column' }}
-        StyleTextArea={{ resize: "none" ,   fontWeight: "bold"        }}
+        StyleTextArea={textAreaStyle}
       />
 
       <RegionSelect
            value={state[STATE_KEY]?.city}
+           propsId={"city"}
            PropsOnChange={childrenOnChange}
            PropsPlaceholder={"אזור מגורים"}
       />
@@ -235,6 +240,8 @@ const NewOrder = ({ orderId, newOrder }) => {
         />
       </label>
 
+ 
+
 
 
       <LazyMotion features={f}>
@@ -242,7 +249,7 @@ const NewOrder = ({ orderId, newOrder }) => {
           <m.button
             type="submit"
             style={SubmitStyle}
-            whileHover={{ boxShadow: `3px 3px 3px inset` ,background: Colors.d }}
+            whileHover={{ boxShadow: `3px 3px 3px inset` ,background: Colors.d ,color:Colors.text}}
           >
         {orderId? "עדכן ":" שלח הזמנה "}  
         </m.button>

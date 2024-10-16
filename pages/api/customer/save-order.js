@@ -23,10 +23,12 @@ const handler = async (req, res) => {
   }
 
   const client = await clientPromise;
+
   const userEmail = session.user.email;
+  const userName = session.user.name;
+
   const database = client.db('my-made');
   const areadatabase = client.db("my-made-Areas");
-  const users = database.collection('users');
 
   const {
     orderPhone,
@@ -39,11 +41,11 @@ const handler = async (req, res) => {
     city,
   } = req.body;
 
-  const name = session.user.name;
+
 
   try {
     const newOrder = {
-      name,
+      userName,
       orderPhone,
       addres,
       ApartmentRoomsNumber,
@@ -58,10 +60,14 @@ const handler = async (req, res) => {
     };
 
     // Add the order to the user's Orders array
+    const usersCollection = database.collection('users');
+
     const userFilter = { email: userEmail };
     const updateUser = { $push: { Orders: newOrder }};
-    const userResult = await users.updateOne(userFilter, updateUser);
+    const userResult = await usersCollection.updateOne(userFilter, updateUser);
+
     const areaCollection = areadatabase.collection(city);
+    
     const addOrderToArea = await areaCollection.insertOne(newOrder);
 
     if (userResult.modifiedCount >= 1 && addOrderToArea.insertedCount >= 1) {

@@ -1,5 +1,5 @@
 
-
+import Colors from "../../lib/colors";
 
 function ThreeColorsH1({
     text,
@@ -19,7 +19,7 @@ function ThreeColorsH1({
             ${angleDeg?angleDeg:"90deg"},
                  ${color1 ? color1 : 'rgba(131,58,180,1) '  },
                  ${color2 ? color2 :'rgba(253,29,29,1)' } ,
-                 ${color3 ? color3 :'#fff'} 
+                 ${color3 ? color3 : `${Colors.d}`} 
              )`,
             color:"transparent",
             backgroundClip:"text",

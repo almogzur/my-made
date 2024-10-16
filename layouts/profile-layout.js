@@ -18,7 +18,7 @@ const ProfileLayout = ({ children }) => {
            justifyContent:'center',
            alignItems:'center',
            alignContent:'center',
-           color:Colors.d
+           color:Colors.a
    }
   
 
@@ -46,7 +46,7 @@ const ProfileLayout = ({ children }) => {
         >
           <MdCleaningServices size={40} />
           </CostumeLink>
-           </ProfileControls>
+        </ProfileControls>
       </Footer>
 
     </>

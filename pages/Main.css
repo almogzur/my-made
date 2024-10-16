@@ -1,8 +1,13 @@
 :root {
-    --a:#1A3636;
-    --b:#40534C;
-    --c:#677D6A;
-    --d:#D6BD98;
+    --green-a:#1A3636;
+    --green-b:#40534C;
+    --green-c:#677D6A;
+    --green-d:#D6BD98;
+
+    --blue-a:"#F7FBFC";
+    --blue-b:"#D6E6F2";
+    --blue-c:"#B9D7EA";
+    --blue-d:"#769FCD";
   }
 
 *{

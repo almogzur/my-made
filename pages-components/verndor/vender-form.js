@@ -162,8 +162,8 @@ const VendorForm = ({ setEdit }) => {
               fontSize: "20px",
               cursor: "pointer",
               textAlign: "center",
-              color: Colors.b,
-              boxShadow: `3px 3px 3px 3px ${Colors.c}`,
+              color: Colors.text,
+              boxShadow: `3px 3px 3px 3px ${Colors.d}`,
             }}
             whileHover={{
               boxShadow: `3px 3px 3px inset`,

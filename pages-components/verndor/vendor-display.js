@@ -53,7 +53,7 @@ const VendorDisplay = ({
     padding: "5px",
     borderRadius: "5px",
     marginBottom: "10 x",
-    boxShadow: `0 2px 4px ${Colors.c}`,
+    boxShadow: `0 2px 4px ${Colors.d}`,
     margin:"5px",
     height:"70px",
     width: '150px',
@@ -73,12 +73,12 @@ const VendorDisplay = ({
       width: '150px',
       borderRadius: "5px",
       border:"none",
-      boxShadow: `0 2px 4px ${Colors.c}`,
+      boxShadow: `0 2px 4px ${Colors.d}`,
       background:"none",
       fontSize: "20px",
       cursor: "pointer",
       textAlign: "center",
-      color: Colors.a,
+      color: Colors.d,
 
    }
 }
@@ -91,19 +91,19 @@ const VendorDisplay = ({
     <div style={Style.wrapper}>
 
       <div style={Style.div}>
-        <div style={{ color: Colors.c }}>שם</div>
+        <div style={{ color: Colors.d}}>שם</div>
         <div>{BussniseName}</div>
       </div>
       <div style={Style.div}>
-        <div style={{ color: Colors.c }}>טלפון</div>
+        <div style={{ color: Colors.d }}>טלפון</div>
         <div>{phone}</div>
       </div>
       <div style={Style.div}>
-        <div style={{ color: Colors.c }}>מחיר לשעת </div>
+        <div style={{ color: Colors.d }}>מחיר לשעת </div>
         <div>{price}</div>
       </div>
       <div style={Style.div}>
-        <div style={{ color: Colors.c }}> זמין </div>
+        <div style={{ color: Colors.d }}> זמין </div>
         <div>{isVendor ? 'כן' : 'לא'}</div>
       </div>
       <div style={{...Style.div, width:"100%"}}>
@@ -123,7 +123,7 @@ const VendorDisplay = ({
           style={Style.button}
           onClick={() => {setEdit(true)}}
         >
-        <MdEdit  size={"40px"} color={Colors.c} />
+        <MdEdit  size={"40px"} color={Colors.d} />
         <br/>
 
           ערוך פרטים
@@ -135,7 +135,7 @@ const VendorDisplay = ({
                 style={{...Style.button  }}
                 onClick={() => router.push('/board')}
              >
-                   <FaRegClipboard   size={"40px"} color={Colors.c} />
+                   <FaRegClipboard   size={"40px"} color={Colors.d} />
                    <br/>
                      לוח עבודות
              </button>

@@ -28,9 +28,9 @@ const { data: session ,status ,update} = useSession()
            background: 'rgb(25,29,136)',
            background: `linear-gradient(
              -119deg, 
-             ${Colors.a} , 
-             ${Colors.c} ,
-             ${"#fff"}        
+             ${Colors.b} , 
+             ${Colors.d} ,
+             ${Colors.a}        
            )
            `,
            boxShadow: '0 4px 8px #404040'
@@ -38,8 +38,8 @@ const { data: session ,status ,update} = useSession()
        >
          <ColorsH1      
          text={session?.user?.name.toUpperCase()}
-         color1={Colors.b}
-         color2={Colors.c}
+         color1={"black"}
+         color2={Colors.d}
          angleDeg={"-17deg"}
          style={{   
           position:"absolute",
@@ -51,11 +51,11 @@ const { data: session ,status ,update} = useSession()
 
          <ColorsH1
            text={session?.user?.email?.toUpperCase()}
-           color1={Colors.b}
+           color1={"black"}
            color2={Colors.d}
            angleDeg={"-217deg"}
            style={{   
-          position:"absolute",
+           position:"absolute",
             top:"120px",
             right:"10px",
               }}

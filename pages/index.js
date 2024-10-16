@@ -15,27 +15,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <Header />
+ 
+       <MainSection/>
+       <ProfileControls inHomePage={true}/>     
       
-      <MainSection/>
-
-      <div style={{
-            marginTop:"20px",
-            width:"100%",
-            display:'flex',
-            flexDirection:'column',
-            justifyContent:'center',
-            alignItems:'center',
-            alignContent:'center',
-            position:"absolute",
-            bottom:"20%",
-        }
-      }>
-      <ProfileControls
-
-
-      />     
-      </div>
     </>
   );
 }

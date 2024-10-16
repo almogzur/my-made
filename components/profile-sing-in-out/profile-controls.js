@@ -8,56 +8,63 @@ import Colors from "../../lib/colors";
 import f from '../../lib/features';
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { position } from "@chakra-ui/react";
+
+
+const Styles = {
+
+  unOuthWrapper:{
+    width:"100%",
+    display:'flex',
+    justifyContent:'center',
+    position:"absolute",
+    bottom:"250px"
+  },
+  unOuthBtn:{
+    width: "150px",
+    height: '60px',
+    border: "none",
+    background: Colors.c,
+    borderRadius: "6px",
+    
+    
+  },
+ 
+
+
+}
 
 
 
 
 
+function ProfileControls( {children,inHomePage}) {
 
-
-function ProfileControls( {children}) {
   const { data: session , status } = useSession();
-  const { user, isLoading, isError } = useUser(session?.user?.email);
-  const router = useRouter();
-  const { pathname } = router;
 
-
-  useEffect(() => {
-   // console.log(pathname);
-  }, [pathname]);
-
-
-
-
-
-  if ( !session  ) {
+  if ( !session && status !=="loading") {
     return (
       <LazyMotion features={f}>
+      <div style={Styles.unOuthWrapper} >
         <m.button
-          style={{
-            width: "150px",
-            height: '60px',
-            border: "none",
-            background: Colors.c,
-            borderRadius: "6px",
-          }}
+          style={Styles.unOuthBtn}
           transition={{ duration: 1 }}
-          whileHover={{
-            borderRadius: "15px",
-            background: Colors.d,
-          }}
+          whileHover={{borderRadius: "15px",background: Colors.d,}}
           animate={{ opacity: [0, 0.5, 1] }}
           onClick={() => signIn(undefined, { callbackUrl: "/profile" })}
         >
           <strong>כניסה</strong>
         </m.button>
+      </div>
       </LazyMotion>
     );
   }
 
    // ther is no direct pathing to Home with an active sesstion  
    // BUT it you do manage to go ther this will render 
-   else if ( pathname === "/" && session  ) {
+
+
+   else if ( inHomePage  && session  ) {
     return (
       <>
         <Link href={"/profile"} passHref>
@@ -150,7 +157,7 @@ function ProfileControls( {children}) {
               justifyContent: 'center',
               alignItems: 'center',
               alignContent: 'center',
-              background: Colors.d,
+              background: Colors.b,
               width:"70px",
              
             }}
@@ -177,7 +184,7 @@ function ProfileControls( {children}) {
               border: "none",
               background: "none",
               height: "inherit",
-              color: Colors.d,
+              color: Colors.a,
               width:"70px"
             }}
               transition={{ duration: 1 }}

@@ -79,17 +79,17 @@ const Dialog = ({
         {children}
         <LazyMotion features={f}>
           <m.button
-            whileHover={{ background: Colors.d }}
+            whileHover={{ background: Colors.d, color:Colors.text }}
             onClick={perentOpenModle? perntHendler: handleModal}
             style={{
               position: "absolute",
               top: "15px",
               left: "15px",
-              background:Colors.b,
+              background:Colors.a,
               color:Colors.d,
               width:"40px",
               height:"40px",
-              borderRadius:"10px",
+              borderRadius:"5px",
               display:'flex',
               justifyContent:'center',
               alignItems:'center',

@@ -19,8 +19,27 @@ import useUser from '../../lib/hooks/useUser'
 import Colors from '../../lib/colors'
 import Link from 'next/link'
 import Image from 'next/image'
-import CardsWrapper from '../../pages-components/board/orders-wrapper'
+import OrdersWrapper from '../../pages-components/board/orders-wrapper'
 import useOrders from '../../lib/hooks/useOrders'
+
+
+
+const Style = {
+   Fotter : { 
+              marginTop:"3px",
+              borderRadius: "5px",
+              height: "50px",
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              alignContent: 'center',
+              background: Colors.d,
+              width:"70px",
+            },
+
+}
+
 
 const BoardPage=()=>{
 
@@ -29,9 +48,6 @@ const BoardPage=()=>{
   const { user, isLoading, isError } = useUser(session?.user?.email);
   const [ Mode , setMode ] = useState("Cards")
   const  [ displayCity , setDisplayCity] = useState("")
-  const cityOrders = useOrders(displayCity)
-
-  useEffect(()=>{})
 
     if (status === 'loading') {
      return <h1 style={{textAlign:'center'}}>Loading...</h1>
@@ -40,41 +56,27 @@ const BoardPage=()=>{
 return (
     <>
     <AppHead/>
+    
      <BoardToolsBar 
         Mode={Mode}
         setMode={setMode}
         displayCity={displayCity}
         setDisplayCity={setDisplayCity}
       />
-     <CardsWrapper
+      
+     <OrdersWrapper
         Mode={Mode}
         displayCity={displayCity}
-          
-      />
-
+     / >
+    
     <Footer>
-      <div //profile Link
-           style={{
-             marginTop:"3px",
-             borderRadius: "5px",
-             height: "50px",
-             display: 'flex',
-             flexDirection: 'column',
-             justifyContent: 'center',
-             alignItems: 'center',
-             alignContent: 'center',
-             background: Colors.d,
-             width:"70px",
-            
-           }}
-
-         >
+      <div  style={Style.Fotter} >
            <Link href={"/profile"} shallow={true}>
              <Image
                src={session?.user?.image}
                height={40}
                width={40}
-               style={{ borderRadius: "15px" }}
+               style={{ borderRadius: "15px" ,  }}
                alt="User Profile Link"
                fetchPriority="auto"
              />

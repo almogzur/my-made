@@ -15,15 +15,15 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '100vh',
-    backgroundColor: '#1A3636',
-    color: '#D6BD98',
+    backgroundColor: Colors.a,
+    color: Colors.d,
     padding: '20px',
     position: 'relative',
     overflow: 'hidden',
     position:"relative"
   },
   main: {
-    backgroundColor: Colors.a,
+    backgroundColor: Colors.d,
     color: Colors.d,
     padding: '30px',
     borderRadius: '3px',
@@ -44,9 +44,9 @@ const styles = {
   floatingShape: {
     position: 'absolute',
     borderRadius: '30%',
-    backgroundColor: Colors.b,
+    backgroundColor: Colors.d,
     opacity: 0.5,
-    boxShadow: `0px 2px 2px ${Colors.d}`,
+    boxShadow: `0px 2px 2px ${Colors.a}`,
   },
   button: {
     marginTop: '20px',

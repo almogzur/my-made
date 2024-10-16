@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react'
 import {useEffect,useState} from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import Colors from '../../lib/colors'
+import Colors from '../../../lib/colors'
 import { useMediaQuery } from 'usehooks-ts'
 
 

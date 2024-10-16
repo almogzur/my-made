@@ -20,12 +20,12 @@ return (
       style={{
         width:"100%",
         height:"40px",
-        background:Colors.b,
+        background:Colors.d,
         display:'flex',
         justifyContent:"center",
         alignItems:"center",
         width:"100%",
-        color:Colors.d
+        color:Colors.a
 
       }}
    >

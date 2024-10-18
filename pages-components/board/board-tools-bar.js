@@ -5,8 +5,8 @@ import Colors from '../../lib/colors'
 import { FaThList } from "react-icons/fa";
 import { PiCardsThin } from "react-icons/pi";
 import RegionSelect from '../../components/select-city/select'
-import MultiRangeSlider from './multi-range-piker';
-
+import MultiRangeSlider from '../../pages-components/board/multi-range-input'
+import { background } from '@chakra-ui/react';
 
 const Style = {
     Wrapper:{
@@ -33,8 +33,11 @@ const Style = {
     Filter:{
       
         height:"100%",
-   
         width:"100%",
+        display:'flex',
+        flexDirection:'column',
+        
+   
         
 
     },
@@ -97,28 +100,21 @@ return (
           >
           <RegionSelect 
             propsId="filter-date"
-            PropsStyle={{border:"none" , width:"100%",height:"50%"  }}
+            PropsStyle={{border:"none" , width:"100%"  }}
             PropsPlaceholder={"סינון לפי אזור"}
             PropsOnChange={cityHendler}
    
           />
-    
-        <MultiRangeSlider
-           min={0}
-           max={1000}
-           onChange={({ min, max }) =>
-             console.log(`min = ${min}, max = ${max}`)
-          }
-        />
 
-       
+          <MultiRangeSlider
+                min={0}
+                max={100}
+                onChange={
+                  ({ min, max }) => console.log(`min = ${min}, max = ${max}`)}
 
 
-
-          
-
- </div>
-
+          />
+        </div>
 
   </div>
 ) 

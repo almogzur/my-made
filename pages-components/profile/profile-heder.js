@@ -36,18 +36,7 @@ const { data: session ,status ,update} = useSession()
            boxShadow: '0 4px 8px #404040'
                 }}
        >
-         <ColorsH1      
-         text={session?.user?.name.toUpperCase()}
-         color1={"black"}
-         color2={Colors.d}
-         angleDeg={"-17deg"}
-         style={{   
-          position:"absolute",
-            top:"10px",
-            right:"10px",
-              }}
-            >
-         </ColorsH1>
+
 
          <ColorsH1
            text={session?.user?.email?.toUpperCase()}

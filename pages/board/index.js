@@ -36,6 +36,7 @@ const Style = {
               alignContent: 'center',
               background: Colors.d,
               width:"70px",
+              
             },
 
 }
@@ -76,9 +77,10 @@ return (
                src={session?.user?.image}
                height={40}
                width={40}
-               style={{ borderRadius: "15px" ,  }}
+               style={{ borderRadius: "15px"   }}
                alt="User Profile Link"
                fetchPriority="auto"
+               
              />
            </Link>
 

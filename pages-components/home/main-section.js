@@ -103,7 +103,7 @@ function  Main() {
   };
 
   if (status === "loading" ) {
-    return <MongoSpinner propsname={"בודק נתונים"}/>;
+    return <div>Loading...</div> 
   }
 
   return (

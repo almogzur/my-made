@@ -13,7 +13,7 @@ const OrdersWrapper=({Mode,childern})=>{
 
   const WrapperStyle = {
     width:"100%",
-    height:"80%",
+
     display:"flex" ,
     flexDirection: Mode === "Cards" ? "row" : "column" ,
     flexWrap:"wrap",

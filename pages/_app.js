@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import "../components/acordione/acordione.css"
 import "../components/range-elemnt/range-elemnt.css"
 import "../components/calendar/calendar.css"
-import "../pages-components/board/price-range.css"
+import '../pages-components/board/muli-css.css'
 
  // will move to in line 
 import "../components/spining-loader/spining-loader.css"

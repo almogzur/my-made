@@ -6,7 +6,7 @@ import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
 import Dialogui from '../../components/dialog/ui-dialog';
 import NewOrder from './new-order';
 import { StateContext } from '../../context';
-import { background } from '@chakra-ui/react';
+import { background, border } from '@chakra-ui/react';
 
 
 const CustomerOrderList = () => {
@@ -56,12 +56,13 @@ const CustomerOrderList = () => {
 
     },
     button: {
-      background: Colors.d,
       color: Colors.a,
       marginTop: '15px',
       width: "100px",
       height: "35px",
       marginBottom: "15px",
+      border:"none",
+      borderRadius:"5px",
     },
   
   };
@@ -131,7 +132,7 @@ const CustomerOrderList = () => {
                    {/* too add key to fragment need to import it can't use " <></>"" */}
                   <tr 
                     key={index} 
-                    style={{...Style.tableRow ,   background: expandedOrder === index ? ` lightblue ` : ""    }} 
+                    style={{...Style.tableRow ,   background: expandedOrder === index ? ` lightgray ` : ""    }} 
                     onClick={() => handleRowClick(index)}
                   
                   >
@@ -163,13 +164,13 @@ const CustomerOrderList = () => {
 
                          <strong style={{color:"red"}} > מחיר לשעה : {order.orderPrice || "N/A"}</strong> 
 
-                         <div style={{display:"flex" , background:"lightblue" , display:"flex" , justifyContent:"space-around"}}>
+                         <div style={{display:"flex" , background:`${Colors.d}` , display:"flex" , justifyContent:"space-around"}}>
                       
                         { /**n Remove Order  */}
                         <button 
                           onClick={() => handleRemoveOrder(order.orderId)} 
                           disabled={isRemoving}
-                          style={{...Style.button,background:"red"}}
+                          style={{...Style.button,background:"#a90b0b"}}
                         >
                           <strong>{isRemoving ? 'מוחק...' : 'מחק '}</strong>
                         </button>
@@ -180,7 +181,7 @@ const CustomerOrderList = () => {
                           perentOpenModle={openDialog}
                           perntHendler={closeDialog}
                           buttonText={"ערוך  "}
-                          CloseDialogButtonStyle={Style.button}
+                          CloseDialogButtonStyle={{...Style.button , border:"solid black 0.5px" ,borderRadius:"5px", background:`${Colors.c}`  }}
                         >
                           <NewOrder
                             orderId={order.orderId}

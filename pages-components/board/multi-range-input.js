@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState, useRef } from "react";
-import PropTypes from "prop-types";
 
-const MultiRangeSlider = ({ min, max, onChange }) => {
+const MultiRangeSlider = ({ min, max, PropsOnChange }) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
   const minValRef = useRef(min);
@@ -26,12 +25,11 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
       // Set the width of the range to cover the gap between minVal and maxVal
       range.current.style.width = `${maxPercent-minPercent }%`;
     }
+
+    
   }, [minVal, maxVal, getPercent]);
 
   // Get min and max values when their state changes
-  useEffect(() => {
-    onChange({ min: minVal, max: maxVal });
-  }, [minVal, maxVal, onChange]);
 
   return (
     <div className="rang-container">
@@ -44,6 +42,8 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
           const value = Math.min(Number(event.target.value), maxVal - 1);
           setMinVal(value);
           minValRef.current = value;
+          PropsOnChange({ min: minVal, max: maxVal });
+
         }}
         className="thumb thumb--left"
       />
@@ -56,6 +56,7 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
           const value = Math.max(Number(event.target.value), minVal + 1);
           setMaxVal(value);
           maxValRef.current = value;
+          PropsOnChange({ min: minVal, max: maxVal });
         }}
         className="thumb thumb--right"
       />
@@ -64,16 +65,12 @@ const MultiRangeSlider = ({ min, max, onChange }) => {
         <div className="slider__track" />
         <div ref={range} className="slider__range" />
         <div className="slider__left-value">{maxVal + " שח לשעה"}</div>
-        <div className="slider__right-value">{minVal + " עד שח"}</div>
+        <div className="slider__right-value">{minVal + " שח"}</div>
       </div>
     </div>
   );
 };
 
-MultiRangeSlider.propTypes = {
-  min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
+
 
 export default MultiRangeSlider;

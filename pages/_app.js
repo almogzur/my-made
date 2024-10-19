@@ -16,7 +16,7 @@ import "../components/mongo-spinner/mongo-spinner.css"
 
 import { SessionProvider } from "next-auth/react"
 import { WindowWidthContaxt, StateContext ,  ResolvedUserContext} from '../context'
-import {  useState } from "react"
+import {  StrictMode, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import State from '../state'
 
@@ -80,6 +80,7 @@ export default function App({
 
 
   return (
+    <StrictMode>
     <StateContext.Provider value={[state,setState]}>
       <SessionProvider session={session}>    
       <WindowWidthContaxt.Provider value={{md,sm}}>
@@ -87,7 +88,7 @@ export default function App({
       </WindowWidthContaxt.Provider>
       </SessionProvider>
       </StateContext.Provider>
-
+   </StrictMode>
   )
 }
    

@@ -31,7 +31,7 @@ const SubmitStyle = {
   fontSize: "20px",
   cursor: "pointer",
   textAlign: "center",
-  color: Colors.d,
+  color: Colors.text,
   boxShadow: `3px 3px 3px 3px ${Colors.c}`,
 }
 

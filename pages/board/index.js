@@ -20,12 +20,21 @@ import Colors from '../../lib/colors'
 import Link from 'next/link'
 import Image from 'next/image'
 import OrdersWrapper from '../../pages-components/board/orders-wrapper'
-import useOrders from '../../lib/hooks/useOrders'
 
+const host = "http://localhost:8888"
+
+
+ // fetching all citys data 
+export async function getStaticProps() {
+  const res = await fetch(`${host}/api/board/orders`)
+  const staticOrders = await res.json()
+   
+ return { props: { staticOrders } }
+}
 
 
 const Style = {
-   Fotter : { 
+            Fotter : { 
               marginTop:"3px",
               borderRadius: "5px",
               height: "50px",
@@ -38,46 +47,77 @@ const Style = {
               width:"70px",
               
             },
+              Profilelink:{ 
+              display:'flex',
+              justifyContent:'center',
+              alignItems:'center',
+              height:"50px",
+              width:"75px",
+              borderRadius:"7px",
+             background:Colors.b
+            }
 
 }
 
+const BoardPage=({staticOrders})=>{
 
-const BoardPage=()=>{
 
-  const router = useRouter()
+   // user data 
   const { data: session ,status ,update} = useSession()
   const { user, isLoading, isError } = useUser(session?.user?.email);
+
+
+  // filter State 
+  const  [ filterCity , setFilterCity ] = useState("")
+  const  [ filterPriceArray , setFilterPriceArray ] = useState([300,0]) // 300 max price 
   const [ Mode , setMode ] = useState("Cards")
-  const  [ displayCity , setDisplayCity] = useState("")
 
-    if (status === 'loading') {
+
+
+  useEffect(()=>{
+     
+  },[])
+
+
+   // un auth redirect for slug navigation i.e "www.dom.loc/board" with no session
+  const router = useRouter()
+  useEffect(() => {
+    if (status === "unauthenticated") {
+       router.push("/");
+     }
+   }, [status, router]);
+
+
+
+  if (status === 'loading' || !staticOrders ) {
      return <h1 style={{textAlign:'center'}}>Loading...</h1>
-}
+   }
 
-return (
-    <>
-    <AppHead/>
+  return (
+     <>
+     <AppHead/>
     
      <BoardToolsBar 
-        Mode={Mode}
         setMode={setMode}
-        displayCity={displayCity}
-        setDisplayCity={setDisplayCity}
+        setFilterCity={setFilterCity}
+        setFilterPriceArray={setFilterPriceArray}
       />
       
      <OrdersWrapper
         Mode={Mode}
-        displayCity={displayCity}
+        filterCity={filterCity}
+        filterPriceArray={filterPriceArray}
+        Orders={staticOrders}
      / >
     
     <Footer>
       <div  style={Style.Fotter} >
-           <Link href={"/profile"} shallow={true}>
+           <Link style={Style.Profilelink} href={"/profile"} shallow={true}>
              <Image
                src={session?.user?.image}
                height={40}
                width={40}
-               style={{ borderRadius: "15px"   }}
+               style={{ borderRadius: "15px"  }}
                alt="User Profile Link"
                fetchPriority="auto"
                
@@ -90,4 +130,8 @@ return (
 ) 
 }
 
+
+
 export default BoardPage
+
+

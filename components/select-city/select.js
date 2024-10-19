@@ -27,7 +27,13 @@ const InputStyle = {
 
 
 
-const RegionSelect = ({value, PropsOnChange , PropsStyle  ,PropsPlaceholder, propsId }) => {
+const RegionSelect = ({
+     value,
+     PropsOnChange,
+     PropsStyle, 
+     PropsPlaceholder,
+     propsId
+     }) => {
 
 
 

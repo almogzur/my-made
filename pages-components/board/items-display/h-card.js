@@ -17,7 +17,7 @@ import { IoMdPerson } from "react-icons/io";
 
 
 
-const HCard =({})=>{
+const HCard =({data})=>{
 
   const router = useRouter()
   const { data: session ,status ,update} = useSession()

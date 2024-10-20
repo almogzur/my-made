@@ -49,7 +49,7 @@ const Style = {
 
 
 
-const Vcard=()=>{
+const Vcard=({data})=>{
 
   const router = useRouter()
   const { data: session ,status ,update} = useSession()

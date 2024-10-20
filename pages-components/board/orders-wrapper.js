@@ -4,40 +4,10 @@ import VCard from '../../pages-components/board/items-display/v-card'
 import { useEffect, useState } from 'react'
 
 
-const OrdersWrapper=({ Mode ,filterCity , filterPriceArray , Orders})=>{
-
-  const filterOredersByCity = (city ) => {
-    console.log("fired",city);
-    
-    let temp = [ ]
-
-         Object.entries(Orders).map((array,i)=>{
+const OrdersWrapper=({ Mode,  renderList})=>{
   
-             const map_city   = array[0]
-             const map_cityOrders  = array[1]
-             const index  = i 
-  
-                if( map_city === filterCity ){
-                  console.log("pusging");
-                  
-                     temp.push(map_cityOrders)          
-               }
-               
-               
-             } )             
-        return temp   
-     
-   }   
 
   const { data: session ,status ,update} = useSession()
-  const [ citylist  , setCityList  ] = useState( filterOredersByCity(filterCity))
-
-
-  useEffect(()=>{
-  console.log(citylist);
-  
-  },[citylist])
-   
 
 
   const WrapperStyle = {
@@ -59,11 +29,17 @@ const OrdersWrapper=({ Mode ,filterCity , filterPriceArray , Orders})=>{
 
    return <div style={WrapperStyle}  
        >
-       {citylist.length >= 0 ?
-         <div>{JSON.stringify(citylist)}</div>
+       {renderList.length >0  ? 
+          renderList.map((data,i)=>{
+
+            return  Mode === "Cards" ?  
+             <HCard orderData={data} key={i} /> 
+             :
+             <VCard orderData={data} key={i} />
+             
+          })
            
         :
-
         [1,2,3,4,5,6].map(
            (item,index) => {
              return Mode === "Cards" ?  

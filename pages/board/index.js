@@ -21,17 +21,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import OrdersWrapper from '../../pages-components/board/orders-wrapper'
 
-const host = "http://localhost:8888"
+  const host = "http://localhost:8888"
 
-
- // fetching all citys data 
 export async function getStaticProps() {
+
   const res = await fetch(`${host}/api/board/orders`)
   const staticOrders = await res.json()
    
  return { props: { staticOrders } }
 }
-
 
 const Style = {
             Fotter : { 
@@ -61,26 +59,20 @@ const Style = {
 
 const BoardPage=({staticOrders})=>{
 
+  const router = useRouter()
 
    // user data 
   const { data: session ,status ,update} = useSession()
-  const { user, isLoading, isError } = useUser(session?.user?.email);
 
 
-  // filter State 
+  // filter by State 
+  const  [ Mode , setMode ] = useState("Cards")
   const  [ filterCity , setFilterCity ] = useState("")
   const  [ filterPriceArray , setFilterPriceArray ] = useState([300,0]) // 300 max price 
-  const [ Mode , setMode ] = useState("Cards")
-
-
-
-  useEffect(()=>{
-     
-  },[])
+  const  [ renderList , setRenderList ] = useState([])
 
 
    // un auth redirect for slug navigation i.e "www.dom.loc/board" with no session
-  const router = useRouter()
   useEffect(() => {
     if (status === "unauthenticated") {
        router.push("/");
@@ -89,7 +81,7 @@ const BoardPage=({staticOrders})=>{
 
 
 
-  if (status === 'loading' || !staticOrders ) {
+  if (status === 'loading'  ) {
      return <h1 style={{textAlign:'center'}}>Loading...</h1>
    }
 
@@ -101,13 +93,15 @@ const BoardPage=({staticOrders})=>{
         setMode={setMode}
         setFilterCity={setFilterCity}
         setFilterPriceArray={setFilterPriceArray}
+        setRenderList={setRenderList}
+        renderList={renderList}
+        filterCity={filterCity}
+        staticOrders={staticOrders}
       />
       
      <OrdersWrapper
         Mode={Mode}
-        filterCity={filterCity}
-        filterPriceArray={filterPriceArray}
-        Orders={staticOrders}
+        renderList={renderList}
      / >
     
     <Footer>

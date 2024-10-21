@@ -4,9 +4,6 @@ import { FaThList } from "react-icons/fa";
 import { PiCardsThin } from "react-icons/pi";
 import RegionSelect from '../../components/select-city/select'
 import MultiRangeSlider from '../../pages-components/board/multi-range-input'
-import { useEffect } from 'react';
-
-
 
 const Style = {
     Wrapper:{
@@ -14,10 +11,12 @@ const Style = {
         height:"50px",
         boxShadow: `0 2px 4px ${Colors.d}`,
         display:"flex"
+        
     },
     DisplayMode:{
-      width:"50%",
+     width:"130px",
       height:"inherit",
+      display:"flex"
     },
     DisplayModeButtom:{
       width:"60px",
@@ -35,27 +34,19 @@ const Style = {
 }
 
 const filterOrdersByCity = (cityArg, OrdersArg) => {   
-  console.log(OrdersArg);
   
   let temp = [];
 
-  if (!cityArg) return [];
+  if (!cityArg) return temp;
+  else if (!OrdersArg) return temp
 
   for (const key in OrdersArg) {
     const cityJobList = OrdersArg[key];
-    console.log(key);
-    
-
-    // If the key (city) matches the provided cityArg, add its orders to the temp array
-    if (key === cityArg) {
-     
-      
-      temp = [...cityJobList];
-      break; 
+      if (key === cityArg) {
+        temp = [...cityJobList];
+        break; 
     }
   }
-
-  
   return temp;
 }
 
@@ -66,6 +57,7 @@ const BoardToolsBar=({
         setFilterPriceArray,
         setRenderList,
         renderList,
+        filterCity
        })=>{
 
   const { data: session ,status ,update} = useSession()
@@ -78,14 +70,6 @@ const BoardToolsBar=({
   }
 
   const priceHedler = (min,max) => {setFilterPriceArray([min,max])}
-
-
-
-useEffect(()=>{
-    console.log(renderList);
-    
-},[renderList])
-
 
    if (status === 'loading' ) {
      return <h1 style={{textAlign:'center'}}>Loading Orders ...</h1>
@@ -123,11 +107,16 @@ useEffect(()=>{
             PropsOnChange={cityHendler}
           />
 
-          <MultiRangeSlider
+    {      filterCity?   // only render the price selector if city is != fulsy
+              <MultiRangeSlider
                 min={0}
                 max={300}
                 PropsOnChange={({min,max})=>priceHedler(min,max)}
+                
           />
+          :null
+          }
+
       </div>
 
   </div>

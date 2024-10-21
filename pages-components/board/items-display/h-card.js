@@ -1,83 +1,109 @@
-import { useSession } from 'next-auth/react'
-import {useEffect,useState} from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import Colors from '../../../lib/colors'
-import { useMediaQuery } from 'usehooks-ts'
-
-
-import { CiCalendarDate } from "react-icons/ci";
-import { CiPhone } from "react-icons/ci";
-import { CiMap } from "react-icons/ci";
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Colors from '../../../lib/colors';
+import { CiCalendarDate, CiPhone } from "react-icons/ci";
 import { FaWarehouse } from "react-icons/fa";
 import { PiBathtubDuotone } from "react-icons/pi";
-import { IoIosBed } from "react-icons/io";
-import { FaMoneyBill } from "react-icons/fa";
-import { IoMdPerson } from "react-icons/io";
+import { IoIosBed, IoMdPerson } from "react-icons/io";
+import { useEffect } from 'react';
+import { FaCity, FaMoneyBill1Wave } from "react-icons/fa6";
+import { IoLocation } from "react-icons/io5";
+import { color } from 'framer-motion';
+import { background } from '@chakra-ui/react';
 
+const Style = {
+  Wrapper: {
+      width: "40%",
+      height: "300px",
+      boxShadow: `0px 0px 0px 1px ${Colors.c}`,
+      marginTop: "10px",
+      borderRadius: "2px",
+      display: 'flex',
+      textDecoration: "none", 
+      cursor: "pointer",
+      flexDirection:'column',
+      margin:"7px",
+      color:Colors.text
+      
 
+  },
+  HedlineBox: {
+      height:"30%", 
+      borderLeft: `0.5px solid ${Colors.c}`,
+      background:Colors.a,
+        display:'flex',
+        flexDirection:'column',
+        justifyContent:'center',
+        alignItems:'center',
 
-const HCard =({data})=>{
+  },
+  Text: {
+       height:"inherit",
+       display: 'flex',
+       flexDirection: 'row',
+       justifyContent:"space-around",
+       paddingTop:"0.5em",
+       background:Colors.c
+       
+  },
+  TextChildren: {
+  
+  
 
-  const router = useRouter()
-  const { data: session ,status ,update} = useSession()
-  const tab = useMediaQuery(" (min-width: 600px)" )
-  const laptop = useMediaQuery(" (min-width: 1100px) ")
-
-  const Style = {
-    LinkWrapper:{     
-      textDecoration:"none",  
-      width: laptop ? "20%" : tab ? "30% ": "44%",
-      height: "260px",
-      margin: "0.3em",
-      border: `solid 1px black`,
-      background:"#fff",
-      padding:"5px"
-    },
-    CardTop:{height:"15%",margin:"5px"},
-    CardBot:{height:"85%",overflow:"clip",lineHeight:"8px" },
-    CardBotText:{ margin:"0px",padding:"5px"}
-
-
-  }
-
-
-
-    if (status === 'loading') {
-     return <h1 style={{textAlign:'center'}}>Loading...</h1>
-}
-
+  },
+  CardBotText: {
+   
+      margin: "0px",
+      padding: "2px",
 
  
-return (
-   <Link href={""}
-     style={Style.LinkWrapper}
-        >
-        <div 
-          style={Style.CardTop}
-        >
-         תיאור העבודה: {""}
-        </div>
-        <div 
-          style={Style.CardBot}
-         >
-    
-          <h5 style={Style.CardBotText} >{<CiPhone />}0524638610</h5>
-          <h5 style={Style.CardBotText}>{<CiCalendarDate/>}{"date"} </h5>          
-          <h5 style={Style.CardBotText}>{<CiMap/>} {"addres"}</h5>
-          <h5 style={Style.CardBotText}>{<FaWarehouse/>} טר</h5>
-          <h5 style={Style.CardBotText}> {<PiBathtubDuotone/>} 4</h5>
-          <h5 style={Style.CardBotText} >{<IoIosBed/>} 3</h5>
-          <h5 style={Style.CardBotText} >{<FaMoneyBill/>} 300</h5>
-          <h5 style={Style.CardBotText} >{<IoMdPerson />}אלמוג צור</h5>
+  }
+};
 
-        </div>
+const Vcard = ({ OrderData }) => {
+    const router = useRouter();
+    const { data: session, status } = useSession();
 
 
+    useEffect(()=>{
+      console.log(OrderData);
+      
+    },[OrderData])
 
+    if (status === 'loading') {
+        return <h1 style={{ textAlign: 'center' }}>Loading...</h1>;
+    }
 
-   </Link>
-) 
-}
+    return (
+      <Link href={""} style={Style.Wrapper}>
 
-export default HCard
+      <div style={Style.HedlineBox}>
+          
+   
+          <FaMoneyBill1Wave color={Colors.d} size={"3em"} /> 
+         
+          <span style={{textAlign:"center"}} > {" מחיר לשעת ניקיון" }
+
+           <br/> {OrderData?.orderPrice}
+          </span>
+       
+
+      </div>
+        <div style={Style.Text}>
+          <div style={Style.TextChildren}>
+              <div style={Style.CardBotText}><CiPhone size={"1.3em"} /> {OrderData?.orderPhone}</div>
+              <div style={Style.CardBotText}><IoMdPerson size={"1.3em"} /> {OrderData?.userName}</div>
+              <div style={Style.CardBotText}><CiCalendarDate size={"1.3em"} /> {new Date(OrderData?.ResurveDate).toLocaleDateString('he-IL')}</div>
+              <div style={Style.CardBotText}><IoLocation size={"1.3em"} /> {OrderData?.addres}</div>
+              <div style={Style.CardBotText}><FaWarehouse size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber} </div>
+              <div style={Style.CardBotText}><PiBathtubDuotone size={"1.3em"} /> {OrderData?.NumberOfBaths} </div>
+              <div style={Style.CardBotText}><IoIosBed size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber} </div>
+          </div>
+      </div>
+  </Link>
+  
+    );
+};
+
+export default Vcard;

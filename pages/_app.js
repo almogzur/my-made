@@ -76,6 +76,7 @@ export default function App({
    const [state,setState] = useState(State)
    const md = useMediaQuery('(max-width: 900px)')
    const sm = useMediaQuery('(max-width: 600px)')
+   const xs = useMediaQuery('(max-width : 300px)')
 
 
 

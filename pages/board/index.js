@@ -27,8 +27,14 @@ export async function getStaticProps() {
 
   const res = await fetch(`${host}/api/board/orders`)
   const staticOrders = await res.json()
+  console.log("fetching ");
+  
    
- return { props: { staticOrders } }
+ return { 
+  props: { staticOrders } ,
+  revalidate: 60 * 5, // In seconds
+
+}
 }
 
 const Style = {
@@ -97,11 +103,13 @@ const BoardPage=({staticOrders})=>{
         renderList={renderList}
         filterCity={filterCity}
         staticOrders={staticOrders}
+   
       />
       
      <OrdersWrapper
         Mode={Mode}
         renderList={renderList}
+        filterCity={filterCity}
      / >
     
     <Footer>

@@ -64,6 +64,7 @@ const Style = {
 const Vcard = ({ OrderData }) => {
     const router = useRouter();
     const { data: session, status } = useSession();
+    const na = "N/A"
 
 
     useEffect(()=>{
@@ -94,11 +95,11 @@ const Vcard = ({ OrderData }) => {
           <div style={Style.TextChildren}>
               <div style={Style.CardBotText}><CiPhone size={"1.3em"} /> {OrderData?.orderPhone}</div>
               <div style={Style.CardBotText}><IoMdPerson size={"1.3em"} /> {OrderData?.userName}</div>
-              <div style={Style.CardBotText}><CiCalendarDate size={"1.3em"} /> {new Date(OrderData?.ResurveDate).toLocaleDateString('he-IL')}</div>
-              <div style={Style.CardBotText}><IoLocation size={"1.3em"} /> {OrderData?.addres}</div>
-              <div style={Style.CardBotText}><FaWarehouse size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber} </div>
-              <div style={Style.CardBotText}><PiBathtubDuotone size={"1.3em"} /> {OrderData?.NumberOfBaths} </div>
-              <div style={Style.CardBotText}><IoIosBed size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber} </div>
+              <div style={Style.CardBotText}><CiCalendarDate size={"1.3em"} /> {new Date(OrderData?.ResurveDate).toLocaleDateString('he-IL') ||na}</div>
+              <div style={Style.CardBotText}><IoLocation size={"1.3em"} /> {OrderData?.addres || na }</div>
+              <div style={Style.CardBotText}><FaWarehouse size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber ||na} </div>
+              <div style={Style.CardBotText}><PiBathtubDuotone size={"1.3em"} /> {OrderData?.NumberOfBaths|| na} </div>
+              <div style={Style.CardBotText}><IoIosBed size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber ||na  } </div>
           </div>
       </div>
   </Link>

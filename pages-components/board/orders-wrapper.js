@@ -22,15 +22,19 @@ const OrdersWrapper=({ Mode,  renderList , filterCity})=>{
      
    return <div style={WrapperStyle}  
        >
-       <h1>{ filterCity?  `${filterCity} עבודות ב`  : null}</h1>
+       
+     
        {renderList.length > 0  ? 
+       
           renderList.map((data,i)=>{
 
             return  Mode === "Cards" ?  
 
               
-
-             <HCard OrderData={data} key={i} /> 
+              <>
+              <HCard OrderData={data} key={i} /> 
+              </>
+             
              :
              <VCard OrderData={data} key={i} />
              

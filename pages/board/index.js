@@ -94,7 +94,7 @@ const BoardPage=({staticOrders})=>{
   return (
      <>
      <AppHead/>
-    
+
      <BoardToolsBar 
         setMode={setMode}
         setFilterCity={setFilterCity}
@@ -105,7 +105,8 @@ const BoardPage=({staticOrders})=>{
         staticOrders={staticOrders}
    
       />
-      
+                    <h3 style={{textAlign:"center"}}>{ filterCity?  `מציג הזמנות ${filterCity}`   : null}</h3>
+
      <OrdersWrapper
         Mode={Mode}
         renderList={renderList}

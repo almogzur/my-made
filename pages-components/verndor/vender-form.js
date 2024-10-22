@@ -32,7 +32,7 @@ const VendorForm = ({ setEdit }) => {
   // Update state from db 
   useEffect(() => {
     if (!isLoading && !isError && user) {
-      console.log("Vendor form effect - user data:", user);
+     // console.log("Vendor form effect - user data:", user);
   
       const businessName = user?.state?.[STATE_KEY]?.BussniseName || '';
       const price = user?.state?.[STATE_KEY]?.price || '';
@@ -50,7 +50,7 @@ const VendorForm = ({ setEdit }) => {
     }
   }, [user, setState, isLoading, isError]);
   
-
+    // api call set isVendor too true 
   const handleChange = (e) => {
    
     const id = e.target.id
@@ -63,7 +63,7 @@ const VendorForm = ({ setEdit }) => {
 
     }));
   };
-   // api call set isVendor too true 
+
   const handleSubmit = async (e) => {
    
  //  e.preventDefault()

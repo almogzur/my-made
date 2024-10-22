@@ -51,12 +51,11 @@ const filterOrdersByCity = (cityArg, OrdersArg) => {
 }
 
 const BoardToolsBar=({
-        staticOrders,
+        Orders,
         setMode,
         setFilterCity,
         setFilterPriceArray,
         setRenderList,
-        renderList,
         filterCity
        })=>{
 
@@ -66,7 +65,7 @@ const BoardToolsBar=({
   const cityHendler = (id,value) => {
 
     setFilterCity(value);
-    setRenderList(filterOrdersByCity(value,staticOrders));
+    setRenderList(filterOrdersByCity(value,Orders));
   }
 
   const priceHedler = (min,max) => {setFilterPriceArray([min,max])}

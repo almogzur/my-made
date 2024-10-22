@@ -21,10 +21,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import OrdersWrapper from '../../pages-components/board/orders-wrapper'
 
-  const host = "http://localhost:8888"
 
 export async function getStaticProps() {
-
+  const host = process.env.NEXTAUTH_URL
   const res = await fetch(`${host}/api/board/orders`)
   const staticOrders = await res.json()
   console.log("fetching ");

@@ -29,7 +29,7 @@ const ProfilePage = () => {
   }, [status, router]);
 
    if  (status === 'loading' ) {
-    return <MongoSpinner /> ;
+    return <div>Loading...</div> ;
   
   }
   return (

@@ -3,14 +3,14 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Colors from '../../../lib/colors';
 import { CiCalendarDate, CiPhone } from "react-icons/ci";
-import { FaWarehouse } from "react-icons/fa";
+import { FaWarehouse, FaRestroom } from "react-icons/fa";
 import { PiBathtubDuotone } from "react-icons/pi";
-import { IoIosBed, IoMdPerson } from "react-icons/io";
+import {  IoMdPerson } from "react-icons/io";
 import { useEffect } from 'react';
-import { FaCity, FaMoneyBill1Wave } from "react-icons/fa6";
+import {  FaMoneyBill1Wave } from "react-icons/fa6";
 import { IoLocation } from "react-icons/io5";
-import { color } from 'framer-motion';
-import { background } from '@chakra-ui/react';
+import { MdOutlineBedroomChild } from "react-icons/md";
+
 
 const Style = {
   Wrapper: {
@@ -68,7 +68,7 @@ const Vcard = ({ OrderData }) => {
 
 
     useEffect(()=>{
-      console.log(OrderData);
+ //     console.log(OrderData);
       
     },[OrderData])
 
@@ -98,8 +98,8 @@ const Vcard = ({ OrderData }) => {
               <div style={Style.CardBotText}><CiCalendarDate size={"1.3em"} /> {new Date(OrderData?.ResurveDate).toLocaleDateString('he-IL') ||na}</div>
               <div style={Style.CardBotText}><IoLocation size={"1.3em"} /> {OrderData?.addres || na }</div>
               <div style={Style.CardBotText}><FaWarehouse size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber ||na} </div>
-              <div style={Style.CardBotText}><PiBathtubDuotone size={"1.3em"} /> {OrderData?.NumberOfBaths|| na} </div>
-              <div style={Style.CardBotText}><IoIosBed size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber ||na  } </div>
+              <div style={Style.CardBotText}><FaRestroom size={"1.3em"} /> {OrderData?.NumberOfBaths|| na} </div>
+              <div style={Style.CardBotText}><MdOutlineBedroomChild size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber ||na  } </div>
           </div>
       </div>
   </Link>

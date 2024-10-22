@@ -1,104 +1,99 @@
-import { useSession } from 'next-auth/react'
-import {useEffect,useState} from 'react'
-import { useRouter } from 'next/router'
-import Link from 'next/link'
-import Colors from '../../../lib/colors'
-import { CiCalendarDate } from "react-icons/ci";
-import { CiPhone } from "react-icons/ci";
-import { CiMap } from "react-icons/ci";
-import { FaWarehouse } from "react-icons/fa";
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import Colors from '../../../lib/colors';
+import { CiCalendarDate, CiPhone } from "react-icons/ci";
+import { FaWarehouse, FaRestroom } from "react-icons/fa";
 import { PiBathtubDuotone } from "react-icons/pi";
-import { IoIosBed } from "react-icons/io";
-import { FaMoneyBill } from "react-icons/fa";
 import { IoMdPerson } from "react-icons/io";
+import { FaMoneyBill1Wave } from "react-icons/fa6";
+import { IoLocation } from "react-icons/io5";
+import { MdOutlineBedroomChild } from "react-icons/md";
 
 const Style = {
-    Wrapper:{
-        width:"100%",
-        height:"80px",
-        boxShadow: ` 0px 0px 0px 1px   ${Colors.c}`,
-        marginTop:"10px",
-        borderRadius:"2px",
-        display:'flex',
-        
+  Wrapper: {
+    width: "100%",  // Full width for vertical orientation
+    height: "auto",  // Dynamic height based on content
+    boxShadow: `0px 0px 0px 1px ${Colors.c}`,
+    marginTop: "10px",
+    borderRadius: "5px",
+    display: 'flex',
+    flexDirection: 'column',  // Vertical layout
+    cursor: "pointer",
+    textDecoration: "none",
+  },
+  TopSection: {
+    background: Colors.a,  // Background color for the top section
+    padding: '15px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: Colors.text,
+    borderBottom: `1px solid ${Colors.c}`,
+  },
+  BottomSection: {
+    background: Colors.c,  // Background color for the bottom section
+    padding: '15px',
+    display: 'flex',
+    flexDirection: 'row',  // Row layout for text children, like hcard
+    justifyContent: 'space-between',
+    color: Colors.text,
+  },
+  TextChildren: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    rowGap: '10px',  // Spacing between text items
+  },
+  CardBotText: {
+    display: 'flex',
+    alignItems: 'center',
+    margin: '5px 0',
+    fontSize: '1rem',
+  }
+};
 
-    },
-    Box:{
-        borderLeft:` 0.5px solid ${Colors.c} `,
+const Vcard = ({ OrderData }) => {
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  const na = "N/A";
 
-        alignContent:"center",
-        justifyContent:"center",
-    },
-    Test:{
-        width:"90%",
-        display:'flex',
-        flexDirection:'row',   
+  if (status === 'loading') {
+    return <h1 style={{ textAlign: 'center' }}>Loading...</h1>;
+  }
 
-    },
-    TextChildren:{
-        width:"50%",
-        margin:"2px",
+  return (
+    <Link href={""} style={Style.Wrapper}>
+      {/* Top Section */}
+      <div style={Style.TopSection}>
+        <FaMoneyBill1Wave color={Colors.d} size={"3em"} />
+        <span style={{ textAlign: "center" }}>
+          {" מחיר לשעת ניקיון"}
+          <br />
+          {OrderData?.orderPrice || na}
+        </span>
+      </div>
 
-  
-    },
-    ListItem:{
-
-    },
-    CardBotText:{ margin:"0px",padding:"2px" , }
-}
-
-
-
-const Vcard=({data})=>{
-
-  const router = useRouter()
-  const { data: session ,status ,update} = useSession()
-
-
-    if (status === 'loading') {
-     return <h1 style={{textAlign:'center'}}>Loading...</h1>
-}
-
-return (
-    <Link href={""} style={{textDecoration:"none"}}>
-     <div /*wraper*/  
-        style={Style.Wrapper}    
-     >
-        <div /*box */
-          style={Style.Box}
-        >תיאור הזמנה
-
+      {/* Bottom Section */}
+      <div style={Style.BottomSection}>
+        {/* Left Column */}
+        <div style={Style.TextChildren}>
+          <div style={Style.CardBotText}><CiPhone size={"1.3em"} /> {OrderData?.orderPhone || na}</div>
+          <div style={Style.CardBotText}><IoMdPerson size={"1.3em"} /> {OrderData?.userName || na}</div>
+          <div style={Style.CardBotText}><CiCalendarDate size={"1.3em"} /> {new Date(OrderData?.ResurveDate).toLocaleDateString('he-IL') || na}</div>
+          <div style={Style.CardBotText}><IoLocation size={"1.3em"} /> {OrderData?.addres || na}</div>
         </div>
-        <div /**text */
-            style={Style.Test}
-        >
-         <div style={Style.TextChildren}  >
-            
-          <h5 style={Style.CardBotText} >{<CiPhone />}0524638610</h5>
-          <h5 style={Style.CardBotText} >{<IoMdPerson />}אלמוג צור</h5>
 
-          <h5 style={Style.CardBotText}>{<CiCalendarDate/>}{"תאריך"} </h5>          
-          <h5 style={Style.CardBotText}>{<CiMap/>} {"כתובת"}</h5>
-      
-
-            
-             <br/>
-            
-         </div>
-
-         <div style={Style.TextChildren}  >
-         <h5 style={Style.CardBotText}>{<FaWarehouse/>} מטר</h5>
-          <h5 style={Style.CardBotText}> {<PiBathtubDuotone/>} 4</h5>
-          <h5 style={Style.CardBotText} >{<IoIosBed/>} 3</h5>
-          <h5 style={Style.CardBotText} >{<FaMoneyBill/>} 300</h5>
-         </div>
-
+        {/* Right Column */}
+        <div style={Style.TextChildren}>
+          <div style={Style.CardBotText}><FaWarehouse size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber || na}</div>
+          <div style={Style.CardBotText}><FaRestroom size={"1.3em"} /> {OrderData?.NumberOfBaths || na}</div>
+          <div style={Style.CardBotText}><MdOutlineBedroomChild size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber || na}</div>
         </div>
-        
+      </div>
+    </Link>
+  );
+};
 
-    </div> 
-  </Link>
-) 
-}
-
-export default Vcard
+export default Vcard;

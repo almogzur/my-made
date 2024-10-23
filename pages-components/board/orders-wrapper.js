@@ -4,6 +4,7 @@ import VCard from '../../pages-components/board/items-display/v-card'
 
 import useSWR from 'swr';
 import { useEffect, useState } from 'react';
+import { isArray } from 'util';
  
 
 
@@ -28,23 +29,24 @@ const OrdersWrapper=({ Mode,filterCity })=>{
    const getOrder = async  (city) => {
        if(!filterCity){  return [ ]  }
        
-       try{
+    
         setIsFetch(true)
+
+
           const res = await fetch(`/api/board/orders/?city=${city}`)
           const data = await res.json()
-          setOrders(data)
           
+              if (!data){
+                setOrders([])
+              }
 
-      }
-      catch(error){
-          console.log(error);     
-      }
-      finally{
-        setIsFetch(false)
-      }
+          setOrders(data)
+          setIsFetch(false)
 
    }
+
    getOrder(filterCity)
+
   },[filterCity])
  
  if (status === 'loading' ) {
@@ -56,7 +58,7 @@ const OrdersWrapper=({ Mode,filterCity })=>{
      
    return <div style={WrapperStyle}  
        >  
-       {Orders .length !== 0 ? 
+       { Array.isArray(Orders) ? 
        
          Orders.map((data,i)=>{
             return  Mode === "Cards" ?  

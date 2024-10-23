@@ -1,3 +1,4 @@
+import { log } from 'console';
 import clientPromise from '../../../lib/db';
 
 const handler = async (req, res) => {
@@ -19,9 +20,9 @@ const handler = async (req, res) => {
       }
        const collection = areadatabase.collection(city);
        const data = await collection.find({}).toArray();
-       
+
            if (!data.length) {
-              return res.status(404).json({ message: `No data found for city: ${city}` });
+              return res.status(200).json({ message: `No data found for city: ${city}` });
             }
 
        return res.status(200).json(data);

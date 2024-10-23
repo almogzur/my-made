@@ -78,7 +78,7 @@ const Vcard = ({ OrderData }) => {
     }
 
     return (
-      <Link href={""} style={Style.Wrapper}>
+      <Link href={`/board/order/${OrderData.orderId.slice(0,10)}`} style={Style.Wrapper}>
 
       <div style={Style.HedlineBox}>
           

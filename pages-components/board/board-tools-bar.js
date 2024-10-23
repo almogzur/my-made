@@ -51,28 +51,20 @@ const filterOrdersByCity = (cityArg, OrdersArg) => {
 }
 
 const BoardToolsBar=({
-        Orders,
         setMode,
         setFilterCity,
         setFilterPriceArray,
-        setRenderList,
         filterCity
        })=>{
 
   const { data: session ,status ,update} = useSession()
   
 
-  const cityHendler = (id,value) => {
-
-    setFilterCity(value);
-    setRenderList(filterOrdersByCity(value,Orders));
-  }
+  const cityHendler = (id,value) => { setFilterCity(value);}
 
   const priceHedler = (min,max) => {setFilterPriceArray([min,max])}
 
-   if (status === 'loading' ) {
-     return <h1 style={{textAlign:'center'}}>Loading Orders ...</h1>
-}
+
 
   return (
     <div  style={Style.Wrapper}>

@@ -12,39 +12,37 @@ import { MdOutlineBedroomChild } from "react-icons/md";
 
 const Style = {
   Wrapper: {
-    width: "100%",  // Full width for vertical orientation
-    height: "auto",  // Dynamic height based on content
-    boxShadow: `0px 0px 0px 1px ${Colors.c}`,
-    marginTop: "10px",
+    width:"100%",
     borderRadius: "5px",
     display: 'flex',
-    flexDirection: 'column',  // Vertical layout
+    flexDirection: 'column',
     cursor: "pointer",
     textDecoration: "none",
+    marginTop:"0.5em",
+    boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)",  // Add a subtle box shadow
+
   },
   TopSection: {
     background: Colors.a,  // Background color for the top section
-    padding: '15px',
+    padding: '10px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     color: Colors.text,
-    borderBottom: `1px solid ${Colors.c}`,
   },
   BottomSection: {
     background: Colors.c,  // Background color for the bottom section
-    padding: '15px',
+    padding: '5px',
     display: 'flex',
     flexDirection: 'row',  // Row layout for text children, like hcard
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     color: Colors.text,
   },
   TextChildren: {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    rowGap: '10px',  // Spacing between text items
   },
   CardBotText: {
     display: 'flex',
@@ -67,11 +65,10 @@ const Vcard = ({ OrderData }) => {
     <Link href={""} style={Style.Wrapper}>
       {/* Top Section */}
       <div style={Style.TopSection}>
-        <FaMoneyBill1Wave color={Colors.d} size={"3em"} />
         <span style={{ textAlign: "center" }}>
           {" מחיר לשעת ניקיון"}
           <br />
-          {OrderData?.orderPrice || na}
+          {OrderData?.orderPrice + " ש״ח" || na}
         </span>
       </div>
 

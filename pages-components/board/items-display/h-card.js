@@ -24,8 +24,9 @@ const Style = {
       cursor: "pointer",
       flexDirection:'column',
       margin:"7px",
-      color:Colors.text
-      
+      color:Colors.text,
+      boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)",  
+
 
   },
   HedlineBox: {
@@ -82,11 +83,10 @@ const Vcard = ({ OrderData }) => {
       <div style={Style.HedlineBox}>
           
    
-          <FaMoneyBill1Wave color={Colors.d} size={"3em"} /> 
          
           <span style={{textAlign:"center"}} > {" מחיר לשעת ניקיון" }
-
-           <br/> {OrderData?.orderPrice}
+           <br/>          
+            {OrderData?.orderPrice + " ש״ח" || na}
           </span>
        
 

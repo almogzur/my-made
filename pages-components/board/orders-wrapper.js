@@ -11,7 +11,7 @@ const OrdersWrapper=({ Mode,  renderList , filterCity})=>{
     flexDirection: Mode === "Cards" ? "row" : "column" ,
     flexWrap:"wrap",
     marginBottom:"100px",
-    marginTop:"2em",
+    marginTop:"1em",
     justifyContent:"center",
 
   }

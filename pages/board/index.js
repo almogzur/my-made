@@ -56,13 +56,13 @@ const BoardPage = () => {
         const data = await res.json();
         setOrders(data);
       } catch (error) {
-        console.log(2);
+
         
         router.reload
       }
     };
   if(orders.length === 0){
-    console.log(1);
+
     fetchOrders();
   }
    
@@ -76,8 +76,14 @@ const BoardPage = () => {
   }, [status, router]);
 
   // Loading state
-  if (status === 'loading' || orders.length === 0 ) {
-    return <h1 style={{textAlign: 'center'}}>Loading...</h1>;
+  if (status === 'loading' ) {
+    return <h1 style={{textAlign: 'center'}}>Loading User Info ...</h1>;
+  }
+
+   // no orders  while react 
+  else if (  orders.length === 0 ){
+    return <h1 style={{textAlign: 'center'}}>Loading Orders...</h1>;
+
   }
 
   return (

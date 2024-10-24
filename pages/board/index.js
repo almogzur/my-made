@@ -19,7 +19,7 @@ const BoardPage = () => {
   // State for orders and filters
 
   const [Mode, setMode] = useState("Cards");
-  const [filterCity, setFilterCity] = useState("");
+  const [filterCity, setFilterCity] = useState(null);
   const [filterPriceArray, setFilterPriceArray] = useState([300, 0]);  // 300 max price
 
 
@@ -30,12 +30,11 @@ const BoardPage = () => {
     }
   }, [status, router]);
 
-  // Loading state
+
   if (status === 'loading' ) {
     return <h1 style={{textAlign: 'center'}}>Loading User Info ...</h1>;
   }
 
-   // no orders  while react 
 
 
   return (

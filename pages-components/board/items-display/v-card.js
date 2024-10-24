@@ -15,7 +15,7 @@ const Style = {
     width:"100%",
     borderRadius: "5px",
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     cursor: "pointer",
     textDecoration: "none",
     marginTop:"0.5em",
@@ -30,14 +30,16 @@ const Style = {
     alignItems: 'center',
     justifyContent: 'center',
     color: Colors.text,
+    width:"20%"
   },
   BottomSection: {
     background: Colors.c,  // Background color for the bottom section
     padding: '5px',
     display: 'flex',
-    flexDirection: 'row',  // Row layout for text children, like hcard
     justifyContent: 'space-around',
+    
     color: Colors.text,
+    width:"80%"
   },
   TextChildren: {
     display: 'flex',

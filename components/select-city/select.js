@@ -51,6 +51,7 @@ const RegionSelect = ({
         placeholder={PropsPlaceholder}
         required
         style={PropsStyle? PropsStyle: InputStyle}
+        defaultValue={null}
       >
        {israelRegions.map((obj,i)=>{
              const city = obj.value

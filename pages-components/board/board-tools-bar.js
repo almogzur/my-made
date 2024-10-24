@@ -33,22 +33,6 @@ const Style = {
     },
 }
 
-const filterOrdersByCity = (cityArg, OrdersArg) => {   
-  
-  let temp = [];
-
-  if (!cityArg) return temp;
-  else if (!OrdersArg) return temp
-
-  for (const key in OrdersArg) {
-    const cityJobList = OrdersArg[key];
-      if (key === cityArg) {
-        temp = [...cityJobList];
-        break; 
-    }
-  }
-  return temp;
-}
 
 const BoardToolsBar=({
         setMode,
@@ -96,9 +80,10 @@ const BoardToolsBar=({
             PropsStyle={{border:"none" , width:"100%"  }}
             PropsPlaceholder={"אזור"}
             PropsOnChange={cityHendler}
+           
           />
 
-    {      filterCity?   // only render the price selector if city is != fulsy
+    {      filterCity !== "" ?   // only render the price selector if city is != fulsy
               <MultiRangeSlider
                 min={0}
                 max={300}

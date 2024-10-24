@@ -1,71 +1,73 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { useContext, useEffect } from 'react';
+
 import Link from 'next/link';
 import Colors from '../../../lib/colors';
+
 import { CiCalendarDate, CiPhone } from "react-icons/ci";
 import { FaWarehouse, FaRestroom } from "react-icons/fa";
-import { PiBathtubDuotone } from "react-icons/pi";
-import {  IoMdPerson } from "react-icons/io";
-import { useEffect } from 'react';
-import {  FaMoneyBill1Wave } from "react-icons/fa6";
 import { IoLocation } from "react-icons/io5";
 import { MdOutlineBedroomChild } from "react-icons/md";
+import {  IoMdPerson } from "react-icons/io";
+import { WindowWidthContaxt } from '../../../context'
 
-
-const Style = {
-  Wrapper: {
-      width: "40%",
-      height: "300px",
-      boxShadow: `0px 0px 0px 1px ${Colors.c}`,
-      marginTop: "10px",
-      borderRadius: "2px",
-      display: 'flex',
-      textDecoration: "none", 
-      cursor: "pointer",
-      flexDirection:'column',
-      margin:"7px",
-      color:Colors.text,
-      boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)",  
-
-
-  },
-  HedlineBox: {
-      height:"30%", 
-      borderLeft: `0.5px solid ${Colors.c}`,
-      background:Colors.a,
-        display:'flex',
-        flexDirection:'column',
-        justifyContent:'center',
-        alignItems:'center',
-
-  },
-  Text: {
-       height:"inherit",
-       display: 'flex',
-       flexDirection: 'row',
-       justifyContent:"space-around",
-       paddingTop:"0.5em",
-       background:Colors.c
-       
-  },
-  TextChildren: {
-  
-  
-
-  },
-  CardBotText: {
-   
-      margin: "0px",
-      padding: "2px",
-
- 
-  }
-};
 
 const Vcard = ({ OrderData }) => {
     const router = useRouter();
     const { data: session, status } = useSession();
+    const {xs , md , sm} = useContext(WindowWidthContaxt)
     const na = "N/A"
+    const Style = {
+      Wrapper: {
+          width:   xs ? "50%" : sm? " 40% " : md ? "300px"  : "20%",
+          height: "300px",
+          boxShadow: `0px 0px 0px 1px ${Colors.c}`,
+          marginTop: "5px",
+          borderRadius: "2px",
+          display: 'flex',
+          textDecoration: "none", 
+          cursor: "pointer",
+          flexDirection:'column',
+          margin:"10px",
+          
+          color:Colors.text,
+          boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)",  
+    
+    
+      },
+      HedlineBox: {
+          height:"30%", 
+          borderLeft: `0.5px solid ${Colors.c}`,
+          background:Colors.a,
+            display:'flex',
+            flexDirection:'column',
+            justifyContent:'center',
+            alignItems:'center',
+    
+      },
+      Text: {
+           height:"inherit",
+           display: 'flex',
+           flexDirection: 'row',
+           justifyContent:"space-around",
+           paddingTop:"0.5em",
+           background:Colors.c
+           
+      },
+      TextChildren: {
+      
+      
+    
+      },
+      CardBotText: {
+       
+          margin: "0px",
+          padding: "2px",
+    
+     
+      }
+    };
 
 
     useEffect(()=>{

@@ -1,16 +1,13 @@
 import { useSession } from 'next-auth/react'
 import HCard from '../../pages-components/board/items-display/h-card'
 import VCard from '../../pages-components/board/items-display/v-card'
-
-import useSWR from 'swr';
 import { useEffect, useState } from 'react';
-import { isArray } from 'util';
  
 
 
 const OrdersWrapper=({ Mode,filterCity })=>{
   const { data: session ,status ,update} = useSession()
-  const [Orders  , setOrders] = useState([])
+  const [ Orders  , setOrders] = useState([])
   const [ isFetch, setIsFetch] = useState(false)
 
 
@@ -23,40 +20,37 @@ const OrdersWrapper=({ Mode,filterCity })=>{
     justifyContent:"center",
 
   }
-
+ // get orders when reactiv value changes 
   useEffect(()=>{
 
-   const getOrder = async  (city) => {
-       if(!filterCity){  return [ ]  }
+   const getOrders= async  (city) => {
+       if(!filterCity){  setOrders(null)  }
+      
+       setIsFetch(true)
+       try{
+         const res = await fetch(`/api/board/orders/?city=${city}`)
+         const data = await res.json()   
+           if (!data){  setOrders(null) }
+         setOrders(data)
+         setIsFetch(false)
+
+       }
+       catch(e){;
+        alert(e)
+       }
        
-    
-        setIsFetch(true)
-
-
-          const res = await fetch(`/api/board/orders/?city=${city}`)
-          const data = await res.json()
-          
-              if (!data){
-                setOrders([])
-              }
-
-          setOrders(data)
-          setIsFetch(false)
-
    }
-
-   getOrder(filterCity)
+   getOrders(filterCity)
+ 
 
   },[filterCity])
  
  if (status === 'loading' ) {
    return <h1 style={{textAlign:'center'}}>Loading...</h1>
  }   
-
-
-  else if(isFetch){   return <h1 style={{textAlign:'center'}}>Loading Orders ...</h1>}
+ else if(isFetch){   return <h1 style={{textAlign:'center'}}>Loading Orders ...</h1>}
      
-   return <div style={WrapperStyle}  
+ return <div style={WrapperStyle}  
        >  
        { Array.isArray(Orders) ? 
        

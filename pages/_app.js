@@ -84,7 +84,7 @@ export default function App({
     <StrictMode>
     <StateContext.Provider value={[state,setState]}>
       <SessionProvider session={session}>    
-      <WindowWidthContaxt.Provider value={{md,sm}}>
+      <WindowWidthContaxt.Provider value={{md,sm,xs}}>
           <Component {...pageProps} />
       </WindowWidthContaxt.Provider>
       </SessionProvider>

@@ -3,7 +3,7 @@ import { useContext, useState , Fragment } from 'react';
 import useUser from '../../lib/hooks/useUser';
 import Colors from '../../lib/colors';
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
-import Dialogui from '../../components/dialog/ui-dialog';
+import UiDialog from '../../components/dialog/ui-dialog';
 import NewOrder from './new-order';
 import { StateContext } from '../../context';
 
@@ -11,11 +11,9 @@ import { StateContext } from '../../context';
 const CustomerOrderList = () => {
 
   const { data: session, status, update } = useSession();
-  const [state, setState] = useContext(StateContext)
-  const { user, isLoading } = useUser(session?.user?.email);
+  const { user, isLoading, userEroor } = useUser(session?.user?.email);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [isRemoving, setIsRemoving] = useState(false);
-  const [openDialog, setOpenDialog] = useState(false); // Track dialog state
 
 
   const Style = { 
@@ -71,6 +69,9 @@ const CustomerOrderList = () => {
   if (status === 'loading' || isLoading) {
     return <MongoSpinner/>;
   }
+  else if(userEroor){
+      return <div>Eroor, {Array.isArray(userEroor) || typeof userEroor === "string" ? userEroor : null } </div>
+  }
 
   const handleRowClick = (index) => {
     setExpandedOrder(expandedOrder === index ? null : index);
@@ -98,11 +99,6 @@ const CustomerOrderList = () => {
     }
   };
 
-
-  const closeDialog = () => {
-
-    setOpenDialog(false)
-  };
 
   return (
     <>
@@ -178,17 +174,14 @@ const CustomerOrderList = () => {
 
 
                           {/** Edit Order dialog  */}
-                        <Dialogui
-                          perentOpenModle={openDialog}
-                          perntHendler={closeDialog}
-                          buttonText={"ערוך  "}
-                          CloseDialogButtonStyle={{...Style.button , border:"solid black 0.5px" ,borderRadius:"5px", background:`${Colors.c}`  }}
+                        <UiDialog
+                           buttonText={"ערוך  "}
+                           CloseDialogButtonStyle={{...Style.button , border:"solid black 0.5px" ,borderRadius:"5px", background:`${Colors.c}`  }}
                         >
-                          <NewOrder
-                            orderId={order.orderId}
+                          <NewOrder orderId={order.orderId}
                        
                           />
-                        </Dialogui>
+                        </UiDialog>
 
                         </div>     
 

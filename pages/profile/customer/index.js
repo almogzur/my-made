@@ -70,9 +70,9 @@ const CostumerPage = () => {
         <ProfileLayout>      
           <CustomerOrderList/>
              <UiDialog
-              CloseDialogButtonStyle={Style.CloseDialogButton}
-              wrapperStyle={Style.Wrapper}
-              Icon={<IoMdAddCircle  size="2em"/>}
+                 CloseDialogButtonStyle={Style.CloseDialogButton}
+                 wrapperStyle={Style.Wrapper}
+                 Icon={<IoMdAddCircle  size="2em"/>}
              >
                <NewOrder newOrder={true}/>  
             </UiDialog> 

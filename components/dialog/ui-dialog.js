@@ -7,28 +7,32 @@ import ReactModal from "react-modal";
 import Colors from "../../lib/colors";
 import f from '../../lib/features'
 
+
+
+  let overlayRef = null;
+  let contentRef = null;  
+
 const Dialog = ({
   children,
   CloseDialogButtonStyle,
-  wrapperStyle,
-  perentOpenModle,
-  perntHendler, 
+  wrapperStyle, 
   buttonText,
   Icon
 }) => {
   const [showModal, setShowModal] = useState(false);
-
-  let overlayRef = useRef()
-  let contentRef = useRef()
-
-
   const handleModal = () => {  setShowModal(!showModal); }
-
-
   const scroolDown = ()=>{
+    console.log(overlayRef,contentRef);
 
-    console.log(contentRef);
-     
+    const options = {
+          top:400,
+          behavior:"smooth"
+        }
+    
+    if(contentRef){
+      contentRef.scroll(options)
+    }
+
 
   }
   
@@ -38,27 +42,25 @@ const Dialog = ({
     >
       { /** Closed*/}
   
-  {
-    perentOpenModle? null:
+  
+
       <m.button
           transition={{duration:0.5, stiffness:50}}
           whileHover={{
              boxShadow: `4px 4px 2px  ${Colors.c} inset `,
              scale:1.1
            }}
-          whileTap={{
-             boxShadow: `1px 1px 1px  ${Colors.c} inset `,
-           }}
+
           style={CloseDialogButtonStyle ? CloseDialogButtonStyle : null}
           onClick={handleModal}
       >  
-      {   Icon? Icon: <strong> {buttonText}</strong>}
+           {   Icon? Icon: <strong> {buttonText}</strong>}
       </m.button>
-      }
-      {/** Open */}
+      
+
       <ReactModal
         ariaHideApp={false}
-        isOpen={perentOpenModle ? perentOpenModle : showModal }
+        isOpen={showModal}
         onRequestClose={handleModal}
         style={{
           content: {
@@ -82,16 +84,15 @@ const Dialog = ({
             background:Colors.c        
               }
         }}
-        overlayRef={node => (overlayRef = node)}
-        contentRef={node => (contentRef = node)}
+        overlayRef={(node) => overlayRef = node}
+        contentRef={(node) => contentRef = node}        
         >
     
-      
         {children}
         <LazyMotion features={f}>
           <m.button
             whileHover={{ background: Colors.d, color:Colors.text }}
-            onClick={perentOpenModle? perntHendler: handleModal}
+            onClick={ handleModal}
             style={{
               position: "absolute",
               top: "15px",

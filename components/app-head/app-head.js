@@ -3,12 +3,15 @@ import { useRouter } from 'next/router';
 import useUser from '../../lib/hooks/useUser';
 import Colors from '../../lib/colors'
 
-const Header=({inOrder})=>{
+const Header=({inOrder , OrderId})=>{
 
   const { data: session, status } = useSession();
-  const { user, isLoading, isError } = useUser(session?.user?.email);
 
-return ( inOrder ? <OrderId  session={session}/> : <UserName sessio={session} /> )
+     return (
+       inOrder ? <OrderHeadLine id={OrderId}/> 
+       : 
+       <UserName sessio={session} /> 
+      )
 
 }
 
@@ -36,8 +39,8 @@ const UserName = ({session})=>{
    )
 }
 
-const OrderId= ({session})=>{
+const OrderHeadLine= ({id})=>{
         return <div>
-          
+           {id? "הזמנה " + id : null}
         </div>
 }

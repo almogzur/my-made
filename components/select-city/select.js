@@ -1,5 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import { Select } from '@chakra-ui/react'
+import Colors from '../../lib/colors';
+import {
+  NativeSelectField,
+  NativeSelectRoot,
+} from "@chakra-ui/react"
 
 
 const israelRegions = [
@@ -28,7 +32,6 @@ const InputStyle = {
 
 
 const RegionSelect = ({
-     value,
      PropsOnChange,
      PropsStyle, 
      PropsPlaceholder,
@@ -41,26 +44,34 @@ const RegionSelect = ({
      const value =  e.target.value    
       PropsOnChange(propsId,value)   
   }
+  return (
+    <NativeSelectRoot
+            onChange={handleChange}
+            placeholder={PropsPlaceholder}
+            required
+            style={PropsStyle? PropsStyle: InputStyle}
+            variant={"subtle"}
+            colorPalette={"blue"}
+            size={"sm"}
+            
+    >
+
+    <NativeSelectField>
+    <option value="">אזור</option>
+    {israelRegions.map((obj,i)=>{
+               const city = obj.value
+  
+          return <option id={propsId}  key={` ${city} ${i}`} value={city}>{city}</option>
+         })}   
+    </NativeSelectField>
+  </NativeSelectRoot>
+  )
 
 
-  return(
-     <Select
-        icon={""}
-        value={value}
-        onChange={handleChange}
-        placeholder={PropsPlaceholder}
-        required
-        style={PropsStyle? PropsStyle: InputStyle}
-        defaultValue={null}
-      >
-       {israelRegions.map((obj,i)=>{
-             const city = obj.value
-
-        return <option   id={propsId}  key={` ${city} ${i}`} value={city}>{city}</option>
-       })} 
-      </Select>
-
-      )
 }
 
+
+
 export default RegionSelect;
+
+

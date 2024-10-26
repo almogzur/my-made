@@ -1,14 +1,15 @@
 .rang-container {
-  width: 98%; /* Ensure the container takes the full width */
+  width: 80%; /* Ensure the container takes the full width */
   height: inherit;
   position: relative;
   margin-top: 10px;
-
+  align-self:center;
 }
 
 .slider {
 position: relative;
 width: 100%; /* Full width for the slider */
+
 }
 
 .slider__track,
@@ -73,8 +74,8 @@ z-index: 4;
 }
 
 .thumb::-webkit-slider-thumb {
-background-color: #f1f5f7;
-border: none;
+background-color: black;
+border: solid 3px var(--blueD);
 border-radius: 50%;
 box-shadow: 0 0 1px 1px #ced4da;
 cursor: pointer;

@@ -71,7 +71,7 @@ const Calinder = ({
         isClearable
         containerRef={"main"}
         className="calindre"
-        clearButtonClassName="vendor-calinder-clear-btn"
+        clearButtonClassName="calinder-clear-btn"
         popperClassName="vendor-calindr"
         timeIntervals={15}
         dateFormat="PPp"      

@@ -1,8 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes  } from "@fortawesome/free-solid-svg-icons";
-import { IoCloseCircle } from "react-icons/io5";
-
+import { useContext, useEffect, useState , useRef } from "react";
+import { RiCloseLargeFill } from "react-icons/ri";
+import { FaArrowDown } from "react-icons/fa6";
 
 import { m, LazyMotion, color } from "framer-motion";
 import ReactModal from "react-modal";
@@ -20,10 +18,18 @@ const Dialog = ({
 }) => {
   const [showModal, setShowModal] = useState(false);
 
-  const handleModal = () => {
-     console.log(" children click");
+  let overlayRef = useRef()
+  let contentRef = useRef()
+
+
+  const handleModal = () => {  setShowModal(!showModal); }
+
+
+  const scroolDown = ()=>{
+
+    console.log(contentRef);
      
-          setShowModal(!showModal); 
+
   }
   
   return (
@@ -57,25 +63,30 @@ const Dialog = ({
         style={{
           content: {
             position: "absolute",
-            top: "3px",
-            left: "3px",
-            right: "3px",
-            bottom: '3px',
+            top: "1em",
+            left: "5px",
+            right: "5px",
+            bottom: '1em',
             borderRadius: "2px",
             overflowX:"hidden",
             background:` linear-gradient(320deg, ${Colors.c} 11%, #fff 100%)`
           },
           overlay: {
             position: 'fixed',
-            top: "20px",
-            left: "5px",
-            right: "5px",
+            top: "3em",
+            left: "0.5em",
+            right: "0.5em",
             bottom: "60px",
             borderRadius:"8px",
             overflowX:"hidden",
-            background:"gray"          }
+            background:Colors.c        
+              }
         }}
-      >
+        overlayRef={node => (overlayRef = node)}
+        contentRef={node => (contentRef = node)}
+        >
+    
+      
         {children}
         <LazyMotion features={f}>
           <m.button
@@ -96,7 +107,28 @@ const Dialog = ({
               alignContent:'center',     
             }}
           >
-          <IoCloseCircle  size="x2" />
+          <RiCloseLargeFill  size="x2" />
+          </m.button>
+        
+        <m.button
+            whileHover={{ background: Colors.d, color:Colors.text }}
+            onClick={scroolDown}
+            style={{
+              position: "absolute",
+              top: "15px",
+              left: "60px",
+              background:Colors.a,
+              color:Colors.d,
+              width:"40px",
+              height:"40px",
+              borderRadius:"5px",
+              display:'flex',
+              justifyContent:'center',
+              alignItems:'center',
+              alignContent:'center',     
+            }}
+          >
+          <FaArrowDown  size="x2" />
         </m.button>
         </LazyMotion>
       </ReactModal>

@@ -1,5 +1,4 @@
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
+
 import { useContext, useEffect } from 'react';
 
 import Link from 'next/link';
@@ -9,20 +8,20 @@ import { CiCalendarDate, CiPhone } from "react-icons/ci";
 import { FaWarehouse, FaRestroom } from "react-icons/fa";
 import { IoLocation } from "react-icons/io5";
 import { MdOutlineBedroomChild } from "react-icons/md";
-import {  IoMdPerson } from "react-icons/io";
-import { WindowWidthContaxt } from '../../../context'
+import { IoMdPerson } from "react-icons/io";
+import { WindowWidthContaxt,OrderContaxt } from '../../../context'
+
 
 
 const Vcard = ({ OrderData }) => {
-    const router = useRouter();
-    const { data: session, status } = useSession();
     const {xs , md , sm} = useContext(WindowWidthContaxt)
     const na = "N/A"
+    const [orderContext , setOrderContext ] = useContext(OrderContaxt)
+    
     const Style = {
       Wrapper: {
-          width:   xs ? "50%" : sm? " 40% " : md ? "300px"  : "20%",
-          height: "300px",
-          boxShadow: `0px 0px 0px 1px ${Colors.c}`,
+          width:   xs ? "40%" : sm? " 40% " : md ? "300px"  : "20%",
+
           marginTop: "5px",
           borderRadius: "2px",
           display: 'flex',
@@ -30,71 +29,52 @@ const Vcard = ({ OrderData }) => {
           cursor: "pointer",
           flexDirection:'column',
           margin:"10px",
-          
           color:Colors.text,
           boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)",  
     
     
       },
       HedlineBox: {
-          height:"30%", 
-          borderLeft: `0.5px solid ${Colors.c}`,
-          background:Colors.a,
+
+           borderLeft: `0.5px solid ${Colors.c}`,
+           background:Colors.a,
             display:'flex',
             flexDirection:'column',
             justifyContent:'center',
             alignItems:'center',
-    
-      },
-      Text: {
-           height:"inherit",
-           display: 'flex',
-           flexDirection: 'row',
-           justifyContent:"space-around",
-           paddingTop:"0.5em",
-           background:Colors.c
-           
-      },
-      TextChildren: {
-      
-      
+            height:"80px"
     
       },
       CardBotText: {
-       
-          margin: "0px",
-          padding: "2px",
+    
+ 
+          background:"red",
+          display: 'flex',
+          justifyContent:"space-between",
+          paddingTop:"0.5em",
+          background:Colors.c,
+          width:"100%"
     
      
       }
     };
 
-
-    useEffect(()=>{
- //     console.log(OrderData);
-      
-    },[OrderData])
-
-    if (status === 'loading') {
-        return <h1 style={{ textAlign: 'center' }}>Loading...</h1>;
-    }
-
     return (
-      <Link href={`/board/order/${OrderData.orderId.slice(0,10)}`} style={Style.Wrapper}>
+      <Link  href={`/board/order/${OrderData.orderId.slice(0,10)}`} 
 
-      <div style={Style.HedlineBox}>
-          
-   
-         
+         style={Style.Wrapper}
+         onClick={()=> setOrderContext(OrderData)}
+         >
+
+           <div style={Style.HedlineBox}>
           <span style={{textAlign:"center"}} > {" מחיר לשעת ניקיון" }
            <br/>          
             {OrderData?.orderPrice + " ש״ח" || na}
           </span>
        
 
-      </div>
-        <div style={Style.Text}>
-          <div style={Style.TextChildren}>
+           </div>
+           <div style={Style.TextChildren }>
               <div style={Style.CardBotText}><CiPhone size={"1.3em"} /> {OrderData?.orderPhone}</div>
               <div style={Style.CardBotText}><IoMdPerson size={"1.3em"} /> {OrderData?.userName}</div>
               <div style={Style.CardBotText}><CiCalendarDate size={"1.3em"} /> {new Date(OrderData?.ResurveDate).toLocaleDateString('he-IL') ||na}</div>
@@ -103,8 +83,9 @@ const Vcard = ({ OrderData }) => {
               <div style={Style.CardBotText}><FaRestroom size={"1.3em"} /> {OrderData?.NumberOfBaths|| na} </div>
               <div style={Style.CardBotText}><MdOutlineBedroomChild size={"1.3em"} /> {OrderData?.ApartmentRoomsNumber ||na  } </div>
           </div>
-      </div>
-  </Link>
+
+
+     </Link>
   
     );
 };

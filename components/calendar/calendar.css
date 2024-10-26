@@ -1,42 +1,37 @@
-:root{
-    --main:#1A3636;
-    --sec:#40534C;
-    --therd:#677D6A;
-    --for:#D6BD98;
-}
-
+@import '../../pages/Main.css';
 
 .calindre{
     border:unset;
-    border:1px solid;
     padding: 10px;
     margin: 10px 0;
-    box-shadow: 2px 1px 1px var(--therd);
-    border-color:var(--therd);
+    box-shadow: 2px 1px 1px var(--blued);
     border-radius:3px;
     width:96%;
-    transform: scale(1);
-    
-     
-}
-.calindre:hover{
-    transform: scale(1.1);
-    transition: all 2s ease-out;
+    transform: scale(1);    
 }
 
 .calinder-clear-btn{
-  position:unset;
-  position:absolute;
-  right:90%;
-  
-  
-}
-.calinder-clear-btn:hover{
-
-    transform: scale(1.1);
-    transition: all 1s ease-out;
+    position:absolute;
+    left:0px;
+    right:80%;
+    
     
 }
+
+ .calinder-clear-btn::after{
+         content:"";
+         backgrou8nd-color:var(--blueD);
+         color:var(--blueA);
+
+
+
+
+
+}
+.react-datepicker__close-icon .calinder-clear-btn {
+
+}
+
 
 
   

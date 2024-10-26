@@ -6,7 +6,6 @@ import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
 import Dialogui from '../../components/dialog/ui-dialog';
 import NewOrder from './new-order';
 import { StateContext } from '../../context';
-import { background, border } from '@chakra-ui/react';
 
 
 const CustomerOrderList = () => {
@@ -25,6 +24,7 @@ const CustomerOrderList = () => {
       tran: "ease out 1s",
       borderBottom: "solid 1px black",
       width: "100%", 
+      marginTop:"2em"
     },
     table: {      
       height: "70%",
@@ -159,6 +159,7 @@ const CustomerOrderList = () => {
                           <strong> תיאור :</strong> {order.JobDescription || "N/A"}<br/>
                           <strong >סטטוס הזמנה :</strong> {order.orderStatus || "N/A"}<br/> {/* Order status */}
                           <strong >מזהה הזמנה :</strong> {order.orderId.slice(0,20) + " ... " || "N/A"}<br/>
+                          <strong > גודל הדירה במטרים:</strong> { order.ApartmentSize || "N/A"}<br/>
                           <strong >נוצרה ב :</strong> {new Date(order.createdAt).toLocaleString('he-IL') || "N/A"}<br/>
                           {order.updateAt ? <strong  >"עודכנה ב ": {new Date(order.updateAt).toLocaleString('he-IL')}</strong>  : null}
 

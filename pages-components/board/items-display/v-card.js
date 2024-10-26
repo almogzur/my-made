@@ -1,14 +1,13 @@
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Colors from '../../../lib/colors';
 import { CiCalendarDate, CiPhone } from "react-icons/ci";
 import { FaWarehouse, FaRestroom } from "react-icons/fa";
-import { PiBathtubDuotone } from "react-icons/pi";
 import { IoMdPerson } from "react-icons/io";
-import { FaMoneyBill1Wave } from "react-icons/fa6";
 import { IoLocation } from "react-icons/io5";
 import { MdOutlineBedroomChild } from "react-icons/md";
+import { useContext } from 'react';
+import { OrderContaxt } from "../../../context"
+
 
 const Style = {
   Wrapper: {
@@ -55,16 +54,22 @@ const Style = {
 };
 
 const Vcard = ({ OrderData }) => {
-  const router = useRouter();
-  const { data: session, status } = useSession();
+
   const na = "N/A";
 
-  if (status === 'loading') {
-    return <h1 style={{ textAlign: 'center' }}>Loading...</h1>;
-  }
+   const clickHendler = ()=>{
+    setOrderContext(OrderData)
+   }
+
+  const [orderContext , setOrderContext ] = useContext(OrderContaxt)
+
+
 
   return (
-    <Link href={`/board/order/${OrderData.orderId.slice(0,10)}`} style={Style.Wrapper}>
+    <Link href={`/board/order/${OrderData.orderId.slice(0,10)}`}
+          style={Style.Wrapper}
+          onClick={clickHendler}
+     >
       {/* Top Section */}
       <div style={Style.TopSection}>
         <span style={{ textAlign: "center" }}>

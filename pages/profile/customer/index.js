@@ -66,17 +66,16 @@ const CostumerPage = () => {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
       <title>לקוח</title>
     </Head>
-    <AppHead/>
-    <ProfileLayout>      
-        <CustomerOrderList/>
-        <UiDialog
-          CloseDialogButtonStyle={Style.CloseDialogButton}
-          wrapperStyle={Style.Wrapper}
-          Icon={<IoMdAddCircle  size="2em"/>}
-         >
-           <NewOrder newOrder={true}/>
-           
-        </UiDialog> 
+       <AppHead/>
+        <ProfileLayout>      
+          <CustomerOrderList/>
+             <UiDialog
+              CloseDialogButtonStyle={Style.CloseDialogButton}
+              wrapperStyle={Style.Wrapper}
+              Icon={<IoMdAddCircle  size="2em"/>}
+             >
+               <NewOrder newOrder={true}/>  
+            </UiDialog> 
         <OldOrderList/>
     </ProfileLayout>
     </>

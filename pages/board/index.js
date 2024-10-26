@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState  , useContext} from 'react';
 import { useRouter } from 'next/router';
-
+import { FilterCityConteax } from '../../context';
 import BoardToolsBar from '../../pages-components/board/board-tools-bar';
 import OrdersWrapper from '../../pages-components/board/orders-wrapper';
 import BoardLayout from '../../layouts/board-layout';
@@ -19,7 +19,7 @@ const BoardPage = () => {
   // State for orders and filters
 
   const [Mode, setMode] = useState("Cards");
-  const [filterCity, setFilterCity] = useState(null);
+  const [filterCity, setFilterCity] = useContext(FilterCityConteax);
   const [filterPriceArray, setFilterPriceArray] = useState([300, 0]);  // 300 max price
 
 
@@ -48,12 +48,13 @@ const BoardPage = () => {
 
       />
       <h3 style={{textAlign: "center"}}>
-        {filterCity ? `מציג הזמנות ${filterCity}` : null}
+        {filterCity ? ` הזמנות ${filterCity}` : null}
       </h3>
 
       <OrdersWrapper
         Mode={Mode}
         filterCity={filterCity}
+        setFilterCity={setFilterCity}
       />
 
 </BoardLayout>

@@ -7,6 +7,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const nextConfig = {
  
   pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
+  experimental: {
+    optimizePackageImports: ["@chakra-ui/react"],
+  },
   images:{
     remotePatterns: [
          {

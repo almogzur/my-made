@@ -37,6 +37,7 @@ const handler = async (req, res) => {
     NumberOfBaths,
     ResurveDate,
     orderPrice,
+    ApartmentSize,
     JobDescription,
     city,
   } = req.body;
@@ -53,6 +54,7 @@ const handler = async (req, res) => {
       ResurveDate,
       JobDescription,
       orderPrice,
+      ApartmentSize,
       city,
       createdAt: new Date(),
       orderId: uuidv4(),

@@ -3,7 +3,8 @@ import { Html, Head, Main, NextScript } from 'next/document'
  
 export default function Document() {
   return (
-    <Html lang="heb">
+    <Html lang="heb" suppressHydrationWarning>
+ 
       <Head />
       <body>
         <Main />

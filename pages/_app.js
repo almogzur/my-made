@@ -15,56 +15,33 @@ import "../components/spining-loader/spining-loader.css"
 import "../components/mongo-spinner/mongo-spinner.css"
 
 import { SessionProvider } from "next-auth/react"
-import { WindowWidthContaxt, StateContext ,  ResolvedUserContext} from '../context'
+import { WindowWidthContaxt, StateContext ,  ResolvedUserContext , FilterCityConteax , OrderContaxt} from '../context'
 import {  StrictMode, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import State from '../state'
-
+import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
 
   //           STATE  HENDLING (update 17.8.24)
-  // state is going to be in componenty to create component and children 
-  // isolation and preventing perent compon ets from updateing state 
+  // pages will controll state , and will  PropsOnChange CB to children FC
+  // to extract State from component hendler to page hendler 
   
+ // Style 
 
+ // in line Style 
 
-////////////////////////////////////////////////////////////////////////
-//////  insted of saving the state to db on init pro file load ///////
-//////  evry form will update the db and the component will use /////
-///// useGetUserHook (will use context to not reFetch if data) ///////
-//////              with suspence .                            ////// 
-////// the current state fomate fill be divided in to ecth form index /// 
-//////         profile vendor and costumer                    ////
-//////////////////////////////////////////////////////////////////////
-
-// insted of using state in the elemnt im going to use the 
-//  onSubmit e target and create new from 
-// then extrac the data at the api and update the db
-
-
-
- //              STYLE 
-//////////////////////////////////////////////////////////////////////////
-////  5.7.24 idea come to me imgona switch all css files  with     /// ///////
-////      framer mothen curosponding style elements More at           ///////////
-///////////////////////////////////////////////////////////////////////////////////
-
-/*      Framer motion Lazy loading insane bundel size if not 
+ // ther is some component that is useing Css files but will try to avoid 
+ 
+ // I LUREND THIS PROJECT 
+/*      Framer motion Lazy loading insane bundel size 
 ///////////////////////////////////////////////////////////////////////////
 ////////   If you're using a bundler like Webpack or Rollup,             /////
 /// /////       we can pass a dynamic import                             /////
 /// /////  domMax: This provides support for all of the above            /////
 /// ///// plus pan/drag gestures and layout animations. (+25kb)          /////
- //// In the future it might be possible to offer more granular    /////
- ///// feature packages, but for now these were chosen to reduce      /////
- ////   the amount of duplication between features, which could result/////
- /////      in much more data being downloaded ultimately.          /////
-/////          #Synchronous loading                                   /////
-/////    By passing one of these feature packages to LazyMotion, they'll /////
-/////        be bundled into your main JavaScript bundle.            /////
-///////////////////////////////////////////////////////////////////////////
+ ////   In the future it might be possible to offer more granular        /////
+ ///// feature packages, but for now these were chosen to reduce         /////
+ /////////////////////////////////////////////////////////////////////////////
 */
-
-
 
 
 export default function App({
@@ -73,7 +50,24 @@ export default function App({
    pageProps: { session, ...pageProps },
 }) {
 
+   // global State Manged by from input see State
    const [state,setState] = useState(State)
+ 
+
+   // perent was setting state but the sibling component didnt update so this was lifted to Context level 
+   const [filterCity, setFilterCity] = useState(null); 
+
+
+   
+   // ther is no way to preserv state after page navigation , unles the component is in the same position in the react tree 
+   // setting context on page navigation and clear it on component unmounte 
+    const [orderContext , setOrderContext ] = useState(null)
+
+
+
+
+
+ //  for responsive Components 
    const md = useMediaQuery('(max-width: 900px)')
    const sm = useMediaQuery('(max-width: 600px)')
    const xs = useMediaQuery('(max-width : 300px)')
@@ -81,15 +75,19 @@ export default function App({
 
 
   return (
-    <StrictMode>
+    <ChakraProvider value={defaultSystem}>
     <StateContext.Provider value={[state,setState]}>
       <SessionProvider session={session}>    
       <WindowWidthContaxt.Provider value={{md,sm,xs}}>
+      <FilterCityConteax.Provider value={[filterCity,setFilterCity]}>
+      <OrderContaxt.Provider  value={[orderContext,setOrderContext]}>
           <Component {...pageProps} />
+        </OrderContaxt.Provider>
+      </FilterCityConteax.Provider>
       </WindowWidthContaxt.Provider>
       </SessionProvider>
       </StateContext.Provider>
-   </StrictMode>
+      </ChakraProvider>
   )
 }
    

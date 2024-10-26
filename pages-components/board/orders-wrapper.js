@@ -1,15 +1,36 @@
 import { useSession } from 'next-auth/react'
 import HCard from '../../pages-components/board/items-display/h-card'
 import VCard from '../../pages-components/board/items-display/v-card'
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import {FilterCityConteax } from '../../context'
  
 
 
-const OrdersWrapper=({ Mode,filterCity })=>{
-  const { data: session ,status ,update} = useSession()
-  const [ Orders  , setOrders] = useState([])
+const OrdersWrapper=({ Mode})=>{
+  const [ CityOrders ,setCityOrders] = useState(null)
+  const [ filterCity, setFilterCity ] = useContext(FilterCityConteax)
   const [ isFetch, setIsFetch] = useState(false)
 
+  const getOrders= async  (city) => {
+    if(!city){  setCityOrders(null)  }
+    
+    try{
+      setIsFetch(true)
+      const res = await fetch(`/api/board/orders/?city=${city}`)
+      const data = await res.json()   
+        if (!data){  setCityOrders(null) }
+        setCityOrders(data)
+
+    }
+    catch(e){;
+     alert(e)
+    }
+    finally{
+     setIsFetch(false)
+
+    }
+    
+}
 
   const WrapperStyle = {
     display:"flex" ,
@@ -20,45 +41,29 @@ const OrdersWrapper=({ Mode,filterCity })=>{
     justifyContent:"center",
 
   }
- // get orders when reactiv value changes 
+ // get orders when reactive value changes  filterCity
   useEffect(()=>{
 
-   const getOrders= async  (city) => {
-       if(!filterCity){  setOrders(null)  }
-      
-       setIsFetch(true)
-       try{
-         const res = await fetch(`/api/board/orders/?city=${city}`)
-         const data = await res.json()   
-           if (!data){  setOrders(null) }
-         setOrders(data)
-         setIsFetch(false)
-
-       }
-       catch(e){;
-        alert(e)
-       }
-       
-   }
-   getOrders(filterCity)
- 
+        if(filterCity){
+     getOrders(filterCity)
+        }
+    
 
   },[filterCity])
- 
- if (status === 'loading' ) {
-   return <h1 style={{textAlign:'center'}}>Loading...</h1>
- }   
- else if(isFetch){   return <h1 style={{textAlign:'center'}}>Loading Orders ...</h1>}
+  
+ if(isFetch){ 
+    return <h1 style={{textAlign:'center'}}>Loading Orders ...</h1>
+  }
      
  return <div style={WrapperStyle}  
        >  
-       { Array.isArray(Orders) ? 
+       { Array.isArray(CityOrders) && filterCity  ? 
        
-         Orders.map((data,i)=>{
+        CityOrders.map((order,i)=>{
             return  Mode === "Cards" ?  
-             <HCard OrderData={data} key={i} /> 
+             <HCard OrderData={order} key={i}  /> 
              :
-             <VCard OrderData={data} key={i} />
+             <VCard OrderData={order} key={i} />
              
           })
            

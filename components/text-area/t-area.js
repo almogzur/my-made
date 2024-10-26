@@ -1,5 +1,19 @@
 import Colors from "../../lib/colors";
 
+const Style = { 
+  label:{
+   backgroumd:"red"
+  },
+  textarea:{ 
+     resize: "none" ,
+     fontWeight:"bold",
+     borderRadius:"3px",   
+     backgroumd:"green",
+     color:"red",
+     border:"solid"
+    }
+
+}
 
 const TextArea = ({
   id,
@@ -9,8 +23,8 @@ const TextArea = ({
   PropsOnChange,
   labelText,
   placeholder,
-  StyleLable,
-  StyleTextArea,
+  PropsStyleLable,
+  PropsStyleTextArea,
 }) => {
 
 
@@ -20,12 +34,13 @@ const TextArea = ({
   };
 
   return (
-      <label
-        style={StyleLable}
+    <>     
+     <label
+        style={PropsStyleLable ? PropsStyleLable : Style.label}
         htmlFor={id}
       >
         <strong>{ labelText}</strong>
-
+        </label>
           <textarea
             id={id}
             value={value}
@@ -39,12 +54,11 @@ const TextArea = ({
             spellCheck={true}
             placeholder={placeholder ? placeholder : null}
             onChange={handleChange}
-            style={StyleTextArea}
-        
-       
-          />
-      </label>
+            style={PropsStyleTextArea?  PropsStyleTextArea : Style.textarea} 
+         />
+     
 
+</>
 
   );
 };

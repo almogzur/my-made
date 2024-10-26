@@ -27,7 +27,7 @@ const BoardLayout=({children})=>{
 
 return (
     <>
-     <AppHead  inOrder={true} />
+     <AppHead inOrder={true} />
        {children}
      <Footer >
   

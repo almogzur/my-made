@@ -15,6 +15,7 @@ const State = {
       city:"",
       ApartmentRoomsNumber:Number,
       NumberOfBaths:Number,
+      ApartmentSize:Number,
       orderPrice:Number,
       
 

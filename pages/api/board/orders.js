@@ -50,9 +50,7 @@ export default handler;
 //   return res.status(200).json(allData);
 // }
 
-
-
-/* Front End Code For Sorting by City 
+/* Front End Code For Sorting by City  All Orders
 const filterOrdersByCity = (cityArg, OrdersArg) => {   
   
   let temp = [];

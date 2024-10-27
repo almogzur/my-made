@@ -5,16 +5,13 @@ import defulteUserImg from '../../public/User.jpg';
 import ColorsH1 from '../../components/gradient-headline/index';
 import Colors from '../../lib/colors';
 import f from "../../lib/features"
-import MongoSpinner from "../../components/mongo-spinner/mongo-spinner";
 
 const ProfileHeader = ({UserData}) => {
 
 //const {} = UserData
 const { data: session ,status ,update} = useSession()
 
-  if( status === "loading"){
-    <MongoSpinner/>
-  }
+
 
  return (
    <LazyMotion features={f}>

@@ -8,7 +8,7 @@ import Colors from "../../lib/colors";
 import f from '../../lib/features'
 
 
-
+  // outside the  function scope prevent react Memo
   let overlayRef = null;
   let contentRef = null;  
 
@@ -22,10 +22,10 @@ const Dialog = ({
   const [showModal, setShowModal] = useState(false);
   const handleModal = () => {  setShowModal(!showModal); }
   const scroolDown = ()=>{
-    console.log(overlayRef,contentRef);
+
 
     const options = {
-          top:400,
+          top:600,
           behavior:"smooth"
         }
     
@@ -40,10 +40,7 @@ const Dialog = ({
     <div
       style={wrapperStyle ? wrapperStyle : null}
     >
-      { /** Closed*/}
   
-  
-
       <m.button
           transition={{duration:0.5, stiffness:50}}
           whileHover={{
@@ -90,6 +87,7 @@ const Dialog = ({
     
         {children}
         <LazyMotion features={f}>
+        
           <m.button
             whileHover={{ background: Colors.d, color:Colors.text }}
             onClick={ handleModal}
@@ -105,7 +103,8 @@ const Dialog = ({
               display:'flex',
               justifyContent:'center',
               alignItems:'center',
-              alignContent:'center',     
+              alignContent:'center', 
+              zIndex:2    
             }}
           >
           <RiCloseLargeFill  size="x2" />
@@ -117,7 +116,7 @@ const Dialog = ({
             style={{
               position: "absolute",
               top: "15px",
-              left: "60px",
+              left: "70px",
               background:Colors.a,
               color:Colors.d,
               width:"40px",
@@ -127,6 +126,8 @@ const Dialog = ({
               justifyContent:'center',
               alignItems:'center',
               alignContent:'center',     
+              zIndex:2    
+
             }}
           >
           <FaArrowDown  size="x2" />

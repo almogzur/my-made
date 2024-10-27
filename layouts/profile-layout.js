@@ -1,9 +1,9 @@
 import Colors from "../lib/colors";
 import CostumeLink from '../components/costume-link/costume-link'
 import Footer from '../components/footer/app-footer';
-import ProfileControls from '../components/profile-sing-in-out/profile-controls'
 import { MdCleaningServices } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
+import ProfileLink from "../components/profile-controls/profile-link";
 
 
  
@@ -29,7 +29,6 @@ const ProfileLayout = ({ children }) => {
       {children}
 
       <Footer  >
-        <ProfileControls  >
           <CostumeLink
             href="/profile/customer"
              divStyle={divStyle}
@@ -46,7 +45,9 @@ const ProfileLayout = ({ children }) => {
         >
           <MdCleaningServices size={40} />
           </CostumeLink>
-        </ProfileControls>
+          <ProfileLink/>
+
+
       </Footer>
 
     </>

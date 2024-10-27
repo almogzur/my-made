@@ -31,7 +31,7 @@ const VenderPage = () => {
         <title>רישום משק</title>
         
       </Head>
-      <ProfileLayout>
+     <ProfileLayout>
         <VendorWrapper/>
       </ProfileLayout>
       </>

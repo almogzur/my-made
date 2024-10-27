@@ -1,12 +1,17 @@
 import Head from 'next/head';
-import Header from '../components/app-head/app-head';
 import MainSection from '../pages-components/home/main-section'
-import ProfileControls from '../components/profile-sing-in-out/profile-controls';
+import LoginButton from '../components/profile-controls/log-in-button';
+import ProfileLink from '../components/profile-controls/profile-link';
+
 import { useSession } from 'next-auth/react';
 
-export default function Home() {
-  const { data: session } = useSession();
 
+export default function Home() {
+  const { data: session , status , } = useSession();
+
+  if(status === "loading"){
+    return <h1>Loading....</h1>
+  }
 
   return (
     <>
@@ -17,7 +22,12 @@ export default function Home() {
 
  
        <MainSection/>
-       <ProfileControls inHomePage={true}/>     
+       {session ? <ProfileLink /> : <LoginButton/> }
+
+
+
+       {/* Extracting Logic from Profile Controls to Index pages  */}
+       {/* <ProfileControls inHomePage={true}/>      */}
       
     </>
   );

@@ -19,7 +19,6 @@ const TextArea = ({
   id,
   rows,
   cols,
-  value,
   PropsOnChange,
   labelText,
   placeholder,
@@ -43,7 +42,6 @@ const TextArea = ({
         </label>
           <textarea
             id={id}
-            value={value}
             rows={rows || 4}
             cols={cols || 50}
             maxLength={500}

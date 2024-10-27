@@ -12,9 +12,6 @@ import { MdEdit } from "react-icons/md";
 import useUser from '../../lib/hooks/useUser';
 
 
-
-
-
 const VendorDisplay = ({ 
                 BussniseName, 
                 price, 
@@ -28,11 +25,6 @@ const VendorDisplay = ({
   const { data: session, status, update } = useSession();
   const { user , isLoading , isError } = useUser(session?.user?.email)
 
-
-
-  if (status === 'loading') {
-    return <MongoSpinner />;
-  }
 
 
   const Style = {
@@ -77,7 +69,13 @@ const VendorDisplay = ({
       background:"none",
       fontSize: "20px",
       cursor: "pointer",
-      textAlign: "center",
+      
+      display:'flex',
+      flexDirection:'column',
+      alignItems:'center',
+
+      
+     
       color: Colors.d,
 
    }
@@ -123,11 +121,12 @@ const VendorDisplay = ({
           style={Style.button}
           onClick={() => {setEdit(true)}}
         >
-        <MdEdit  size={"40px"} color={Colors.d} />
-        <br/>
+          <MdEdit  size={"40px"} color={Colors.d} />
+     
 
           ערוך פרטים
         </button>
+
         { 
             user?.Vendor?.isVendor ? 
     
@@ -136,7 +135,7 @@ const VendorDisplay = ({
                 onClick={() => router.push('/board')}
              >
                    <FaRegClipboard   size={"40px"} color={Colors.d} />
-                   <br/>
+            
                      לוח עבודות
              </button>
              :

@@ -10,8 +10,7 @@ import ProfileLayout from '../../layouts/profile-layout'
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner'
 import ProfileHeader from '../../pages-components/profile/profile-heder'
 import FormDisplayWrapper from '../../pages-components/profile/profile-form-wrapper'
-import VenderActiveOrEdit from '../../pages-components/profile/profile-vendor-active-edit';
-import useUser from '../../lib/hooks/useUser'
+
 
 
 

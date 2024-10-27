@@ -45,9 +45,11 @@ const STATE_KEY = "Order";
 
 
 
+ // all the inpute are uncontrolled  no value is provided 
 
 
-const NewOrder = ({ orderId, newOrder }) => {
+
+const NewOrder = ({ orderId=null, newOrder=null }) => {
 
   const { data: session, status } = useSession();
   const [ state, setState ] = useContext(StateContext);
@@ -171,13 +173,12 @@ const NewOrder = ({ orderId, newOrder }) => {
 
       <label>
         <strong>טלפון</strong>
-        <br />
         <input
+          name='orderPhone'
           type='tel'
           id="orderPhone"
           required
           onChange={handleChange}
-          value={state[STATE_KEY].orderPhone}
           style={Style.InputStyle}
         />
       </label>
@@ -187,13 +188,11 @@ const NewOrder = ({ orderId, newOrder }) => {
         id="ResurveDate"
         STATE_KEY={STATE_KEY}
         PropsOnChange={childrenOnChange}
-        value={state[STATE_KEY]?.ResurveDate}
       />
 
       <TextArea
         labelText="תיאור"
         id="JobDescription"
-        value={state[STATE_KEY]?.JobDescription}
         PropsOnChange={childrenOnChange}
         placeholder="תיאור העבודה בקצרה"
     
@@ -201,7 +200,6 @@ const NewOrder = ({ orderId, newOrder }) => {
       />
 
       <RegionSelect
-           value={state[STATE_KEY]?.city}
            propsId={"city"}
            PropsOnChange={childrenOnChange}
            PropsPlaceholder={"אזור מגורים"}
@@ -211,7 +209,8 @@ const NewOrder = ({ orderId, newOrder }) => {
         <input
           type="text"
           id="addres"
-          value={state[STATE_KEY].addres}
+          name='addres'
+        
           onChange={handleChange}
           style={Style.InputStyle}
           required
@@ -220,10 +219,10 @@ const NewOrder = ({ orderId, newOrder }) => {
 
       <label><strong>מספר חדרים</strong>
         <input
+          name='ApartmentRoomsNumber'
           type="number"
           id="ApartmentRoomsNumber"
           required
-          value={state[STATE_KEY].ApartmentRoomsNumber}
           onChange={handleChange}
           style={Style.InputStyle}
         />
@@ -233,16 +232,16 @@ const NewOrder = ({ orderId, newOrder }) => {
         <input
           type="number"
           id="NumberOfBaths"
-          value={state[STATE_KEY].NumberOfBaths}
+          name='NumberOfBaths'
           onChange={handleChange}
           style={Style.InputStyle}
         />
       </label>
       <label><strong>גודל הדירה במטרים</strong>
         <input
+          name='ApartmentSize'
           type="number"
           id="ApartmentSize"
-          value={state[STATE_KEY].ApartmentSize}
           onChange={handleChange}
           style={Style.InputStyle}
         />
@@ -250,10 +249,10 @@ const NewOrder = ({ orderId, newOrder }) => {
 
       <label><strong>מחיר שעתי</strong>
         <input
+          name='orderPrice'
           id="orderPrice"
           type="number"
           style={Style.InputStyle}
-          value={state[STATE_KEY].orderPrice}
           onChange={handleChange}
         />
       </label>

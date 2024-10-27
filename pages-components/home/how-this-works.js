@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react'
 import {useEffect,useState} from 'react'
 import { useRouter } from 'next/router'
-
+import Colors from '../../lib/colors'
 
 const CopyText = {
 
@@ -14,10 +14,22 @@ const CopyText = {
 
 
 const HowThisWorks=()=>{
+    
+    const Style = { 
+        Wrapper:{
+            height:"30em",
+            width:"100%",
+            background:Colors.d
+        }
+    }
+    
+    return (
+        <div style={Style.Wrapper}>
+
+        </div>
+    )
 
 
-
-return (<div>{Object.entries(CopyText).values()}</div>) 
 }
 
-export default  HowThisWorks
+export default  HowThisWorks 

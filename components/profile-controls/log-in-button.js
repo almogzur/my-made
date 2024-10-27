@@ -3,37 +3,27 @@ import { m, LazyMotion } from 'framer-motion';
 import Colors from "../../lib/colors";
 import f from '../../lib/features';
 
-const Styles = {
-  unOuthWrapper: {
-    width: "100%",
-    display: 'flex',
-    justifyContent: 'center',
-    position: "absolute",
-    bottom: "250px"
-  },
-  unOuthBtn: {
+const DefultStyles =  {
     width: "150px",
-    height: '60px',
+    height: '80%',
     border: "none",
     background: Colors.c,
     borderRadius: "6px",
-  },
-};
+  }
 
-function LoginButton() {
+
+function LoginButton( { StyleProps ,text}) {
   return (
     <LazyMotion features={f}>
-      <div style={Styles.unOuthWrapper}>
         <m.button
-          style={Styles.unOuthBtn}
+          style={StyleProps? StyleProps : DefultStyles}
           transition={{ duration: 1 }}
           whileHover={{ borderRadius: "15px", background: Colors.d }}
           animate={{ opacity: [0, 0.5, 1] }}
           onClick={() => signIn(undefined, { callbackUrl: "/profile" })}
         >
-          <strong>כניסה</strong>
+          <strong>{text ? text :"כניסה"}</strong>
         </m.button>
-      </div>
     </LazyMotion>
   );
 }

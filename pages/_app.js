@@ -15,11 +15,12 @@ import "../components/spining-loader/spining-loader.css"
 import "../components/mongo-spinner/mongo-spinner.css"
 
 import { SessionProvider } from "next-auth/react"
-import { WindowWidthContaxt, StateContext ,  ResolvedUserContext , FilterCityConteax , OrderContaxt} from '../context'
 import {  StrictMode, useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
-import State from '../state'
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
+import { WindowWidthContaxt, StateContext ,  ResolvedUserContext , FilterCityConteax , OrderContaxt} from '../context'
+import State from '../state'
+
 
   //           STATE  HENDLING (update 17.8.24)
   // pages will controll state , and will  PropsOnChange CB to children FC
@@ -65,12 +66,10 @@ export default function App({
 
 
 
-
-
  //  for responsive Components 
-   const md = useMediaQuery('(max-width: 900px)')
-   const sm = useMediaQuery('(max-width: 600px)')
-   const xs = useMediaQuery('(max-width : 300px)')
+   const large = useMediaQuery('(min-width: 900px)')
+   const medium = useMediaQuery('(min-width: 600px)')
+   const small = useMediaQuery('(min-width : 300px)')
 
 
 
@@ -78,7 +77,7 @@ export default function App({
     <ChakraProvider value={defaultSystem}>
     <StateContext.Provider value={[state,setState]}>
       <SessionProvider session={session}>    
-      <WindowWidthContaxt.Provider value={{md,sm,xs}}>
+      <WindowWidthContaxt.Provider value={{large,medium,small}}>
       <FilterCityConteax.Provider value={[filterCity,setFilterCity]}>
       <OrderContaxt.Provider  value={[orderContext,setOrderContext]}>
           <Component {...pageProps} />

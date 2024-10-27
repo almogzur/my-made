@@ -20,7 +20,6 @@ function ProfileLink() {
     >
       <m.div
         style={{
-         
           borderRadius: "5px",
           display: 'flex',
           flexDirection: 'column',

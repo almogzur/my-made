@@ -9,6 +9,7 @@ import React, { useContext, useEffect } from 'react';
 import Colors from "../../lib/colors"
 
 
+
 const HomePageNavigation = () => {
     const { large, medium ,small } = useContext(WindowWidthContaxt);
 

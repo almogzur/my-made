@@ -14,6 +14,8 @@ import Cover7 from '../../public/home-page/cover7.jpg'
 import Cover8 from '../../public/home-page/cover8.jpg'
 import Cover9 from '../../public/home-page/cover9.jpg'
 
+
+
 const Photos = {
   A:[Cover1,Cover2,Cover3],
   B:[Cover4,Cover5,Cover6],
@@ -28,38 +30,29 @@ function  MainSection() {
 
   const Style = {
       Wrapper:{ 
-         height: large? "40em": "30em",
+         height: large? "40em" : "30em",
+         width:large? "80%" : "100%",
          display:'flex',
-         width:"100%",
-      display:'flex',
-      flexDirection:'row',
-      justifyContent:'center',
-      alignItems:'center',
-      alignContent:'center',  
- 
-        
-        
-    
+         flexDirection:'row',
+         justifyContent:'center',
+        justifySelf:"center"        ,
 
-  
-
-
-      },
+        },
       A:{ 
-         width:"50%" ,
+         width: "50%",
          display:'flex',
          height:"100%",
          flexDirection:'column',
-         justifyContent:'space-around',
-         alignItems:'center',
-
+         justifyContent:'space-evenly',
+          alignItems:'center',
+         
 
         },
       B:{
          width:"50%",
          display:'flex',
          flexDirection:'column',
-         justifyContent:'space-evenly',
+         justifyContent:small? "center": 'space-around',
         
         
         },
@@ -70,10 +63,13 @@ function  MainSection() {
    
 
        <div style={Style.Wrapper}>
-        <div style={Style.A}  >     
+
+       { large && medium? <div style={Style.A}  >     
              <StyledImage Images={Photos.A} PropsImageStyle={{borderRadius:"15px", width:"19em"}} timer={15000}  />
              <StyledImage Images={Photos.B} PropsImageStyle={{borderRadius:"8px" ,}} timer={19000}  />
         </div>
+        :null
+        }
 
         <div  style={Style.B}>
              <StyledImage Images={Photos.C} PropsImageStyle={{ marginTop:"1em" ,borderRadius:"12px"}} timer={13000}  />

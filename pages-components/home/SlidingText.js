@@ -3,8 +3,8 @@ import { m, domAnimation, LazyMotion } from "framer-motion";
 const CopyText = {
     Headline : "MadeIt", 
     Text1 : `  צריכים עוזר/ת בית הרשם עכשיו  ?`,
-    Text2 : `רוצה לראות את לוח  הדורשים עבודה הרשם עכשיו`,
-    bulletPoints:""
+    Text2  :"",
+    bulletPoints: "  "
    
  }
  

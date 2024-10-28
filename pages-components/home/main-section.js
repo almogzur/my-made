@@ -23,13 +23,23 @@ const Photos = {
 
 
 
-function  Main() {
+function  MainSection() {
   const { large, medium ,small } = useContext(WindowWidthContaxt);
 
   const Style = {
       Wrapper:{ 
-         height: large? "40em": "35em",
+         height: large? "40em": "30em",
          display:'flex',
+         width:"100%",
+      display:'flex',
+      flexDirection:'row',
+      justifyContent:'center',
+      alignItems:'center',
+      alignContent:'center',  
+ 
+        
+        
+    
 
   
 
@@ -38,6 +48,7 @@ function  Main() {
       A:{ 
          width:"50%" ,
          display:'flex',
+         height:"100%",
          flexDirection:'column',
          justifyContent:'space-around',
          alignItems:'center',
@@ -65,7 +76,7 @@ function  Main() {
         </div>
 
         <div  style={Style.B}>
-             <StyledImage Images={Photos.C} PropsImageStyle={{height:"90%", marginTop:"5em" ,borderRadius:"12px"}} timer={13000}  />
+             <StyledImage Images={Photos.C} PropsImageStyle={{ marginTop:"1em" ,borderRadius:"12px"}} timer={13000}  />
              <SlidingTextWrapper/>
         </div>
       </div>
@@ -73,7 +84,7 @@ function  Main() {
 
 }
 
-export default Main;
+export default MainSection;
 
 
 

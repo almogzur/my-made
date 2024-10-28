@@ -35,7 +35,7 @@ function ProfileLink() {
         
         { 
           <Image
-            src={session.user.image}
+            src={session?.user?.image}
             height={40}
             width={40}
             alt="User Profile Link"

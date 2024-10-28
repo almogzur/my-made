@@ -18,19 +18,15 @@ const VendorWrapper=()=>{
 
 // updates to DOM
   const [edit ,setEdit] = useState(false)
-  const [Vendor, setVendor] = useState(user?.[STATE_KEY]?.isVendor || false);
+  
 
-  useEffect(() => {
-    if (user?.[STATE_KEY]?.isVendor) {
-      setVendor(user?.[STATE_KEY].isVendor);
-    }
-  }, [user]);
+
 
   if (status === 'loading' || isLoading  ) {
       return <MongoSpinner/>
   }
 
-  else if (!edit && Vendor ) {
+  else if (!edit ) {
            return  <VendorDisplay      
                      phone={
                          user?.Info?.phone ||
@@ -44,8 +40,8 @@ const VendorWrapper=()=>{
                      STATE_KEY={STATE_KEY}
                      BussniseName={user[STATE_KEY].BussniseName}
                      price={user[STATE_KEY].price}
-                     description={user[STATE_KEY].description}
-                     isVendor={Vendor}
+                     description={user?.STATE_KEY?.description}
+                     isVendor={user?.STATE_KEY?.isVendor}
                    />
   }
 

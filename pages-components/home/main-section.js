@@ -1,8 +1,9 @@
 import React, {  useContext } from "react";
 import { WindowWidthContaxt } from "../../context";
 import StyledImage from "./styled-image";
-import SlidingTextWrapper from './SlidingText'
+import SlidingTextWrapper from './sliding-text'
 import Colors from "../../lib/colors";
+import AnimatedHeadline from './animated-headline'
 
 import C1 from '../../public/400px/cover1.jpg'
 import C2 from '../../public/400px/cover2.jpg'
@@ -65,7 +66,14 @@ function  MainSection() {
           alignItems:'center',
           alignContent:'center',
 
-         }
+         },
+         HeadLine: {
+          fontSize: "5em",
+          color: Colors.c,
+          fontWeight: "bold",
+        
+          
+      },
   }
 
 
@@ -75,11 +83,29 @@ function  MainSection() {
        { 
         
         extraLarge?<div style={Style.C}>
+        <AnimatedHeadline
+                     textStr={"MadeIT"}
+                     styleObj={Style.HeadLine}
+                     animateObj={{
+                    scale: [1, 1.15, 1],         // Slight scaling effect for "breathing"
+                    y: [0, -10, 0]               // Subtle vertical float
+                }}
+                transitionObj={{
+                    duration: 3,                 // Adjust duration for slower or faster breathing
+                    ease: "easeInOut",
+                    repeat: Infinity
+                }}
+                     
+              
+        
+         />
         <StyledImage 
                   Images={ PhotosMd.A } 
                   PropsImageStyle={{borderRadius:"30px" , height:"30em" , width:"45em"}} 
-                  timer={3000}  />
-         
+                  timer={3000}  
+
+                  />
+      
           
         </div>
         :
@@ -87,7 +113,7 @@ function  MainSection() {
              <StyledImage Images={PhotosSm.A} PropsImageStyle={{borderRadius:"15px"}} timer={15000}  />
              <StyledImage Images={PhotosSm.B} PropsImageStyle={{borderRadius:"8px" ,}} timer={19000}  />
         </div>
-        :  null
+        : <></>
         }
 
         <div  style={Style.B}>

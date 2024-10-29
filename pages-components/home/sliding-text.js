@@ -1,15 +1,19 @@
-import { m, domAnimation, LazyMotion } from "framer-motion";
 import Colors from "../../lib/colors";
+import AnimatedHeadline from "./animated-headline";
 
-
+import { useContext } from "react";
+import {WindowWidthContaxt} from '../../context'
 const CopyText = {
     Headline: "MadeIT", 
-    Text1: "צריכים עוזר/ת בית הרשם עכשיו?",
+    Text1: "!צריכים עוזר/ת בית?... הרשמו עכשיו ",
     Text2: "תיאום קל ופשוט",
-    bulletPoints: "מצא את הלקוח הבא שלך בקלות"
+ 
 };
 
 const SlidingTextWrapper = () => {
+
+    const {extraLarge} =  useContext(WindowWidthContaxt)
+    
     const Style = {
         Wrapper: { 
         
@@ -63,30 +67,33 @@ const SlidingTextWrapper = () => {
     };
 
     return (
-        <LazyMotion features={domAnimation}>
             <div style={Style.Wrapper}>
-                <AnimatedH1
+
+               { !extraLarge?
+                 <AnimatedHeadline
                     textStr={CopyText.Headline}
                     styleObj={Style.HeadLine}
                     initialObj={animations.HeadLine.initial}
                     animateObj={animations.HeadLine.animate}
                     transitionObj={animations.HeadLine.transition}
-                />
-                <AnimatedH1
+                />:null
+}
+
+                <AnimatedHeadline
                     textStr={CopyText.Text1}
                     styleObj={Style.Text1}
                     initialObj={animations.Text1.initial}
                     animateObj={animations.Text1.animate}
                     transitionObj={animations.Text1.transition}
                 />
-                <AnimatedH1
+                <AnimatedHeadline
                     textStr={CopyText.Text2}
                     styleObj={Style.Text2}
                     initialObj={animations.Text2.initial}
                     animateObj={animations.Text2.animate}
                     transitionObj={animations.Text2.transition}
                 />
-                <AnimatedH1
+                <AnimatedHeadline
                     textStr={CopyText.bulletPoints}
                     styleObj={Style.bulletPoint}
                     initialObj={animations.bulletPoint.initial}
@@ -94,21 +101,9 @@ const SlidingTextWrapper = () => {
                     transitionObj={animations.bulletPoint.transition}
                 />
             </div>
-        </LazyMotion>
     );
 };
 
 export default SlidingTextWrapper;
 
-const AnimatedH1 = ({ textStr, initialObj, animateObj, styleObj, transitionObj }) => {
-    return (
-        <m.h1 
-            initial={initialObj ?? null}
-            animate={animateObj ?? null}
-            transition={transitionObj ?? null}
-            style={styleObj ?? null}
-        >
-            {textStr}
-        </m.h1>
-    );
-};
+

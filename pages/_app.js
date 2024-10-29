@@ -5,7 +5,6 @@
 // Css
 import '../pages/Main.css'
 import "react-datepicker/dist/react-datepicker.css"
-import "../components/acordione/acordione.css"
 import "../components/range-elemnt/range-elemnt.css"
 import "../components/calendar/calendar.css"
 import '../pages-components/board/muli-css.css'
@@ -67,6 +66,7 @@ export default function App({
 
 
  //  for responsive Components 
+   const extraLarge = useMediaQuery('(min-width : 1600px)')
    const large = useMediaQuery('(min-width: 900px)')
    const medium = useMediaQuery('(min-width: 600px)')
    const small = useMediaQuery('(min-width : 300px)')
@@ -77,7 +77,7 @@ export default function App({
     <ChakraProvider value={defaultSystem}>
     <StateContext.Provider value={[state,setState]}>
       <SessionProvider session={session}>    
-      <WindowWidthContaxt.Provider value={{large,medium,small}}>
+      <WindowWidthContaxt.Provider value={{extraLarge,large,medium,small}}>
       <FilterCityConteax.Provider value={[filterCity,setFilterCity]}>
       <OrderContaxt.Provider  value={[orderContext,setOrderContext]}>
           <Component {...pageProps} />

@@ -1,8 +1,9 @@
 import { m, domAnimation, LazyMotion } from "framer-motion";
 import Colors from "../../lib/colors";
 
+
 const CopyText = {
-    Headline: "MadeIt", 
+    Headline: "MadeIT", 
     Text1: "צריכים עוזר/ת בית הרשם עכשיו?",
     Text2: "תיאום קל ופשוט",
     bulletPoints: "מצא את הלקוח הבא שלך בקלות"
@@ -11,30 +12,28 @@ const CopyText = {
 const SlidingTextWrapper = () => {
     const Style = {
         Wrapper: { 
-            position: "absolute", 
-            width: "fit-content",
+        
         },
         HeadLine: {
             fontSize: "5em",
             color: Colors.c,
             fontWeight: "bold",
-            marginBottom: "0.5em",
+          
             
         },
         Text1: {
             fontSize: "1.5em",
-            color: "#fff",
+          
             marginBottom: "0.5em"
         },
         Text2: {
             fontSize: "1.5em",
-            color: "#fff",
+
 
             marginBottom: "0.5em"
         },
         bulletPoint: {
             fontSize: "1.5em",
-            color: "#fff",
 
             marginBottom: "0.5em"
         }
@@ -43,7 +42,7 @@ const SlidingTextWrapper = () => {
     const animations = {
         HeadLine: {
             initial: { x: 100, opacity: 0 },
-            animate: { x: 0, opacity: 1 },
+            animate: { x: 0, opacity: 1 , type:"sping" },
             transition: { duration: 2, ease: "easeOut" }
         },
         Text1: {

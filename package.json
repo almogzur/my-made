@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.4.1",
-    "@chakra-ui/react": "^3.0.0",
+    "@chakra-ui/react": "^3.0.1",
     "@emotion/react": "^11.13.3",
     "@next/bundle-analyzer": "^14.2.4",
     "@popperjs/core": "^2.11.8",

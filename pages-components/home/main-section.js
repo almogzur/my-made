@@ -31,26 +31,25 @@ const PhotosMd = {
 
 
 function  MainSection() {
-  const { large , medium , small } = useContext(WindowWidthContaxt);
+  const { extraLarge, large , medium , small } = useContext(WindowWidthContaxt);
 
   const Style = {
       Wrapper:{ 
-         height: large? "40em" : "30em",
+         height:large? "30%" :"250%",
          width:large? "80%" : "100%",
          display:'flex',
          flexDirection:'row',
          justifyContent:'center',
          justifySelf:"center",
          transition:"all ease 2s",
-         overflow:"clip"
         },
       A:{ 
          width: large? "50%" : "0px",
          display:'flex',
-         height:"100%",
          flexDirection:'column',
          justifyContent:'space-evenly',
           alignItems:'center',
+          
         },
       B:{
           width:large ? "50%":"100%",  
@@ -58,25 +57,43 @@ function  MainSection() {
           flexDirection:'column',
           justifyContent:'center',
           alignItems:'center',
-          margin:"20px",
-          },
+         },
+         C:{
+          display:'flex',
+          flexDirection:'column',
+          justifyContent:'center',
+          alignItems:'center',
+          alignContent:'center',
+
+         }
   }
 
 
   return (
        <div style={Style.Wrapper}>
 
-       { medium? <div style={Style.A}  >     
+       { 
+        
+        extraLarge?<div style={Style.C}>
+        <StyledImage 
+                  Images={ PhotosMd.A } 
+                  PropsImageStyle={{borderRadius:"30px" , height:"30em" , width:"45em"}} 
+                  timer={3000}  />
+         
+          
+        </div>
+        :
+        medium? <div style={Style.A}  >     
              <StyledImage Images={PhotosSm.A} PropsImageStyle={{borderRadius:"15px"}} timer={15000}  />
              <StyledImage Images={PhotosSm.B} PropsImageStyle={{borderRadius:"8px" ,}} timer={19000}  />
         </div>
-        :null
+        :  null
         }
 
         <div  style={Style.B}>
              <StyledImage 
                   Images={ PhotosMd.A } 
-                  PropsImageStyle={{ height: large? "" : "30em",    borderRadius:"12px" ,  }} 
+                  PropsImageStyle={{ height: large? "" : "30em" ,  margin: large? "3em" : null , borderRadius:"12px" ,  }} 
                   timer={13000}  />
               <SlidingTextWrapper/> 
         </div>
@@ -86,6 +103,9 @@ function  MainSection() {
 }
 
 export default MainSection;
+
+
+
 
 
 

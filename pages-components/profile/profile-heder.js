@@ -25,9 +25,9 @@ const { data: session ,status ,update} = useSession()
            background: 'rgb(25,29,136)',
            background: `linear-gradient(
              -119deg, 
-             ${Colors.b} , 
-             ${Colors.d} ,
-             ${Colors.a}        
+             ${Colors.d} , 
+       
+             ${Colors.c}        
            )
            `,
            boxShadow: '0 4px 8px #404040'

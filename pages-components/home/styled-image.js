@@ -33,7 +33,7 @@ const StyledImage = ({ Images, timer = 3000, PropsImageStyle, PropsDivStyle }) =
         }}
         style={PropsDivStyle? PropsDivStyle :  {}}
       >
-        <Image style={PropsImageStyle ? PropsImageStyle : {}} src={src} alt="נקיון בבית" />
+        <Image  style={PropsImageStyle ? PropsImageStyle :  {}} src={src} alt="נקיון בבית" />
       </m.div>
     </LazyMotion>
   );

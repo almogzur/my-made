@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { FilterCityConteax } from '../../context';
 import BoardToolsBar from '../../pages-components/board/board-tools-bar';
 import OrdersWrapper from '../../pages-components/board/orders-wrapper';
-import BoardLayout from '../../layouts/board-layout';
 
 
 
@@ -39,8 +38,7 @@ const BoardPage = () => {
 
   return (
 
-    <BoardLayout>
-    
+    <>
       <BoardToolsBar
         setMode={setMode}
         setFilterCity={setFilterCity}
@@ -56,8 +54,7 @@ const BoardPage = () => {
         filterCity={filterCity}
         setFilterCity={setFilterCity}
       />
-
-</BoardLayout>
+      </>
   );
 };
 

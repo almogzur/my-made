@@ -49,7 +49,8 @@ function  MainSection() {
                       height:"600px",  
                        borderRadius: large ? "12px" : null ,
                         objectFit:"fill" ,
-                         margin: large? "2em" : null  
+                         margin: large? "2em" : null  ,
+                         opacity: "0.8"
                            }} 
                   timer={13000}  />
               <SlidingTextWrapper/> 

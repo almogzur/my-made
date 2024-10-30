@@ -25,8 +25,7 @@ function QuickcSingIn() {
   
   return (
     <div style={Style.Wrapper} >
-        <h1 style={Style.Text} >צריך עזרה בניקוי הבית ?  </h1>
-        <h1 style={Style.Text} > הרשם עכשיו</h1>
+        <h1 style={Style.Text} >צריך עזרה פרסם עכשיו ?!  </h1>
         <OrdersButton borderColor={"#fff"} />
     </div>
     )

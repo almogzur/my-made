@@ -14,22 +14,23 @@ const SlidingTextWrapper = () => {
     
     const Style = {
         Wrapper: { 
-        background:"#fff",
-
-        display:'flex',
-        flexDirection:'column',
-        alignItems:'center',
-        width:"100%"
-        
+                
+                display:'flex',
+                flexDirection:'column',
+                alignItems:'center',
+                position:"absolute" ,
+                color:"#fff",
+        textAlign:"center"
         
         },
         HeadLine: {
-            fontSize: "6em",
+            fontSize: "5em",
             color: Colors.c,
             fontWeight: "bold",
+            
         },
         Text: {
-            fontSize: "1.9em",
+            fontSize: "2.9em",
             marginBottom: "0.5em"
         },
 

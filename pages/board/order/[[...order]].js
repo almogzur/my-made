@@ -1,4 +1,3 @@
-import OrderLayout from '../../../layouts/order-layout' 
 import OrderSummary from '../../../pages-components/board/OrderSummary'
 import Colors from '../../../lib/colors'
 
@@ -12,9 +11,6 @@ import Colors from '../../../lib/colors'
 
 export default function OrderPage() {
 
-  return <OrderLayout > 
-            <OrderSummary />     
-         </OrderLayout>
-     
+  return          <OrderSummary />     
 }
 

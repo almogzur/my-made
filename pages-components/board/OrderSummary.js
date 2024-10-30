@@ -14,7 +14,7 @@ import { useContext } from 'react'
     margin: "auto",
     marginTop:"2em",
     border: `1px solid ${Colors.d}`,
-    backgroundColor: Colors.a,
+    backgroundColor: "#fff",
     padding: "20px",
     borderRadius: "10px",
     fontFamily: "'Arial', sans-serif",
@@ -51,7 +51,7 @@ import { useContext } from 'react'
   },
   button: {
     backgroundColor: Colors.d,
-    color: Colors.a,
+    color: Colors.c,
     border: "none",
     padding: "10px 15px",
     borderRadius: "5px",

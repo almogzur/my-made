@@ -1,13 +1,11 @@
-import Image from "next/image"
 import {useRouter} from "next/router"
 import { useSession } from "next-auth/react";
 import LoginButton from "../../components/profile-controls/log-in-button"
-import OrdersButton from "./go-to-orders-button"
+import OrdersButton from "../../components/go-to-orders-button"
 import Colors from "../../lib/colors"
 import ProfileLink from '../../components/profile-controls/profile-link'
-import LogoComponent from "../../components/logo/logo"
-import MainLogo from '../../public/main-maid-logo.webp'
 
+import { GiVacuumCleaner } from "react-icons/gi";
 
 const Menu = () => {
 
@@ -43,13 +41,7 @@ const Menu = () => {
         <div style={Style.Wrapper}  >
 
            <div style={Style.colA} >
-           
-           <LogoComponent
-             path={"/"}
-             imamge={MainLogo}
-             height={80}
-             width={80}
-           />
+            <GiVacuumCleaner size={"5em"} color="#fff"  /> 
           </div>
         
           <div style={Style.colB} >

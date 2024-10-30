@@ -5,26 +5,14 @@ import SlidingTextWrapper from './sliding-text'
 import Colors from "../../lib/colors";
 import AnimatedHeadline from './animated-headline'
 
-import C1 from '../../public/400px/cover1.jpg'
-import C2 from '../../public/400px/cover2.jpg'
-import C3 from '../../public/400px/cover3.jpg'
-import C4 from '../../public/400px/cover4.jpg'
-import C5 from '../../public/400px/cover5.jpg'
-import C6 from '../../public/400px/cover6.jpg'
-import C7 from '../../public/400px/cover7.jpg'
-import C8 from '../../public/400px/cover8.jpg'
-import C9 from '../../public/400px/cover9.jpg'
+
 import MD1 from '../../public/800px/cover1.jpg'
 import MD2 from '../../public/800px/cover2.jpg'
 import MD3 from '../../public/800px/cover3.jpg'
 import MD4 from '../../public/800px/cover4.jpg'
 import MD5 from '../../public/800px/cover5.jpg'
 
-const PhotosSm = {
-  A:[C1,C2,C3],
-  B:[C4,C5,C6],
-  C:[C7,C8,C9]
-}
+
 const PhotosMd = {
    A:[MD1,MD2,MD3,MD4,MD5]
 }
@@ -35,96 +23,38 @@ function  MainSection() {
   const { XLarge, large , medium , small } = useContext(WindowWidthContaxt);
 
   const Style = {
-      Wrapper:{ 
-          display:'flex',
-          flexDirection:'row',
-          justifyContent:'space-around',
-          transition:"all ease 2s",
-          overflow:"clip"
-        },
-      A:{ 
-         width: large? "40%" : "0px",
-         display:'flex',
-         flexDirection:'column',
-         justifyContent:'space-evenly',
-          alignItems:'center',
-          
-        },
+ 
+  
       B:{
-          width:large? "60%":"100%",
-          height:"inherit",
-          display: "flex",
-          flexDirection:'column',
-          justifyContent:'center',
-          alignItems:'center',
-          alignContent:'center',
-
-
-         },
-         C:{
+          width:"inherit",
           display:'flex',
           flexDirection:'column',
           justifyContent:'center',
           alignItems:'center',
           alignContent:'center',
 
-         },
-         HeadLine: {
+         },   
+      HeadLine: {
           fontSize: "5em",
           color: Colors.c,
           fontWeight: "bold",
-        
-          
       },
-  }
+       
+      }
+  
 
 
   return (
-       <div style={Style.Wrapper}>
 
-       { 
-        
-        XLarge?<div style={Style.C}>
-        <AnimatedHeadline
-                     textStr={"MadeIT"}
-                     styleObj={Style.HeadLine}
-                     animateObj={{
-                    scale: [1, 1.15, 1],      
-                    y: [0, -10, 0]               
-                }}
-                transitionObj={{
-                    duration: 3,                
-                    ease: "easeInOut",
-                    repeat: Infinity
-                }}
-                     
-              
-        
-         />
-        <StyledImage 
-                  Images={ PhotosMd.A } 
-                  PropsImageStyle={{borderRadius:"30px" , height:"30em" , width:"45em"}} 
-                  timer={3000}  
-
-                  />
-      
-          
-        </div>
-        :
-        medium? <div style={Style.A}  >     
-             <StyledImage Images={PhotosSm.A} PropsImageStyle={{borderRadius:"15px"}} timer={15000}  />
-             <StyledImage Images={PhotosSm.B} PropsImageStyle={{borderRadius:"8px" ,}} timer={19000}  />
-        </div>
-        : <></>
-        }
+    
 
         <div  style={Style.B}>
              <StyledImage 
                   Images={ PhotosMd.A } 
-                  PropsImageStyle={{     borderRadius: large ? "12px" : null ,  }} 
+                  PropsImageStyle={{ height:"600px",   height:"inherit",   borderRadius: large ? "12px" : null ,  }} 
                   timer={13000}  />
               <SlidingTextWrapper/> 
-        </div>
+
       </div>
   );
 

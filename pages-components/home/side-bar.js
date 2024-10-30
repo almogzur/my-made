@@ -15,9 +15,7 @@ import { BsArrowBarLeft } from "react-icons/bs";
 import { BsArrowBarRight } from "react-icons/bs";
 import Colors from "../../lib/colors"
 import { useRouter } from "next/router";
-import LogoComponent from '../../components/logo/logo'
-import MainLogo from '../../public/main-maid-logo.webp'
-
+import { GiVacuumCleaner } from "react-icons/gi";
 const SideBard = () => {
 
   const router = useRouter()
@@ -35,12 +33,8 @@ const SideBard = () => {
     return (
         <div style={Style.Wrapper}>
           <Bar/>
-          <LogoComponent
-            path={"/"}
-            propsStyle={{ height:"inherit", width:"80px", position:"absolute", left:"0px"}} 
-            imamge={MainLogo}
-            height={80}
-          />
+         <span style={{position:"absolute" , left:"10px" , color:"#fff"}}> <GiVacuumCleaner size={"5em"}/> </span>
+
         </div>
       
     )

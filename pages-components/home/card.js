@@ -1,5 +1,5 @@
 import Colors from "../../lib/colors";
- import { color, LazyMotion, m  } from "framer-motion";
+ import {  LazyMotion, m  } from "framer-motion";
  import f from '../../lib/features'
 
 const Style = {
@@ -64,7 +64,6 @@ const Card = ({text,IconEl  }) => {
       </div>
       <div style={Style.content}>
         <h2 style={Style.Title}>{text}</h2>
-     
       </div>
       </m.div>
   </LazyMotion>

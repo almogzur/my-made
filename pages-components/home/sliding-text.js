@@ -1,46 +1,35 @@
 import Colors from "../../lib/colors";
 import AnimatedHeadline from "./animated-headline";
 
-import { useContext } from "react";
-import {WindowWidthContaxt} from '../../context'
 const CopyText = {
     Headline: "MadeIT", 
-    Text1: "!צריכים עוזר/ת בית?... הרשמו עכשיו ",
-    Text2: "תיאום קל ופשוט",
+    Text1: "!צריכים עוזר/ת בית?... " , 
+    Text2 :" הרשמו עכשיו ", 
+    Text3: "תיאום קל ופשוט",
  
 };
 
 const SlidingTextWrapper = () => {
 
-    const {XLarge} =  useContext(WindowWidthContaxt)
     
     const Style = {
         Wrapper: { 
         
+        display:'flex',
+        flexDirection:'column',
+        alignItems:'center',
+        
         },
         HeadLine: {
-            fontSize: "5em",
+            fontSize: "6em",
             color: Colors.c,
             fontWeight: "bold",
-          
-            
         },
-        Text1: {
-            fontSize: "1.5em",
-          
+        Text: {
+            fontSize: "1.9em",
             marginBottom: "0.5em"
         },
-        Text2: {
-            fontSize: "1.5em",
 
-
-            marginBottom: "0.5em"
-        },
-        bulletPoint: {
-            fontSize: "1.5em",
-
-            marginBottom: "0.5em"
-        }
     };
 
     const animations = {
@@ -69,33 +58,30 @@ const SlidingTextWrapper = () => {
     return (
             <div style={Style.Wrapper}>
 
-               { !XLarge?
                  <AnimatedHeadline
                     textStr={CopyText.Headline}
                     styleObj={Style.HeadLine}
                     initialObj={animations.HeadLine.initial}
                     animateObj={animations.HeadLine.animate}
                     transitionObj={animations.HeadLine.transition}
-                />:null
-}
-
+                />
                 <AnimatedHeadline
                     textStr={CopyText.Text1}
-                    styleObj={Style.Text1}
+                    styleObj={Style.Text}
                     initialObj={animations.Text1.initial}
                     animateObj={animations.Text1.animate}
                     transitionObj={animations.Text1.transition}
                 />
                 <AnimatedHeadline
                     textStr={CopyText.Text2}
-                    styleObj={Style.Text2}
+                    styleObj={Style.Text}
                     initialObj={animations.Text2.initial}
                     animateObj={animations.Text2.animate}
                     transitionObj={animations.Text2.transition}
                 />
                 <AnimatedHeadline
-                    textStr={CopyText.bulletPoints}
-                    styleObj={Style.bulletPoint}
+                    textStr={CopyText.Text3}
+                    styleObj={Style.Text}
                     initialObj={animations.bulletPoint.initial}
                     animateObj={animations.bulletPoint.animate}
                     transitionObj={animations.bulletPoint.transition}

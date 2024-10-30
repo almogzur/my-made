@@ -22,6 +22,7 @@ import { FcPlus } from "react-icons/fc";
 import { signOut ,signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import { color } from "framer-motion";
 
 
 
@@ -52,13 +53,14 @@ const MyDrawer = () => {
         
 
           <DrawerHeader style={{background:Colors.d , color:"#fff" }}  >
+
              <GiVacuumCleaner style={{
                                  padding:"0px" , 
                                  marginTop:"-10px" ,
                                  cursor: "pointer",      
                                   }}
                                  size={"3em"} 
-                                 color={Colors.c} 
+                                 color="#fff" 
                                  onClick={()=>{router.push("/")}}  
                               />
           </DrawerHeader>
@@ -69,7 +71,7 @@ const MyDrawer = () => {
           <DrawerBody  style={{ background:Colors.d}}  >
 
                 <DrawerItem 
-                    text={ session?.user?.name?? "הרשמה"} 
+                    text={ session?.user?.name??  "הרשמה | כניסה "} 
                     PropsOnClick={()=>{ session? router.push("/profile") : signIn(undefined,{callbackUrl:"/profile"})   }}
                     > 
                      <FcButtingIn  style={{margin:"10px"}} size={"2em"}/>
@@ -125,7 +127,6 @@ const MyDrawer = () => {
                     fontWeight: "600",           
                     cursor: "pointer",             
                     boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.4)",
-                    color:Colors.c
                       }}  
                   >Close
                  <BsArrowBarRight/>
@@ -136,7 +137,7 @@ const MyDrawer = () => {
           
           </DrawerFooter>
 
-          <DrawerCloseTrigger  style={{background:Colors.c , padding:"5px"}}  />
+          <DrawerCloseTrigger  style={{  padding:"5px" , color:"#fff" }}  />
 
 
         </DrawerContent>

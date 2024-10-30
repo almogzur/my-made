@@ -1,16 +1,16 @@
 import { useEffect, useContext , useState } from "react";
 import { useRouter } from "next/router";
 import { useSession  } from "next-auth/react";
-import NewOrder from "../../../pages-components/customer/new-order";
-import  ProfileLayout from '../../../layouts/profile-layout'
+import NewOrder from "../../pages-components/customer/new-order";
+import  ProfileLayout from '../../layouts/profile-layout'
 import Head from "next/head";
-import MongoSpinner from "../../../components/mongo-spinner/mongo-spinner";
-import AppHead from '../../../components/app-head/app-head'
-import CustomerOrderList from '../../../pages-components/customer/customer-order-list'
-import UiDialog from '../../../components/dialog/ui-dialog'
-import Colors from "../../../lib/colors";
+import MongoSpinner from "../../components/mongo-spinner/mongo-spinner";
+import AppHead from '../../components/app-head/app-head'
+import CustomerOrderList from '../../pages-components/customer/customer-order-list'
+import UiDialog from '../../components/dialog/ui-dialog'
+import Colors from "../../lib/colors";
 import { IoMdAddCircle } from "react-icons/io";
-import OldOrderList from "../../../pages-components/customer/customer-old-order-list";
+import OldOrderList from "../../pages-components/customer/customer-old-order-list";
 
 const CostumerPage = () => {
 

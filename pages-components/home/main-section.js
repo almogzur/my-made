@@ -32,20 +32,18 @@ const PhotosMd = {
 
 
 function  MainSection() {
-  const { extraLarge, large , medium , small } = useContext(WindowWidthContaxt);
+  const { XLarge, large , medium , small } = useContext(WindowWidthContaxt);
 
   const Style = {
       Wrapper:{ 
-         height:large? "30%" :"250%",
-         width:large? "80%" : "100%",
-         display:'flex',
-         flexDirection:'row',
-         justifyContent:'center',
-         justifySelf:"center",
-         transition:"all ease 2s",
+          display:'flex',
+          flexDirection:'row',
+          justifyContent:'space-around',
+          transition:"all ease 2s",
+          overflow:"clip"
         },
       A:{ 
-         width: large? "50%" : "0px",
+         width: large? "40%" : "0px",
          display:'flex',
          flexDirection:'column',
          justifyContent:'space-evenly',
@@ -53,11 +51,15 @@ function  MainSection() {
           
         },
       B:{
-          width:large ? "50%":"100%",  
-          display:'flex',
+          width:large? "60%":"100%",
+          height:"inherit",
+          display: "flex",
           flexDirection:'column',
           justifyContent:'center',
           alignItems:'center',
+          alignContent:'center',
+
+
          },
          C:{
           display:'flex',
@@ -82,16 +84,16 @@ function  MainSection() {
 
        { 
         
-        extraLarge?<div style={Style.C}>
+        XLarge?<div style={Style.C}>
         <AnimatedHeadline
                      textStr={"MadeIT"}
                      styleObj={Style.HeadLine}
                      animateObj={{
-                    scale: [1, 1.15, 1],         // Slight scaling effect for "breathing"
-                    y: [0, -10, 0]               // Subtle vertical float
+                    scale: [1, 1.15, 1],      
+                    y: [0, -10, 0]               
                 }}
                 transitionObj={{
-                    duration: 3,                 // Adjust duration for slower or faster breathing
+                    duration: 3,                
                     ease: "easeInOut",
                     repeat: Infinity
                 }}
@@ -119,7 +121,7 @@ function  MainSection() {
         <div  style={Style.B}>
              <StyledImage 
                   Images={ PhotosMd.A } 
-                  PropsImageStyle={{ height: large? "" : "30em" ,  margin: large? "3em" : null , borderRadius:"12px" ,  }} 
+                  PropsImageStyle={{     borderRadius: large ? "12px" : null ,  }} 
                   timer={13000}  />
               <SlidingTextWrapper/> 
         </div>

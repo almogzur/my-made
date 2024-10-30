@@ -5,14 +5,11 @@ import Colors from "../../lib/colors";
 import { useSession } from 'next-auth/react'
 
 
-function ProfileLink() {
+
+
+const ProfileLink =()=> {
     
     const { data: session , status , } = useSession();
-
-
-    if(!session){
-        <h1>No Profile Eroor</h1>
-    }
 
   return (
     <Link
@@ -21,13 +18,16 @@ function ProfileLink() {
       <m.div
         style={{
           borderRadius: "5px",
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          background: Colors.d,
-          color: Colors.a,
+          
           cursor: 'pointer',
+          display: 'flex',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          width: "150px",  
+          height: '4em',
+          border: `2px solid ${Colors.c}`,
+          borderRadius: "6px",
+          color:"#fff"
         }}
         transition={{ duration: 1 }}
         whileHover={{ borderRadius: "15px", background: Colors.d, color: Colors.c }}
@@ -36,10 +36,10 @@ function ProfileLink() {
         { 
           <Image
             src={session?.user?.image}
-            height={40}
-            width={40}
+            height={60}
+            width={60}
             alt="User Profile Link"
-            style={{ borderRadius: "15px" }}
+            style={{ borderRadius: "6px" }}
             fetchPriority="auto"
           />
           

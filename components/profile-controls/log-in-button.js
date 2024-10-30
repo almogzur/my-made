@@ -1,5 +1,5 @@
 import { signIn } from "next-auth/react";
-import { m, LazyMotion } from 'framer-motion';
+import { m, LazyMotion, } from 'framer-motion';
 import Colors from "../../lib/colors";
 import f from '../../lib/features';
 
@@ -9,20 +9,24 @@ const DefultStyles =  {
     border: "none",
     background: Colors.c,
     borderRadius: "6px",
+    color:"#fff"
   }
 
 
-function LoginButton( { StyleProps ,text}) {
+function LoginButton( { StyleProps } ) {
+
   return (
     <LazyMotion features={f}>
         <m.button
-          style={StyleProps? StyleProps : DefultStyles}
+          style={StyleProps?? DefultStyles}
           transition={{ duration: 1 }}
-          whileHover={{ borderRadius: "15px", background: Colors.d }}
+          whileHover={{ borderRadius: "15px", background: Colors.a }}
           animate={{ opacity: [0, 0.5, 1] }}
           onClick={() => signIn(undefined, { callbackUrl: "/profile" })}
         >
-          <strong>{text ? text :"כניסה"}</strong>
+           { 
+             <strong>{"כניסה"}</strong>
+           }
         </m.button>
     </LazyMotion>
   );

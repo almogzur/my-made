@@ -1,35 +1,58 @@
 import { useSession } from 'next-auth/react'
 import {useEffect,useState} from 'react'
-import { useRouter } from 'next/router'
+import Card from './card'
 import Colors from '../../lib/colors'
+import Image from 'next/image'
+
+
+import { FaPenFancy } from "react-icons/fa";
+import { TbViewfinder } from "react-icons/tb";
+import { PiCursorClickBold } from "react-icons/pi";
+
+
+ const HeasLine=  " רוצה למצוא עוזר/ת !?"
 
 const CopyText = {
+    1:  {  text : "נרשמים בקלות ומפרסמים " , Icon: FaPenFancy ,   },
+    2:  { text : "מחפשים במערכת נוחה ומתקדמת" , Icon: TbViewfinder , },
+    3:  { text : " ואתם במחרק של קליק  " , Icon:PiCursorClickBold , }
 
-    HeasLine : " רוצה למצוא עוזרת ?", 
-    text1 : "נרשמים בקלות ומפרסמים מודעה",
-    text2 : "מחפשים במערכת נוחה ומתקדמת" , 
-    text3 : "פונים בקליק ומקבלים תשובה... או מחכים לפניות" , 
-    text4 : "ויוצרים קשר"
 } 
+const HowThisWorks = () => {
 
 
-const HowThisWorks=()=>{
-    
+
     const Style = { 
-        Wrapper:{
-            height:"30em",
-            width:"100%",
-            background:Colors.d
-        }
-    }
+        Wrapper: {
+            height: "40%",
+            background: Colors.d,    
+        },
+        Cards: {
+            display: "flex",
+            flexWrap:"wrap",
+            justifyContent: 'space-around',
+        },
+        HeasLine:{ 
+            textAlign: "center",
+             padding: "5px",
+              fontSize: "40px" ,
+              color:"#fff",
+            }
+    };
     
     return (
         <div style={Style.Wrapper}>
-
+            <h1 style={Style.HeasLine}>{HeasLine}</h1>
+            <div style={Style.Cards}>
+                {Object.values(CopyText)
+                    .map((obj, i) => 
+                            
+                        <Card key={i} text={obj.text} IconEl={obj.Icon} />
+                    
+                    )}
+            </div>  
         </div>
-    )
+    );
+};
 
-
-}
-
-export default  HowThisWorks 
+export default HowThisWorks;

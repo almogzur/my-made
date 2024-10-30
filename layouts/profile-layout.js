@@ -4,49 +4,20 @@ import Footer from '../components/footer/app-footer';
 import { MdCleaningServices } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
 import ProfileLink from "../components/profile-controls/profile-link";
-
+import HomePageNavigation from "../pages-components/home/home-navigation";
 
  
 
 const ProfileLayout = ({ children }) => {
 
-   const divStyle = {
-           width:"50px",
-           height:"55px" ,
-           display:'flex',
-           flexDirection:'column',
-           justifyContent:'center',
-           alignItems:'center',
-           alignContent:'center',
-           color:Colors.a
-   }
-  
 
   return (
     <>
-    
+    <HomePageNavigation/>
   
       {children}
 
-      <Footer  >
-          <CostumeLink
-            href="/profile/customer"
-             divStyle={divStyle}
-        
-        >
-          <FaHome size={40}/>
-          </CostumeLink>
-
-          <CostumeLink
-
-            href="/profile/vendor"
-            divStyle={divStyle}
-            
-        >
-          <MdCleaningServices size={40} />
-          </CostumeLink>
-          <ProfileLink/>
-
+      <Footer>
 
       </Footer>
 

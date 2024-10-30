@@ -4,17 +4,12 @@ import React, { useContext, useEffect } from 'react';
 import Menu from "./menu"
 import SideBard from './side-bar'
 
-
-
-
+ 
 const HomePageNavigation = () => {
-    const { large, medium ,small } = useContext(WindowWidthContaxt);
 
-    return (
+    const {  large, medium ,small } = useContext(WindowWidthContaxt);
 
-            large? <Menu/> : <SideBard/> 
-   
-    );
+    return  large? <Menu/> : <SideBard/> 
 };
 
 

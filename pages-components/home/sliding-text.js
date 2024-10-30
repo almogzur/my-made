@@ -12,7 +12,7 @@ const CopyText = {
 
 const SlidingTextWrapper = () => {
 
-    const {extraLarge} =  useContext(WindowWidthContaxt)
+    const {XLarge} =  useContext(WindowWidthContaxt)
     
     const Style = {
         Wrapper: { 
@@ -69,7 +69,7 @@ const SlidingTextWrapper = () => {
     return (
             <div style={Style.Wrapper}>
 
-               { !extraLarge?
+               { !XLarge?
                  <AnimatedHeadline
                     textStr={CopyText.Headline}
                     styleObj={Style.HeadLine}

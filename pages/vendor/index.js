@@ -7,9 +7,9 @@
 import React, { useContext,useState,useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import ProfileLayout from '../../../layouts/profile-layout'
+import ProfileLayout from '../../layouts/profile-layout'
 import Head from "next/head";
-import VendorWrapper from "../../../pages-components/verndor/vendor-wrapper";
+import VendorWrapper from "../../pages-components/verndor/vendor-wrapper";
 
 
 const VenderPage = () => {

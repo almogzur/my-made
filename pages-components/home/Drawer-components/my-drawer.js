@@ -52,7 +52,15 @@ const MyDrawer = () => {
         
 
           <DrawerHeader style={{background:Colors.d , color:"#fff" }}  >
-             <GiVacuumCleaner style={{padding:"0px",marginTop:"-10px"}} size={"3em"} color={Colors.c}  />
+             <GiVacuumCleaner style={{
+                                 padding:"0px" , 
+                                 marginTop:"-10px" ,
+                                 cursor: "pointer",      
+                                  }}
+                                 size={"3em"} 
+                                 color={Colors.c} 
+                                 onClick={()=>{router.push("/")}}  
+                              />
           </DrawerHeader>
 
 
@@ -92,12 +100,13 @@ const MyDrawer = () => {
                     <DrawerItem 
                         text={"התנקת"}
                         propsStyle={{ 
-                            padding:"10px" ,
+                            padding:"0px" ,
+                            margin:"0px",
                             background:"#333333",
                             color:Colors.c,
                             justifyContent:"center"
                            }}
-                           PropsOnClick={()=>{signOut()}}
+                         PropsOnClick={()=>{signOut()}}
              /> :
              null
              }
@@ -109,7 +118,7 @@ const MyDrawer = () => {
                    border: "none",
                    width: "50%",
                    height: "60px",
-                   borderRadius: "9px",
+                   borderRadius: "px",
                    backgroundColor: "#333",      
                    color: "#fff",                  
                    fontSize: "16px",             

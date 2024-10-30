@@ -5,7 +5,7 @@ const styles = {
   card: {
     backgroundColor: 'white',
     padding: '20px',
-    borderRadius: '8px',
+  
     textAlign: 'center',
 
   },

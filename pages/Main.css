@@ -1,8 +1,10 @@
 :root {
+
     --greenA:#1A3636;
     --greenB:#40534C;
     --greenC:#677D6A;
     --greenD:#D6BD98;
+
     --blueA:#F7FBFC;
     --blueB:#D6E6F2;
     --blueC:#B9D7EA;
@@ -18,7 +20,7 @@ body{
     position: relative;
     margin: 0;
     padding:0;
-    background:#f2f4f6;
+    background:#343131;
     overflow-x: hidden;
 
 }

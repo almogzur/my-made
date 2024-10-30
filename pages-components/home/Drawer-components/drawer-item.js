@@ -2,14 +2,14 @@
  import f from '../../../lib/features'
 import Colors from "../../../lib/colors";
 
-const DrawerItem = ({ text ,children , propsStyle  , PropsOnClick  } ) => {
+const DrawerItem = ({ text , children , propsStyle  , PropsOnClick  } ) => {
 
     const Style = {
             Wrapper: {
                    border: "none",
                    width: "100%",
                    height: "60px",
-                   borderRadius: "9px",
+                   borderRadius: "3px",
                    backgroundColor: "#333",      
                    color: "#fff",                  
                    fontSize: "16px",             
@@ -21,6 +21,8 @@ const DrawerItem = ({ text ,children , propsStyle  , PropsOnClick  } ) => {
                     flexDirection:'row',
                     justifyContent:'space-between',
                     alignItems:'center',  
+                    marginTop:"10px",
+                    padding:"5px"
 }
     }
 

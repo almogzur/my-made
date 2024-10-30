@@ -3,29 +3,33 @@ import ProfileCard from '../../pages-components/new-profile/profile-card'
 import ContactInfo from '../../pages-components/new-profile/content-info';
 import SocialLinks from '../../pages-components/new-profile/social-link';
 import ProjectStatus from '../../pages-components/new-profile/project-status';
+import Colors from '../../lib/colors';
 
 const UserProfile = () => {
-  return (
-    <>
-    <div style={styles.container}>
+  const styles = {
+    wrapper: {
+      
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '20px',
+      padding: '20px',
+      backgroundColor: '#F0F2F5',      
+      background:Colors.d
 
-      <ProfileCard />
-      <ContactInfo />
-      <SocialLinks />
-      <ProjectStatus />
+    },
+    child: {
+      flex: '1 1 100%',
+      
+    },
+  };
+
+  return (
+    <div style={styles.wrapper}>
+      <div style={styles.child}><ProfileCard /></div>
+      <div style={styles.child}><ContactInfo /></div>
+      <div style={styles.child}><SocialLinks /></div>
+      <div style={styles.child}><ProjectStatus /></div>
     </div>
-    </>
   );
 };
-
-const styles = {
-  container: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: '20px',
-    padding: '20px',
-    backgroundColor: '#F0F2F5',
-  },
-};
-
-export default UserProfile;
+export default UserProfile

@@ -1,4 +1,5 @@
 const ContactInfo = () => {
+
     return (
       <div style={styles.card}>
         <h3 style={styles.title}>Full Name</h3>
@@ -20,7 +21,6 @@ const ContactInfo = () => {
     card: {
       backgroundColor: 'white',
       padding: '20px',
-      borderRadius: '8px',
     },
     title: {
       fontWeight: 'bold',

@@ -26,7 +26,6 @@ const ProjectStatus = () => {
     card: {
       backgroundColor: 'white',
       padding: '20px',
-      borderRadius: '8px',
     },
     title: {
       fontSize: '16px',

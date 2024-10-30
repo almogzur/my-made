@@ -28,7 +28,6 @@ const SocialLinks = () => {
     card: {
       backgroundColor: 'white',
       padding: '20px',
-      borderRadius: '8px',
     },
     link: {
       display: 'flex',

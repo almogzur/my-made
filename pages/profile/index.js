@@ -9,9 +9,11 @@ const ProfilePage=()=>{
   const router = useRouter()
   const { data: session ,status ,update} = useSession()
 
-  useEffect(()=>{
-
-        })
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
 
     if (status === 'loading') {
      return <h1 style={{textAlign:'center'}}>Loading...</h1>

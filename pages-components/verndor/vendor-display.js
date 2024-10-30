@@ -3,9 +3,6 @@ import {useContext, useEffect } from 'react';
 import { useRouter } from 'next/navigation'
 
 import Colors from '../../lib/colors';
-import MongoSpinner from '../../components/mongo-spinner/mongo-spinner';
-import AppHeader from '../../components/app-head/app-head';
-import CostumeLink from '../../components/costume-link/costume-link'
 import { FaRegClipboard } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 
@@ -84,7 +81,6 @@ const VendorDisplay = ({
   return (
     <>   
 
-   <AppHeader/>
    <h3 style={Style.headline}>{ ` פרטים `}</h3>
     <div style={Style.wrapper}>
 

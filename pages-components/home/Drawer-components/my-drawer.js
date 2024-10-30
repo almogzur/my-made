@@ -13,15 +13,21 @@ import {
 } from "../../../components/ui/drawer"
 import { BsArrowBarLeft } from "react-icons/bs";
 import { BsArrowBarRight } from "react-icons/bs";
-import { useContext } from "react";
-import { WindowWidthContaxt } from "../../../context";
 import Colors from "../../../lib/colors";
 import {GiVacuumCleaner} from "react-icons/gi"
 import DrawerItem from './drawer-item'
-import { color } from "framer-motion";
+import { FcButtingIn } from "react-icons/fc";
+import { FcOnlineSupport } from "react-icons/fc";
+import { FcPlus } from "react-icons/fc";
+import { signOut ,signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+
+
 
 const MyDrawer = () => {
-    const { XLarge, large, medium ,small } = useContext(WindowWidthContaxt);
+  const { data: session, status } = useSession();
+    const router = useRouter()
 
     return (
       <DrawerRoot   >
@@ -43,8 +49,7 @@ const MyDrawer = () => {
 
         <DrawerContent offset="3" rounded="0"    >
 
-          
-
+        
 
           <DrawerHeader style={{background:Colors.d , color:"#fff" }}  >
              <GiVacuumCleaner style={{padding:"0px",marginTop:"-10px"}} size={"3em"} color={Colors.c}  />
@@ -55,14 +60,26 @@ const MyDrawer = () => {
 
           <DrawerBody  style={{ background:Colors.d}}  >
 
-                <DrawerItem text={"הרשמה"}/>
-                <DrawerItem text={"פירסום מודעה "}/>
-                <DrawerItem  text={"צור קשר "} />
-                
-                
+                <DrawerItem 
+                    text={ session?.user?.name?? "הרשמה"} 
+                    PropsOnClick={()=>{ session? router.push("/profile") : signIn(undefined,{callbackUrl:"/profile"})   }}
+                    > 
+                     <FcButtingIn  style={{margin:"10px"}} size={"2em"}/>
+                </DrawerItem>
 
 
-             
+
+                <DrawerItem text={ " פירסום מודעה " }>
+                      <FcPlus size={"2em"} style={{margin:"10px"}}   />
+                </DrawerItem>
+
+
+
+                <DrawerItem  text={"צור קשר "}>
+                    <FcOnlineSupport size={"2em"} style={{margin:"10px"}}/>
+                </DrawerItem>
+                
+                
           </DrawerBody>
 
 
@@ -70,7 +87,20 @@ const MyDrawer = () => {
           <DrawerFooter 
              style={{  height:100 , background:Colors.d}} 
               >
-            <DrawerItem text={"התנקת"} propsStyle={{margin:"0px", padding:"0px" , background:"#333333"}} />
+
+           { status && status==="authenticated" ?  
+                    <DrawerItem 
+                        text={"התנקת"}
+                        propsStyle={{ 
+                            padding:"10px" ,
+                            background:"#333333",
+                            color:Colors.c,
+                            justifyContent:"center"
+                           }}
+                           PropsOnClick={()=>{signOut()}}
+             /> :
+             null
+             }
 
             <DrawerActionTrigger asChild>
 

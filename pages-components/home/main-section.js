@@ -22,36 +22,35 @@ const PhotosMd = {
 function  MainSection() {
   const { XLarge, large , medium , small } = useContext(WindowWidthContaxt);
 
-  const Style = {
- 
-  
-      B:{
+  const Style = { 
+      Wrapper:{
           width:"inherit",
           display:'flex',
           flexDirection:'column',
           justifyContent:'center',
           alignItems:'center',
           alignContent:'center',
-
+          overflow:"clip"
          },   
       HeadLine: {
           fontSize: "5em",
           color: Colors.c,
           fontWeight: "bold",
-      },
-       
+      },   
       }
   
-
-
   return (
 
-    
-
-        <div  style={Style.B}>
+        <div  style={Style.Wrapper}>
              <StyledImage 
                   Images={ PhotosMd.A } 
-                  PropsImageStyle={{ height:"600px",   height:"inherit",   borderRadius: large ? "12px" : null ,  }} 
+                  PropsImageStyle={{ 
+                    width:"800px", 
+                      height:"600px",  
+                       borderRadius: large ? "12px" : null ,
+                        objectFit:"fill" ,
+                         marginTop: large? "2em" : null  
+                           }} 
                   timer={13000}  />
               <SlidingTextWrapper/> 
 

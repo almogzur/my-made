@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { m, domAnimation, LazyMotion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { type } from "os";
 
 const StyledImage = ({ Images, timer = 3000, PropsImageStyle, PropsDivStyle }) => {
   const [index, setIndex] = useState(0); 

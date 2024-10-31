@@ -1,18 +1,24 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import profileDefualtIcon from '../../public/User.jpg'
-const styles = {
+import { use } from "react";
+
+
+
+const Style = {
   card: {
     backgroundColor: 'white',
     padding: '20px',
-  
-    textAlign: 'center',
+    display:'flex',
+    flexDirection:'column',
+    alignItems:'center',
+
 
   },
   avatar: {
     width: '80px',
-    borderRadius: '50%',
-    
+    borderRadius: '0%',
+
   },
   name: {
     fontSize: '18px',
@@ -56,15 +62,18 @@ const ProfileCard = () => {
 
 
     return (
-      <div style={styles.card}>
-        <Image style={styles.avatar} width={50} height={50} src={session?.user.image || profileDefualtIcon} alt="" / >
-         <h2 style={styles.name}>John Doe</h2>
-         <p style={styles.title}>Full Stack Developer</p>
-        <p style={styles.location}>Bay Area, San Francisco, CA</p>
-            <div style={styles.buttonGroup}>
-              <button style={styles.followButton}>Follow</button>
-              <button style={styles.messageButton}>Message</button>
+      <div style={Style.card}>
+         <Image style={Style.avatar} width={50} height={50} src={session?.user.image || profileDefualtIcon} alt="" / >
+
+          <h2 style={Style.name}>{session?.user?.name ?? "אלמוני" }</h2>
+
+          <p style={Style.title}>{session?.user?.email.toUpperCase() }</p>
+          <p style={Style.location}>אימייל מאושר : {session?.user?.emailVerified ? "כן" :" לא"}</p>
+            <div style={Style.buttonGroup}>
+
            </div>
+
+
       </div>
     );
   };

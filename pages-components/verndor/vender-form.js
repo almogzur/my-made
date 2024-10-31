@@ -1,23 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import  { useContext, useEffect, useState } from "react";
 import { StateContext } from '../../context';
 import { useSession } from "next-auth/react";
-import TextArea from '../../components/text-area/t-area';
 import Colors from '../../lib/colors'
 import { m, LazyMotion } from 'framer-motion';
 import f from '../../lib/features';
 import useUser from '../../lib/hooks/useUser'
-import MongoSpinner from "../../components/mongo-spinner/mongo-spinner";
+import LoadingSpinner from "../../components/my-spinner/loading-spinner";
+import { Input,Textarea } from "@chakra-ui/react"
+import { Field } from "../../components/ui/field"
 
 
-const Style = {
-   headelinStyle : { textAlign: "center" },
-    FormStyle:  {display:'flex', flexDirection:'column',justifyContent:'center',},
-    InputStyle: { width:"100%", padding:"10px", marginTop : "10px", marginBottom:"10px" }
-
-}
 const descriptionPlaceholder = 
-` המחיר המבוקש הוא לשעה או גלובלי  ... 
- מלל חופשי`;
+` דוגמה : המחיר הוא עבור 1 2 3  
+ דוגמה: מבצע/ת את כאשר אין אנשים ביית 
+  פרטים נוספים ...
+  `;
 
  const STATE_KEY = "Vendor";
 
@@ -27,10 +24,24 @@ const VendorForm = ({ setEdit }) => {
   const { data: session, status } = useSession();
   const { user , isLoading , isError } = useUser(session?.user?.email)
   const [ state, setState ] = useContext(StateContext);
+  const [ConIsFetching , setComIsFetching] = useState(false)
+
+
+    const Style = {
+        Wrapper:  {   
+           background:"#fff",
+           padding:"20px"
+         },    
+       headelinStyle : { 
+           textAlign:"center",
+           fontSize:"1.5em"
+        },
+
+    }
 
   //  toogel to render back the form 
   // Update state from db 
-  useEffect(() => {
+   useEffect(() => {
     if (!isLoading && !isError && user) {
      // console.log("Vendor form effect - user data:", user);
   
@@ -69,15 +80,18 @@ const VendorForm = ({ setEdit }) => {
  //  e.preventDefault()
    // setEdit(true)
     try {
-      const response = await fetch('/api/vendor/save-vendor', {
+      setComIsFetching(true)
+      e.preventDefault()
+      const response = await fetch('/api/vendor', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(state[STATE_KEY])
       });
-      if (response.status) {
-   
+      if (response.ok) {
+        setTimeout(()=>{  setComIsFetching(false)} ,3000)
+
         console.log('Profile updated successfully');
       } else {
         console.error('Failed to update profile');
@@ -86,72 +100,55 @@ const VendorForm = ({ setEdit }) => {
     catch (error) {
       console.error('Error updating profile:', error);
     }
-    setEdit(false)
 
   };
 
-  const childrenOnChange = ( id,value)=>{
-    setState(prevState => ({
-      ...prevState,
-     [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value },
 
-  }));
-  }
-
-
-
-  if (isLoading){
-    return <MongoSpinner propsname={STATE_KEY}/>
+  if (status==="loading" || isLoading || ConIsFetching  ){
+    return <LoadingSpinner />
   }
 
  return (
       <form 
-         style={Style.FormStyle}
+         style={Style.Wrapper}
          onSubmit={handleSubmit}
          >
-        <h2 style={Style.headelinStyle}>{`שלום ${session?.user?.name}`}</h2>
         <h3 style={Style.headelinStyle}>{`הרשם כנותן שירות משק`}</h3>
 
 
-      <label>שם
-           <input
-          type="text"
-          id="BussniseName"
-          value={state[STATE_KEY].BussniseName }
-          onChange={handleChange}
-          style={Style.InputStyle}
-        />
-       </label>
+        <Field  label="שם" required helperText="שם שיופיע במערכת  " >
+           <Input  
+                variant={"subtle"}
+                 required
+                 value={state[STATE_KEY].BussniseName} 
+                 id="BussniseName"
+                 onChange={handleChange}  
 
+                 />
+        </Field>
 
-       <label>מחיר לשעת עבודה 
-        <input
-          type="number"
-          id="price"
-          value={state[STATE_KEY].price }
-          onChange={handleChange}
-          min="0.00"
-          max="300.00"
-          required
-          style={Style.InputStyle}
+        <Field label="מחיר   " required helperText=" מחיר לעשת עבודה" >
+           <Input variant={"subtle"}  type="number" required  onChange={handleChange} id="price"  />
+        </Field>
 
-        />
-       </label>    
+        <Field  label="טלפון " required helperText=" יוצג ללקוח רק לאחר הסכמה  " >
+           <Input variant={"subtle"}  type="number" required  onChange={handleChange} id="phone"  />
+        </Field>
 
-        <TextArea
-          id={"description"}
+        <Field label="תיאור ">
+        <Textarea
+           id={"description"}
           text={"תיאור"}
-          value={state[STATE_KEY].description}
-          PropsOnChange={childrenOnChange}
+          onChange={handleChange}
           placeholder={descriptionPlaceholder}
-          resize={false}
-          StyleTextArea={{...Style.InputStyle, resize:"nonc" }}
-
+          resize="none"
+           variant={"subtle"}
+           rows={3}
         />
+        </Field>
 
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
          <LazyMotion features={f}>
-          <m.button
+            <m.button
             type="submit"
             style={{
               height: "60px",
@@ -172,7 +169,7 @@ const VendorForm = ({ setEdit }) => {
           הרשמה
             </m.button>
           </LazyMotion>
-        </div>
+
       </form>
 
   );

@@ -38,8 +38,8 @@ const VendorWrapper=()=>{
                          }
                      setEdit={setEdit}
                      STATE_KEY={STATE_KEY}
-                     BussniseName={user[STATE_KEY].BussniseName}
-                     price={user[STATE_KEY].price}
+                     BussniseName={user?.[STATE_KEY]?.BussniseName}
+                     price={user?.[STATE_KEY]?.price}
                      description={user?.STATE_KEY?.description}
                      isVendor={user?.STATE_KEY?.isVendor}
                    />

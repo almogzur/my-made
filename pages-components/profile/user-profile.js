@@ -1,8 +1,8 @@
 import React from 'react';
-import ProfileCard from '../../pages-components/new-profile/profile-card'
-import ContactInfo from '../../pages-components/new-profile/content-info';
-import SocialLinks from '../../pages-components/new-profile/social-link';
-import ProjectStatus from '../../pages-components/new-profile/project-status';
+import ProfileCard from '../../pages-components/profile/profile-card'
+import ContactInfo from '../../pages-components/profile/content-info';
+import SocialLinks from '../../pages-components/profile/social-link';
+import ProjectStatus from '../../pages-components/profile/project-status';
 import Colors from '../../lib/colors';
 
 const UserProfile = () => {
@@ -14,7 +14,7 @@ const UserProfile = () => {
       gap: '20px',
       padding: '20px',
       backgroundColor: '#F0F2F5',      
-      background:Colors.d
+      background:Colors.d,
 
     },
     child: {

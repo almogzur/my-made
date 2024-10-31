@@ -2,14 +2,13 @@
 import { WindowWidthContaxt } from '../../context'
 import React, { useContext, useEffect } from 'react';
 import Menu from "./menu"
-import SideBard from './side-bar'
-
+import MobNav from './mob-nav';
  
 const HomePageNavigation = () => {
 
     const {  large, medium ,small } = useContext(WindowWidthContaxt);
 
-    return  large? <Menu/> : <SideBard/> 
+    return  large? <Menu/> : <MobNav/> 
 };
 
 

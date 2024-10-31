@@ -1,6 +1,6 @@
-import clientPromise from '../../../lib/db';
+import clientPromise from '../../lib/db';
 import { getServerSession } from "next-auth/next";
-import { authOptions } from '../auth/[...nextauth]'
+import { authOptions } from '../api/auth/[...nextauth]'
 
 const handler = async (req, res) => {
   const API_NAME = "UPDATE USER VENDOR INFO ";
@@ -24,7 +24,7 @@ const handler = async (req, res) => {
   const userEmail = session.user.email;
   const database = client.db('my-made');
   const users = database.collection('users');
-  const { BussniseName, price, description } = req.body;
+  const { BussniseName, price, description ,phone } = req.body;
 
   try {
     // Find the user by their email and update their vendor information
@@ -34,6 +34,7 @@ const handler = async (req, res) => {
         "Vendor.BussniseName": BussniseName,
         "Vendor.price": price,
         "Vendor.description": description,
+        "Vendor.phone":phone,
         'Vendor.isVendor': true // on saving to db 
       }
     };

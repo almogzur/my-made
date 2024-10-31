@@ -1,6 +1,3 @@
-
-
-
 const SocialLinks = () => {
     const links = [
       { platform: 'Website', url: 'https://bootdey.com', icon: '🌐' },

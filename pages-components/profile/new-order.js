@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StateContext } from '../../context.js';
-import Calinder from '../../components/calendar/cal';
+import Calinder from '../../components/calendar/cal.js';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import TextArea from '../../components/text-area/t-area.js';
 import Colors from '../../lib/colors.js';
 import { m, LazyMotion } from 'framer-motion';
 import f from "../../lib/features.js";
 import MongoSpinner from '../../components/mongo-spinner/mongo-spinner.js';
 import useUser from '../../lib/hooks/useUser.js';
 import RegionSelect from '../../components/select-city/select.js';
-
+import { Textarea  } from '@chakra-ui/react';
+import { Field } from "../../components/ui/field"
 const STATE_KEY = "Order";
 
  const Style = {
@@ -43,13 +43,7 @@ const STATE_KEY = "Order";
   
  }
 
-
-
- // all the inpute are uncontrolled  no value is provided 
-
-
-
-const NewOrder = ({ orderId=null, newOrder=null }) => {
+const NewOrder = ({ orderId, newOrder }) => {
 
   const { data: session, status } = useSession();
   const [ state, setState ] = useContext(StateContext);
@@ -138,15 +132,7 @@ const NewOrder = ({ orderId=null, newOrder=null }) => {
       console.error('Failed to update order', error);
     }
   };  
-  const childrenOnChange = (id, value) => {
-      console.log(id,value, "changed");
-      
 
-    setState(prevState => ({
-      ...prevState,
-      [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value }
-    }));
-  };
 
   if (isLoading || status === "loading") {
     return <MongoSpinner propsname={STATE_KEY} />;
@@ -187,21 +173,15 @@ const NewOrder = ({ orderId=null, newOrder=null }) => {
         text="תאירך ושעה"
         id="ResurveDate"
         STATE_KEY={STATE_KEY}
-        PropsOnChange={childrenOnChange}
       />
 
-      <TextArea
-        labelText="תיאור"
-        id="JobDescription"
-        PropsOnChange={childrenOnChange}
-        placeholder="תיאור העבודה בקצרה"
-    
-        
-      />
+ 
+        <Field label="תיאור הבקשה בהרכבה " >
+          <Textarea variant={"subtle"} value={state[STATE_KEY].JobDescription} id='JobDescription'  onChange={handleChange} />
+        </Field>
 
       <RegionSelect
            propsId={"city"}
-           PropsOnChange={childrenOnChange}
            PropsPlaceholder={"אזור מגורים"}
       />
 

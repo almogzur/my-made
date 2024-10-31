@@ -1,18 +1,15 @@
 
 import { useSession } from 'next-auth/react'
-import {useEffect,useState, useContext} from 'react'
+import {useState, useContext} from 'react'
 import { StateContext } from '../../context'
-
-import VendorDisplay from '../../pages-components/verndor/vendor-display'
-import VendorForm from '../verndor/vender-form'
-
-import Link from "next/link";
+import VendorDisplay from './vendor-display'
+import VendorForm from './vender-form'
 import useUser from '../../lib/hooks/useUser'
 
 import LoadingSpinner from '../../components/my-spinner/loading-spinner'
 
 
-const ContactInfo = () => {
+const VendorInfo = () => {
 
   const STATE_KEY = "Vendor";
   // Data
@@ -41,6 +38,6 @@ const ContactInfo = () => {
   
 
   
-  export default ContactInfo;
+  export default VendorInfo;
   
 

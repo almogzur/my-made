@@ -24,7 +24,7 @@ const VendorForm = ({ setEdit }) => {
   const { data: session, status } = useSession();
   const { user , isLoading , isError } = useUser(session?.user?.email)
   const [ state, setState ] = useContext(StateContext);
-  const [ConIsFetching , setComIsFetching] = useState(false)
+  const [IsFetching , setIsFetching] = useState(false)
 
 
     const Style = {
@@ -80,8 +80,9 @@ const VendorForm = ({ setEdit }) => {
  //  e.preventDefault()
    // setEdit(true)
     try {
-      setComIsFetching(true)
+      setIsFetching(true)
       e.preventDefault()
+     
       const response = await fetch('/api/vendor', {
         method: 'POST',
         headers: {
@@ -89,11 +90,13 @@ const VendorForm = ({ setEdit }) => {
         },
         body: JSON.stringify(state[STATE_KEY])
       });
+
       if (response.ok) {
-        setTimeout(()=>{  setComIsFetching(false)} ,3000)
+        setTimeout(()=>{  setIsFetching(false)} ,3000)
 
         console.log('Profile updated successfully');
-      } else {
+      } 
+      else {
         console.error('Failed to update profile');
       }
     } 
@@ -104,7 +107,7 @@ const VendorForm = ({ setEdit }) => {
   };
 
 
-  if (status==="loading" || isLoading || ConIsFetching  ){
+  if (status==="loading" || isLoading || IsFetching  ){
     return <LoadingSpinner />
   }
 

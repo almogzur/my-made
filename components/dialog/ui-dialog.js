@@ -12,15 +12,12 @@ import f from '../../lib/features'
   let overlayRef = null;
   let contentRef = null;  
 
-const Dialog = ({
-  children,
-  CloseDialogButtonStyle,
-  wrapperStyle, 
-  buttonText,
-  Icon
-}) => {
-  const [showModal, setShowModal] = useState(false);
-  const handleModal = () => {  setShowModal(!showModal); }
+const Dialog = ({children,CloseDialogButtonStyle,wrapperStyle, buttonText,Icon}) =>
+   {
+     const [showModal, setShowModal] = useState(false)
+      const handleModal = () => {  setShowModal(!showModal) }
+
+
   const scroolDown = ()=>{
 
 
@@ -38,7 +35,7 @@ const Dialog = ({
   
   return (
     <div
-      style={wrapperStyle ? wrapperStyle : null}
+      style={wrapperStyle ?? null }
     >
   
       <m.button
@@ -51,7 +48,7 @@ const Dialog = ({
           style={CloseDialogButtonStyle ? CloseDialogButtonStyle : null}
           onClick={handleModal}
       >  
-           {   Icon? Icon: <strong> {buttonText}</strong>}
+           { Icon? Icon: <strong> {buttonText}</strong>}
       </m.button>
       
 

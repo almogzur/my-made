@@ -5,7 +5,7 @@ import Colors from '../../lib/colors';
 import { useRouter } from 'next/router';
 
 
-const styles = {
+const Style = {
   wrapper: {
     padding: '30px',
     backgroundColor: '#FFF',
@@ -20,7 +20,11 @@ const styles = {
     fontSize: '2rem',
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: '20px',
+ 
+  },
+  subheadline:{
+    textAlign:"center",
+    fontSize:"8xp"
   },
   itemWrapper: {
     display: 'flex',
@@ -75,44 +79,45 @@ const ProfileDetails = ({ user, setEdit,  }) => {
   const router = useRouter()
 
   return (
-    <div style={styles.wrapper}>
-      <h3 style={styles.headline}>נרשמתם בהצלחה</h3>
+    <div style={Style.wrapper}>
+      <h3 style={Style.headline}>  נרשמתם בהצלחה </h3>
+      <p style={Style.subheadline} > ניתן לראות הזמנות בלוח העבודת  </p>
 
-      <div style={styles.itemWrapper}>
-        <div style={styles.itemDisplay}>
-          <div style={styles.label}>שם</div>
-          <h1 style={styles.infoText}>{user.BussniseName}</h1>
+      <div style={Style.itemWrapper}>
+        <div style={Style.itemDisplay}>
+          <div style={Style.label}>שם</div>
+          <h1 style={Style.infoText}>{user.BussniseName}</h1>
         </div>
 
-        <div style={styles.itemDisplay}>
-          <div style={styles.label}>טלפון</div>
-          <div style={styles.infoText}>{user.phone ?? "לא זמין"}</div>
+        <div style={Style.itemDisplay}>
+          <div style={Style.label}>טלפון</div>
+          <div style={Style.infoText}>{user.phone ?? "לא זמין"}</div>
         </div>
 
-        <div style={styles.itemDisplay}>
-          <div style={styles.label}>מחיר לשעה</div>
-          <div style={styles.infoText}>{user.price}</div>
+        <div style={Style.itemDisplay}>
+          <div style={Style.label}>מחיר לשעה</div>
+          <div style={Style.infoText}>{user.price}</div>
         </div>
 
-        <div style={styles.itemDisplay}>
-          <div style={styles.label}>זמין</div>
-          <h1 style={styles.infoText}>{user.isVendor ? 'כן' : 'לא'}</h1>
+        <div style={Style.itemDisplay}>
+          <div style={Style.label}>זמין</div>
+          <h1 style={Style.infoText}>{user.isVendor ? 'כן' : 'לא'}</h1>
         </div>
         
       </div>
 
-      <div style={styles.itemDisplayWide}>
-        <div style={styles.label}>תיאור</div>
-        <div style={styles.infoText}>{user.description}</div>
+      <div style={Style.itemDisplayWide}>
+        <div style={Style.label}>תיאור</div>
+        <div style={Style.infoText}>{user.description}</div>
       </div>
 
-      <div style={styles.btnWrapper}>
-        <button style={styles.btn} onClick={() => setEdit(true)}>
+      <div style={Style.btnWrapper}>
+        <button style={Style.btn} onClick={() => setEdit(true)}>
           <MdEdit size={"24px"} color={Colors.c} /> ערוך פרטים
         </button>
 
         {user?.isVendor && (
-          <button style={styles.btn} onClick={() => router.push('/board')}>
+          <button style={Style.btn} onClick={() => router.push('/board')}>
             <FaRegClipboard size={"24px"} color={Colors.c} /> לוח עבודות
           </button>
         )}

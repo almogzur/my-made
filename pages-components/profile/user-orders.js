@@ -47,7 +47,6 @@ import f from '../../lib/features'
    headlineCell:{
     padding: !md ? "4px" : "16px",
     background:"#fff",
-    color:"black",
     borderBottom: "1px solid #ddd",
     height:"60px",
      background:"gray",
@@ -91,13 +90,12 @@ import f from '../../lib/features'
 
    },
    expendedOrderBtnWrap:{
-    height:"100px",
     display:'flex',
     flexDirection:'row',
     flexWrap:"wrap",
     justifyContent:"space-evenly",
     maxWidth:"600px",
-    borderTop:"dotted"
+    borderTop:"dotted",
    },
    orderDetails:{
     display:'flex',
@@ -168,10 +166,10 @@ import f from '../../lib/features'
                   
                          <motion.div 
                            style={Style.orderDetails}
-                           initial={{ opacity: 0, height:0 }}
-                           animate={{ opacity: 1,  type:"ease", height:"auto" }}
-                           exit={{ opacity:0   ,height:0 , type:"spring" }}
-                           transition={{ duration: 1 , type:"spring"}}
+                           initial={{ opacity: 0, height:0 ,x:500 }}
+                           animate={{ opacity: 1,  type:"ease", height:"auto" , background:"lightgray" , x:0 }}
+                           exit={{ opacity:0  , x:600  ,height:0,   type:"spring" ,  }}
+                           transition={{ duration: 2 , type:"spring"}}
                          
                   
                          >
@@ -183,7 +181,7 @@ import f from '../../lib/features'
                          <strong style={Style.detail} >כתובת : {order.addres || "N/A"}  </strong> 
                          <strong style={Style.detail}> מספר חדרים  :  {order.ApartmentRoomsNumber || "N/A"} </strong>
                          <strong style={Style.detail} > מספר מקלחות :   {order.NumberOfBaths || "N/A"}</strong>
-                         <strong style={Style.detail} > תיאור :</strong> {order.JobDescription || "N/A"}
+                         <strong style={Style.detail} > תיאור : {order.JobDescription || "N/A"} </strong> 
                          <strong style={Style.detail}  >סטטוס הזמנה :{order.orderStatus || "N/A"}</strong> 
                          <strong style={Style.detail} >מזהה הזמנה : {order.orderId.slice(0,17) + " ... " || "N/A"} </strong> 
                          <strong style={Style.detail} > גודל הדירה במטרים : { order.ApartmentSize || "N/A"} </strong> 
@@ -194,6 +192,7 @@ import f from '../../lib/features'
                          <strong style={{...Style.detail ,color:"#d9534f"}} > מחיר לשעה : {order.orderPrice || "N/A"}</strong> 
                     
                           <div style={Style.expendedOrderBtnWrap}>
+
                          <button 
                            onClick={() => handleRemoveOrder(order.orderId)} 
                            disabled={isRemoving}
@@ -204,7 +203,9 @@ import f from '../../lib/features'
                          <UiDialog buttonStyle={Style.button} buttonText="ערוך הזמנה">
                            <NewOrder orderId={order.orderId} />
                          </UiDialog>
+
                         </div>
+                        
                         </motion.div>
                         </motion.td>
               

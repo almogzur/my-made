@@ -1,23 +1,10 @@
 const ProjectStatus = () => {
-    const projects = [
-      { name: 'Web Design', progress: 80 },
-      { name: 'Website Markup', progress: 60 },
-      { name: 'One Page', progress: 90 },
-      { name: 'Mobile Template', progress: 50 },
-      { name: 'Backend API', progress: 70 },
-    ];
+
   
     return (
       <div style={styles.card}>
-        <h3 style={styles.title}>Project Status</h3>
-        {projects.map((project, index) => (
-          <div key={index} style={styles.project}>
-            <span>{project.name}</span>
-            <div style={styles.progressBar}>
-              <div style={{ ...styles.progress, width: `${project.progress}%` }}></div>
-            </div>
-          </div>
-        ))}
+        <h3 style={styles.title}>הזמנות ישנות</h3>
+ 
       </div>
     );
   };

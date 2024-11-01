@@ -6,28 +6,20 @@ import { useRouter } from 'next/router';
 import Colors from '../../lib/colors.js';
 import { m, LazyMotion } from 'framer-motion';
 import f from "../../lib/features.js";
-import MongoSpinner from '../../components/mongo-spinner/mongo-spinner.js';
 import useUser from '../../lib/hooks/useUser.js';
 import RegionSelect from '../../components/select-city/select.js';
-import { Textarea  } from '@chakra-ui/react';
+import { Textarea ,Input } from '@chakra-ui/react';
 import { Field } from "../../components/ui/field"
+import LoadingSpinner from '../../components/my-spinner/loading-spinner.js';
 const STATE_KEY = "Order";
 
  const Style = {
    Wrapper:{
-    boxSizing:"none",
     margin:"0px",
     padding:"0px",
-    width:"100%"
+    
    },
-   InputStyle : {
-    width: "96%",
-    padding: "10px",
-    marginTop: "10px",
-    marginBottom: "10px",
-    fontWeight: "bold"
-  
-  },
+ 
    SubmitStyle : {
     height: "60px",
     width: '150px',
@@ -135,7 +127,7 @@ const NewOrder = ({ orderId, newOrder }) => {
 
 
   if (isLoading || status === "loading") {
-    return <MongoSpinner propsname={STATE_KEY} />;
+    return <LoadingSpinner />;
   }
 
   return (
@@ -177,7 +169,7 @@ const NewOrder = ({ orderId, newOrder }) => {
 
  
         <Field label="תיאור הבקשה בהרכבה " >
-          <Textarea variant={"subtle"} value={state[STATE_KEY].JobDescription} id='JobDescription'  onChange={handleChange} />
+          <Textarea resize={"none"} variant={"subtle"} value={state[STATE_KEY].JobDescription} id='JobDescription'  onChange={handleChange} />
         </Field>
 
       <RegionSelect
@@ -185,28 +177,16 @@ const NewOrder = ({ orderId, newOrder }) => {
            PropsPlaceholder={"אזור מגורים"}
       />
 
-      <label><strong>כתובת</strong>
-        <input
-          type="text"
-          id="addres"
-          name='addres'
-        
-          onChange={handleChange}
-          style={Style.InputStyle}
-          required
-        />
-      </label>
+    
 
-      <label><strong>מספר חדרים</strong>
-        <input
-          name='ApartmentRoomsNumber'
-          type="number"
-          id="ApartmentRoomsNumber"
-          required
-          onChange={handleChange}
-          style={Style.InputStyle}
-        />
-      </label>
+      <Field label="כתובת" >
+         <Input type='text' variant={"subtle"} id='addres'  onChange={handleChange} required  width={"100%"}/>
+      </Field>
+
+
+      <Field label="מספר חדרים " >
+        <Input   required    type='number'   width={"100%"}     onChange={handleChange}  id="ApartmentRoomsNumber"/>
+      </Field>
 
       <label><strong>מספר מקלחות</strong>
         <input

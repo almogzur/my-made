@@ -3,6 +3,7 @@ import { MdEdit } from 'react-icons/md';
 import { FaRegClipboard } from 'react-icons/fa';
 import Colors from '../../lib/colors';
 import { useRouter } from 'next/router';
+import { color } from 'framer-motion';
 
 
 const Style = {
@@ -10,21 +11,22 @@ const Style = {
     padding: '30px',
     backgroundColor: '#FFF',
 
-    fontFamily: "'Times New Roman', serif",
 
     margin: '0 auto',
-    borderRadius: '8px',
     boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
   },
   headline: {
     fontSize: '2rem',
     fontWeight: 'bold',
     textAlign: 'center',
+    color:Colors.c
  
   },
   subheadline:{
     textAlign:"center",
-    fontSize:"8xp"
+    fontSize:"8xp",
+    color:Colors.c,
+    marginBottom:"20px",
   },
   itemWrapper: {
     display: 'flex',
@@ -32,13 +34,13 @@ const Style = {
     gap: '15px',
     marginBottom: '20px',
   },
-  itemDisplay: {
+  item: {
     display: 'flex',
     justifyContent: 'space-between',
     borderBottom: '1px dotted #c2b5a9',
     paddingBottom: '8px',
   },
-  itemDisplayWide: {
+  itemWide: {
     display: 'flex',
     flexDirection: 'column',
     paddingTop: '15px',
@@ -81,32 +83,32 @@ const ProfileDetails = ({ user, setEdit,  }) => {
   return (
     <div style={Style.wrapper}>
       <h3 style={Style.headline}>  נרשמתם בהצלחה </h3>
-      <p style={Style.subheadline} > ניתן לראות הזמנות בלוח העבודת  </p>
+      <p style={Style.subheadline} > ניתן לראות הזמנות בלוח עבודות  </p>
 
       <div style={Style.itemWrapper}>
-        <div style={Style.itemDisplay}>
+        <div style={Style.item}>
           <div style={Style.label}>שם</div>
           <h1 style={Style.infoText}>{user.BussniseName}</h1>
         </div>
 
-        <div style={Style.itemDisplay}>
+        <div style={Style.item}>
           <div style={Style.label}>טלפון</div>
           <div style={Style.infoText}>{user.phone ?? "לא זמין"}</div>
         </div>
 
-        <div style={Style.itemDisplay}>
+        <div style={Style.item}>
           <div style={Style.label}>מחיר לשעה</div>
           <div style={Style.infoText}>{user.price}</div>
         </div>
 
-        <div style={Style.itemDisplay}>
+        <div style={Style.item}>
           <div style={Style.label}>זמין</div>
           <h1 style={Style.infoText}>{user.isVendor ? 'כן' : 'לא'}</h1>
         </div>
         
       </div>
 
-      <div style={Style.itemDisplayWide}>
+      <div style={Style.itemWide}>
         <div style={Style.label}>תיאור</div>
         <div style={Style.infoText}>{user.description}</div>
       </div>
@@ -122,6 +124,7 @@ const ProfileDetails = ({ user, setEdit,  }) => {
           </button>
         )}
       </div>
+      
     </div>
   );
 };

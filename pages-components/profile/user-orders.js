@@ -4,57 +4,90 @@ import useUser from '../../lib/hooks/useUser';
 import Colors from '../../lib/colors';
 import UiDialog from '../../components/dialog/ui-dialog';
 import NewOrder from './new-order';
-import { StateContext } from '../../context';
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
+import { WindowWidthContaxt } from '../../context';
+import { IoMdAddCircle } from "react-icons/io";
+import { color } from 'framer-motion';
 
-const Style = {
-  Wrapper: {
-    padding: "20px",
-    borderRadius: "8px",
-    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
-    backgroundColor: "#f9f9f9",
-  },
-  table: {
-    width: "100%",
-    borderCollapse: "collapse",
-  },
-  tableHead: {
-    background: "#333",
-    color: "#fff",
-    textAlign: "right",
-  },
-  tableBody: {
-    background: "#fff",
-  },
-  tableRow: {
-    borderBottom: "1px solid #ddd",
-    height: "50px",
-  },
-  cell: {
-    padding: "12px",
-    fontSize: "16px",
-  },
-  expandedRow: {
-    backgroundColor: "#f3f3f3",
-    color: "#333",
-  },
-  button: {
-    color: "#fff",
-    background: "#6c757d",
-    padding: "8px 16px",
-    fontSize: "14px",
-    borderRadius: "4px",
-    border: "none",
-    cursor: "pointer",
-    transition: "background 0.3s ease",
-  },
-};
 
 const UserOrders = () => {
   const { data: session, status, update } = useSession();
   const { user, isLoading, userEroor } = useUser(session?.user?.email);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [isRemoving, setIsRemoving] = useState(false);
+   const {xl , lg , md , sm} =  useContext(WindowWidthContaxt)
+
+  const Style = {
+    Wrapper: {
+     display:"flex",
+     flexDirection:"column",
+     backgroundColor: "#f9f9f9",
+   },
+   headline:{
+    display:'flex',
+    justifyContent:'center',
+    alignItems:'center',
+    padding:"20px",
+    fontSize:"1.5em",
+    color:Colors.c,
+    fontWeight: 'bold',
+
+   },
+    table: {
+     borderCollapse: "collapse",
+   },
+
+    tableBody: {
+     background: "#fff",
+   },
+    tableRow: {
+     borderBottom: "1px solid #ddd",
+     height: "50px",
+   },
+   headlineCell:{
+    padding: !md ? "4px" : "16px",
+    background:"#fff",
+    color:"black",
+    borderBottom: "1px solid #ddd",
+    height:"60px",
+     background:"gray",
+  },
+    cell: {
+     padding: !md ? "4px" : "16px",
+     fontSize:  "16px",
+     background:"#fff",
+     color:"black",
+     borderBottom: "1px solid #ddd",
+ 
+ 
+   },
+    expandedRow: {
+     backgroundColor: "#f3f3f3",
+     color: "#333",
+   },
+    button: {
+     color: "#fff",
+     background: "#6c757d",
+     padding: "8px 16px",
+     fontSize: "14px",
+     borderRadius: "4px",
+     border: "none",
+     cursor: "pointer",
+     width:"150px",
+     height:"60px",   
+     
+   },
+   newOrderWrap:{
+     display:'flex',
+     flexDirection:"row",
+     justifyContent:'center',
+     alignItems:'center',
+
+     margin:"15px",
+
+
+   }
+ }
 
   if (status === 'loading' || isLoading || isRemoving) {
     return <LoadingSpinner />;
@@ -85,23 +118,20 @@ const UserOrders = () => {
   };
 
   return (
-    <>
-      {user?.Orders ? (
         <div style={Style.Wrapper}>
-          <h3 style={{ textAlign: "center", color: "#444" }}>Open Orders</h3>
-
-          <table style={Style.table}>
-            <thead style={Style.tableHead}>
+              <h1 style={Style.headline}> הזמנות </h1>
+            <table style={Style.table}>
+            <thead >
               <tr>
-                <th style={Style.cell}>#</th>
-                <th style={Style.cell}>טלפון</th>
-                <th style={Style.cell}>כתובת</th>
-                <th style={Style.cell}>תאריך ושעה </th>
+                <th style={Style.headlineCell}>הזמנה</th>
+                <th style={Style.headlineCell}>טלפון</th>
+                <th style={Style.headlineCell}>כתובת</th>
+                <th style={Style.headlineCell}>תאריך ושעה </th>
               </tr>
             </thead>
 
             <tbody style={Style.tableBody}>
-              {user.Orders.map((order, index) => (
+              {user?.Orders?.map((order, index) => (
                 <Fragment key={order.orderId}>
                   <tr 
                     style={{ ...Style.tableRow, backgroundColor: expandedOrder === index ? "#f7f7f7" : "#fff" }} 
@@ -110,8 +140,8 @@ const UserOrders = () => {
                     <td style={Style.cell}>{index + 1}</td>
                     <td style={Style.cell}>{order.orderPhone}</td>
                     <td style={Style.cell}>{order.addres}</td>
-                    <strong ></strong> {new Date(order.ResurveDate).toLocaleString('he-IL') || "N/A"}<br/> {/* Reservation date */}
-                    </tr>
+                    <td style={Style.cell}>{new Date(order.ResurveDate).toLocaleString('he-IL') || "N/A"}</td>
+                  </tr>
 
                   {expandedOrder === index && (
                     <tr style={Style.expandedRow}>
@@ -136,12 +166,40 @@ const UserOrders = () => {
                 </Fragment>
               ))}
             </tbody>
-          </table>
+            </table>
+
+            <div style={Style.newOrderWrap} > 
+               
+               <UiDialog 
+                 buttonText={"הזמנה חדשה "}
+                 buttonStyle={{
+                  display:'flex',
+                   justifyContent:'space-evenly',
+                   alignItems:'center',
+                   width:"150px",
+                    height:"60px",   
+                    backgroundColor: Colors.d,
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    fontSize: '1rem',
+                    fontWeight: 'bold',
+                    
+
+                }}
+
+               Icon={<IoMdAddCircle  size="2em" color={Colors.c} /> 
+               } >
+                   <NewOrder newOrder={true}/>  
+               </UiDialog> 
+               
+            </div>
         </div>
-      ) : (
-        <DemoList />
-      )}
-    </>
+      
+
+       
+    
   );
 };
 

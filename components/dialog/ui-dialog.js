@@ -12,7 +12,7 @@ import f from '../../lib/features'
   let overlayRef = null;
   let contentRef = null;  
 
-const Dialog = ({children,CloseDialogButtonStyle,wrapperStyle, buttonText,Icon}) =>
+const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
    {
      const [showModal, setShowModal] = useState(false)
       const handleModal = () => {  setShowModal(!showModal) }
@@ -34,9 +34,7 @@ const Dialog = ({children,CloseDialogButtonStyle,wrapperStyle, buttonText,Icon})
   }
   
   return (
-    <div
-      style={wrapperStyle ?? null }
-    >
+    < >
   
       <m.button
           transition={{duration:0.5, stiffness:50}}
@@ -45,10 +43,10 @@ const Dialog = ({children,CloseDialogButtonStyle,wrapperStyle, buttonText,Icon})
              scale:1.1
            }}
 
-          style={CloseDialogButtonStyle ? CloseDialogButtonStyle : null}
+          style={buttonStyle?? null}
           onClick={handleModal}
       >  
-           { Icon? Icon: <strong> {buttonText}</strong>}
+           { [Icon, <strong> {buttonText}</strong>]}
       </m.button>
       
 
@@ -65,17 +63,17 @@ const Dialog = ({children,CloseDialogButtonStyle,wrapperStyle, buttonText,Icon})
             bottom: '1em',
             borderRadius: "2px",
             overflowX:"hidden",
-            background:` linear-gradient(320deg, ${Colors.c} 11%, #fff 100%)`
+            background:Colors.d
           },
           overlay: {
             position: 'fixed',
-            top: "3em",
+            top: "0.5em",
             left: "0.5em",
             right: "0.5em",
-            bottom: "60px",
+            bottom: "0.5em",
             borderRadius:"8px",
             overflowX:"hidden",
-            background:Colors.c        
+            background:"#fff"      
               }
         }}
         overlayRef={(node) => overlayRef = node}
@@ -131,7 +129,7 @@ const Dialog = ({children,CloseDialogButtonStyle,wrapperStyle, buttonText,Icon})
         </m.button>
         </LazyMotion>
       </ReactModal>
-    </div>
+    </>
   );
 }
 

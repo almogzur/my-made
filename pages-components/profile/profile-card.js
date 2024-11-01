@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import profileDefualtIcon from '../../public/User.jpg'
-import { use } from "react";
-
+import Colors from "../../lib/colors";
 
 
 const Style = {
@@ -12,47 +11,30 @@ const Style = {
     display:'flex',
     flexDirection:'column',
     alignItems:'center',
-
-
+    fontWeight: 'bold',
   },
   avatar: {
-    width: '80px',
-    borderRadius: '0%',
-
+    width: '130px',
+    border:` dotted 3px ${Colors.c} `,
+    padding:"10px",
+    borderRadius:"6px"
   },
   name: {
     fontSize: '18px',
     fontWeight: 'bold',
-  },
-  title: {
-    color: 'gray',
-  },
+    
+    color: Colors.c,
+    
+    },
+  title: { },
   location: {
-    color: 'gray',
-    fontSize: '14px',
+    fontSize: '16px',
+    padding:"10px"
+
   },
-  buttonGroup: {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '10px',
-    marginTop: '10px',
-  },
-  followButton: {
-    backgroundColor: '#007bff',
-    color: 'white',
-    padding: '5px 10px',
-    borderRadius: '4px',
-    border: 'none',
-    cursor: 'pointer',
-  },
-  messageButton: {
-    backgroundColor: 'white',
-    color: '#007bff',
-    padding: '5px 10px',
-    borderRadius: '4px',
-    border: '1px solid #007bff',
-    cursor: 'pointer',
-  },
+
+  
+  
 };
 
 
@@ -63,17 +45,10 @@ const ProfileCard = () => {
 
     return (
       <div style={Style.card}>
-         <Image style={Style.avatar} width={50} height={50} src={session?.user.image || profileDefualtIcon} alt="" / >
-
+         <Image style={Style.avatar} width={50} height={50} src={session?.user.image || profileDefualtIcon} alt="" />
           <h2 style={Style.name}>{session?.user?.name ?? "אלמוני" }</h2>
-
           <p style={Style.title}>{session?.user?.email.toUpperCase() }</p>
           <p style={Style.location}>אימייל מאושר : {session?.user?.emailVerified ? "כן" :" לא"}</p>
-            <div style={Style.buttonGroup}>
-
-           </div>
-
-
       </div>
     );
   };

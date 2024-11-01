@@ -6,6 +6,8 @@ import { m, LazyMotion } from 'framer-motion';
 import f from '../../lib/features';
 import useUser from '../../lib/hooks/useUser'
 import LoadingSpinner from "../../components/my-spinner/loading-spinner";
+
+import { FaPenFancy } from "react-icons/fa";
 import { Input,Textarea } from "@chakra-ui/react"
 import { Field } from "../../components/ui/field"
 
@@ -30,7 +32,12 @@ const VendorForm = ({ setEdit }) => {
     const Style = {
         Wrapper:  {   
            background:"#fff",
-           padding:"20px"
+           padding:"20px",
+           display:'flex',
+           flexDirection:'column',
+           justifyContent:'center',
+           alignItems:'center',
+           alignContent:'center',
          },    
        headelinStyle : { 
            textAlign:"center",
@@ -152,24 +159,34 @@ const VendorForm = ({ setEdit }) => {
 
          <LazyMotion features={f}>
             <m.button
+            initial={{ x: '100px', opacity: 0 }}
+            animate = {{ x: 0, opacity: 1} }
+            transition={{ duration: 2, ease: 'easeInOut' }}
+
             type="submit"
             style={{
-              height: "60px",
-              width: '150px',
-              border: "1px solid",
-              borderRadius: "3px",
-              background: "#fff",
-              fontSize: "20px",
-              cursor: "pointer",
-              textAlign: "center",
-              color: Colors.text,
-              boxShadow: `3px 3px 3px 3px ${Colors.d}`,
+               display:'flex',
+               justifyContent:'space-evenly',
+               alignItems:'center',
+                width:"150px",
+                height:"60px",   
+   
+                    backgroundColor: Colors.d,
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    fontSize: '1rem',
+                    fontWeight: 'bold',
+                    margin:"15px",
             }}
             whileHover={{
               boxShadow: `3px 3px 3px inset`,
             }}
+            
           >
-          הרשמה
+          <FaPenFancy size={"1.5em"}  color={Colors.c}/>{"הרשמה"}
+          
             </m.button>
           </LazyMotion>
 

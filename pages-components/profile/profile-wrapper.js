@@ -3,7 +3,7 @@ import ProfileCard from './profile-card'
 import VendorInfo from './vendor-info';
 import ProjectStatus from './project-status';
 import Colors from '../../lib/colors';
-import OrdersWrpper from './orders-wrapper'
+import UserOrders from './user-orders'
 const UserProfile = () => {
   const Style = {
     wrapper: {
@@ -25,7 +25,7 @@ const UserProfile = () => {
   return (
     <div style={Style.wrapper}>
       <div style={Style.child}><ProfileCard /></div>
-      <div style={Style.child}><OrdersWrpper /></div>
+      <div style={Style.child}><UserOrders /></div>
       <div style={Style.child}><VendorInfo /></div>
       <div style={Style.child}><ProjectStatus /></div>
     </div>

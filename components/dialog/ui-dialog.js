@@ -51,7 +51,7 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
       
 
       <ReactModal
-        ariaHideApp={false}
+         ariaHideApp={false}
         isOpen={showModal}
         onRequestClose={handleModal}
         style={{
@@ -63,7 +63,7 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
             bottom: '1em',
             borderRadius: "2px",
             overflowX:"hidden",
-            background:Colors.d
+            background:"#fff"      
           },
           overlay: {
             position: 'fixed',
@@ -73,14 +73,15 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
             bottom: "0.5em",
             borderRadius:"8px",
             overflowX:"hidden",
-            background:"#fff"      
+            background:Colors.d
               }
         }}
         overlayRef={(node) => overlayRef = node}
-        contentRef={(node) => contentRef = node}        
+         contentRef={(node) => contentRef = node}        
         >
     
         {children}
+
         <LazyMotion features={f}>
         
           <m.button
@@ -90,7 +91,7 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
               position: "absolute",
               top: "15px",
               left: "15px",
-              background:Colors.a,
+              background:Colors.c,
               color:Colors.d,
               width:"40px",
               height:"40px",
@@ -105,14 +106,14 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
           <RiCloseLargeFill  size="x2" />
           </m.button>
         
-        <m.button
+          <m.button
             whileHover={{ background: Colors.d, color:Colors.text }}
             onClick={scroolDown}
             style={{
               position: "absolute",
               top: "15px",
               left: "70px",
-              background:Colors.a,
+              background:Colors.c,
               color:Colors.d,
               width:"40px",
               height:"40px",
@@ -126,8 +127,10 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
             }}
           >
           <FaArrowDown  size="x2" />
-        </m.button>
+          </m.button>
+
         </LazyMotion>
+
       </ReactModal>
     </>
   );

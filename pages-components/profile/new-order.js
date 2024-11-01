@@ -1,37 +1,64 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StateContext } from '../../context.js';
-import Calinder from '../../components/calendar/cal.js';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Colors from '../../lib/colors.js';
 import { m, LazyMotion } from 'framer-motion';
 import f from "../../lib/features.js";
 import useUser from '../../lib/hooks/useUser.js';
-import RegionSelect from '../../components/select-city/select.js';
 import { Textarea ,Input } from '@chakra-ui/react';
 import { Field } from "../../components/ui/field"
 import LoadingSpinner from '../../components/my-spinner/loading-spinner.js';
+
+/////
+
+import DatePicker from "react-datepicker";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import { he } from 'date-fns/locale/he';
+registerLocale('he', he )
+/////
+
+////
+import {
+  NativeSelectField,
+  NativeSelectRoot,
+} from "@chakra-ui/react"
+
+const israelRegions = [
+  { value: 'צפון' },
+  { value: 'חיפה' },
+  { value: 'ירושלים' },
+  { value: 'תל אביב' },
+  { value: 'מרכז' },
+  { value: 'באר שבע' },
+  { value: 'דרום' },
+  { value: 'אילת' },  
+];
+////
+
+
 const STATE_KEY = "Order";
 
  const Style = {
    Wrapper:{
-    margin:"0px",
-    padding:"0px",
-    
-   },
- 
-   SubmitStyle : {
-    height: "60px",
-    width: '150px',
-    border: "1px solid",
-    borderRadius: "3px",
-    background: "#fff",
-    fontSize: "20px",
-    cursor: "pointer",
-    textAlign: "center",
-    color: Colors.text,
-    boxShadow: `3px 3px 3px 3px ${Colors.c}`,
-  }
+   }, 
+   submitBtn:{
+    display:'flex',
+    justifyContent:'space-evenly',
+    alignItems:'center',
+     width:"150px",
+     height:"60px",   
+
+         backgroundColor: Colors.d,
+         color: '#fff',
+         border: 'none',
+         borderRadius: '5px',
+         cursor: 'pointer',
+         fontSize: '1rem',
+         fontWeight: 'bold',
+         margin:"15px",
+   }
+
   
  }
 
@@ -40,6 +67,7 @@ const NewOrder = ({ orderId, newOrder }) => {
   const { data: session, status } = useSession();
   const [ state, setState ] = useContext(StateContext);
   const { user, isLoading, isError } = useUser(session?.user?.email);
+  const [startDate, setStartDate] = useState("");
   const router = useRouter();
 
 
@@ -86,6 +114,11 @@ const NewOrder = ({ orderId, newOrder }) => {
       [STATE_KEY]: { ...prevState[STATE_KEY], [id]: value }
     }));
   };
+
+  const hendelCaLchange =  (value)=>{
+      
+  }
+
   const createNewOrder = async () => {
     try {
       const response = await fetch('/api/customer/save-order', {
@@ -126,6 +159,8 @@ const NewOrder = ({ orderId, newOrder }) => {
   };  
 
 
+
+
   if (isLoading || status === "loading") {
     return <LoadingSpinner />;
   }
@@ -133,91 +168,106 @@ const NewOrder = ({ orderId, newOrder }) => {
   return (
     <form 
         onSubmit={orderId? updateExistingOrder: createNewOrder}
-        style={Style.Wrapper}
+        style={{
+          display:"flex",
+          flexDirection:"column",
+          background:"#fff",
+          
+
+    }}
       >
       <h3>הזמן משק בית</h3>
 
 
-      <label>
-      <strong>שם</strong>
-      <input 
-        type="text" disabled 
-        style={Style.InputStyle}
-        placeholder={session.user.name}
-        // cant be change and hrd coded in back end 
-      />
+  
+     <Field  label="שם"  >
+      <Input  variant="subtle" type="text"  placeholder={session.user.name} />
+     </Field>
+
+
+     <Field label="טלפון" >
+      <Input variant="subtle"   type='tel'  id="orderPhone"  required onChange={handleChange} />
+     </Field>
+
       
-    </label>
-
-      <label>
-        <strong>טלפון</strong>
-        <input
-          name='orderPhone'
-          type='tel'
-          id="orderPhone"
-          required
-          onChange={handleChange}
-          style={Style.InputStyle}
-        />
-      </label>
-
-      <Calinder
-        text="תאירך ושעה"
-        id="ResurveDate"
-        STATE_KEY={STATE_KEY}
+      <DatePicker
+            placeholderText= "תאריך ושעה "
+            id="ResurveDate"
+            locale={he}
+            required
+            withPortal
+            selected={startDate} 
+            onChange={ (date) =>{ 
+                setStartDate(date);
+                hendelCaLchange(date);
+            }}
+          
+             closeOnScroll
+             showYearDropdown
+             showMonthDropdown
+             showTimeSelect
+             showFullMonthYearPicker
+             showPreviousMonths
+             showPopperArrow
+             isClearable
+              className={`orders-calindre`}
+              clearButtonClassName="orders-calinder-btn"
+              timeIntervals={15}
+              dateFormat="PPp"        
+              
       />
 
  
-        <Field label="תיאור הבקשה בהרכבה " >
+        
+      <Field label="תיאור הבקשה בהרכבה " >
           <Textarea resize={"none"} variant={"subtle"} value={state[STATE_KEY].JobDescription} id='JobDescription'  onChange={handleChange} />
-        </Field>
+      </Field>
 
-      <RegionSelect
-           propsId={"city"}
-           PropsPlaceholder={"אזור מגורים"}
-      />
+      <NativeSelectRoot
+            onChange={handleChange}
+            placeholder="אזור"
+            required
+            variant="subtle"
+            size={"צג"}
+            id='city'    
+          >
+
+          <NativeSelectField>
+              <option value="">אזור</option>
+                  {israelRegions.map((obj,i)=>{
+                  const city = obj.value
+  
+                  return <option   id={city}  key={` ${city} ${i}`} value={city}>{city}</option>
+             })}   
+            </NativeSelectField>
+      </NativeSelectRoot>
 
     
 
-      <Field label="כתובת" >
+       <Field label="כתובת" >
          <Input type='text' variant={"subtle"} id='addres'  onChange={handleChange} required  width={"100%"}/>
+       </Field>
+
+
+       <Field label="מספר חדרים " >
+        <Input variant={"subtle"}  required    type='number'   width={"100%"}     onChange={handleChange}  id="ApartmentRoomsNumber"/>
+       </Field>
+
+  
+
+       <Field label="מספר מקלחות" >
+          <Input variant={"subtle"} type="number" id="NumberOfBaths"    onChange={handleChange} />
+       </Field>
+
+
+
+      <Field  label="גודל הדירה במטרים" >
+        <Input variant={"subtle"} type="number"  id="ApartmentSize" onChange={handleChange} />
       </Field>
 
-
-      <Field label="מספר חדרים " >
-        <Input   required    type='number'   width={"100%"}     onChange={handleChange}  id="ApartmentRoomsNumber"/>
+      <Field label="מחיר שעתי" >
+        <Input variant={"subtle"}  id="orderPrice"  type="number" onChange={handleChange} />
       </Field>
-
-      <label><strong>מספר מקלחות</strong>
-        <input
-          type="number"
-          id="NumberOfBaths"
-          name='NumberOfBaths'
-          onChange={handleChange}
-          style={Style.InputStyle}
-        />
-      </label>
-      <label><strong>גודל הדירה במטרים</strong>
-        <input
-          name='ApartmentSize'
-          type="number"
-          id="ApartmentSize"
-          onChange={handleChange}
-          style={Style.InputStyle}
-        />
-      </label>
-
-      <label><strong>מחיר שעתי</strong>
-        <input
-          name='orderPrice'
-          id="orderPrice"
-          type="number"
-          style={Style.InputStyle}
-          onChange={handleChange}
-        />
-      </label>
-
- 
 
 
 
@@ -225,10 +275,10 @@ const NewOrder = ({ orderId, newOrder }) => {
         <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
           <m.button
             type="submit"
-            style={Style.SubmitStyle}
-            whileHover={{ boxShadow: `3px 3px 3px inset` ,background: Colors.d ,color:Colors.text}}
+            style={Style.submitBtn}
+            whileHover={{ boxShadow: `3px 3px 3px inset` ,background: Colors.c }}
           >
-        {orderId? "עדכן ":" שלח הזמנה "}  
+          {orderId? "עדכן ":" שלח הזמנה "}  
         </m.button>
         </div>
       </LazyMotion>

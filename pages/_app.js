@@ -6,7 +6,6 @@
 import '../pages/Main.css'
 import "react-datepicker/dist/react-datepicker.css"
 import "../components/range-elemnt/range-elemnt.css"
-import "../components/calendar/calendar.css"
 import '../pages-components/board/muli-css.css'
 
  // will move to in line 

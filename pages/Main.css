@@ -29,5 +29,13 @@ body{
     transition:all ease 1s;
 }
 
+.orders-calindre{
+    width:100%;
+    background:#f4f4f5;
+    height:40px;
+    margin-top:20px;
+    margin-bottom:20px;
+    
+}
 
 

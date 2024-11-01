@@ -14,9 +14,10 @@ registerLocale('he', he )
 
 const Calinder = ({
     id,
-    text,
+    
     PropsOnChange,
     STATE_KEY,
+    placeholder
     }
     ) => {
   
@@ -41,42 +42,35 @@ const Calinder = ({
 
 
 
-  return (
-    
-   <label 
-     htmlFor={id}   
-     >
-    <strong>{text}</strong>
-    
-     <DatePicker 
-        locale={he}
-        required
-        withPortal
-        id={id} 
-        selected={startDate} 
-        onChange={
-          (date) =>{ 
-          // data is object   console.log(date)
-            setStartDate(date)
-            handleChange(date)
+  return ( <DatePicker
+            placeholderText={placeholder?? "תאריך ושעה " }
+            locale={he}
+            required
+            withPortal
+            id={id} 
+            selected={startDate} 
+            onChange={(date) =>{ 
+                setStartDate(date);
+                handleChange(date);
             }}
           
-        closeOnScroll
-        showYearDropdown
-        showMonthDropdown
-        showTimeSelect
-        showFullMonthYearPicker
-        showPreviousMonths
-        showPopperArrow
-        isClearable
-        containerRef={"main"}
-        className="calindre"
-        clearButtonClassName="calinder-clear-btn"
-        popperClassName="vendor-calindr"
-        timeIntervals={15}
-        dateFormat="PPp"      
+             closeOnScroll
+             showYearDropdown
+             showMonthDropdown
+             showTimeSelect
+             showFullMonthYearPicker
+             showPreviousMonths
+             showPopperArrow
+             isClearable
+             containerRef={"main"}
+            className="calindre"
+            clearButtonClassName="calinder-btn"
+            popperClassName="calindr"
+            timeIntervals={15}
+            dateFormat="PPp"  
+            
        />
-     </label>
+     
 
   );
 };

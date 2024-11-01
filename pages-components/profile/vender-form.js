@@ -170,16 +170,15 @@ const VendorForm = ({ setEdit }) => {
                alignItems:'center',
                 width:"150px",
                 height:"60px",   
-   
-                    backgroundColor: Colors.d,
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                    fontSize: '1rem',
-                    fontWeight: 'bold',
-                    margin:"15px",
-            }}
+                backgroundColor: Colors.d,
+                color: '#fff',
+                border: 'none',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                fontSize: '1rem',
+                fontWeight: 'bold',
+                 margin:"15px",
+                 }}
             whileHover={{
               boxShadow: `3px 3px 3px inset`,
             }}

@@ -3,7 +3,6 @@ import { FilterCityConteax } from '../../context';
 import { useSession } from 'next-auth/react'
 import { FaThList } from "react-icons/fa";
 import { PiCardsThin } from "react-icons/pi";
-import RegionSelect from '../../components/select-city/select'
 import MultiRangeSlider from '../../pages-components/board/multi-range-input'
 import Colors from '../../lib/colors'
 
@@ -85,6 +84,8 @@ const BoardToolsBar=({
 
      {/* Filter By */}
       <div style={Style.Filter}>
+           
+          {/*  removed component commont for now
           
           <RegionSelect 
             propsId="filter-date"
@@ -92,7 +93,7 @@ const BoardToolsBar=({
             PropsOnChange={cityHendler}
            
            
-          />
+          /> */}
           {filterCity  &&   
             <MultiRangeSlider
               min={0}

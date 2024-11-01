@@ -37,8 +37,9 @@ const Style = {
   item: {
     display: 'flex',
     justifyContent: 'space-between',
-    borderBottom: '1px dotted #c2b5a9',
+    borderBottom: '2px solid #c2b5a9',
     paddingBottom: '8px',
+    
   },
   itemWide: {
     display: 'flex',
@@ -56,6 +57,8 @@ const Style = {
   infoText: {
     color: '#333',
     fontSize: '1rem',
+    fontWeight: 'bold',
+
   },
   btnWrapper: {
     display: 'flex',

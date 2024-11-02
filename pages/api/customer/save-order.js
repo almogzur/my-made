@@ -39,7 +39,9 @@ const handler = async (req, res) => {
     ApartmentSize,
     JobDescription,
     city,
-    name
+    name,
+    FromH,
+    ToH
   } = req.body;
 
 
@@ -56,6 +58,8 @@ const handler = async (req, res) => {
       orderPrice,
       ApartmentSize,
       city,
+      FromH,
+      ToH,
       createdAt: new Date(),
       orderId: uuidv4(),
       orderStatus: "Open",

@@ -10,14 +10,17 @@ const State = {
   Order: { 
       name:"",
       ResurveDate:"",
+      FromH:"",
+      ToH:"",
       JobDescription:"",
       addres:"",
       city:"",
-      orderPhone:Number,
-      ApartmentRoomsNumber:Number,
-      NumberOfBaths:Number,
-      ApartmentSize:Number,
-      orderPrice:Number,
+
+      orderPhone:0,
+      ApartmentRoomsNumber:0,
+      NumberOfBaths:0,
+      ApartmentSize:0,
+      orderPrice:0,
       
 
  },

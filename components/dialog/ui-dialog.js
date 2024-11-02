@@ -41,8 +41,8 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
         BtnsWrapper:{
             display:"flex",
             position:'fixed',  
-            left:"15px",
-            top:"25px",
+            left:"27px",
+            top:"35px",
             zIndex:"2"
           }
       }
@@ -77,7 +77,7 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
           style={buttonStyle?? null}
           onClick={handleModal}
       >  
-           { [Icon, <strong> {buttonText}</strong>]}
+           { Icon }{buttonText}
       </m.button>
       
 

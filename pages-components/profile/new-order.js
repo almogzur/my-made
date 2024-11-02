@@ -115,7 +115,10 @@ const NewOrder = ({ orderId, newOrder }) => {
   };
 
   const hendelCaLchange =  (value)=>{
-      
+    setState(prevState => ({
+      ...prevState,
+      [STATE_KEY]: { ...prevState[STATE_KEY], ResurveDate: value }
+    }));
   }
 
   const createNewOrder = async () => {
@@ -174,12 +177,13 @@ const NewOrder = ({ orderId, newOrder }) => {
 
 
   
-     <Field  label="שם"  >
+     <Field  label="שם מלא" htmlFor={'name'}   >
       <Input  
            variant="subtle" 
            type="text" 
-           placeholder={session.user.name}
+           id='name'
            value={state[STATE_KEY].name} 
+           onChange={handleChange}
            />
      </Field>
 
@@ -205,12 +209,10 @@ const NewOrder = ({ orderId, newOrder }) => {
        }} >
       <DatePicker      
             placeholderText= "תאריך ושעה "
-            id="ResurveDate"
             locale={he}
             required
             selected={startDate} 
             onChange={ (date) =>{ 
-                setStartDate(date);
                 hendelCaLchange(date);
             }}
              inline
@@ -222,12 +224,34 @@ const NewOrder = ({ orderId, newOrder }) => {
       </div>
     
       <HStack gap="10" width="full">
+
           <Field label="משעה" required>
-             <Input type='time' placeholder="12:00" variant="subtle" />
+
+             <Input 
+             type='time' 
+             placeholder="12:00" 
+             variant="subtle" 
+             id='FromH'
+             value={state[STATE_KEY].FromH}
+             onChange={handleChange}
+             />
+
           </Field>
+
           <Field label="עד שעה " required>
-             <Input type='time' placeholder="00:00" variant="subtle" />
+
+             <Input 
+               type='time' 
+               placeholder="00:00" 
+               variant="subtle" 
+               id="ToH"
+               value={state[STATE_KEY].ToH}
+               onChange={handleChange}
+
+               />
+
            </Field>
+
       </HStack>
       
 
@@ -244,20 +268,22 @@ const NewOrder = ({ orderId, newOrder }) => {
       </Field>
 
       <Select
-            onChange={handleChange}
             placeholder="אזור"
             required
             variant="subtle"
-            size={"צג"}
             id='city'    
+            value={state[STATE_KEY].city}
+            onChange={handleChange}
+            paddingTop={"20px"}
+            
           >
 
           <Option>
-              <option value="">אזור</option>
+              <option >אזור</option>
                   {israelRegions.map((obj,i)=>{
                   const city = obj.value
   
-                  return <option   id={city}  key={` ${city} ${i}`} value={city}>{city}</option>
+                  return <option   id={city}  key={`  ${i}`} value={city} >{city}</option>
              })}   
             </Option>
       </Select>

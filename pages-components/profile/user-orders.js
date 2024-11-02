@@ -25,6 +25,8 @@ import f from '../../lib/features'
      display:"flex",
      flexDirection:"column",
      backgroundColor: "#f9f9f9",
+     fontWeight: 'bold',
+
      
    },
    headline:{
@@ -160,21 +162,21 @@ import f from '../../lib/features'
                 <AnimatePresence>
                      {expandedOrder === index && (
           
-                     <motion.td 
+                    <motion.td 
                      colSpan="4" style={{background:"lightgray"}}
                      >
                   
                          <motion.div 
                            style={Style.orderDetails}
                            initial={{ opacity: 0, height:0 ,x:500 }}
-                           animate={{ opacity: 1,  type:"ease", height:"auto" , background:"lightgray" , x:0 }}
-                           exit={{ opacity:0  , x:600  ,height:0,   type:"spring" ,  }}
-                           transition={{ duration: 2 , type:"spring"}}
+                           animate={{ opacity: 1,  type:"ease", height:"auto" , background:"lightgray" , x:0,  }}
+                           exit={{ opacity:0  , x:600  ,height:0,   type:"spring" , background:"#808080",  }}
+                           transition={{ duration: 2 , type:"spring" , type:"spring" ,}}
                          
                   
                          >
 
-                         <strong style={{ ...Style.detail ,color:"#d9534f", fontSize:"20px" , marginBottom:"10px" , borderBottom:"dotted" , borderColor:"black"}}> שם מזמין: {order.userName}</strong> 
+                         <strong style={{ ...Style.detail ,color:"#d9534f", fontSize:"20px" , marginBottom:"10px" , borderBottom:"dotted" , borderColor:"black"}}> מזמין: {order.userName}</strong> 
                          <strong style={Style.detail}> טלפון : {order.orderPhone} </strong> 
                          <strong style={Style.detail} >תאריך ושעה :  {new Date(order.ResurveDate).toLocaleString('he-IL') || "N/A"}  </strong>
                          <strong style={Style.detail}   >עיר : {order.city || "N/A"}</strong> 
@@ -207,7 +209,7 @@ import f from '../../lib/features'
                         </div>
                         
                         </motion.div>
-                        </motion.td>
+                   </motion.td>
               
                  )}
                  </AnimatePresence>

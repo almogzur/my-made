@@ -25,7 +25,6 @@ const handler = async (req, res) => {
   const client = await clientPromise;
 
   const userEmail = session.user.email;
-  const userName = session.user.name;
 
   const database = client.db('my-made');
   const areadatabase = client.db("my-made-Areas");
@@ -40,13 +39,14 @@ const handler = async (req, res) => {
     ApartmentSize,
     JobDescription,
     city,
+    name
   } = req.body;
 
 
 
   try {
     const newOrder = {
-      userName,
+      name,
       orderPhone,
       addres,
       ApartmentRoomsNumber,

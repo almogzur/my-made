@@ -26,8 +26,8 @@ const UserProfile = () => {
     <div style={Style.wrapper}>
       <div style={Style.child}><ProfileCard /></div>
       <div style={Style.child}><UserOrders /></div>
-      <div style={Style.child}><VendorInfo /></div>
       <div style={Style.child}><ProjectStatus /></div>
+      <div style={Style.child}><VendorInfo /></div>
     </div>
   );
 };

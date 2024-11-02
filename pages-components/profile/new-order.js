@@ -6,13 +6,12 @@ import Colors from '../../lib/colors.js';
 import { m, LazyMotion } from 'framer-motion';
 import f from "../../lib/features.js";
 import useUser from '../../lib/hooks/useUser.js';
-import { Textarea ,Input } from '@chakra-ui/react';
+import { Textarea ,Input, HStack } from '@chakra-ui/react';
 import { Field } from "../../components/ui/field"
-import LoadingSpinner from '../../components/my-spinner/loading-spinner.js';
 
 /////
 
-import DatePicker from "react-datepicker";
+import DatePicker  from "react-datepicker";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { he } from 'date-fns/locale/he';
 registerLocale('he', he )
@@ -20,8 +19,8 @@ registerLocale('he', he )
 
 ////
 import {
-  NativeSelectField,
-  NativeSelectRoot,
+  NativeSelectField  as Option,
+  NativeSelectRoot as Select,
 } from "@chakra-ui/react"
 
 const israelRegions = [
@@ -49,8 +48,8 @@ const STATE_KEY = "Order";
      width:"150px",
      height:"60px",   
 
-         backgroundColor: Colors.d,
-         color: '#fff',
+         background: "gray",
+         
          border: 'none',
          borderRadius: '5px',
          cursor: 'pointer',
@@ -81,9 +80,9 @@ const NewOrder = ({ orderId, newOrder }) => {
   // Fetch the order if orderId is provided
   useEffect(() => {
    
-   
     if (orderId) { // Fetch order only if it's not a new order
       const existingOrder = user?.Orders?.find(order => order.orderId === orderId);
+
       if (existingOrder) {
         setState(prevState => ({
           ...prevState,
@@ -161,10 +160,6 @@ const NewOrder = ({ orderId, newOrder }) => {
 
 
 
-  if (isLoading || status === "loading") {
-    return <LoadingSpinner />;
-  }
-
   return (
     <form 
         onSubmit={orderId? updateExistingOrder: createNewOrder}
@@ -172,58 +167,83 @@ const NewOrder = ({ orderId, newOrder }) => {
           display:"flex",
           flexDirection:"column",
           background:"#fff",
-          
-
+  
     }}
       >
-      <h3>הזמן משק בית</h3>
+      <h1>הזמן משק בית</h1>
 
 
   
      <Field  label="שם"  >
-      <Input  variant="subtle" type="text"  placeholder={session.user.name} />
+      <Input  
+           variant="subtle" 
+           type="text" 
+           placeholder={session.user.name}
+           value={state[STATE_KEY].name} 
+           />
      </Field>
 
 
      <Field label="טלפון" >
-      <Input variant="subtle"   type='tel'  id="orderPhone"  required onChange={handleChange} />
+      <Input
+         variant="subtle"
+         type='tel'
+         id="orderPhone" 
+         required 
+         value={state[STATE_KEY].orderPhone}
+         onChange={handleChange} 
+       />
      </Field>
 
-      
-      <DatePicker
+      <div style={{
+          width:"100%" ,
+          display:'flex',
+          flexDirection:'row',
+          justifyContent:'center',
+          alignItems:'center',
+          alignContent:'center',
+       }} >
+      <DatePicker      
             placeholderText= "תאריך ושעה "
             id="ResurveDate"
             locale={he}
             required
-            withPortal
             selected={startDate} 
             onChange={ (date) =>{ 
                 setStartDate(date);
                 hendelCaLchange(date);
             }}
-          
-             closeOnScroll
-             showYearDropdown
+             inline
              showMonthDropdown
-             showTimeSelect
-             showFullMonthYearPicker
-             showPreviousMonths
-             showPopperArrow
-             isClearable
-              className={`orders-calindre`}
-              clearButtonClassName="orders-calinder-btn"
-              timeIntervals={15}
-              dateFormat="PPp"        
-              
+             show
+             timeIntervals={30}
+             dateFormat="PPp"                  
       />
+      </div>
+    
+      <HStack gap="10" width="full">
+          <Field label="משעה" required>
+             <Input type='time' placeholder="12:00" variant="subtle" />
+          </Field>
+          <Field label="עד שעה " required>
+             <Input type='time' placeholder="00:00" variant="subtle" />
+           </Field>
+      </HStack>
+      
 
  
         
-      <Field label="תיאור הבקשה בהרכבה " >
-          <Textarea resize={"none"} variant={"subtle"} value={state[STATE_KEY].JobDescription} id='JobDescription'  onChange={handleChange} />
+      <Field label="תיאור הבקשה  " >
+          <Textarea 
+              resize={"none"} 
+              variant={"subtle"} 
+              value={state[STATE_KEY].JobDescription} 
+              onChange={handleChange} 
+              id='JobDescription'  
+            />
       </Field>
 
-      <NativeSelectRoot
+      <Select
             onChange={handleChange}
             placeholder="אזור"
             required
@@ -232,41 +252,76 @@ const NewOrder = ({ orderId, newOrder }) => {
             id='city'    
           >
 
-          <NativeSelectField>
+          <Option>
               <option value="">אזור</option>
                   {israelRegions.map((obj,i)=>{
                   const city = obj.value
   
                   return <option   id={city}  key={` ${city} ${i}`} value={city}>{city}</option>
              })}   
-            </NativeSelectField>
-      </NativeSelectRoot>
+            </Option>
+      </Select>
 
     
 
        <Field label="כתובת" >
-         <Input type='text' variant={"subtle"} id='addres'  onChange={handleChange} required  width={"100%"}/>
+         <Input 
+            type='text' 
+            variant={"subtle"} 
+            id='addres'
+            value={state[STATE_KEY].addres}
+            onChange={handleChange}
+            required 
+            width={"100%"}      
+            />
        </Field>
 
 
        <Field label="מספר חדרים " >
-        <Input variant={"subtle"}  required    type='number'   width={"100%"}     onChange={handleChange}  id="ApartmentRoomsNumber"/>
+        <Input 
+            variant={"subtle"}
+            required    
+            type='number'   
+            width={"100%"}     
+            value={state[STATE_KEY].ApartmentRoomsNumber}
+            onChange={handleChange}  
+            id="ApartmentRoomsNumber"  
+            />
        </Field>
 
-  
 
        <Field label="מספר מקלחות" >
-          <Input variant={"subtle"} type="number" id="NumberOfBaths"    onChange={handleChange} />
+          <Input 
+              variant={"subtle"} 
+              type="number" 
+              id="NumberOfBaths"  
+              value={state[STATE_KEY].NumberOfBaths} 
+              onChange={handleChange}
+                />
        </Field>
 
 
 
       <Field  label="גודל הדירה במטרים" >
-        <Input variant={"subtle"} type="number"  id="ApartmentSize" onChange={handleChange} />
+        <Input 
+            variant={"subtle"} 
+            type="number"  
+            id="ApartmentSize" 
+            value={state[STATE_KEY].ApartmentSize}
+            onChange={handleChange} 
+
+            />
       </Field>
 
       <Field label="מחיר שעתי" >
-        <Input variant={"subtle"}  id="orderPrice"  type="number" onChange={handleChange} />
+        <Input 
+            variant={"subtle"}  
+            id="orderPrice"  
+            type="number"
+            value={state[STATE_KEY].orderPrice}
+            onChange={handleChange} 
+
+            />
       </Field>
 
 
@@ -276,7 +331,7 @@ const NewOrder = ({ orderId, newOrder }) => {
           <m.button
             type="submit"
             style={Style.submitBtn}
-            whileHover={{ boxShadow: `3px 3px 3px inset` ,background: Colors.c }}
+            whileHover={{ boxShadow: `3px 3px 3px inset` ,background: "black" ,color:"#fff" }}
           >
           {orderId? "עדכן ":" שלח הזמנה "}  
         </m.button>

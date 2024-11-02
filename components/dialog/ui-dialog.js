@@ -12,10 +12,41 @@ import f from '../../lib/features'
   let overlayRef = null;
   let contentRef = null;  
 
+
+
 const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
    {
      const [showModal, setShowModal] = useState(false)
       const handleModal = () => {  setShowModal(!showModal) }
+
+
+      const Style = {
+        helpBtn:{
+           display:'flex',
+           justifyContent:'space-evenly',
+           alignItems:'center',
+           width:"60px",
+           height:"40px",   
+           zIndex:2 ,
+           backgroundColor: "#f4f4f5",
+           color: '#fff',
+           border: 'none',
+           borderRadius: '5px',
+           cursor: 'pointer',
+           fontWeight: 'bold',
+           margin: "5px",
+           color:Colors.d,
+  
+        },
+        BtnsWrapper:{
+            display:"flex",
+            position:'fixed',  
+            left:"15px",
+            top:"25px",
+            zIndex:"2"
+          }
+      }
+
 
 
   const scroolDown = ()=>{
@@ -79,57 +110,30 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
         overlayRef={(node) => overlayRef = node}
          contentRef={(node) => contentRef = node}        
         >
-    
+        <LazyMotion features={f}>
+        <div style={Style.BtnsWrapper}>
+          <m.button
+              whileHover={{ background: Colors.d, color:"#fff" }}
+               onClick={scroolDown}
+               style={Style.helpBtn }
+          >
+            <FaArrowDown  size="30" />
+          </m.button>
+          
+          <m.button
+            whileHover={{ background: Colors.d, color:"#fff"}}
+            onClick={ handleModal}
+            style={{...Style.helpBtn 
+              }}
+          >
+            <RiCloseLargeFill  size="30" />
+          </m.button>
+        
+        </div>
+        </LazyMotion>
         {children}
 
-        <LazyMotion features={f}>
-        
-          <m.button
-            whileHover={{ background: Colors.d, color:Colors.text }}
-            onClick={ handleModal}
-            style={{
-              position: "absolute",
-              top: "15px",
-              left: "15px",
-              background:Colors.c,
-              color:Colors.d,
-              width:"40px",
-              height:"40px",
-              borderRadius:"5px",
-              display:'flex',
-              justifyContent:'center',
-              alignItems:'center',
-              alignContent:'center', 
-              zIndex:2    
-            }}
-          >
-          <RiCloseLargeFill  size="x2" />
-          </m.button>
-        
-          <m.button
-            whileHover={{ background: Colors.d, color:Colors.text }}
-            onClick={scroolDown}
-            style={{
-              position: "absolute",
-              top: "15px",
-              left: "70px",
-              background:Colors.c,
-              color:Colors.d,
-              width:"40px",
-              height:"40px",
-              borderRadius:"5px",
-              display:'flex',
-              justifyContent:'center',
-              alignItems:'center',
-              alignContent:'center',     
-              zIndex:2    
-
-            }}
-          >
-          <FaArrowDown  size="x2" />
-          </m.button>
-
-        </LazyMotion>
+    
 
       </ReactModal>
     </>

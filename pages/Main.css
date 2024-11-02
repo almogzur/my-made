@@ -25,17 +25,20 @@ body{
 
 }
 
-.home-image{
-    transition:all ease 1s;
-}
-
-.orders-calindre{
-    width:100%;
-    background:#f4f4f5;
-    height:40px;
+.react-datepicker{
+    
     margin-top:20px;
     margin-bottom:20px;
+    max-width:500px;
+    font-weight:bold;    
+    
+    
     
 }
+
+
+
+
+
 
 

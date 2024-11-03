@@ -1,14 +1,14 @@
 import Link from 'next/link';
 import Colors from '../../../lib/colors';
-import { Badge, Box, Card, Text } from "@chakra-ui/react";
+import { Badge, Box, Card, Text, Flex } from "@chakra-ui/react";
 import { Button } from "../../../components/ui/button";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useContext, useState } from 'react';
 import { OrderContext, FilterCityContext } from "../../../context";
 
 const MotionCard = motion(Card.Root); // Create a motion component for the Card
+const Vcard = ({ orderData , index }) => {
 
-const Vcard = ({ orderData }) => {
   const [orderContext, setOrderContext] = useContext(OrderContext);
   const [filterCity, setFilterCity] = useContext(FilterCityContext);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -24,39 +24,40 @@ const Vcard = ({ orderData }) => {
         overflow="hidden"
         width="100%"
         maxWidth={"700px"} // Set width to 100%
-        p="2"
+        p="0"
         m={2}
         boxShadow="lg"
         borderRadius="md"
         bg="white"
-        initial={{ x: 200, opacity: 0 }} // Initial state
-        animate={{ x: 0, opacity: 1 }} // Animate to this state
-        exit={{  opacity: 0 }} // Animate out with X and opacity
-        transition={{ duration: 0.3 }} // Duration of the transition
+        initial={{ x: 300, opacity: 0  , height:0}} 
+        animate={{ x: 0, opacity: 1 , height:'auto' }} 
+        
+        transition={{ 
+          x: {duration: index +1} ,
+          opacity:{ duration:2 } , 
+          height:{duration:index + 1 , type:"spring"}
+          }} 
       >
-        <Box mb="1"  pb="0">
+
           <Card.Body >
 
             <Card.Title color={Colors.c} mb="2" fontSize="2xl" mt="-0.5" fontWeight="bold">{orderData?.name || 'לא זמין'}</Card.Title>
 
-            <Card.Description mb={0}   >
+      
+                <Text style={{display:'flex',flexDirection:'column',justifyContent:'center'}} fontSize="md" width="100%">   </Text>
+                <Text>כתובת:{orderData?.addres || 'לא זמין'}, </Text> 
+                <Text>עיר : {orderData?.city || 'לא זמין'}</Text>
+                <Text>תאריך הזמנה: {new Date(orderData.ResurveDate).toLocaleString('he-IL').slice(0,10)} </Text> 
+                <Text>טלפון: {orderData?.orderPhone || 'לא זמין'}</Text> 
+                <Text>מחיר: {orderData?.orderPrice || '0'}</Text> 
+              
+           
+      
 
-              <Text style={{display:'flex',flexDirection:'column',justifyContent:'center'}} fontSize="md" width="100%">
+            <AnimatePresence>
 
-                <strong>כתובת:{orderData?.addres || 'לא זמין'}, </strong> 
-                <strong>עיר : {orderData?.city || 'לא זמין'}</strong>
-                <strong>תאריך הזמנה: {new Date(orderData.ResurveDate).toLocaleString('he-IL').slice(0,10)} </strong> 
-                <strong>טלפון: {orderData?.orderPhone || 'לא זמין'}</strong> 
-                <strong>מחיר: {orderData?.orderPrice || '0'}</strong> 
-
-              </Text>
-            </Card.Description>
-          </Card.Body>
-        </Box>
-
-        <AnimatePresence>
           {isExpanded && (
-            <motion.div
+              <motion.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
@@ -64,32 +65,34 @@ const Vcard = ({ orderData }) => {
               style={{ overflow: 'hidden', padding: '8px', backgroundColor: Colors.lightGray, borderRadius: '8px' }}
             >
               <Box mt="4" textAlign="center">
-                <Text fontSize="lg" textAlign="center" width="100%">
-                  <strong>מזהה הזמנה:</strong> {orderData?.orderId || 'לא זמין'}
+   
+                  <strong>מזהה הזמנה :  {orderData?.orderId || 'לא זמין'}</strong> 
                   <br />
                   <strong>סטטוס:</strong> 
-                  <Badge colorScheme={orderData?.orderStatus === "Open" ? "green" : "red"}>{orderData?.orderStatus || 'לא ידוע'}</Badge>
+                  <Badge color={orderData?.orderStatus === "Open" ? "green" : "red"}>{orderData?.orderStatus || 'לא ידוע'}</Badge>
                   <br />
-                  <strong>חדרים:</strong> {orderData?.ApartmentRoomsNumber || 'לא זמין'}
+                  <strong>חדרים: {orderData?.ApartmentRoomsNumber || 'לא זמין'}</strong> 
                   <br />
-                  <strong>גודל:</strong> {orderData?.ApartmentSize ? `${orderData.ApartmentSize} מ"ר` : 'לא זמין'}
+                  <strong>גודל: {orderData?.ApartmentSize ? `${orderData.ApartmentSize} מ"ר` : 'לא זמין'}</strong> 
                   <br />
-                  <strong>חדרי רחצה:</strong> {orderData?.NumberOfBaths || 'לא זמין'}
+                  <strong>חדרי רחצה: {orderData?.NumberOfBaths || 'לא זמין'}</strong> 
                   <br />
-                  <strong>תיאור עבודה:</strong> {orderData?.JobDescription || 'לא זמין'}
+                  <strong>תיאור עבודה:  {orderData?.JobDescription || 'לא זמין'}</strong> 
                   <br />
-                  <strong>שעה:</strong> {orderData?.FromH || 'לא זמין'} - {orderData?.ToH || 'לא זמין'}
-                </Text>
+                  <strong>שעה:  {orderData?.FromH || 'לא זמין'} - {orderData?.ToH || 'לא זמין'}</strong>
+               
               </Box>
-            </motion.div>
+             </motion.div>
           )}
-        </AnimatePresence>
+             </AnimatePresence>
 
-        <Box mt="4">
-          <Button colorPalette="gray" variant="outline" onClick={toggleExpand} width={200} co>
-            {isExpanded ? 'להראות פחות' : 'להראות יותר'}
-          </Button>
-        </Box>
+             <Box mt="4">
+               <Button colorPalette="gray" variant="outline" onClick={toggleExpand} width={200} >
+              {isExpanded ? 'להראות פחות' : 'להראות יותר'}
+             </Button>
+           </Box>
+          </Card.Body>
+       
 
       </MotionCard>
     </AnimatePresence>

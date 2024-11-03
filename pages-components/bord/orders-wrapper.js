@@ -65,7 +65,7 @@ const OrdersWrapper=({ Mode})=>{
          { Array.isArray(CityOrders) && filterCity  ? 
        
              CityOrders.map((order,i)=>{
-             return ( <VCard orderData={order}  key={i} />)
+             return ( <VCard orderData={order} index={i}  key={i} />)
           })
             :"אין הזמנות " } 
         

@@ -354,6 +354,8 @@ const NewOrder = ({ orderId, newOrder }) => {
             type="number"
             value={state[STATE_KEY].orderPrice}
             onChange={handleChange} 
+            max={300}
+            min={0}
 
             />
       </Field>

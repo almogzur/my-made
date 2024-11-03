@@ -20,25 +20,38 @@ const BoardTools=({
         
         const [filterCity, setFilterCity] = useContext(FilterCityContext);
         const { data: session ,status ,update} = useSession()
+        const [ minPrice, setMinPrice ] = useState(0)
+        const [ maxPrice , setMaxPrice ] = useState(0)
 
 
-
-const Style = {
-  Wrapper:{
-      background:"#fff",
-
-  },
-
-
-
-}
 
   const cityHendler = (e) => { 
       const value = e.target.value
+
+
     setFilterCity(value)
   }
 
-  const priceHedler = (min,max) => {setFilterPriceArray([min,max])}
+  const priceHedler = (e) => {
+
+            const minPercent = e.value[1]
+            const maxPercent = e.value[0]
+  
+            let minPriceToDisplay =  300 - (minPercent * 3)
+            let maxPriceToDisplay = 300- (maxPercent * 3) 
+          
+            setMinPrice(minPriceToDisplay)
+            setMaxPrice(maxPriceToDisplay)
+          
+
+      
+
+
+
+
+ console.log(minPriceToDisplay,maxPriceToDisplay);
+
+  }
 
 
 
@@ -67,6 +80,11 @@ const Style = {
              })}   
               </Option>
            </Select>
+
+
+
+
+
                         
            <Flex >
 
@@ -74,8 +92,9 @@ const Style = {
                     <StatLabel>ממחיר</StatLabel>
                     <StatValueText
                         fontSize={"18px"}
-                         value={935.4}
+                         value={minPrice}
                          formatOptions={{ style: "currency", currency: "ILS" }}
+
                       />
              </StatRoot> 
               
@@ -83,14 +102,14 @@ const Style = {
                    <StatLabel>עד</StatLabel>
                    <StatValueText
                         fontSize={"18px"}
-                        value={935.4}
+                        value={maxPrice}
                         formatOptions={{ style: "currency", currency: "ILS" }}
                      />
              </StatRoot>
                  
            </Flex>
 
-          <Slider    defaultValue={[0, 60]} />
+          <Slider    defaultValue={[0, 100]}    onValueChange={priceHedler}  />
 
         </Container>
     </Container>

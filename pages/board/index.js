@@ -1,25 +1,38 @@
 import { useSession } from 'next-auth/react';
 import { useEffect, useState  , useContext} from 'react';
 import { useRouter } from 'next/router';
-import { FilterCityConteax } from '../../context';
-import BoardToolsBar from '../../pages-components/board/board-tools-bar';
-import OrdersWrapper from '../../pages-components/board/orders-wrapper';
+import { FilterCityContext } from '../../context';
+import Colors from '../../lib/colors';
+import HomeNavigation from '../../pages-components/home/home-navigation'
+import BordTools from '../../pages-components/bord/bord-tool'
+import OrdersWrapper from '../../pages-components/bord/orders-wrapper';
 
 
+
+const Style = {
+  wrapper: {
+    
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '20px',
+    padding: '20px',
+    backgroundColor: '#F0F2F5',      
+    background:Colors.d,
+
+  },
+  child: {
+    flex: '1 1 100%',
+    
+  },
+};
 
 const BoardPage = () => {
   const router = useRouter();
 
-  // Session and user data
   const { data: session, status } = useSession();
-
-
-
-  // State for orders and filters
-
   const [Mode, setMode] = useState("Cards");
-  const [filterCity, setFilterCity] = useContext(FilterCityConteax);
-  const [filterPriceArray, setFilterPriceArray] = useState([300, 0]);  // 300 max price
+  const [filterCity, setFilterCity] = useContext(FilterCityContext);
+  const [filterPriceArray, setFilterPriceArray] = useState([300, 0]);  
 
 
   // Redirect if unauthenticated
@@ -35,25 +48,32 @@ const BoardPage = () => {
   }
 
 
-
   return (
 
     <>
-      <BoardToolsBar
-        setMode={setMode}
-        setFilterCity={setFilterCity}
-        setFilterPriceArray={setFilterPriceArray}
+      <HomeNavigation/>
+      <div style={Style.wrapper} >
+      
+          <div style={Style.child}>
+            <BordTools
+                 setMode={setMode}
+                 setFilterCity={setFilterCity}
+                 setFilterPriceArray={setFilterPriceArray}
+           />
+          </div>
 
-      />
-      <h3 style={{textAlign: "center"}}>
-        {filterCity ? ` הזמנות ${filterCity}` : null}
-      </h3>
+          <div style={Style.child}>
+                <OrdersWrapper
+                    Mode={Mode}
+                    filterCity={filterCity}
+                     setFilterCity={setFilterCity}
+          /> 
+          </div>
 
-      <OrdersWrapper
-        Mode={Mode}
-        filterCity={filterCity}
-        setFilterCity={setFilterCity}
-      />
+
+      </div>
+
+
       </>
   );
 };

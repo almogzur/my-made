@@ -1,5 +1,5 @@
 import React, {  useContext } from "react";
-import { WindowWidthContaxt } from "../../context";
+import { WindowWidthContext } from "../../context";
 import StyledImage from "./styled-image";
 import SlidingTextWrapper from './sliding-text'
 import Colors from "../../lib/colors";
@@ -20,7 +20,7 @@ const PhotosMd = {
 
 
 function  MainSection() {
-  const { XLarge, large , medium , small } = useContext(WindowWidthContaxt);
+  const { xl, lg , md , sm } = useContext(WindowWidthContext);
 
   const Style = { 
       Wrapper:{
@@ -47,9 +47,9 @@ function  MainSection() {
                   PropsImageStyle={{ 
                     width:"800px", 
                       height:"600px",  
-                       borderRadius: large ? "12px" : null ,
+                       borderRadius: lg ? "12px" : null ,
                         objectFit:"fill" ,
-                         margin: large? "2em" : null  ,
+                         margin: lg? "2em" : null  ,
                          opacity: "0.8"
                            }} 
                   timer={13000}  />

@@ -10,7 +10,7 @@ import { Textarea ,Input, HStack } from '@chakra-ui/react';
 import { Field } from "../../components/ui/field"
 
 /////
-
+import { israelRegions } from '../../app-data.js';
 import DatePicker  from "react-datepicker";
 import { registerLocale, setDefaultLocale } from "react-datepicker";
 import { he } from 'date-fns/locale/he';
@@ -23,16 +23,7 @@ import {
   NativeSelectRoot as Select,
 } from "@chakra-ui/react"
 
-const israelRegions = [
-  { value: 'צפון' },
-  { value: 'חיפה' },
-  { value: 'ירושלים' },
-  { value: 'תל אביב' },
-  { value: 'מרכז' },
-  { value: 'באר שבע' },
-  { value: 'דרום' },
-  { value: 'אילת' },  
-];
+
 ////
 
 
@@ -152,6 +143,10 @@ const NewOrder = ({ orderId, newOrder }) => {
       console.error('Failed to create new order', error);
     }
   };
+
+
+
+  //  need to change to Close order and not del 
   const updateExistingOrder = async () => {
     try {
       const response = await fetch('/api/customer/edit-order', {
@@ -280,6 +275,7 @@ const NewOrder = ({ orderId, newOrder }) => {
       </Field>
 
       <Select
+            key={"new-order"}
             placeholder="אזור"
             required
             variant="subtle"

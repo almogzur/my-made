@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
 export const StateContext = createContext(null)
-export const WindowWidthContaxt = createContext(null)
-export const FilterCityConteax = createContext(null)
-export const OrderContaxt = createContext(null)
+export const WindowWidthContext = createContext(null)
+export const FilterCityContext = createContext(null)
+export const OrderContext = createContext(null)

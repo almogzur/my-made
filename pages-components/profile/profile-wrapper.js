@@ -4,7 +4,8 @@ import VendorInfo from './vendor-info';
 import ProjectStatus from './project-status';
 import Colors from '../../lib/colors';
 import UserOrders from './user-orders'
-const UserProfile = () => {
+
+const UserProfilePage = () => {
   const Style = {
     wrapper: {
       
@@ -31,4 +32,4 @@ const UserProfile = () => {
     </div>
   );
 };
-export default UserProfile
+export default UserProfilePage

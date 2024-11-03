@@ -21,10 +21,9 @@ const State = {
       NumberOfBaths:0,
       ApartmentSize:0,
       orderPrice:0,
-      
-
  },
- Orders:[]
+ Orders:[],
+ ClosedOrders:[]
      
   }
   export default State

@@ -5,7 +5,7 @@ import Colors from '../../lib/colors';
 import UiDialog from '../../components/dialog/ui-dialog';
 import NewOrder from './new-order';
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
-import { WindowWidthContaxt } from '../../context';
+import { WindowWidthContext } from '../../context';
 import { IoMdAddCircle } from "react-icons/io";
 import {   motion ,AnimatePresence } from 'framer-motion';
 import { DataListItem, DataListRoot as DataList } from "../../components/ui/data-list"
@@ -15,7 +15,7 @@ const UserOrders = () => {
   const { user, isLoading, userError } = useUser(session?.user?.email);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [isRemoving, setIsRemoving] = useState(false);
-  const { xl, lg, md, sm } = useContext(WindowWidthContaxt);
+  const { xl, lg, md, sm } = useContext(WindowWidthContext);
 
   const Style = {
     wrapper: {
@@ -148,7 +148,7 @@ const UserOrders = () => {
             { title: "נוצרה ב", value: order.createdAt ? new Date(order.createdAt).toLocaleString('he-IL') : "N/A" },
             { title: "עודכנה ב", value: order.updateAt ? new Date(order.updateAt).toLocaleString('he-IL') : "N/A" },
             { title: "מחיר לשעה", value: order.orderPrice || "N/A" }
-];
+        ];
             
      return   <div key={order.orderId} 
                    style={Style.RowContainer}

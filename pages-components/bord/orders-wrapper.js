@@ -1,14 +1,15 @@
 import { useSession } from 'next-auth/react'
-import HCard from '../../pages-components/board/items-display/h-card'
-import VCard from '../../pages-components/board/items-display/v-card'
+import HCard from '../../pages-components/bord/items-display/h-card'
+import VCard from '../../pages-components/bord/items-display/v-card'
 import { useContext, useEffect, useState } from 'react';
-import {FilterCityConteax } from '../../context'
+import {FilterCityContext } from '../../context'
+import LoadingSpinner from '../../components/my-spinner/loading-spinner';
  
 
 
 const OrdersWrapper=({ Mode})=>{
   const [ CityOrders ,setCityOrders] = useState(null)
-  const [ filterCity, setFilterCity ] = useContext(FilterCityConteax)
+  const [ filterCity, setFilterCity ] = useContext(FilterCityContext)
   const [ isFetch, setIsFetch] = useState(false)
 
   const getOrders= async  (city) => {
@@ -32,14 +33,20 @@ const OrdersWrapper=({ Mode})=>{
     
 }
 
-  const WrapperStyle = {
+  const Style = {
+    Wrap:{
+      height:"400px",
+      background:"#fff",
+      width:"100%"
+    },
+    oldWrap:{
     display:"flex" ,
     flexDirection: Mode === "Cards" ? "row" : "column" ,
     flexWrap:"wrap",
     marginBottom:"100px",
     marginTop:"1em",
     justifyContent:"center",
-
+    }
   }
  // get orders when reactive value changes  filterCity
   useEffect(()=>{
@@ -52,10 +59,10 @@ const OrdersWrapper=({ Mode})=>{
   },[filterCity])
   
  if(isFetch){ 
-    return <h1 style={{textAlign:'center'}}>Loading Orders ...</h1>
+    return <LoadingSpinner/>
   }
      
- return <div style={WrapperStyle}  
+ return <div style={Style.Wrap}  
        >  
        { Array.isArray(CityOrders) && filterCity  ? 
        
@@ -66,9 +73,8 @@ const OrdersWrapper=({ Mode})=>{
              <VCard OrderData={order} key={i} />
              
           })
-           
-        :
-        <div>אין המנות</div>
+            :"אין הזמנות "
+ 
    
      }
      </div>

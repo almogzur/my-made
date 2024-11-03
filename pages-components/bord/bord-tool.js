@@ -7,7 +7,7 @@ import {israelRegions} from '../../app-data'
 import Colors from '../../lib/colors'
 import { Slider   } from '../../components/ui/slider'
 import {Field} from '../../components/ui/field'
-import { Container ,Flex} from "@chakra-ui/react"
+import { Container ,Flex , Text} from "@chakra-ui/react"
 
 import { StatLabel, StatRoot, StatValueText } from "../../components/ui/stat"
 import { NativeSelectField  as Option,NativeSelectRoot as Select,} from "@chakra-ui/react"
@@ -21,7 +21,7 @@ const BoardTools=({
         const [filterCity, setFilterCity] = useContext(FilterCityContext);
         const { data: session ,status ,update} = useSession()
         const [ minPrice, setMinPrice ] = useState(0)
-        const [ maxPrice , setMaxPrice ] = useState(0)
+        const [ maxPrice , setMaxPrice ] = useState(300)
 
 
 
@@ -36,30 +36,25 @@ const BoardTools=({
 
             const minPercent = e.value[1]
             const maxPercent = e.value[0]
-  
+            // evry 1 percent is 3 ISL  
+
             let minPriceToDisplay =  300 - (minPercent * 3)
             let maxPriceToDisplay = 300- (maxPercent * 3) 
           
             setMinPrice(minPriceToDisplay)
             setMaxPrice(maxPriceToDisplay)
-          
-
-      
-
-
-
-
- console.log(minPriceToDisplay,maxPriceToDisplay);
-
+        
   }
 
 
 
   return (
-     <Container background={"#fff"}>
-        <Container maxWidth={600} padding={"15px"} >
+     <Container background={"#fff"} >
+         <Text textStyle={"2xl"} p={2} fontWeight={"bold"} textAlign={"center"}  color={Colors.c}> סינן עבדוה לפי </Text>
 
-           <Field label="בחר עיר" size={"sm"}  />
+        <Container maxWidth={600} padding={"15px"} p={5} >
+
+           <Field label="עיר" size={"sm"}  />
            <Select
                     size={"lg"}
                     key={"bord"}
@@ -86,10 +81,10 @@ const BoardTools=({
 
 
                         
-           <Flex >
+           <Flex justifyContent={'center'} maxWidth={"550px"} >
 
              <StatRoot >
-                    <StatLabel>ממחיר</StatLabel>
+                    <StatLabel info="מחיר לשעה " >ממחיר</StatLabel>
                     <StatValueText
                         fontSize={"18px"}
                          value={minPrice}
@@ -109,9 +104,11 @@ const BoardTools=({
                  
            </Flex>
 
-          <Slider    defaultValue={[0, 100]}    onValueChange={priceHedler}  />
-
+          <Container maxWidth={"500px"} >
+                <Slider    defaultValue={[0, 100]}   onValueChange={priceHedler}  />
+          </Container>
         </Container>
+
     </Container>
 ) 
 }

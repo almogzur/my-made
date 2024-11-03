@@ -164,7 +164,6 @@ const UserOrders = () => {
 
             {expandedOrder === index ? 
                 
-              
               <motion.div
                 key={"dropdown"}
                 style={Style.expandedDetails}

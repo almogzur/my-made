@@ -54,6 +54,12 @@ const OrdersWrapper=({ Mode})=>{
     
 
   },[filterCity])
+
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
+  const handleExpand = (index) => {
+    setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
   
  if(isFetch){ 
     return <LoadingSpinner/>
@@ -65,7 +71,12 @@ const OrdersWrapper=({ Mode})=>{
          { Array.isArray(CityOrders) && filterCity  ? 
        
              CityOrders.map((order,i)=>{
-             return ( <VCard orderData={order} index={i}  key={i} />)
+             return ( <VCard 
+               orderData={order} itemIndex={i} 
+               key={i} 
+               expandedIndex={expandedIndex}
+               handleExpand={handleExpand}
+           />)
           })
             :"אין הזמנות " } 
         

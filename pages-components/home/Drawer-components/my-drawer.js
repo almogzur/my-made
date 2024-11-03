@@ -17,17 +17,20 @@ import Colors from "../../../lib/colors";
 import {GiVacuumCleaner} from "react-icons/gi"
 import DrawerItem from './drawer-item'
 import { FcButtingIn } from "react-icons/fc";
-import { FcOnlineSupport } from "react-icons/fc";
+import { FcOnlineSupport , FcViewDetails } from "react-icons/fc";
 import { FcPlus } from "react-icons/fc";
 import { signOut ,signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { color } from "framer-motion";
-
+import useUser from '../../../lib/hooks/useUser'
 
 
 const MyDrawer = () => {
+
   const { data: session, status } = useSession();
+  const {user , isLoading , isError} = useUser(session?.user?.email)
+
     const router = useRouter()
 
     return (
@@ -82,12 +85,21 @@ const MyDrawer = () => {
                 <DrawerItem text={ " פירסום מודעה " }>
                       <FcPlus size={"2em"} style={{margin:"10px"}}   />
                 </DrawerItem>
-
+                    
+                {user?.Vendor.isVendor &&
+                  <DrawerItem  text={"לוח עבודות "} 
+                      PropsOnClick={()=>{router.push("/bord")}}
+                  >
+                    <FcViewDetails size={"2em"} style={{margin:"10px"}}/>
+                </DrawerItem> }
 
 
                 <DrawerItem  text={"צור קשר "}>
                     <FcOnlineSupport size={"2em"} style={{margin:"10px"}}/>
                 </DrawerItem>
+
+             
+
                 
                 
           </DrawerBody>

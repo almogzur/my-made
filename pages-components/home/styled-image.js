@@ -3,6 +3,7 @@ import { m, domAnimation, LazyMotion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 const StyledImage = ({ Images, timer = 3000, PropsImageStyle, PropsDivStyle }) => {
+  
   const [index, setIndex] = useState(0); 
   const [src, setSrc] = useState(Images[0]);
 

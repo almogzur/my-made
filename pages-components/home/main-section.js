@@ -3,7 +3,7 @@ import { WindowWidthContext } from "../../context";
 import StyledImage from "./styled-image";
 import SlidingTextWrapper from './sliding-text'
 import Colors from "../../lib/colors";
-import AnimatedHeadline from './animated-headline'
+import { Flex } from "@chakra-ui/react";
 
 
 import MD1 from '../../public/800px/cover1.jpg'
@@ -11,6 +11,7 @@ import MD2 from '../../public/800px/cover2.jpg'
 import MD3 from '../../public/800px/cover3.jpg'
 import MD4 from '../../public/800px/cover4.jpg'
 import MD5 from '../../public/800px/cover5.jpg'
+import { Container } from "@chakra-ui/react";
 
 
 const PhotosMd = {
@@ -23,15 +24,8 @@ function  MainSection() {
   const { xl, lg , md , sm } = useContext(WindowWidthContext);
 
   const Style = { 
-      Wrapper:{
-          width:"inherit",
-          display:'flex',
-          flexDirection:'column',
-          justifyContent:'center',
-          alignItems:'center',
-          alignContent:'center',
-          overflow:"clip"
-         },   
+   
+    
       HeadLine: {
           fontSize: "5em",
           color: Colors.c,
@@ -41,8 +35,9 @@ function  MainSection() {
   
   return (
 
-        <div  style={Style.Wrapper}>
-             <StyledImage 
+        <Container p={2}  >
+            <Flex direction={"column"} alignItems={"center"}  >
+              <StyledImage 
                   Images={ PhotosMd.A } 
                   PropsImageStyle={{ 
                     width:"800px", 
@@ -53,9 +48,11 @@ function  MainSection() {
                          opacity: "0.8"
                            }} 
                   timer={13000}  />
-              <SlidingTextWrapper/> 
+                  
+                <SlidingTextWrapper/> 
+              </Flex>
 
-      </div>
+      </Container>
   );
 
 }

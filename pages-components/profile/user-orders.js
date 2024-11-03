@@ -9,7 +9,7 @@ import { WindowWidthContext } from '../../context';
 import { IoMdAddCircle } from "react-icons/io";
 import {   motion ,AnimatePresence } from 'framer-motion';
 import { DataListItem, DataListRoot as DataList } from "../../components/ui/data-list"
-import { Container } from '@chakra-ui/react';
+import { Container, Flex, Text } from '@chakra-ui/react';
 
 const UserOrders = () => {
   const { data: session, status, update } = useSession();
@@ -30,15 +30,7 @@ const UserOrders = () => {
       marginBottom: "20px",
     },
 
-    ordersMainRow:{
-      display:'flex',
-      flexDirection:'row',
-      justifyContent:'space-around',
-      alignItems:'center',
-      background:"gray",
-      height:"60px",
-        
-    },
+
 
     RowContainer: {
       display: "flex",
@@ -60,7 +52,8 @@ const UserOrders = () => {
     orderDetail: {
       fontSize: !md ? "14px" : "16px",
       color: "#333",
-      width:"25%"
+      width:"25%",
+      fontWeight:"bold"
       
     },
     expandedDetails: {
@@ -124,12 +117,12 @@ const UserOrders = () => {
   return (
     <Container style={Style.wrapper}>
       <h1 style={Style.headline}>הזמנות</h1>
-      <div style={Style.ordersMainRow} >
-            <span style={{...Style.orderDetail,width:"7%"}}> #</span>
-            <span style={Style.orderDetail}>טלפון</span>
-            <span style={Style.orderDetail}>כתובת</span>
-            <span style={Style.orderDetail}>תאריך</span>
-          </div>
+         <Flex  justifyContent={"space-around"} alignItems={"center"} style={Style.ordersMainRow} background={"gray.300"} height={"60px"} >
+            <Text style={{...Style.orderDetail,width:"7%"}}> #</Text>
+            <Text style={Style.orderDetail}>טלפון</Text>
+            <Text style={Style.orderDetail}>כתובת</Text>
+            <Text style={Style.orderDetail}>תאריך</Text>
+          </Flex>
 
       {user?.Orders?.map((order, index) => {
         const orderDetails = [
@@ -152,12 +145,12 @@ const UserOrders = () => {
      return   <Container key={order.orderId} 
                    style={Style.RowContainer}
               >
-               <div style={Style.Row} onClick={() => handleRowClick(index)}>
+               <Container p={0} style={Style.Row} onClick={() => handleRowClick(index)}>
                   <div style={{...Style.orderDetail,width:"7%"}}> {index + 1}</div>
                   <div style={Style.orderDetail}>{order.orderPhone}</div>
                   <div style={Style.orderDetail}>{order.addres}</div>
                   <div style={Style.orderDetail}>{new Date(order.ResurveDate).toLocaleString('he-IL').slice(0,10) || "N/A"}</div>
-              </div>
+              </Container>
             <AnimatePresence>
 
             {expandedOrder === index ? 

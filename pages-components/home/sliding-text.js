@@ -1,3 +1,4 @@
+import { Container ,Flex} from "@chakra-ui/react";
 import Colors from "../../lib/colors";
 import AnimatedHeadline from "./animated-headline";
 
@@ -13,16 +14,7 @@ const SlidingTextWrapper = () => {
 
     
     const Style = {
-        Wrapper: { 
-                
-                display:'flex',
-                flexDirection:'column',
-                alignItems:'center',
-                position:"absolute" ,
-                color:"#fff",
-        textAlign:"center"
-        
-        },
+
         HeadLine: {
             fontSize: "5em",
             color: Colors.c,
@@ -43,12 +35,12 @@ const SlidingTextWrapper = () => {
             transition: { duration: 2, ease: "easeOut" }
         },
         Text1: {
-            initial: { x: -100, opacity: 0 },
+            initial: { x: 100, opacity: 0 },
             animate: { x: 0, opacity: 1 },
             transition: { duration: 2, delay: 0.5, ease: "easeOut" }
         },
         Text2: {
-            initial: { y: -100, opacity: 0 },
+            initial: { y: 100, opacity: 0 },
             animate: { y: 0, opacity: 1 },
             transition: { duration: 2, delay: 1, ease: "easeOut" }
         },
@@ -60,8 +52,8 @@ const SlidingTextWrapper = () => {
     };
 
     return (
-            <div style={Style.Wrapper}>
-
+            <Container p={0} m={0} > 
+                <Flex  direction={"column"} alignItems={"center"}    textAlign={"center"} color={"#fff"} >
                  <AnimatedHeadline
                     textStr={CopyText.Headline}
                     styleObj={Style.HeadLine}
@@ -90,8 +82,9 @@ const SlidingTextWrapper = () => {
                     animateObj={animations.bulletPoint.animate}
                     transitionObj={animations.bulletPoint.transition}
                 />
-            </div>
-    );
+                </Flex>
+            </Container>
+    )
 };
 
 export default SlidingTextWrapper;

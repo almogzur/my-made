@@ -3,8 +3,7 @@ import { MdEdit } from 'react-icons/md';
 import { FaRegClipboard } from 'react-icons/fa';
 import Colors from '../../lib/colors';
 import { useRouter } from 'next/router';
-import { color } from 'framer-motion';
-
+import { Container } from '@chakra-ui/react';
 
 const Style = {
   wrapper: {
@@ -84,7 +83,7 @@ const ProfileDetails = ({ user, setEdit,  }) => {
   const router = useRouter()
 
   return (
-    <div style={Style.wrapper}>
+    <Container style={Style.wrapper}>
       <h3 style={Style.headline}>  נרשמתם בהצלחה </h3>
       <p style={Style.subheadline} > ניתן לראות הזמנות בלוח עבודות  </p>
 
@@ -128,7 +127,7 @@ const ProfileDetails = ({ user, setEdit,  }) => {
         )}
       </div>
       
-    </div>
+    </Container>
   );
 };
 

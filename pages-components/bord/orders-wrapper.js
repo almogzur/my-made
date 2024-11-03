@@ -1,11 +1,9 @@
 import { useSession } from 'next-auth/react'
-import HCard from '../../pages-components/bord/items-display/h-card'
 import VCard from '../../pages-components/bord/items-display/v-card'
 import { useContext, useEffect, useState } from 'react';
 import {FilterCityContext } from '../../context'
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
- 
-import Accordi from './items-display/accrdi';
+import { Container } from "@chakra-ui/react"
 
 const OrdersWrapper=({ Mode})=>{
   const [ CityOrders ,setCityOrders] = useState(null)
@@ -36,16 +34,15 @@ const OrdersWrapper=({ Mode})=>{
   const Style = {
     Wrap:{
        padding:"20px",
-      background:"#fff",
-       width:"100%"
+         background:"#fff",
+          width:"100%",
+          display:'flex',
+          flexDirection:'column',
+          
+          alignItems:'center',
+          alignContent:'center',
       },
     oldWrap:{
-    display:"flex" ,
-    flexDirection: Mode === "Cards" ? "row" : "column" ,
-    flexWrap:"wrap",
-    marginBottom:"100px",
-    marginTop:"1em",
-    justifyContent:"center",
     }
   }
  // get orders when reactive value changes  filterCity
@@ -63,22 +60,18 @@ const OrdersWrapper=({ Mode})=>{
   }
      
  return (
-        <div style={Style.Wrap}>  
+        <Container style={Style.Wrap}>  
 
          { Array.isArray(CityOrders) && filterCity  ? 
        
              CityOrders.map((order,i)=>{
-             return (
-              
-              
-                  <VCard OrderData={order}  key={i} />
-                  )
+             return ( <VCard orderData={order}  key={i} />)
           })
             :"אין הזמנות " } 
         
 
 
-       </div>
+      </Container>
  )
 }
 

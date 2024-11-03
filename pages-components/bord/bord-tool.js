@@ -27,7 +27,6 @@ const Style = {
   Wrapper:{
       background:"#fff",
 
-
   },
 
 
@@ -92,7 +91,7 @@ const Style = {
            </Flex>
 
           <Slider    defaultValue={[0, 60]} />
-          
+
         </Container>
     </Container>
 ) 

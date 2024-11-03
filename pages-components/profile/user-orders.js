@@ -9,6 +9,7 @@ import { WindowWidthContext } from '../../context';
 import { IoMdAddCircle } from "react-icons/io";
 import {   motion ,AnimatePresence } from 'framer-motion';
 import { DataListItem, DataListRoot as DataList } from "../../components/ui/data-list"
+import { Container } from '@chakra-ui/react';
 
 const UserOrders = () => {
   const { data: session, status, update } = useSession();
@@ -123,7 +124,7 @@ const UserOrders = () => {
   };
 
   return (
-    <div style={Style.wrapper}>
+    <Container style={Style.wrapper}>
       <h1 style={Style.headline}>הזמנות</h1>
       <div style={Style.ordersMainRow} >
             <span style={{...Style.orderDetail,width:"7%"}}> #</span>
@@ -242,7 +243,7 @@ const UserOrders = () => {
           <NewOrder newOrder={true} />
         </UiDialog>
       </div>
-    </div>
+    </Container>
   );
 };
 

@@ -1,11 +1,13 @@
+import { Container } from "@chakra-ui/react";
+
 const ProjectStatus = () => {
 
   
     return (
-      <div style={styles.card}>
+      <Container style={styles.card}>
         <h3 style={styles.title}>הזמנות ישנות</h3>
  
-      </div>
+      </Container>
     );
   };
   

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import profileDefualtIcon from '../../public/User.jpg'
 import Colors from "../../lib/colors";
+import { Container } from "@chakra-ui/react";
 
 
 const Style = {
@@ -44,12 +45,12 @@ const ProfileCard = () => {
 
 
     return (
-      <div style={Style.card}>
+      <Container style={Style.card}>
          <Image style={Style.avatar} width={50} height={50} src={session?.user.image || profileDefualtIcon} alt="" />
           <h2 style={Style.name}>{session?.user?.name ?? "אלמוני" }</h2>
           <p style={Style.title}>{session?.user?.email.toUpperCase() }</p>
           <p style={Style.location}>אימייל מאושר : {session?.user?.emailVerified ? "כן" :" לא"}</p>
-      </div>
+      </Container>
     );
   };
   

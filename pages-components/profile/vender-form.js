@@ -8,7 +8,7 @@ import useUser from '../../lib/hooks/useUser'
 import LoadingSpinner from "../../components/my-spinner/loading-spinner";
 
 import { FaPenFancy } from "react-icons/fa";
-import { Input,Textarea } from "@chakra-ui/react"
+import { Input,Textarea , Container } from "@chakra-ui/react"
 import { Field } from "../../components/ui/field"
 
 
@@ -32,12 +32,14 @@ const VendorForm = ({ setEdit }) => {
     const Style = {
         Wrapper:  {   
            background:"#fff",
-           padding:"20px",
            display:'flex',
            flexDirection:'column',
            justifyContent:'center',
            alignItems:'center',
            alignContent:'center',
+           
+           
+        
          },    
        headelinStyle : { 
            textAlign:"center",
@@ -119,10 +121,13 @@ const VendorForm = ({ setEdit }) => {
   }
 
  return (
+  <Container  background={"#fff"}>
+
       <form 
          style={Style.Wrapper}
          onSubmit={handleSubmit}
          >
+
         <h3 style={Style.headelinStyle}>{`הרשם כנותן שירות משק`}</h3>
 
 
@@ -187,9 +192,10 @@ const VendorForm = ({ setEdit }) => {
           <FaPenFancy size={"1.5em"}  color={Colors.c}/>{"הרשמה"}
           
             </m.button>
-          </LazyMotion>
+        </LazyMotion>
 
       </form>
+      </Container>
 
   );
 };

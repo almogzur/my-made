@@ -86,7 +86,7 @@ const MyDrawer = () => {
                       <FcPlus size={"2em"} style={{margin:"10px"}}   />
                 </DrawerItem>
                     
-                {user?.Vendor.isVendor &&
+                {user?.Vendor?.isVendor &&
                   <DrawerItem  text={"לוח עבודות "} 
                       PropsOnClick={()=>{router.push("/bord")}}
                   >

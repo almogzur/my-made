@@ -72,7 +72,7 @@ const OrdersWrapper=({ Mode})=>{
        
              CityOrders.map((order,i)=>{
              return ( <VCard 
-               orderData={order} itemIndex={i} 
+               order={order} itemIndex={i} 
                key={i} 
                expandedIndex={expandedIndex}
                handleExpand={handleExpand}

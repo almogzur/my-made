@@ -67,8 +67,6 @@ const UserOrders = () => {
       display:'flex',
       flexDirection:'column',
       alignItems:'center',
-      background: "lightgray",
-      width:"100%",
     },
 
     button: {
@@ -151,7 +149,7 @@ const UserOrders = () => {
             { title: "מחיר לשעה", value: order.orderPrice || "N/A" }
         ];
             
-     return   <div key={order.orderId} 
+     return   <Container key={order.orderId} 
                    style={Style.RowContainer}
               >
                <div style={Style.Row} onClick={() => handleRowClick(index)}>
@@ -180,10 +178,7 @@ const UserOrders = () => {
               >
                <DataList 
                     orientation="horizontal"
-                    padding={"2em"}
-                    
-                   
-                    
+                    padding={"2em"}           
                     >
                        {orderDetails.map((item) => (
                 <DataListItem
@@ -225,7 +220,7 @@ const UserOrders = () => {
             :null}
             </AnimatePresence>
 
-        </div>
+        </Container>
       })}
 
       <div style={Style.newOrderWrap}>

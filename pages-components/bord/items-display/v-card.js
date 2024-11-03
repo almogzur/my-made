@@ -6,7 +6,7 @@ import { motion, AnimatePresence, easeIn } from 'framer-motion';
 
 const MotionCard = motion(Card.Root);
 
-const Vcard = ({ orderData, itemIndex, expandedIndex, handleExpand }) => {
+const Vcard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
 
   const isExpanded = expandedIndex === itemIndex 
 
@@ -25,20 +25,23 @@ const Vcard = ({ orderData, itemIndex, expandedIndex, handleExpand }) => {
         initial={{ x: 300, opacity: 0, height: 0 }}
         animate={{ x: 0, opacity: 1, height: 'auto' }}
         transition={{
-          x: { duration: (itemIndex + 1) / 2 },
-          opacity: { duration: 2 },
+          x: { duration: (itemIndex + 3) / 3 },
+          opacity: { duration: 0.2 },
           height: { duration: (itemIndex + 1) / 3, type: 'spring' },
         }}
+        viewport={{ once: false, amount: 0.4 }} 
+
+    
       >
         <Card.Body>
           <Card.Title color={Colors.c}  fontSize="2xl" mt="-0.5" fontWeight="bold">
-            {orderData?.name || 'לא זמין'}
+            {order?.name || 'לא זמין'}
           </Card.Title>
-          <Text fontSize="md">כתובת: {orderData?.address || 'לא זמין'}</Text>
-          <Text>עיר : {orderData?.city || 'לא זמין'}</Text>
-          <Text>תאריך הזמנה: {new Date(orderData.ReserveDate).toLocaleDateString('he-IL')}</Text>
-          <Text>טלפון: {orderData?.orderPhone || 'לא זמין'}</Text>
-          <Text>מחיר: {orderData?.orderPrice || '0'}</Text>
+          <Text fontSize="md">כתובת: {order?.address || 'לא זמין'}</Text>
+          <Text>עיר : {order?.city || 'לא זמין'}</Text>
+          <Text>תאריך הזמנה: {new Date(order?.ResurveDate).toLocaleString('he-IL').slice(0,10) || "לא זמין "}</Text>
+          <Text>טלפון: {order?.orderPhone || 'לא זמין'}</Text>
+          <Text>מחיר: {order?.orderPrice || '0'}</Text>
           
       
 
@@ -58,17 +61,17 @@ const Vcard = ({ orderData, itemIndex, expandedIndex, handleExpand }) => {
 
                 <Flex direction="column" alignItems="center">
                   <strong>סטטוס:  
-                    <Badge color={orderData?.orderStatus === "Open" ? "green" : "red"}>
-                    {orderData?.orderStatus || 'לא ידוע'}
+                    <Badge color={order?.orderStatus === "Open" ? "green" : "red"}>
+                    {order?.orderStatus || 'לא ידוע'}
                     </Badge>
                   </strong>
                 
-                  <strong>חדרים: {orderData?.ApartmentRoomsNumber || 'לא זמין'}</strong>
-                  <strong>גודל: {orderData?.ApartmentSize ? `${orderData.ApartmentSize} מ"ר` : 'לא זמין'}</strong>
-                  <strong>חדרי רחצה: {orderData?.NumberOfBaths || 'לא זמין'}</strong>
-                  <strong>תיאור עבודה: {orderData?.JobDescription || 'לא זמין'}</strong>
-                  <strong>שעה: {orderData?.FromH || 'לא זמין'} - {orderData?.ToH || 'לא זמין'}</strong>
-                  <strong>מזהה הזמנה : {orderData?.orderId.slice(0,10) +"..." || 'לא זמין'}</strong>
+                  <strong>חדרים: {order?.ApartmentRoomsNumber || 'לא זמין'}</strong>
+                  <strong>גודל: {order?.ApartmentSize ? `${order.ApartmentSize} מ"ר` : 'לא זמין'}</strong>
+                  <strong>חדרי רחצה: {order?.NumberOfBaths || 'לא זמין'}</strong>
+                  <strong>תיאור עבודה: {order?.JobDescription || 'לא זמין'}</strong>
+                  <strong>שעה: {order?.FromH || 'לא זמין'} - {order?.ToH || 'לא זמין'}</strong>
+                  <strong>מזהה הזמנה : {order?.orderId.slice(0,10) +"..." || 'לא זמין'}</strong>
                   
                   <Box p={4}>
                     <Button backgroundColor={Colors.c} color="#fff" variant="outline" width={150}>
@@ -86,7 +89,12 @@ const Vcard = ({ orderData, itemIndex, expandedIndex, handleExpand }) => {
               colorPalette="gray"
               variant="subtle"
               backgroundColor="gray"
-              onClick={() => handleExpand(itemIndex)}
+              onClick={() => {
+                handleExpand(itemIndex)
+             
+                }
+                
+              }
               width={200}
             >
               {isExpanded ? ' סגור' : ' פרטים'}

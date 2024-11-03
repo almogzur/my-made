@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Colors from '../../../lib/colors';
 import { Badge, Box, Card, Text, Flex } from "@chakra-ui/react";
 import { Button } from "../../../components/ui/button";
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, easeIn } from 'framer-motion';
 
 const MotionCard = motion(Card.Root);
 
@@ -31,7 +31,7 @@ const Vcard = ({ orderData, itemIndex, expandedIndex, handleExpand }) => {
         }}
       >
         <Card.Body>
-          <Card.Title color={Colors.c} mb="2" fontSize="2xl" mt="-0.5" fontWeight="bold">
+          <Card.Title color={Colors.c}  fontSize="2xl" mt="-0.5" fontWeight="bold">
             {orderData?.name || 'לא זמין'}
           </Card.Title>
           <Text fontSize="md">כתובת: {orderData?.address || 'לא זמין'}</Text>
@@ -39,6 +39,8 @@ const Vcard = ({ orderData, itemIndex, expandedIndex, handleExpand }) => {
           <Text>תאריך הזמנה: {new Date(orderData.ReserveDate).toLocaleDateString('he-IL')}</Text>
           <Text>טלפון: {orderData?.orderPhone || 'לא זמין'}</Text>
           <Text>מחיר: {orderData?.orderPrice || '0'}</Text>
+          
+      
 
           <AnimatePresence>
             {isExpanded && (
@@ -46,31 +48,35 @@ const Vcard = ({ orderData, itemIndex, expandedIndex, handleExpand }) => {
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: 'auto', opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-                style={{
-                  overflow: 'hidden',
-                  padding: '8px',
-                  backgroundColor: Colors.lightGray,
-                  borderRadius: '8px',
-                }}
+                transition={ {
+                  height:{ duration: 1.5 , ease:"backOut" },
+                  opacity:{ duration: 1 }
+                } }
+         
               >
+
+
                 <Flex direction="column" alignItems="center">
-                  <strong>מזהה הזמנה : {orderData?.orderId || 'לא זמין'}</strong>
-                  <strong>סטטוס:</strong>
-                  <Badge color={orderData?.orderStatus === "Open" ? "green" : "red"}>
+                  <strong>סטטוס:  
+                    <Badge color={orderData?.orderStatus === "Open" ? "green" : "red"}>
                     {orderData?.orderStatus || 'לא ידוע'}
-                  </Badge>
+                    </Badge>
+                  </strong>
+                
                   <strong>חדרים: {orderData?.ApartmentRoomsNumber || 'לא זמין'}</strong>
                   <strong>גודל: {orderData?.ApartmentSize ? `${orderData.ApartmentSize} מ"ר` : 'לא זמין'}</strong>
                   <strong>חדרי רחצה: {orderData?.NumberOfBaths || 'לא זמין'}</strong>
                   <strong>תיאור עבודה: {orderData?.JobDescription || 'לא זמין'}</strong>
                   <strong>שעה: {orderData?.FromH || 'לא זמין'} - {orderData?.ToH || 'לא זמין'}</strong>
+                  <strong>מזהה הזמנה : {orderData?.orderId.slice(0,10) +"..." || 'לא זמין'}</strong>
+                  
                   <Box p={4}>
                     <Button backgroundColor={Colors.c} color="#fff" variant="outline" width={150}>
                       קח הזמנה
                     </Button>
                   </Box>
                 </Flex>
+
               </motion.div>
             )}
           </AnimatePresence>
@@ -86,6 +92,8 @@ const Vcard = ({ orderData, itemIndex, expandedIndex, handleExpand }) => {
               {isExpanded ? ' סגור' : ' פרטים'}
             </Button>
           </Flex>
+
+
         </Card.Body>
       </MotionCard>
     </AnimatePresence>

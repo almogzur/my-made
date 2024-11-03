@@ -159,7 +159,7 @@ const UserOrders = () => {
                   <div style={Style.orderDetail}>{order.addres}</div>
                   <div style={Style.orderDetail}>{new Date(order.ResurveDate).toLocaleString('he-IL').slice(0,10) || "N/A"}</div>
               </div>
-          <AnimatePresence>
+            <AnimatePresence>
 
             {expandedOrder === index ? 
                 

@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from 'react';
 import {FilterCityContext } from '../../context'
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
  
-
+import Accordi from './items-display/accrdi';
 
 const OrdersWrapper=({ Mode})=>{
   const [ CityOrders ,setCityOrders] = useState(null)
@@ -13,11 +13,11 @@ const OrdersWrapper=({ Mode})=>{
   const [ isFetch, setIsFetch] = useState(false)
 
   const getOrders= async  (city) => {
-    if(!city){  setCityOrders(null)  }
+    if(!city || city === "אזור" ){  setCityOrders(null)  }
     
     try{
       setIsFetch(true)
-      const res = await fetch(`/api/board/orders/?city=${city}`)
+      const res = await fetch(`/api/bord/orders/?city=${city}`)
       const data = await res.json()   
         if (!data){  setCityOrders(null) }
         setCityOrders(data)
@@ -35,10 +35,10 @@ const OrdersWrapper=({ Mode})=>{
 
   const Style = {
     Wrap:{
-      height:"400px",
+       padding:"20px",
       background:"#fff",
-      width:"100%"
-    },
+       width:"100%"
+      },
     oldWrap:{
     display:"flex" ,
     flexDirection: Mode === "Cards" ? "row" : "column" ,
@@ -50,7 +50,7 @@ const OrdersWrapper=({ Mode})=>{
   }
  // get orders when reactive value changes  filterCity
   useEffect(()=>{
-
+    console.log(filterCity)
         if(filterCity){
      getOrders(filterCity)
         }
@@ -62,23 +62,26 @@ const OrdersWrapper=({ Mode})=>{
     return <LoadingSpinner/>
   }
      
- return <div style={Style.Wrap}  
-       >  
-       { Array.isArray(CityOrders) && filterCity  ? 
+ return (
+        <div style={Style.Wrap}>  
+
+         { Array.isArray(CityOrders) && filterCity  ? 
        
-        CityOrders.map((order,i)=>{
-            return  Mode === "Cards" ?  
-             <HCard OrderData={order} key={i}  /> 
-             :
-             <VCard OrderData={order} key={i} />
-             
+             CityOrders.map((order,i)=>{
+             return (
+              
+              
+                  <VCard OrderData={order}  key={i} />
+                  )
           })
-            :"אין הזמנות "
- 
-   
-     }
-     </div>
+            :"אין הזמנות " } 
+        
+
+
+       </div>
+ )
 }
+
 
 export default OrdersWrapper
 

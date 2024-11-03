@@ -9,18 +9,20 @@ import { FaWarehouse, FaRestroom } from "react-icons/fa";
 import { IoLocation } from "react-icons/io5";
 import { MdOutlineBedroomChild } from "react-icons/md";
 import { IoMdPerson } from "react-icons/io";
-import { WindowWidthContaxt,OrderContaxt } from '../../../context'
+import { WindowWidthContext,OrderContext,FilterCityContext } from '../../../context'
 
 
 
 const Vcard = ({ OrderData }) => {
-    const {xs , md , sm} = useContext(WindowWidthContaxt)
+    const {xl,lg,md,sm} = useContext(WindowWidthContext)
     const na = "N/A"
-    const [orderContext , setOrderContext ] = useContext(OrderContaxt)
+    const [orderContext , setOrderContext ] = useContext(OrderContext)
+    const [filterCity, setFilterCity] = useContext(FilterCityContext);
+
     
     const Style = {
       Wrapper: {
-          width:   xs ? "40%" : sm? " 40% " : md ? "300px"  : "20%",
+          width:   xl ? "40%" : sm? " 40% " : md ? "300px"  : "20%",
 
           marginTop: "5px",
           borderRadius: "2px",
@@ -63,7 +65,10 @@ const Vcard = ({ OrderData }) => {
       <Link  href={`/board/order/${OrderData.orderId.slice(0,10)}`} 
 
          style={Style.Wrapper}
-         onClick={()=> setOrderContext(OrderData)}
+         onClick={()=>{ 
+          setOrderContext(OrderData)
+          setFilterCity(null)
+          }}
          >
 
            <div style={Style.HedlineBox}>

@@ -6,33 +6,33 @@ import { IoMdPerson } from "react-icons/io";
 import { IoLocation } from "react-icons/io5";
 import { MdOutlineBedroomChild } from "react-icons/md";
 import { useContext } from 'react';
-import { OrderContaxt } from "../../../context"
+import { OrderContext ,FilterCityContext} from "../../../context"
+import { Container } from '@chakra-ui/react';
 
 
 const Style = {
   Wrapper: {
-    width:"100%",
     borderRadius: "5px",
     display: 'flex',
     flexDirection: 'row',
     cursor: "pointer",
     textDecoration: "none",
     marginTop:"0.5em",
-    boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)",  // Add a subtle box shadow
+    boxShadow: "0px 6px 10px rgba(0, 0, 0, 0.5)",  
 
   },
   TopSection: {
-    background: Colors.a,  // Background color for the top section
-    padding: '10px',
+    background: Colors.d,  // Background color for the top section
+    
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    color: Colors.text,
-    width:"20%"
+    color: "#fff",
+   
   },
   BottomSection: {
-    background: Colors.c,  // Background color for the bottom section
+    
     padding: '5px',
     display: 'flex',
     justifyContent: 'space-around',
@@ -59,13 +59,17 @@ const Vcard = ({ OrderData }) => {
 
    const clickHendler = ()=>{
     setOrderContext(OrderData)
+    setFilterCity(null)
    }
 
-  const [orderContext , setOrderContext ] = useContext(OrderContaxt)
+  const [orderContext , setOrderContext ] = useContext(OrderContext)
+  const [filterCity, setFilterCity] = useContext(FilterCityContext);
 
 
 
   return (
+    <Container maxWidth={900} padding={0}  >
+    
     <Link href={`/board/order/${OrderData.orderId.slice(0,10)}`}
           style={Style.Wrapper}
           onClick={clickHendler}
@@ -97,6 +101,7 @@ const Vcard = ({ OrderData }) => {
         </div>
       </div>
     </Link>
+    </Container>
   );
 };
 

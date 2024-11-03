@@ -79,6 +79,7 @@ const NewOrder = ({ orderId, newOrder }) => {
 
   // Fetch the order if orderId is provided
   useEffect(() => {
+    
    
     if (orderId) { // Fetch order only if it's not a new order
       const existingOrder = user?.Orders?.find(order => order.orderId === orderId);
@@ -106,6 +107,8 @@ const NewOrder = ({ orderId, newOrder }) => {
   const handleChange = (e) => {
     const id = e.target.id;
     const value = e.target.value;
+      // hendler cant get the values from Select && Calender events ,
+
 
 
     setState(prevState => ({
@@ -115,10 +118,19 @@ const NewOrder = ({ orderId, newOrder }) => {
   };
 
   const hendelCaLchange =  (value)=>{
+    
     setState(prevState => ({
       ...prevState,
       [STATE_KEY]: { ...prevState[STATE_KEY], ResurveDate: value }
     }));
+  }
+
+  const handleSelect= (e)=>{
+    const   value  = e.target.value
+    const id = "city"
+        setState((prevState)=>({ ...prevState,
+          [STATE_KEY]:{...prevState[STATE_KEY], [id]:value}
+        }))    
   }
 
   const createNewOrder = async () => {
@@ -271,9 +283,9 @@ const NewOrder = ({ orderId, newOrder }) => {
             placeholder="אזור"
             required
             variant="subtle"
-            id='city'    
+            id='city'
             value={state[STATE_KEY].city}
-            onChange={handleChange}
+            onChange={handleSelect}
             paddingTop={"20px"}
             
           >
@@ -283,7 +295,7 @@ const NewOrder = ({ orderId, newOrder }) => {
                   {israelRegions.map((obj,i)=>{
                   const city = obj.value
   
-                  return <option   id={city}  key={`  ${i}`} value={city} >{city}</option>
+                  return <option  id={city}  key={`  ${i}`} value={city} >{city}</option>
              })}   
             </Option>
       </Select>

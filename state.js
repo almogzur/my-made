@@ -15,7 +15,7 @@ const State = {
       JobDescription:"",
       addres:"",
       city:"",
-
+      orderStatus:"",
       orderPhone:0,
       ApartmentRoomsNumber:0,
       NumberOfBaths:0,

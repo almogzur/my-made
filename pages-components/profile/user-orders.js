@@ -8,7 +8,7 @@ import LoadingSpinner from '../../components/my-spinner/loading-spinner';
 import { WindowWidthContaxt } from '../../context';
 import { IoMdAddCircle } from "react-icons/io";
 import {   motion ,AnimatePresence } from 'framer-motion';
-import { DataListItem, DataListRoot } from "../../components/ui/data-list"
+import { DataListItem, DataListRoot as DataList } from "../../components/ui/data-list"
 
 const UserOrders = () => {
   const { data: session, status, update } = useSession();
@@ -28,7 +28,18 @@ const UserOrders = () => {
       fontWeight: 'bold',
       marginBottom: "20px",
     },
-    orderContainer: {
+
+    ordersMainRow:{
+      display:'flex',
+      flexDirection:'row',
+      justifyContent:'space-around',
+      alignItems:'center',
+      background:"gray",
+      height:"60px",
+        
+    },
+
+    RowContainer: {
       display: "flex",
       flexDirection: "column",
       borderBottom: "1px solid #ddd",
@@ -36,16 +47,7 @@ const UserOrders = () => {
       background: "#fff",
       borderRadius: "5px",
     },
-    ordersHeadline:{
-      display:'flex',
-      flexDirection:'row',
-      justifyContent:'center',
-      alignItems:'center',
-      background:"gray",
-      height:"60px",
-      
-    },
-    orderRow: {
+    Row: {
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
@@ -55,7 +57,7 @@ const UserOrders = () => {
 
     },
     orderDetail: {
-      fontSize: !md ? "10px" : "16px",
+      fontSize: !md ? "14px" : "16px",
       color: "#333",
       width:"25%"
       
@@ -65,7 +67,7 @@ const UserOrders = () => {
       flexDirection:'column',
       alignItems:'center',
       background: "lightgray",
-      width:"100%"
+      width:"100%",
     },
 
     button: {
@@ -123,8 +125,8 @@ const UserOrders = () => {
   return (
     <div style={Style.wrapper}>
       <h1 style={Style.headline}>הזמנות</h1>
-      <div style={Style.ordersHeadline} >
-            <span style={Style.orderDetail}> מספר</span>
+      <div style={Style.ordersMainRow} >
+            <span style={{...Style.orderDetail,width:"7%"}}> #</span>
             <span style={Style.orderDetail}>טלפון</span>
             <span style={Style.orderDetail}>כתובת</span>
             <span style={Style.orderDetail}>תאריך</span>
@@ -134,13 +136,13 @@ const UserOrders = () => {
         const orderDetails = [
             { title: "מזמין", value: order.name },
             { title: "טלפון", value: order.orderPhone },
-            { title: "תאריך ושעה", value: order.ResurveDate ? new Date(order.ResurveDate).toLocaleString('he-IL') : "N/A" },
+            { title: "תאריך ושעה", value: order.ResurveDate ? new Date(order.ResurveDate).toLocaleString('he-IL').slice(0,10)  : "N/A" },
             { title: "עיר", value: order.city || "N/A" },
             { title: "כתובת", value: order.addres || "N/A" },
             { title: "מספר חדרים", value: order.ApartmentRoomsNumber || "N/A" },
             { title: "מספר מקלחות", value: order.NumberOfBaths || "N/A" },
             { title: "תיאור", value: order.JobDescription || "N/A" },
-            { title: "סטטוס הזמנה", value: order.ResurveDate ? new Date(order.ResurveDate).toLocaleString('he-IL') : "N/A" },
+            { title: "סטטוס הזמנה", value: order.orderStatus ? order.orderStatus : "N/A" },
             { title: "מזהה הזמנה", value: order.orderId ? order.orderId.slice(0, 17) + " ..." : "N/A" },
             { title: "גודל הדירה במטרים", value: order.ApartmentSize || "N/A" },
             { title: "נוצרה ב", value: order.createdAt ? new Date(order.createdAt).toLocaleString('he-IL') : "N/A" },
@@ -148,13 +150,15 @@ const UserOrders = () => {
             { title: "מחיר לשעה", value: order.orderPrice || "N/A" }
 ];
             
-     return   <div key={order.orderId} style={Style.orderContainer}>
-          <div style={Style.orderRow} onClick={() => handleRowClick(index)}>
-            <div style={Style.orderDetail}> {index + 1}</div>
-            <div style={Style.orderDetail}>{order.orderPhone}</div>
-            <div style={Style.orderDetail}>{order.addres}</div>
-            <div style={Style.orderDetail}>{order.ResurveDate.toLocaleString('he-il') || "N/A"}</div>
-          </div>
+     return   <div key={order.orderId} 
+                   style={Style.RowContainer}
+              >
+               <div style={Style.Row} onClick={() => handleRowClick(index)}>
+                  <div style={{...Style.orderDetail,width:"7%"}}> {index + 1}</div>
+                  <div style={Style.orderDetail}>{order.orderPhone}</div>
+                  <div style={Style.orderDetail}>{order.addres}</div>
+                  <div style={Style.orderDetail}>{new Date(order.ResurveDate).toLocaleString('he-IL').slice(0,10) || "N/A"}</div>
+              </div>
           <AnimatePresence>
 
             {expandedOrder === index ? 
@@ -174,20 +178,24 @@ const UserOrders = () => {
                 }}
                  
               >
-               <DataListRoot 
+               <DataList 
                     orientation="horizontal"
                     padding={"2em"}
+                    
+                   
+                    
                     >
                        {orderDetails.map((item) => (
                 <DataListItem
-                  fontSize={!md? "10px" : "16px"}
-                  style={{padding:"0px" , lineHeight:!md? "10px" : "16px" , }}
+                  fontSize={!md? "14px" : "16px"}
+                  style={{padding:"2px" , lineHeight:!md? "10px" : "16px" , }}
                   key={item.label}
                   label={item.title}
                   value={item.value}
+
         />
       ))}
-                   </DataListRoot>
+               </DataList>
                 
               
                 

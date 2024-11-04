@@ -3,7 +3,7 @@ import VCard from '../../pages-components/bord/items-display/v-card'
 import { useContext, useEffect, useState } from 'react';
 import {FilterCityContext } from '../../context'
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
-import { Container } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
 
 const OrdersWrapper=({ Mode})=>{
   const [ CityOrders ,setCityOrders] = useState(null)
@@ -33,14 +33,9 @@ const OrdersWrapper=({ Mode})=>{
 
   const Style = {
     Wrap:{
-       padding:"20px",
          background:"#fff",
-          width:"100%",
-          display:'flex',
-          flexDirection:'column',
-          
-          alignItems:'center',
-          alignContent:'center',
+    
+     
       },
     oldWrap:{
     }
@@ -66,7 +61,10 @@ const OrdersWrapper=({ Mode})=>{
   }
      
  return (
-        <Container style={Style.Wrap}>  
+        <Flex background='#fff' p={0} direction="column" alignItems="center" alignContent='center'
+
+
+        >  
 
          { Array.isArray(CityOrders) && filterCity  ? 
        
@@ -82,7 +80,7 @@ const OrdersWrapper=({ Mode})=>{
         
 
 
-      </Container>
+      </Flex>
  )
 }
 

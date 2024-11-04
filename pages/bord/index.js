@@ -6,24 +6,19 @@ import Colors from '../../lib/colors';
 import HomeNavigation from '../../pages-components/home/home-navigation'
 import BordTools from '../../pages-components/bord/bord-tool'
 import OrdersWrapper from '../../pages-components/bord/orders-wrapper';
+import { Container, Flex } from '@chakra-ui/react';
+import LoadingSpinner from '../../components/my-spinner/loading-spinner';
 
 
 
 const Style = {
   wrapper: {
     
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '20px',
-    padding: '20px',
-    backgroundColor: '#F0F2F5',      
+  
     background:Colors.d,
 
   },
-  child: {
-    flex: '1 1 100%',
-    
-  },
+
 };
 
 const BoardPage = () => {
@@ -44,37 +39,37 @@ const BoardPage = () => {
 
 
   if (status === 'loading' ) {
-    return <h1 style={{textAlign: 'center'}}>Loading User Info ...</h1>;
+    return <LoadingSpinner/>
   }
 
 
   return (
-
-    <>
-      <HomeNavigation/>
-      <div style={Style.wrapper} >
+        <Container>
+        <HomeNavigation/>
+            <Flex flexWrap='wrap' gap={"20px"}  >
       
-          <div style={Style.child}>
-            <BordTools
-                 setMode={setMode}
+                 <Flex  flexBasis={"100%"} >
+                    <BordTools
+                       setMode={setMode}
                  setFilterCity={setFilterCity}
-                 setFilterPriceArray={setFilterPriceArray}
-           />
-          </div>
+                        setFilterPriceArray={setFilterPriceArray}
+                     />
+                </Flex>
 
-          <div style={Style.child}>
-                <OrdersWrapper
-                    Mode={Mode}
-                    filterCity={filterCity}
-                     setFilterCity={setFilterCity}
-          /> 
-          </div>
-
-
-      </div>
+                 <Flex flexBasis={"100%"}  >
+                  <OrdersWrapper
+                       Mode={Mode}
+                       filterCity={filterCity}
+                       setFilterCity={setFilterCity}
+              /> 
+                </Flex>
 
 
-      </>
+            </Flex>
+
+      </Container>
+
+      
   );
 };
 

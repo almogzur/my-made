@@ -1,9 +1,12 @@
 import { useSession } from 'next-auth/react'
-import VCard from '../../pages-components/bord/items-display/v-card'
+import Card from '../../pages-components/bord/card'
 import { useContext, useEffect, useState } from 'react';
 import {FilterCityContext } from '../../context'
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
-import { Flex } from "@chakra-ui/react"
+import { Container, Flex } from "@chakra-ui/react"
+import { GiVacuumCleaner } from "react-icons/gi";
+import Colors from '../../lib/colors';
+
 
 const OrdersWrapper=({ Mode})=>{
   const [ CityOrders ,setCityOrders] = useState(null)
@@ -31,15 +34,7 @@ const OrdersWrapper=({ Mode})=>{
     
 }
 
-  const Style = {
-    Wrap:{
-         background:"#fff",
-    
-     
-      },
-    oldWrap:{
-    }
-  }
+
  // get orders when reactive value changes  filterCity
   useEffect(()=>{
     console.log(filterCity)
@@ -57,30 +52,52 @@ const OrdersWrapper=({ Mode})=>{
   };
   
  if(isFetch){ 
-    return <LoadingSpinner/>
+    return <Flex
+                direction={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                bg={"#fff"}
+                height={"12em"}
+                width={'100%'}
+                >
+
+             <LoadingSpinner/>
+            </Flex> 
   }
      
  return (
-        <Flex background='#fff' p={0} direction="column" alignItems="center" alignContent='center'
-
-
-        >  
-
-         { Array.isArray(CityOrders) && filterCity  ? 
-       
-             CityOrders.map((order,i)=>{
-             return ( <VCard 
-               order={order} itemIndex={i} 
-               key={i} 
-               expandedIndex={expandedIndex}
-               handleExpand={handleExpand}
-           />)
-          })
-            :"אין הזמנות " } 
         
+          <Flex width={"100%"} p={0} m={0}flexWrap={"wrap"} justifyContent={"space-around"}  bg={"#fff"} >  
+            
+              { Array.isArray(CityOrders) && filterCity  ?     
+              
+                 CityOrders.map((order,i)=>{
+                   return(
+                     <Card 
+                        order={order} itemIndex={i} 
+                        key={i} 
+                        expandedIndex={expandedIndex}
+                        handleExpand={handleExpand}
+                     />
+                     )})
+                   :
+                   <Flex
+                       direction={"column"}
+                       justifyContent={"center"}
+                       alignContent={"center"}
+                       background='#fff'
+                       height={"12em"} 
+                    >
+                     <GiVacuumCleaner size={"5em"} color={Colors.c}  /> 
+                  </Flex>
+      
+                    } 
+                   
 
 
-      </Flex>
+       </Flex>
+   
+
  )
 }
 

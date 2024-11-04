@@ -5,7 +5,7 @@ import {motion } from "framer-motion";
 const AnimatedHeadline = ({ text, initia, animate, style, transition , fontWeight }) => {
     return (
     
-    <Container  >
+
         <motion.div 
             initial={initia }
             animate={animate }
@@ -13,9 +13,11 @@ const AnimatedHeadline = ({ text, initia, animate, style, transition , fontWeigh
             style={style}
 
         >
+            <Container  >
            <Text fontWeight={fontWeight?? null}  >{text}</Text>
+           </Container>
         </motion.div>
-        </Container>
+  
     );
 };
 export default AnimatedHeadline

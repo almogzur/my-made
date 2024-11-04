@@ -1,26 +1,28 @@
-import Link from 'next/link';
-import Colors from '../../../lib/colors';
-import { Badge, Box, Card, Text, Flex } from "@chakra-ui/react";
-import { Button } from "../../../components/ui/button";
-import { motion, AnimatePresence, easeIn } from 'framer-motion';
+import Colors from "../../lib/colors";
+import { Badge, Box, Card, Text, Flex, Container } from "@chakra-ui/react";
+import { Button } from "../../components/ui/button";
+import { motion, AnimatePresence } from 'framer-motion';
+import { WindowWidthContext } from '../../context';
+import { useContext, useEffect } from 'react';
 
 const MotionCard = motion(Card.Root);
 
 const Vcard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
 
+  const {xl,lg,md,sm} = useContext(WindowWidthContext)
+
+
   const isExpanded = expandedIndex === itemIndex 
 
   return (
-    <AnimatePresence>
-      <MotionCard
-        flexDirection="column"
-        overflow="hidden"
-        width="100%"
-        maxWidth="700px"
-        p="0"
-        m={2}
+        <Container p={0} maxWidth={"360px"}>
+           <AnimatePresence>
+
+      <MotionCard        
         boxShadow="lg"
-        borderRadius="md"
+        
+        m={sm && md?  3 : 2}
+        p={0}
         bg="white"
         initial={{ x: 300, opacity: 0, height: 0 }}
         animate={{ x: 0, opacity: 1, height: 'auto' }}
@@ -33,15 +35,17 @@ const Vcard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
 
     
       >
-        <Card.Body>
-          <Card.Title color={Colors.c}  fontSize="2xl" mt="-0.5" fontWeight="bold">
+        <Card.Body p={3} m={0}>
+          
+          <Card.Title color={Colors.c}  fontSize="2xl" fontWeight="bold">
             {order?.name || 'לא זמין'}
           </Card.Title>
+
           <Text fontSize="md">כתובת: {order?.address || 'לא זמין'}</Text>
           <Text>עיר : {order?.city || 'לא זמין'}</Text>
           <Text>תאריך הזמנה: {new Date(order?.ResurveDate).toLocaleString('he-IL').slice(0,10) || "לא זמין "}</Text>
           <Text>טלפון: {order?.orderPhone || 'לא זמין'}</Text>
-          <Text>מחיר: {order?.orderPrice || '0'}</Text>
+          <Text color={Colors.c} fontWeight={"bold"} fontSize={'larger'} > שעתון  : {order?.orderPrice || '0'}</Text>
           
       
 
@@ -53,25 +57,24 @@ const Vcard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                 exit={{ height: 0, opacity: 0 }}
                 transition={ {
                   height:{ duration: 1.5 , ease:"backOut" },
-                  opacity:{ duration: 1 }
+                  opacity:{ duration: 0.8 }
                 } }
          
               >
 
 
                 <Flex direction="column" alignItems="center">
-                  <strong>סטטוס:  
+                  <Text fontWeight={'bold'}  >סטטוס:  
                     <Badge color={order?.orderStatus === "Open" ? "green" : "red"}>
-                    {order?.orderStatus || 'לא ידוע'}
+                    {order?.orderStatus || 'N/A'}
                     </Badge>
-                  </strong>
+                  </Text>
                 
-                  <strong>חדרים: {order?.ApartmentRoomsNumber || 'לא זמין'}</strong>
-                  <strong>גודל: {order?.ApartmentSize ? `${order.ApartmentSize} מ"ר` : 'לא זמין'}</strong>
-                  <strong>חדרי רחצה: {order?.NumberOfBaths || 'לא זמין'}</strong>
-                  <strong>תיאור עבודה: {order?.JobDescription || 'לא זמין'}</strong>
-                  <strong>שעה: {order?.FromH || 'לא זמין'} - {order?.ToH || 'לא זמין'}</strong>
-                  <strong>מזהה הזמנה : {order?.orderId.slice(0,10) +"..." || 'לא זמין'}</strong>
+                  <Text fontWeight={'bold'}  >חדרים: {order?.ApartmentRoomsNumber || 'לא זמין'}</Text>
+                  <Text fontWeight={'bold'}  >חדרי רחצה: {order?.NumberOfBaths || 'לא זמין'}</Text>
+                  <Text fontWeight={'bold'}  >תיאור עבודה: {order?.JobDescription || 'לא זמין'}</Text>
+                  <Text fontWeight={'bold'}  >שעה: {order?.FromH || 'לא זמין'} - {order?.ToH || 'לא זמין'}</Text>
+                  <Text fontWeight={'bold'} >מזהה הזמנה : {order?.orderId.slice(0,10) +"..." || 'לא זמין'}</Text>
                   
                   <Box p={4}>
                     <Button backgroundColor={Colors.c} color="#fff" variant="outline" width={150}>
@@ -84,27 +87,28 @@ const Vcard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
             )}
           </AnimatePresence>
 
-          <Flex direction="column" alignItems="center">
+          <Flex direction="column" p={2}  alignItems="center">
+
             <Button
               colorPalette="gray"
-              variant="subtle"
-              backgroundColor="gray"
-              onClick={() => {
-                handleExpand(itemIndex)
-             
-                }
-                
-              }
-              width={200}
+              variant="surface"
+              onClick={() => handleExpand(itemIndex)}
+              width={120}
+              color={Colors.c}
+              
             >
               {isExpanded ? ' סגור' : ' פרטים'}
             </Button>
+
           </Flex>
 
 
         </Card.Body>
+
       </MotionCard>
-    </AnimatePresence>
+
+           </AnimatePresence>
+       </Container>
   );
 };
 

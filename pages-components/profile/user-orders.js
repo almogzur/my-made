@@ -38,12 +38,13 @@ const UserOrders = () => {
       background: "#f9f9f9",
 
     },
+
+
     orderDetail: {
-      fontSize: !md ? "12px" : "16px",
+      fontSize: md && sm ? "16px" : "12px",
       color: "#333",
       width:"30%",
-      fontWeight:"bold",
-      overflow:"clip"
+      overflow:"clip",
       
     },
 
@@ -122,15 +123,16 @@ const UserOrders = () => {
             { title: "מזהה הזמנה", value: order.orderId ? order.orderId.slice(0, 20) : "N/A" },
         ];
             
-       return  <Flex direction={"column"} borderBottom={"1px solid #ddd"} p={1}
-                   key={order.orderId} 
-          
+    return  <Flex 
+                  direction={"column"} 
+                  borderBottom={"1px solid #ddd"} p={1}
+                  key={order.orderId} 
               >
                  <Container p={0} overflow={"hidden"} style={Style.Row} onClick={() => handleClick(index)}>
-                  <div style={{...Style.orderDetail,width:"7%"}}> {index + 1}</div>
-                  <div style={Style.orderDetail}>{order.orderPhone}</div>
-                  <div style={Style.orderDetail}>{order.addres}</div>
-                  <div style={Style.orderDetail}>{new Date(order.ResurveDate).toLocaleString('he-IL').slice(0,10) || "N/A"}</div>
+                   <Text style={{...Style.orderDetail,width:"7%"}}> {index + 1}</Text>
+                    <Text style={Style.orderDetail}  >{order.orderPhone}</Text>
+                  <Text style={Style.orderDetail}>{order.addres}</Text>
+                  <Text style={Style.orderDetail}>{new Date(order.ResurveDate).toLocaleString('he-IL').slice(0,10) || "N/A"}</Text>
                 </Container>
 
             <AnimatePresence>
@@ -152,16 +154,21 @@ const UserOrders = () => {
               >
                <DataList 
                     orientation="horizontal"
-                    marginTop={"10px"}         
-                     p={0}
+                    marginTop={"10px"}  
+                    p={0}       
+                    size={"sm"}
+                    
+                 
                
                
         
                     >
             {orderDetails.map((item) => (
                 <DataListItem
-                   fontSize={!md? "14px" : "16px"}
-                   style={{padding:"2px" ,}}
+                
+                   fontSize={!md? "12px" : "16px"}
+                   
+                   style={{padding:"0px" , lineHeight:"13px", margin:"0px" }}
                    key={item.label}
                    label={item.title}
                    value={item.value}

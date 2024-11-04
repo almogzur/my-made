@@ -1,7 +1,6 @@
 import { Container ,Flex} from "@chakra-ui/react";
 import Colors from "../../lib/colors";
 import AnimatedHeadline from "./animated-headline";
-import { delay } from "framer-motion";
 
 
 
@@ -12,36 +11,36 @@ import { delay } from "framer-motion";
                     animate: { y: 0, opacity: 1 , type:"sping" },    
                     transition: { duration: 1, ease: "easeOut" }
                 },
-                style:{   fontSize: "4.5em", color: Colors.c , fontWeight: "bold",}
+                style:{   fontSize: "3em", color: Colors.c , fontWeight: "bold",}
                 } 
 
 const CopyText = [ 
         
-        {Text: "צריכים עוזר/ת בית?",
+        {Text: "צריכים עוזר/ת בית ?",
           animation:{
             initial: { height:0, opacity: 0 , delay:"0.2"  },
             animate: {  opacity: 1 , height:'auto' , ease:"backInOut"},
             transition: { duration: 2, delay: 0.5, ease: "easeOut" ,}
            },
-           style:{  fontSize: "2.9em", marginBottom: "0.5em"}
+           style:{  fontSize: "1.5em", marginBottom: "0.5em"  }
      
 
         },
-        {Text :" הרשמו עכשיו ",
+        {Text :" הרשמו עכשיו !!",
         animation:{
             initial: { y: 100, opacity: 0 },
             animate: { y: 0, opacity: 1 },
             transition: { duration: 2, delay: 1, ease: "easeOut" }
             },
-        style:{  fontSize: "2.9em", marginBottom: "0.5em"}
+        style:{  fontSize: "1.5em", marginBottom: "0.5em"}
         }, 
-        {Text: "תיאום קל ופשוט",
+        {Text: "תיאום קל ופשוט .",
         animation:{
             initial: { y: 100, opacity: 0 },
             animate: { y: 0, opacity: 1 },
             transition: { duration: 2, delay: 1.5, ease: "easeOut" }
         },
-        style:{  fontSize: "2.9em", marginBottom: "0.5em"}
+        style:{  fontSize: "1.5em", marginBottom: "0.5em" }
         }
 ]
 
@@ -50,7 +49,7 @@ const SlidingTextWrapper = () => {
 
 
     return (
-            <Container p={0} m={0} > 
+            
                 <Flex  direction={"column"} alignItems={"center"}    textAlign={"center"} color={"#fff"} p={0}  >
                               <AnimatedHeadline 
                                 
@@ -77,7 +76,7 @@ const SlidingTextWrapper = () => {
 
           
                 </Flex>
-            </Container>
+
     )
 };
 

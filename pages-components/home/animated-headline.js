@@ -1,18 +1,21 @@
-import {m, domAnimation, LazyMotion } from "framer-motion";
+import { Container , Text  } from "@chakra-ui/react";
 
-const AnimatedHeadline = ({ textStr, initialObj, animateObj, styleObj, transitionObj }) => {
+import {motion } from "framer-motion";
+
+const AnimatedHeadline = ({ text, initia, animate, style, transition }) => {
     return (
-        <LazyMotion features={domAnimation}>
+    
+    <Container>
+        <motion.div 
+            initial={initia }
+            animate={animate }
+            transition={transition}
+            style={style}
 
-        <m.h1 
-            initial={initialObj ?? null}
-            animate={animateObj ?? null}
-            transition={transitionObj ?? null}
-            style={styleObj ?? null}
         >
-            {textStr}
-        </m.h1>
-        </LazyMotion>
+           <Text  >{text}</Text>
+        </motion.div>
+        </Container>
     );
 };
 export default AnimatedHeadline

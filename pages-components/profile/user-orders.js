@@ -9,7 +9,7 @@ import { WindowWidthContext } from '../../context';
 import { IoMdAddCircle } from "react-icons/io";
 import {   motion ,AnimatePresence } from 'framer-motion';
 import { DataListItem, DataListRoot as DataList } from "../../components/ui/data-list"
-import { Container, Flex, Text } from '@chakra-ui/react';
+import { Button, Container, Flex, Text } from '@chakra-ui/react';
 
 const UserOrders = () => {
   const { data: session, status, update } = useSession();
@@ -19,9 +19,7 @@ const UserOrders = () => {
   const { xl, lg, md, sm } = useContext(WindowWidthContext);
 
   const Style = {
-    wrapper: {
-        backgroundColor: "#fff",
-     },
+
     headline: {
       textAlign: 'center',
       fontSize: "2em",
@@ -31,15 +29,6 @@ const UserOrders = () => {
     },
 
 
-
-    RowContainer: {
-      display: "flex",
-      flexDirection: "column",
-      borderBottom: "1px solid #ddd",
-      padding: "5px",
-      background: "#fff",
-      borderRadius: "5px",
-    },
     Row: {
       display: "flex",
       justifyContent: "space-between",
@@ -50,16 +39,12 @@ const UserOrders = () => {
 
     },
     orderDetail: {
-      fontSize: !md ? "14px" : "16px",
+      fontSize: !md ? "12px" : "16px",
       color: "#333",
-      width:"25%",
-      fontWeight:"bold"
+      width:"30%",
+      fontWeight:"bold",
+      overflow:"clip"
       
-    },
-    expandedDetails: {
-      display:'flex',
-      flexDirection:'column',
-      alignItems:'center',
     },
 
     button: {
@@ -74,14 +59,7 @@ const UserOrders = () => {
       fontWeight: "bold",
       margin: "20px",
     },
-    BtnsWrap:{
-      display:'flex',
-      flexDirection:'row',
-      flexWrap:"wrap",
-      justifyContent:"space-evenly"
-      
-      
-    },
+
     newOrderWrap: {
       display: 'flex',
       justifyContent: 'center',
@@ -93,7 +71,7 @@ const UserOrders = () => {
     return <LoadingSpinner />;
   }
 
-  const handleRowClick = (index) => {
+  const handleClick = (index) => {
     setExpandedOrder(expandedOrder === index ? null : index);
   };
 
@@ -115,8 +93,10 @@ const UserOrders = () => {
   };
 
   return (
-    <Container style={Style.wrapper}>
-      <h1 style={Style.headline}>הזמנות</h1>
+    <Container background={"#fff"} >
+
+      <Text style={Style.headline}>הזמנות</Text>
+      
          <Flex  justifyContent={"space-around"} alignItems={"center"} style={Style.ordersMainRow} background={"gray.300"} height={"60px"} >
             <Text style={{...Style.orderDetail,width:"7%"}}> #</Text>
             <Text style={Style.orderDetail}>טלפון</Text>
@@ -126,71 +106,75 @@ const UserOrders = () => {
 
       {user?.Orders?.map((order, index) => {
         const orderDetails = [
+            { title: "מחיר לשעה", value: order.orderPrice || "N/A" },
             { title: "מזמין", value: order.name },
             { title: "טלפון", value: order.orderPhone },
+            { title: "סטטוס הזמנה", value: order.orderStatus ? order.orderStatus : "N/A" },
             { title: "תאריך ושעה", value: order.ResurveDate ? new Date(order.ResurveDate).toLocaleString('he-IL').slice(0,10)  : "N/A" },
             { title: "עיר", value: order.city || "N/A" },
             { title: "כתובת", value: order.addres || "N/A" },
             { title: "מספר חדרים", value: order.ApartmentRoomsNumber || "N/A" },
             { title: "מספר מקלחות", value: order.NumberOfBaths || "N/A" },
             { title: "תיאור", value: order.JobDescription || "N/A" },
-            { title: "סטטוס הזמנה", value: order.orderStatus ? order.orderStatus : "N/A" },
-            { title: "מזהה הזמנה", value: order.orderId ? order.orderId.slice(0, 17) + " ..." : "N/A" },
             { title: "גודל הדירה במטרים", value: order.ApartmentSize || "N/A" },
             { title: "נוצרה ב", value: order.createdAt ? new Date(order.createdAt).toLocaleString('he-IL') : "N/A" },
             { title: "עודכנה ב", value: order.updateAt ? new Date(order.updateAt).toLocaleString('he-IL') : "N/A" },
-            { title: "מחיר לשעה", value: order.orderPrice || "N/A" }
+            { title: "מזהה הזמנה", value: order.orderId ? order.orderId.slice(0, 20) : "N/A" },
         ];
             
-     return   <Container key={order.orderId} 
-                   style={Style.RowContainer}
+       return  <Flex direction={"column"} borderBottom={"1px solid #ddd"} p={1}
+                   key={order.orderId} 
+          
               >
-               <Container p={0} style={Style.Row} onClick={() => handleRowClick(index)}>
+                 <Container p={0} overflow={"hidden"} style={Style.Row} onClick={() => handleClick(index)}>
                   <div style={{...Style.orderDetail,width:"7%"}}> {index + 1}</div>
                   <div style={Style.orderDetail}>{order.orderPhone}</div>
                   <div style={Style.orderDetail}>{order.addres}</div>
                   <div style={Style.orderDetail}>{new Date(order.ResurveDate).toLocaleString('he-IL').slice(0,10) || "N/A"}</div>
-              </Container>
+                </Container>
+
             <AnimatePresence>
 
-            {expandedOrder === index ? 
-                
+            {expandedOrder === index && 
+             <Flex direction={"column"} justifyItems={"center"} alignItems={"center"} >
               <motion.div
                 key={"dropdown"}
-                style={Style.expandedDetails}
-                initial={{ opacity: 0, y: 400, x: 300 , height:0 }}
+                initial={{ opacity: 0, y: 400, x:200,  height:0 }}
                 animate={{ opacity: 1, y: 0, x: 0, height:"auto"  }}
                 exit={{ height:0 , opacity:0 }}
                 transition={{
                   height: { duration: 2, type:"spring"  },
                   opacity: { duration: 0.5 },
                   x: { duration: 2, type: "spring" },
-                  
                 }}
-                 
+               
               >
                <DataList 
                     orientation="horizontal"
-                    padding={"2em"}           
+                    marginTop={"10px"}         
+                     p={0}
+               
+               
+        
                     >
-                       {orderDetails.map((item) => (
+            {orderDetails.map((item) => (
                 <DataListItem
-                  fontSize={!md? "14px" : "16px"}
-                  style={{padding:"2px" , lineHeight:!md? "10px" : "16px" , }}
-                  key={item.label}
-                  label={item.title}
-                  value={item.value}
+                   fontSize={!md? "14px" : "16px"}
+                   style={{padding:"2px" , }}
+                   key={item.label}
+                   label={item.title}
+                   value={item.value}
 
+                    
         />
       ))}
                </DataList>
-                
-              
+                             
                 
 
-                <div style={Style.BtnsWrap}>
+                <Flex flexWrap={"wrap"} justifyContent={"space-evenly"} >
 
-                  <button 
+                  <Button 
                         onClick={() => handleRemoveOrder(order.orderId)}
                         style={{   
                         ...Style.button,
@@ -198,7 +182,8 @@ const UserOrders = () => {
                         }
                         }>
                     {isRemoving ? 'מוחק...' : 'מחק'}
-                 </button>
+                 </Button>
+
                   <UiDialog 
                   buttonStyle={{     
                      ...Style.button,
@@ -207,13 +192,14 @@ const UserOrders = () => {
                       buttonText="ערוך הזמנה">
                     <NewOrder orderId={order.orderId} />
                   </UiDialog>
-                </div>
+                </Flex>
 
               </motion.div>
-            :null}
+              </Flex>
+            }
             </AnimatePresence>
 
-        </Container>
+              </Flex>
       })}
 
       <div style={Style.newOrderWrap}>

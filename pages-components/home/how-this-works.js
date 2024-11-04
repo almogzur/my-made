@@ -2,8 +2,7 @@ import { useSession } from 'next-auth/react'
 import {useEffect,useState} from 'react'
 import Card from './card'
 import Colors from '../../lib/colors'
-import Image from 'next/image'
-
+import {Container} from '@chakra-ui/react'
 
 import { FaPenFancy } from "react-icons/fa";
 import { TbViewfinder } from "react-icons/tb";
@@ -41,7 +40,7 @@ const HowThisWorks = () => {
     };
     
     return (
-        <div style={Style.Wrapper}>
+        <Container style={Style.Wrapper}>
             <h1 style={Style.HeasLine}>{HeasLine}</h1>
             <div style={Style.Cards}>
                 {Object.values(CopyText)
@@ -51,7 +50,7 @@ const HowThisWorks = () => {
                     
                     )}
             </div>  
-        </div>
+        </Container>
     );
 };
 

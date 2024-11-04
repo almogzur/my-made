@@ -5,6 +5,7 @@ import HomePageNavigation from '../pages-components/home/home-navigation'
 import HowThisWorks from '../pages-components/home/how-this-works';
 import HomePageReview from '../pages-components/home/review';
 import QuickcSingIn from '../pages-components/home/ quick-sing-in';
+import { Container } from '@chakra-ui/react';
 
 export default function Home() {
 
@@ -16,7 +17,7 @@ export default function Home() {
   }
 
   return (
-    <>
+    <Container>
       <Head>
         <title>MadeIt</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,7 +28,7 @@ export default function Home() {
      <QuickcSingIn/>
      <HowThisWorks/>
       
-    </>
+    </Container>
   );
 }
 

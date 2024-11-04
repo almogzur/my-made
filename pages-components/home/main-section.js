@@ -36,6 +36,7 @@ function  MainSection() {
   return (
 
         <Container p={2}  >
+            <SlidingTextWrapper/> 
             <Flex direction={"column"} alignItems={"center"}  >
               <StyledImage 
                   Images={ PhotosMd.A } 
@@ -47,9 +48,9 @@ function  MainSection() {
                          margin: lg? "2em" : null  ,
                          opacity: "0.8"
                            }} 
-                  timer={13000}  />
+                  timer={8000} 
+                   />
                   
-                <SlidingTextWrapper/> 
               </Flex>
 
       </Container>

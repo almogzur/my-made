@@ -347,7 +347,7 @@ const NewOrder = ({ orderId, newOrder }) => {
             />
       </Field>
 
-      <Field label="מחיר שעתי" >
+      <Field label="מחיר שעתי"  >
         <Input 
             variant={"subtle"}  
             id="orderPrice"  

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { m, domAnimation, LazyMotion } from "framer-motion";
+import { motion} from "framer-motion";
 import { useState, useEffect } from "react";
 
 const StyledImage = ({ Images, timer = 3000, PropsImageStyle, PropsDivStyle }) => {
@@ -20,8 +20,7 @@ const StyledImage = ({ Images, timer = 3000, PropsImageStyle, PropsDivStyle }) =
   }, [index, Images]);
 
   return (
-    <LazyMotion features={domAnimation}>
-      <m.div
+      <motion.div
         
         key={index} // key is not only for List its can triger rerender if changed 
         initial={{ opacity: 0 }}
@@ -34,8 +33,7 @@ const StyledImage = ({ Images, timer = 3000, PropsImageStyle, PropsDivStyle }) =
         style={PropsDivStyle? PropsDivStyle :  {}}
       >
         <Image  style={PropsImageStyle ? PropsImageStyle :  {}} src={src} alt="נקיון בבית" />
-      </m.div>
-    </LazyMotion>
+      </motion.div>
   );
 };
 

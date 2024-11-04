@@ -7,7 +7,7 @@ import NewOrder from './new-order';
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
 import { WindowWidthContext } from '../../context';
 import { IoMdAddCircle } from "react-icons/io";
-import {   motion ,AnimatePresence } from 'framer-motion';
+import {   motion ,AnimatePresence, color } from 'framer-motion';
 import { DataListItem, DataListRoot as DataList } from "../../components/ui/data-list"
 import { Button, Container, Flex, Text } from '@chakra-ui/react';
 
@@ -136,7 +136,7 @@ const UserOrders = () => {
             <AnimatePresence>
 
             {expandedOrder === index && 
-             <Flex direction={"column"} justifyItems={"center"} alignItems={"center"} >
+             <Flex  direction={"column"} justifyItems={"center"} alignItems={"center"} >
               <motion.div
                 key={"dropdown"}
                 initial={{ opacity: 0, y: 400, x:200,  height:0 }}
@@ -146,8 +146,9 @@ const UserOrders = () => {
                   height: { duration: 2, type:"spring"  },
                   opacity: { duration: 0.5 },
                   x: { duration: 2, type: "spring" },
+
                 }}
-               
+
               >
                <DataList 
                     orientation="horizontal"
@@ -160,7 +161,7 @@ const UserOrders = () => {
             {orderDetails.map((item) => (
                 <DataListItem
                    fontSize={!md? "14px" : "16px"}
-                   style={{padding:"2px" , }}
+                   style={{padding:"2px" ,}}
                    key={item.label}
                    label={item.title}
                    value={item.value}

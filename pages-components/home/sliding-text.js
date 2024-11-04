@@ -8,11 +8,11 @@ import { delay } from "framer-motion";
  const headLine ={
                 Text: "MadeIT", 
                 animation :{ 
-                    initial: { x: 0, opacity: 0 },
-                    animate: { x: 0, opacity: 1 , type:"sping" },    
+                    initial: { y:200, opacity: 0 },
+                    animate: { y: 0, opacity: 1 , type:"sping" },    
                     transition: { duration: 1, ease: "easeOut" }
                 },
-                style:{    fontSize: "5em", color: Colors.c , fontWeight: "bold",}
+                style:{   fontSize: "4.5em", color: Colors.c , fontWeight: "bold",}
                 } 
 
 const CopyText = [ 
@@ -51,7 +51,7 @@ const SlidingTextWrapper = () => {
 
     return (
             <Container p={0} m={0} > 
-                <Flex  direction={"column"} alignItems={"center"}    textAlign={"center"} color={"#fff"} >
+                <Flex  direction={"column"} alignItems={"center"}    textAlign={"center"} color={"#fff"} p={0}  >
                               <AnimatedHeadline 
                                 
                                      text={headLine.Text} 

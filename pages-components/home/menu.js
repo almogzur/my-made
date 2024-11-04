@@ -6,50 +6,26 @@ import Colors from "../../lib/colors"
 import ProfileLink from '../../components/profile-controls/profile-link'
 
 import { GiVacuumCleaner } from "react-icons/gi";
+import {  Flex } from "@chakra-ui/react";
 
 const Menu = () => {
 
   const { data: session ,status } = useSession()
   const router = useRouter()
 
-    const Style = {
-         Wrapper : {
-            width:"100%",
-            height:"80px",
-            background:Colors.d,
-            display:"flex"
-          },
-        colA:{
-         width:"50%",
-         height:"inherit",
-
-         
-        },
-        colB:{
-             width:"50%",
-             height:"inherit",
-            display:'flex',
-            flexDirection:'row',
-            justifyContent:'space-evenly',
-            alignItems:'center',
-          
-          
-          
-        }
-    }
      return (
-        <div style={Style.Wrapper}  >
+        <Flex height={"80px"}   background={Colors.d} >
 
-           <div style={Style.colA} >
-            <GiVacuumCleaner size={"5em"} color="#fff"  /> 
-          </div>
+           <Flex width={"50%"} height={"inherit"} background={Colors.d}>
+            <GiVacuumCleaner size={"4em"} color="#fff"  /> 
+          </Flex>
         
-          <div style={Style.colB} >
+          <Flex  width={"50%"} height={"inherit"} justifyContent={"space-evenly"} alignItems={"center"} >
              { status && status === "authenticated" ? <ProfileLink/>   : <LoginButton />}
              <OrdersButton/>
-          </div>
+          </Flex>
 
-        </div>
+        </Flex>
   )
 }
 export default Menu

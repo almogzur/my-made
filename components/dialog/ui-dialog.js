@@ -35,7 +35,7 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
            cursor: 'pointer',
            fontWeight: 'bold',
            margin: "5px",
-           color:Colors.d,
+           color:Colors.c,
   
         },
         BtnsWrapper:{
@@ -53,7 +53,7 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
 
 
     const options = {
-          top:600,
+          top:700,
           behavior:"smooth"
         }
     
@@ -80,7 +80,7 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
            { Icon }{buttonText}
       </m.button>
       
-
+     
       <ReactModal
          ariaHideApp={false}
         isOpen={showModal}
@@ -94,17 +94,20 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
             bottom: '1em',
             borderRadius: "2px",
             overflowX:"hidden",
-            background:"#fff"      
+         
           },
           overlay: {
             position: 'fixed',
-            top: "0.5em",
-            left: "0.5em",
-            right: "0.5em",
-            bottom: "0.5em",
+            top: "0",
+            left: "0",
+            right: "0",
+            bottom: "0",
             borderRadius:"8px",
             overflowX:"hidden",
-            background:Colors.d
+            background:Colors.d,
+            
+            
+      
               }
         }}
         overlayRef={(node) => overlayRef = node}
@@ -113,7 +116,7 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
         <LazyMotion features={f}>
         <div style={Style.BtnsWrapper}>
           <m.button
-              whileHover={{ background: Colors.d, color:"#fff" }}
+              whileHover={{ background: Colors.d,  }}
                onClick={scroolDown}
                style={Style.helpBtn }
           >
@@ -121,7 +124,7 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
           </m.button>
           
           <m.button
-            whileHover={{ background: Colors.d, color:"#fff"}}
+            whileHover={{ background: Colors.d, }}
             onClick={ handleModal}
             style={{...Style.helpBtn 
               }}

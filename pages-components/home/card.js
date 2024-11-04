@@ -1,6 +1,7 @@
 import Colors from "../../lib/colors";
- import {  LazyMotion, m  } from "framer-motion";
- import f from '../../lib/features'
+ import {   motion  } from "framer-motion";
+
+import { Container } from "@chakra-ui/react";
 
 const Style = {
   card: {
@@ -51,22 +52,22 @@ const Style = {
 
 const Card = ({text,IconEl  }) => {
   return (
-    <LazyMotion features={f}>
-      <m.div
+      <motion.div
         style={Style.card}
         initial={{ opacity: 0, y: 30 }} 
         whileInView={{ opacity: 1, y: 0 }} 
         transition={{ duration: 1.5 , delay:0.1}}
         viewport={{ once: false, amount: 0.4 }} 
        >
-       <div style={Style.image}>
-         <IconEl size={"11em"} color={Colors.c}/>
-      </div>
-      <div style={Style.content}>
-        <h2 style={Style.Title}>{text}</h2>
-      </div>
-      </m.div>
-  </LazyMotion>
+       <Container style={Style.image} >
+           <IconEl size={"11em"} color={Colors.c}/>
+      </Container>
+      
+      <Container style={Style.content}>
+          <h2 style={Style.Title}>{text}</h2>
+      </Container>
+      
+      </motion.div>
   );
 };
 

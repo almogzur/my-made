@@ -2,10 +2,10 @@ import { Container , Text  } from "@chakra-ui/react";
 
 import {motion } from "framer-motion";
 
-const AnimatedHeadline = ({ text, initia, animate, style, transition }) => {
+const AnimatedHeadline = ({ text, initia, animate, style, transition , fontWeight }) => {
     return (
     
-    <Container>
+    <Container  >
         <motion.div 
             initial={initia }
             animate={animate }
@@ -13,7 +13,7 @@ const AnimatedHeadline = ({ text, initia, animate, style, transition }) => {
             style={style}
 
         >
-           <Text  >{text}</Text>
+           <Text fontWeight={fontWeight?? null}  >{text}</Text>
         </motion.div>
         </Container>
     );

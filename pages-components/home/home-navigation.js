@@ -6,9 +6,9 @@ import MobNav from './mob-nav';
  
 const HomePageNavigation = () => {
 
-    const {  large, medium ,small } = useContext(WindowWidthContext);
+    const { xl, lg, medium ,small } = useContext(WindowWidthContext);
 
-    return  large? <Menu/> : <MobNav/> 
+    return  lg? <Menu/> : <MobNav/> 
 };
 
 

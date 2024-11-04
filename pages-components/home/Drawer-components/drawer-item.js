@@ -1,24 +1,13 @@
- import {  LazyMotion, m  } from "framer-motion";
- import f from '../../../lib/features'
+ import {  motion } from "framer-motion";
 import Colors from "../../../lib/colors";
+import { Flex } from "@chakra-ui/react";
 
 const DrawerItem = ({ text , children , propsStyle  , PropsOnClick  } ) => {
 
     const Style = {
             Wrapper: {
-                   border: "none",
-                   width: "100%",
-                   height: "60px",
-                   borderRadius: "3px",
-                   backgroundColor: "#333",      
-                   color: "#fff",                  
-                   fontSize: "16px",             
-                    fontWeight: "600",           
-                    cursor: "pointer",             
-                    boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.4)",
-                    marginTop:"10px",
-                    display:'flex',
-                    flexDirection:'row',
+                 
+      
                     justifyContent:'space-between',
                     alignItems:'center',  
                     marginTop:"10px",
@@ -26,21 +15,36 @@ const DrawerItem = ({ text , children , propsStyle  , PropsOnClick  } ) => {
 }
     }
 
-    return <LazyMotion features={f}>
-              <m.button 
-                initial={{ opacity: 0, y:0  , x : 300 }}
-                animate={{ opacity: 1, y: 0 , x:0}}
-                transition={{ duration: 1 , delay:0.1 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ scale: 1.1, boxShadow: "0px 6px 16px rgba(0, 0, 0, 0.5)" , color:Colors.c}} 
-                style={{ ...Style.Wrapper, ...propsStyle }}
-                onClick={PropsOnClick?? null}
+    return     <motion.button 
+                  initial={{ opacity: 0, y:0  , x : 300 }}
+                  animate={{ opacity: 1, y: 0 , x:0}}
+                  transition={{ duration: 1 , delay:0.1 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.1, boxShadow: "0px 6px 16px rgba(0, 0, 0, 0.5)" , color:Colors.c}} 
+                  style={{border:"none" , width:"100%"}}
+                 onClick={PropsOnClick?? null}
 
              
                  >
-                 {children}
-                 {text}
-              </m.button>
-            </LazyMotion>
-  }
+                 <Flex 
+                    justifyContent="space-between"
+                    alignItems={"center"}
+                    height={"60px"} 
+                    fontWeight={600} 
+                    borderRadius={"3px"} 
+                    background={Colors.d}
+                    color={"#fff"} 
+                    fontSize={"16px"} 
+                    boxShadow={ "0px 4px 12px rgba(255, 255, 255, 0.1)"}
+                    cursor={"pointer"}
+                    p={1}
+                    mt={3}
+                    style={propsStyle?? null}
+                    >
+                  {children}
+                  {text}
+                 </Flex>
+
+              </motion.button>
+  } 
   export default DrawerItem

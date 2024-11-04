@@ -3,16 +3,15 @@ import { StateContext } from '../../context.js';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import Colors from '../../lib/colors.js';
-import { m, LazyMotion } from 'framer-motion';
-import f from "../../lib/features.js";
+import { motion } from 'framer-motion';
 import useUser from '../../lib/hooks/useUser.js';
-import { Textarea ,Input, HStack } from '@chakra-ui/react';
-import { Field } from "../../components/ui/field"
+import { Textarea ,Input, HStack, Container , Flex, Text} from '@chakra-ui/react';
+import { Field  } from "../../components/ui/field"
 
 /////
 import { israelRegions } from '../../app-data.js';
 import DatePicker  from "react-datepicker";
-import { registerLocale, setDefaultLocale } from "react-datepicker";
+import { registerLocale } from "react-datepicker";
 import { he } from 'date-fns/locale/he';
 registerLocale('he', he )
 /////
@@ -30,8 +29,7 @@ import {
 const STATE_KEY = "Order";
 
  const Style = {
-   Wrapper:{
-   }, 
+
    submitBtn:{
     display:'flex',
     justifyContent:'space-evenly',
@@ -146,7 +144,7 @@ const NewOrder = ({ orderId, newOrder }) => {
 
 
 
-  //  need to change to Close order and not del 
+  //  need to change to Close order 
   const updateExistingOrder = async () => {
     try {
       const response = await fetch('/api/customer/edit-order', {
@@ -171,20 +169,14 @@ const NewOrder = ({ orderId, newOrder }) => {
 
 
   return (
-    <form 
-        onSubmit={orderId? updateExistingOrder: createNewOrder}
-        style={{
-          display:"flex",
-          flexDirection:"column",
-          background:"#fff",
-  
-    }}
-      >
-      <h1>הזמן משק בית</h1>
+    
+    <form   onSubmit={orderId? updateExistingOrder: createNewOrder}>
+   <Container  color={Colors.c}   >
+      <Text fontWeight={"bolder"} fontSize={"larger"}>הזמן משק בית</Text>
 
 
   
-     <Field  label="שם מלא" htmlFor={'name'}   >
+     <Field paddingTop="15px"  label="שם מלא" htmlFor={'name'}   >
       <Input  
            variant="subtle" 
            type="text" 
@@ -206,15 +198,10 @@ const NewOrder = ({ orderId, newOrder }) => {
        />
      </Field>
 
-      <div style={{
-          width:"100%" ,
-          display:'flex',
-          flexDirection:'row',
-          justifyContent:'center',
-          alignItems:'center',
-          alignContent:'center',
-       }} >
-      <DatePicker      
+
+        <Flex justifyContent={"center"}  >
+
+          <DatePicker      
             placeholderText= "תאריך ושעה "
             locale={he}
             required
@@ -227,8 +214,9 @@ const NewOrder = ({ orderId, newOrder }) => {
              show
              timeIntervals={30}
              dateFormat="PPp"                  
-      />
-      </div>
+           />
+
+       </Flex>
     
       <HStack gap="10" width="full">
 
@@ -362,17 +350,16 @@ const NewOrder = ({ orderId, newOrder }) => {
 
 
 
-      <LazyMotion features={f}>
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "15px" }}>
-          <m.button
+        <Flex  justifyContent={"center"} marginTop={"15px"}  >
+          <motion.button
             type="submit"
             style={Style.submitBtn}
             whileHover={{ boxShadow: `3px 3px 3px inset` ,background: "black" ,color:"#fff" }}
           >
           {orderId? "עדכן ":" שלח הזמנה "}  
-        </m.button>
-        </div>
-      </LazyMotion>
+        </motion.button>
+        </Flex>
+    </Container>
     </form>
   );
 };

@@ -22,16 +22,6 @@ const PhotosMd = {
 
 function  MainSection() {
   const { xl, lg , md , sm } = useContext(WindowWidthContext);
-
-  const Style = { 
-   
-    
-      HeadLine: {
-          fontSize: "5em",
-          color: Colors.c,
-          fontWeight: "bold",
-      },   
-      }
   
   return (
 
@@ -44,7 +34,7 @@ function  MainSection() {
                     width:"800px", 
                       height:"600px",  
                        borderRadius: lg ? "12px" : null ,
-                        objectFit:"fill" ,
+                       borderRadius:"3%",
                          margin: lg? "2em" : null  ,
                          opacity: "0.8"
                            }} 

@@ -40,11 +40,10 @@ const MyDrawer = () => {
         <DrawerBackdrop  />
 
         {/** open btn */}
-        <DrawerTrigger asChild>
+         <DrawerTrigger asChild background={{}} width={"60px"} height={"inherit"} p={2} mr={"2px"}>
 
-          <Button style={{border:"none" , width:"70px" }}  variant="" size="full">
-                <BsArrowBarLeft size={"2em"} color="#fff" />
-          </Button>
+                <BsArrowBarLeft  color="#fff" />
+          
 
 
 
@@ -57,6 +56,8 @@ const MyDrawer = () => {
 
           <DrawerHeader style={{background:Colors.d , color:"#fff" }}  >
 
+
+
              <GiVacuumCleaner style={{
                                  padding:"0px" , 
                                  marginTop:"-10px" ,
@@ -66,7 +67,10 @@ const MyDrawer = () => {
                                  color="#fff" 
                                  onClick={()=>{router.push("/")}}  
                               />
-          </DrawerHeader>
+
+
+                              
+            </DrawerHeader>
 
 
 

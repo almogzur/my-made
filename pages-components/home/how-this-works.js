@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react'
 import {useEffect,useState} from 'react'
 import Card from './card'
 import Colors from '../../lib/colors'
-import {Container} from '@chakra-ui/react'
+import {Container , Text , Flex} from '@chakra-ui/react'
 
 import { FaPenFancy } from "react-icons/fa";
 import { TbViewfinder } from "react-icons/tb";
@@ -20,38 +20,26 @@ const CopyText = {
 const HowThisWorks = () => {
 
 
-
-    const Style = { 
-        Wrapper: {
-            height: "40%",
-            background: Colors.d,    
-        },
-        Cards: {
-            display: "flex",
-            flexWrap:"wrap",
-            justifyContent: 'space-around',
-        },
-        HeasLine:{ 
-            textAlign: "center",
-             padding: "5px",
-              fontSize: "40px" ,
-              color:"#fff",
-            }
-    };
     
     return (
-        <Container style={Style.Wrapper}>
-            <h1 style={Style.HeasLine}>{HeasLine}</h1>
-            <div style={Style.Cards}>
+        <Container height={"40%"} background={Colors.d}>
+
+            <Text fontSize={"4xl"} textAlign={"center"} color={"#fff"} >{HeasLine}</Text>
+            
+            <Flex flexWrap={"wrap"} justifyContent={"space-around"} >
                 {Object.values(CopyText)
                     .map((obj, i) => 
                             
                         <Card key={i} text={obj.text} IconEl={obj.Icon} />
                     
                     )}
-            </div>  
+            </Flex>  
         </Container>
     );
 };
 
 export default HowThisWorks;
+
+
+
+//  עברתי על כול רחיב והעברתי ל צקרה 

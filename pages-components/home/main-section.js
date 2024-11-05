@@ -31,8 +31,8 @@ function  MainSection() {
               <StyledImage 
                   Images={ PhotosMd.A } 
                   PropsImageStyle={{ 
-                    width:"800px", 
-                      height:"600px",  
+                      width: sm && md? "800px" : "400px", 
+                      height:sm && md? "600px":"300px",  
                        borderRadius: lg ? "12px" : null ,
                        borderRadius:"3%",
                          margin: lg? "2em" : null  ,

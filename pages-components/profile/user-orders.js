@@ -7,13 +7,14 @@ import NewOrder from './new-order';
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
 import { WindowWidthContext } from '../../context';
 import { IoMdAddCircle } from "react-icons/io";
-import {   motion ,AnimatePresence, color } from 'framer-motion';
+import { motion , AnimatePresence } from 'framer-motion';
 import { DataListItem, DataListRoot as DataList } from "../../components/ui/data-list"
 import { Button, Container, Flex, Text } from '@chakra-ui/react';
 
 const UserOrders = () => {
+
   const { data: session, status, update } = useSession();
-  const { user, isLoading, userError } = useUser(session?.user?.email);
+  const { user, isLoading, isValidating,  userError, mutate } = useUser(session?.user?.email);
   const [expandedOrder, setExpandedOrder] = useState(null);
   const [isRemoving, setIsRemoving] = useState(false);
   const { xl, lg, md, sm } = useContext(WindowWidthContext);
@@ -68,7 +69,7 @@ const UserOrders = () => {
     },
   };
 
-  if (status === 'loading' || isLoading || isRemoving) {
+  if (status === 'loading' || isLoading || isRemoving ) {
     return <LoadingSpinner />;
   }
 
@@ -81,10 +82,10 @@ const UserOrders = () => {
     try {
       const res = await fetch(`/api/customer/remove-order?orderId=${orderId}`, { method: 'DELETE' });
       const data = await res.json();
+
       if (res.ok) {
         update();
-      } else {
-        console.error('Error removing order:', data.message);
+        mutate()
       }
     } catch (error) {
       console.error('Failed to remove order:', error);
@@ -135,7 +136,7 @@ const UserOrders = () => {
                   <Text style={Style.orderDetail}>{new Date(order.ResurveDate).toLocaleString('he-IL').slice(0,10) || "N/A"}</Text>
                 </Container>
 
-            <AnimatePresence>
+                <AnimatePresence>
 
             {expandedOrder === index && 
              <Flex  direction={"column"} justifyItems={"center"} alignItems={"center"} >
@@ -205,9 +206,9 @@ const UserOrders = () => {
               </motion.div>
               </Flex>
             }
-            </AnimatePresence>
+                </AnimatePresence>
 
-              </Flex>
+            </Flex>
       })}
 
       <div style={Style.newOrderWrap}>

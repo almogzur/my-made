@@ -1,8 +1,7 @@
 import React from 'react';
 import ProfileCard from './profile-card'
-import VendorInfo from './vendor-info';
+import VendorWrap from './vendor-wrap';
 import ProjectStatus from './project-status';
-import Colors from '../../lib/colors';
 import UserOrders from './user-orders'
 import { Container, Flex } from '@chakra-ui/react';
 
@@ -24,7 +23,7 @@ const UserProfilePage = () => {
       </Container>
 
       <Container >
-          <VendorInfo />
+          <VendorWrap />
       </Container>
     </Flex>
   );

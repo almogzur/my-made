@@ -4,19 +4,27 @@ import { FaRegClipboard } from 'react-icons/fa';
 import Colors from '../../lib/colors';
 import Link from 'next/link';
 import { Container , Heading , Text , Flex, Button} from '@chakra-ui/react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 // link is 32 k Route is 113k for 1 navigation 
 // replaced width Link
 
-const ProfileDetails = ({ user, setEdit,  }) => {
+const VendorDisplay = ({ user, setEdit ,edit }) => {
 
 
   return (
-    <Container p={"30px"} background={"#fff"}>
+      <motion.div
+        initial={{opacity:0}}
+        animate={{opacity:1}}
+        transition={{duration:2 }}
+      >
+        <Container p={4} mb={"5em"} background={"#fff"}>
+        
        <Heading fontSize={"2rem"} fontWeight={"bold"} textAlign={"center"} color={Colors.c} >  נרשמתם בהצלחה </Heading>
+
        <Text textAlign={"center"} fontSize={"medium"}  color={Colors.c} mb={"20px"} p={2} > ניתן לראות הזמנות בלוח עבודות  </Text>
 
-      <Flex direction={"column"} gap={"15px"} mb={"20px"} >
+       <Flex p={4} direction={"column"} gap={"15px"} mb={"20px"} >
       
       <Flex justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >
 
@@ -24,7 +32,7 @@ const ProfileDetails = ({ user, setEdit,  }) => {
           <Text >{user.BussniseName}</Text>
         </Flex>
 
-        <Flex justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >
+        <Flex  justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >
 
           <Text >טלפון</Text>
           <Text   >{user.phone ?? "לא זמין"}</Text>
@@ -41,17 +49,17 @@ const ProfileDetails = ({ user, setEdit,  }) => {
           <Text >{user.isVendor ? 'כן' : 'לא'}</Text>
         </Flex>
         
-      </Flex>
+       </Flex>
 
-      <Flex direction={"column"} m={1} borderBottom={'4px dotted #c2b5a9'} width={"inherit"}  fontWeight={"bold"}   >
+       <Flex p={4} direction={"column"} m={1} borderBottom={'4px dotted #c2b5a9'} width={"inherit"}  fontWeight={"bold"}   >
          <Text >תיאור</Text>
         <Text >{user.description}</Text>
-      </Flex>
+       </Flex>
 
-       <Flex justifyContent={"space-evenly"} gap={"10px"}  p={2} background={""} >
+       <Flex p={4} justifyContent={"center"}  gap={"10px"}  m={4}  >
 
 
-           <Button fontSize={"medium"}  borderRadius={"4px"} width={"120px"}  background={Colors.d} onClick={() => setEdit(true)}>
+           <Button fontSize={"medium"}  borderRadius={"4px"} width={"120px"}  background={Colors.d} onClick={()=>setEdit(true) }>
                 <MdEdit  color={Colors.c} />  
                 <Text>ערוך פרטים</Text> 
 
@@ -69,10 +77,11 @@ const ProfileDetails = ({ user, setEdit,  }) => {
 
       </Flex>
       
-    </Container>
+        </Container>
+    </motion.div>
   );
 };
 
 
 
-export default ProfileDetails;
+export default VendorDisplay;

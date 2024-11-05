@@ -54,7 +54,7 @@ const NewOrder = ({ orderId, newOrder }) => {
 
   const { data: session, status } = useSession();
   const [ state, setState ] = useContext(StateContext);
-  const { user, isLoading, isError } = useUser(session?.user?.email);
+  const { user, isLoading, isError ,mutate } = useUser(session?.user?.email);
   const [startDate, setStartDate] = useState("");
   const router = useRouter();
 
@@ -133,6 +133,8 @@ const NewOrder = ({ orderId, newOrder }) => {
       });
   
       if (response.ok) {
+        
+        mutate()
         console.log('New order created successfully');
       } else {
         alert('Failed to create new order');
@@ -156,6 +158,7 @@ const NewOrder = ({ orderId, newOrder }) => {
       });
   
       if (response.ok) {
+        mutate()
         console.log('Order updated successfully');
       } else {
         alert('Failed to update order');

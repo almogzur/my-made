@@ -1,6 +1,6 @@
 
 import { useSession } from 'next-auth/react'
-import {useState, useContext} from 'react'
+import {useState, useContext , useEffect} from 'react'
 import { StateContext } from '../../context'
 import VendorDisplay from './vendor-display'
 import VendorForm from './vender-form'
@@ -9,35 +9,37 @@ import useUser from '../../lib/hooks/useUser'
 import LoadingSpinner from '../../components/my-spinner/loading-spinner'
 
 
-const VendorInfo = () => {
+const VendorWrap = () => {
 
   const STATE_KEY = "Vendor";
   // Data
+
+
+
     const { data: session ,status ,update} = useSession()
     const [state, setState] = useContext(StateContext);
+
     const { user , isLoading , isError } = useUser(session?.user?.email)
 
-
-   
-  
-  // updates to DOM
     const [edit ,setEdit] = useState(false)
-    
- 
+
+    const Vendor = user?.[STATE_KEY]?.isVendor  
+
+
     if (status === 'loading' || isLoading ) {
-        return <LoadingSpinner/>
+             return <LoadingSpinner/>
+     }
+  
+    else if ( !edit && Vendor) {
+             return  <VendorDisplay edit setEdit={setEdit} user={user?.[STATE_KEY]} />
     }
   
-    else if ( user?.[STATE_KEY]?.isVendor && !edit ) {
-             return  <VendorDisplay setEdit={setEdit} user={user?.[STATE_KEY]}/>
-    }
-  
-    return    <VendorForm setEdit={setEdit} />
+             return   <VendorForm  setEdit={setEdit} />
      
   };
   
 
   
-  export default VendorInfo;
+  export default VendorWrap;
   
 

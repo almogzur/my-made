@@ -1,11 +1,11 @@
 const State = {
-  Info:{
-     phone:"",  
- },
+
   Vendor:{
        BussniseName:"",
        price:0,
        description:"",
+       phone:"",
+       ActiveOrders:[]
  },
   Order: { 
       name:"",

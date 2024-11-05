@@ -35,7 +35,8 @@ const handler = async (req, res) => {
         "Vendor.price": price,
         "Vendor.description": description,
         "Vendor.phone":phone,
-        'Vendor.isVendor': true // on saving to db 
+        'Vendor.isVendor': true, // on saving to db 
+        'Vendor.Orders':[]
       }
     };
 
@@ -51,9 +52,7 @@ const handler = async (req, res) => {
   } catch (error) {
     console.error(API_NAME, 'Error updating vendor profile:', error);
     return res.status(500).json({ message: 'Error updating vendor profile', error });
-  } finally {
-    // Close the database connection if needed
-  }
+  } 
 };
 
 export default handler;

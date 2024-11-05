@@ -56,7 +56,7 @@ const BoardPage = () => {
                      />
                 </Flex>
 
-                 <Flex flexBasis={"100%"}  >
+                 <Flex  flexBasis={"100%"}  >
                   <OrdersWrapper
                        Mode={Mode}
                        filterCity={filterCity}

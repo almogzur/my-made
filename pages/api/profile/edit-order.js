@@ -26,34 +26,15 @@ const handler = async (req, res) => {
   const database = client.db('my-made');
   const users = database.collection('users');
 
-  const {  
-    orderId, // Order ID to identify the order to edit
-    orderPhone,
-    addres, 
-    ApartmentRoomsNumber,
-    NumberOfBaths,
-    ResurveDate,
-    orderPrice, 
-    JobDescription,
-    city,
-    ApartmentSize,
-  } = req.body;
+  const { Id } = req.body;
 
   try {
     // Find the user by their email and update the order with the matching orderId
-    const filter = { email: userEmail, 'Orders.orderId': orderId };
+    const filter = { email: userEmail, 'Id': Id };
     const updateDoc = {
       $set: {
-        'Orders.$.orderPhone': orderPhone,
-        'Orders.$.addres': addres,
-        'Orders.$.ApartmentRoomsNumber': ApartmentRoomsNumber,
-        'Orders.$.NumberOfBaths': NumberOfBaths,
-        'Orders.$.ResurveDate': ResurveDate,
-        'Orders.$.ApartmentSize' : ApartmentSize, 
-        'Orders.$.orderPrice': orderPrice,
-        'Orders.$.JobDescription': JobDescription,
-        'Orders.$.city': city,
-        'Orders.$.updateAt': new Date(),
+        ...req.body,
+          'Orders.$.updateAt': new Date(),
       }
     };
 

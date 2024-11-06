@@ -18,7 +18,7 @@ const VendorDisplay = ({ user, setEdit ,edit }) => {
         animate={{opacity:1}}
         transition={{duration:2 }}
       >
-        <Container p={4} mb={"5em"} background={"#fff"}>
+        <Container p={4} background={"#fff"}>
         
        <Heading fontSize={"2rem"} fontWeight={"bold"} textAlign={"center"} color={Colors.c} >  נרשמתם בהצלחה </Heading>
 

@@ -29,13 +29,12 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
            height:"40px",   
            zIndex:2 ,
            backgroundColor: "#f4f4f5",
-           color: '#fff',
+     
            border: 'none',
            borderRadius: '5px',
            cursor: 'pointer',
            fontWeight: 'bold',
            margin: "5px",
-           color:Colors.c,
   
         },
         BtnsWrapper:{
@@ -116,7 +115,7 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
         <LazyMotion features={f}>
         <div style={Style.BtnsWrapper}>
           <m.button
-              whileHover={{ background: Colors.d,  }}
+              whileHover={{ background: Colors.d, color:"#fff"  }}
                onClick={scroolDown}
                style={Style.helpBtn }
           >
@@ -124,10 +123,9 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
           </m.button>
           
           <m.button
-            whileHover={{ background: Colors.d, }}
+            whileHover={{ background: Colors.d,color:"#fff" }}
             onClick={ handleModal}
-            style={{...Style.helpBtn 
-              }}
+            style={{...Style.helpBtn             }}
           >
             <RiCloseLargeFill  size="30" />
           </m.button>

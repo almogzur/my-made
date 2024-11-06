@@ -22,7 +22,7 @@ const VendorForm = ({ setEdit ,edit }) => {
 
   const { data: session, status } = useSession();
 
-  const { user , isLoading , isError ,mutate  } = useUser(session?.user?.email)
+  const { user , isLoading , isError ,updateUser  } = useUser(session?.user?.email)
 
   const [ state, setState ] = useContext(StateContext);
   const [IsFetching , setIsFetching] = useState(false)
@@ -62,7 +62,7 @@ const VendorForm = ({ setEdit ,edit }) => {
       });
 
       if (response.ok) {
-        mutate()  // When you call mutate(key) (or just mutate() with the bound mutate API) without any data, it will trigger a revalidation
+        updateUser()  // When you call mutate(key) (or just mutate() with the bound mutate API) without any data, it will trigger a revalidation
         setTimeout( ()=> setIsFetching(false) ,3000)
       
 
@@ -89,7 +89,7 @@ const VendorForm = ({ setEdit ,edit }) => {
   }
 
  return ( 
-      <Flex  p={4} background={"#fff"}  mb={"5em"} direction={"column"}  justifyContent={"center"}  alignContent={'center'} >
+      <Flex  p={4} background={"#fff"}   direction={"column"}  justifyContent={"center"}  alignContent={'center'} >
         <form  onSubmit={handleSubmit} >
 
         <Heading fontSize={"3xl"} p={4} color={Colors.c} textAlign={"center"} >{`הרשם למערכת `}</Heading>

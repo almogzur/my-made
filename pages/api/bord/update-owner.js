@@ -2,14 +2,15 @@ import clientPromise from '../../../lib/db';
 
 
 export default async function handler(req, res) {
-  const { orderId, userEmail, city } = req.body;
+
+  const { Id, email, city } = req.body;
 
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  if (!orderId || !userEmail || !city) {
-    return res.status(400).json({ message: 'Missing required fields: orderId, userEmail, or city' });
+  if (!Id || !email || !city) {
+    return res.status(400).json({ message: 'Missing required fields: Id, email, or city' });
   }
 
   try {
@@ -20,8 +21,8 @@ export default async function handler(req, res) {
     const usersCollection = database.collection('users');
     const cityCollection = areadatabase.collection(city);
 
-
-    const order = await cityCollection.findOne({  orderId });
+ // Retrieve the order document
+    const order = await cityCollection.findOne({  Id });
     if (!order) {
       console.log("User Err");
       
@@ -30,28 +31,33 @@ export default async function handler(req, res) {
 
 
     // Retrieve the user document
-    const user = await usersCollection.findOne({ email: userEmail });
+    const user = await usersCollection.findOne({ email: email });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
+ 
+    if (order.ownerId.toString() === user._id.toString()) {
+      return res.status(400).json({ message: "לקוח שפותח הזמנה לא יכול למשוך אותה בתור משק  " });
+    }
     // Add the order to the user's vendor orders array
+
+    
     await usersCollection.updateOne(
-      { email: userEmail },
-      { $push: { 'Vendor.Orders': order } }
+      { email: email ,  },
+      { $push: { 'Vendor.Vendor_Active_Order': order } }
     );
 
- // Remove the order from the city's orders array
+    // Remove the order from the city's orders array
 
-    const deletResult = await cityCollection.deleteOne({ orderId });
+    const deleteResult = await cityCollection.deleteOne({ Id });
 
-    if(!deletResult.deletedCount ===1 ){
+    if(!deleteResult.deletedCount === 1 ){
             
         return res.status(404).json({massage:"Order is Not Removed from DB"})
 
     }
-    console.log(deletResult);
-
+ 
 
     // Success response
     return res.status(200).json({ message: 'Order moved successfully' });

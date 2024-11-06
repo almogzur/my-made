@@ -18,8 +18,6 @@ export const authOptions = {
     // Send properties to the client, like an access_token and user id from a provider.
     // extanding Session Object 
     // passiong user id for db calls from Front end as slug quary 
-      session.user.id = user.id
-     // session.user.state = {}
       
       return session
    },

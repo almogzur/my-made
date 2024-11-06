@@ -35,8 +35,8 @@ const handler = async (req, res) => {
         "Vendor.price": price,
         "Vendor.description": description,
         "Vendor.phone":phone,
-        'Vendor.isVendor': true, // on saving to db 
-        'Vendor.Orders':[]
+        'Vendor.isVendor': true, 
+        'Vendor.Vendor_Order':[]
       }
     };
 

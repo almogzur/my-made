@@ -5,25 +5,26 @@ const State = {
        price:0,
        description:"",
        phone:"",
-       ActiveOrders:[]
+       Active_Active_Orders:[]
  },
   Order: { 
-      name:"",
-      ResurveDate:"",
-      FromH:"",
-      ToH:"",
-      JobDescription:"",
-      addres:"",
+      phone:"",
+      date:"",
+      hour:"",
+      tooHour:"",
+      jobDescription:"",
+      address:"",
       city:"",
-      orderStatus:"",
-      orderPhone:0,
-      ApartmentRoomsNumber:0,
-      NumberOfBaths:0,
-      ApartmentSize:0,
-      orderPrice:0,
+      status:"",
+      rooms:"",
+      baths:'',
+      homeSize:"",
+      price:"",
  },
- Orders:[],
- ClosedOrders:[]
+ Profile_Active_Orders:[],
+ Profile_Old_Orders:[],
+ Profile_Closed_Orders:[],
+ 
      
   }
   export default State

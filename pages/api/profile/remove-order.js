@@ -25,9 +25,9 @@ const handler = async (req, res) => {
   const userEmail = session.user.email;
   const database = client.db('my-made');
   const users = database.collection('users');  
-  const  {orderId} = req.query
+  const  { Id } = req.query
 
-  if (!orderId) {
+  if (!Id) {
     console.log(API_NAME, 'Order ID is required');
     return res.status(400).json({ message: 'Order ID is required' });
   }
@@ -35,7 +35,7 @@ const handler = async (req, res) => {
   try {
     // Find the user by their email and remove the order with the matching orderId from the Orders array
     const filter = { email: userEmail };
-    const updateDoc = {  $pull: { Orders: { orderId } }};
+    const updateDoc = {  $pull: { Orders: { Id } }};
 
     const result = await users.updateOne(filter, updateDoc);
 

@@ -1,9 +1,9 @@
 import React from 'react';
-import ProfileCard from './profile-card'
-import VendorWrap from './vendor-wrap';
-import ProjectStatus from './project-status';
-import UserOrders from './user-orders'
+import VendorWrap from './profile-vendor-wrap';
+import ProfileOrders from './profile-orders'
 import { Container, Flex } from '@chakra-ui/react';
+import ProfileAvatr from './profile-avatar';
+import VendorActiveOrders from './vendor-active-orders'
 
 const UserProfilePage = () => {
 
@@ -11,20 +11,21 @@ const UserProfilePage = () => {
     <Flex  wrap={"wrap"} gap={"30px"} p={0}>
     
       <Container > 
-           <ProfileCard /> 
+           <ProfileAvatr /> 
       </Container>
 
       <Container >
-          <UserOrders />
-      </Container>
-
-      <Container >
-        <ProjectStatus />
+          <ProfileOrders />
       </Container>
 
       <Container >
           <VendorWrap />
       </Container>
+
+      <Container >
+        <VendorActiveOrders />
+      </Container>
+
     </Flex>
   );
 };

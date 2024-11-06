@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react'
-import Order from './order'
+import Order from './order-card'
 import { useContext, useEffect, useState } from 'react';
 import {FilterCityContext } from '../../context'
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';

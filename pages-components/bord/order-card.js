@@ -5,26 +5,29 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { WindowWidthContext } from '../../context';
 import { useContext, useEffect } from 'react';
 import { useSession } from "next-auth/react";
+import useOrders from "../../lib/hooks/useOrders";
+import BadgeStatus from "../../components/badge_status";
 
 const MotionCard = motion(Card.Root);
 
-const Vcard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
+const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
 
   const {xl,lg,md,sm} = useContext(WindowWidthContext)
   const { data: session, status, update } = useSession();
+  const {  mutateOrders } = useOrders()
 
-  const orderHendler = async (e,orderId,city) => {
+  const orderHendler = async (e,Id,city) => {
       e.preventDefault()
 
-    if (!orderId) return;
+    if (!Id) return;
 
-      const userEmail = session.user.email
+      const email = session.user.email
 
     try { 
            const options =  {
              method: 'POST',
              headers: {'Content-Type': 'application/json'},
-             body: JSON.stringify( { orderId ,userEmail, city })
+             body: JSON.stringify( { Id ,email, city })
              }
 
 
@@ -33,7 +36,9 @@ const Vcard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
       
       if (res.ok) {
         update();
-   
+       setTimeout(() => {
+        mutateOrders() 
+       }, 3000); 
       }
 
 
@@ -65,17 +70,15 @@ const Vcard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
           opacity: { duration: 0.2 },
           height: { duration: (itemIndex + 1) / 3, type: 'spring' },
         }}
-                viewport={{ once: false, amount: 0.4 }}     
+        exit={{opacity:0}}
              >    
               <Card.Body p={3} m={0}>
           
-                 <Card.Title color={Colors.c}  fontSize="2xl" fontWeight="bold">
-            {order?.name || 'לא זמין'}
-                  </Card.Title>
+                    <Card.Title color={Colors.c}  fontSize="2xl" fontWeight="bold">  {order?.name || 'לא זמין'}</Card.Title>
                     <Text fontSize="md">כתובת: {order?.address || 'לא זמין'}</Text>
                     <Text>עיר : {order?.city || 'לא זמין'}</Text>
-                    <Text>תאריך הזמנה: {new Date(order?.ResurveDate).toLocaleString('he-IL').slice(0,10) || "לא זמין "}</Text>
-                    <Text>טלפון: {order?.orderPhone || 'לא זמין'}</Text>
+                    <Text>תאריך הזמנה: {new Date(order?.date).toLocaleString('he-IL').slice(0,10) || "לא זמין "}</Text>
+                    <Text>טלפון: {order?.phone || 'לא זמין'}</Text>
                     <Text color={Colors.c} fontWeight={"bold"} fontSize={'larger'} > שעתון  : {order?.orderPrice || '0'}</Text>
           
       
@@ -92,16 +95,12 @@ const Vcard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                           }}    
                          >
                           <Flex direction="column" alignItems="center">
-                         <Text fontWeight={'bold'}  >סטטוס:  
-                    <Badge color={order?.orderStatus === "Open" ? "green" : "red"}>
-                    {order?.orderStatus || 'N/A'}
-                    </Badge>
-                         </Text>
-                         <Text fontWeight={'bold'}  >חדרים: {order?.ApartmentRoomsNumber || 'לא זמין'}</Text>
-                         <Text fontWeight={'bold'}  >חדרי רחצה: {order?.NumberOfBaths || 'לא זמין'}</Text>
-                         <Text fontWeight={'bold'}  >תיאור עבודה: {order?.JobDescription || 'לא זמין'}</Text>
-                         <Text fontWeight={'bold'}  >שעה: {order?.FromH || 'לא זמין'} - {order?.ToH || 'לא זמין'}</Text>
-                         <Text fontWeight={'bold'} >מזהה הזמנה : {order?.orderId.slice(0,10) +"..." || 'לא זמין'}</Text>
+                          <BadgeStatus status={order.status}  />
+                         <Text fontWeight={'bold'}  >חדרים: {order?.rooms || 'לא זמין'}</Text>
+                         <Text fontWeight={'bold'}  >חדרי רחצה: {order?.baths || 'לא זמין'}</Text>
+                         <Text fontWeight={'bold'}  >תיאור עבודה: {order?.jobDescription || 'לא זמין'}</Text>
+                         <Text fontWeight={'bold'}  >שעה: {order?.hour || 'לא זמין'} - {order?.ToH || 'לא זמין'}</Text>
+                         <Text fontWeight={'bold'} >מזהה הזמנה : {order?.Id.slice(0,10) +"..." || 'לא זמין'}</Text>
 
                         <Box p={4}>
 
@@ -110,7 +109,7 @@ const Vcard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                             color="#fff" 
                             variant="outline" 
                             width={150}
-                            onClick={(e)=>orderHendler(e,order.orderId, order.city)}
+                            onClick={(e)=>orderHendler(e, order.Id, order.city)}
                           >
                             <Text>קח הזמנה</Text>  
                           </Button>
@@ -143,4 +142,4 @@ const Vcard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
   );
 };
 
-export default Vcard;
+export default OrderCard;

@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext ,forwardRef } from 'react';
 import { StateContext } from '../../context.js';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import Colors from '../../lib/colors.js';
-import { motion } from 'framer-motion';
 import useUser from '../../lib/hooks/useUser.js';
-import { Textarea ,Input, HStack, Container , Flex, Text} from '@chakra-ui/react';
+import { Textarea ,Input, HStack, Container , Flex, Text, Button ,Stack , For , createListCollection } from '@chakra-ui/react';
 import { Field  } from "../../components/ui/field"
 
 /////
@@ -28,35 +26,17 @@ import {
 
 const STATE_KEY = "Order";
 
- const Style = {
 
-   submitBtn:{
-    display:'flex',
-    justifyContent:'space-evenly',
-    alignItems:'center',
-     width:"150px",
-     height:"60px",   
 
-         background: "gray",
-         
-         border: 'none',
-         borderRadius: '5px',
-         cursor: 'pointer',
-         fontSize: '1rem',
-         fontWeight: 'bold',
-         margin:"15px",
-   }
-
-  
- }
-
-const NewOrder = ({ orderId, newOrder }) => {
+const NewOrder = ({ Id, newOrder }) => {
 
   const { data: session, status } = useSession();
   const [ state, setState ] = useContext(StateContext);
-  const { user, isLoading, isError ,mutate } = useUser(session?.user?.email);
-  const [startDate, setStartDate] = useState("");
+  const { user, isLoading, isError ,updateUser } = useUser(session?.user?.email);
+  
   const router = useRouter();
+
+  
 
 
   // No Session redirect
@@ -70,13 +50,13 @@ const NewOrder = ({ orderId, newOrder }) => {
   useEffect(() => {
     
    
-    if (orderId) { // Fetch order only if it's not a new order
-      const existingOrder = user?.Orders?.find(order => order.orderId === orderId);
-
+    if (Id) { //  order only if it's not a new order
+      const existingOrder = user?.Orders?.find(order => order.Id === Id);
+        
       if (existingOrder) {
         setState(prevState => ({
           ...prevState,
-          [STATE_KEY]: { ...existingOrder }
+          [STATE_KEY]: { ...existingOrder  }
         }));
       }
 
@@ -90,7 +70,7 @@ const NewOrder = ({ orderId, newOrder }) => {
        [STATE_KEY]: []
     }));
 
-  }, [orderId, user, newOrder]);
+  }, [Id, user, newOrder]);
 
 
   const handleChange = (e) => {
@@ -107,12 +87,15 @@ const NewOrder = ({ orderId, newOrder }) => {
   };
 
   const hendelCaLchange =  (value)=>{
+    console.log(value);
+    
     
     setState(prevState => ({
       ...prevState,
-      [STATE_KEY]: { ...prevState[STATE_KEY], ResurveDate: value }
+      [STATE_KEY]: { ...prevState[STATE_KEY], date: value }
     }));
   }
+
 
   const handleSelect= (e)=>{
     const   value  = e.target.value
@@ -122,9 +105,12 @@ const NewOrder = ({ orderId, newOrder }) => {
         }))    
   }
 
-  const createNewOrder = async () => {
+  const createNewOrder = async (event) => {
+
+
     try {
-      const response = await fetch('/api/customer/save-order', {
+
+      const response = await fetch('/api/profile/save-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -134,27 +120,26 @@ const NewOrder = ({ orderId, newOrder }) => {
   
       if (response.ok) {
         
-        mutate()
+
         console.log('New order created successfully');
-      } else {
-        alert('Failed to create new order');
       }
     } catch (error) {
       console.error('Failed to create new order', error);
+
     }
   };
 
 
-
   //  need to change to Close order 
-  const updateExistingOrder = async () => {
+  const updateExistingOrder = async (e) => {
+
     try {
-      const response = await fetch('/api/customer/edit-order', {
+      const response = await fetch('/api/profile/edit-order', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...state[STATE_KEY], orderId }),
+        body: JSON.stringify({ ...state[STATE_KEY], Id }),
       });
   
       if (response.ok) {
@@ -169,68 +154,59 @@ const NewOrder = ({ orderId, newOrder }) => {
   };  
 
 
-
-
   return (
     
-    <form   onSubmit={orderId? updateExistingOrder: createNewOrder}>
-   <Container  color={Colors.c}   >
+    <form  onSubmit={Id? updateExistingOrder: createNewOrder}>
+   <Container     >
+      <Text  fontWeight={"bolder"} fontSize={"larger"} >{session.user.name}</Text>
       <Text fontWeight={"bolder"} fontSize={"larger"}>הזמן משק בית</Text>
+      
 
 
   
-     <Field paddingTop="15px"  label="שם מלא" htmlFor={'name'}   >
-      <Input  
-           variant="subtle" 
-           type="text" 
-           id='name'
-           value={state[STATE_KEY].name} 
-           onChange={handleChange}
-           />
-     </Field>
-
-
-     <Field label="טלפון" >
+     <Field label="טלפון" required >
       <Input
          variant="subtle"
          type='tel'
-         id="orderPhone" 
+         id="phone" 
          required 
-         value={state[STATE_KEY].orderPhone}
+         value={state[STATE_KEY].phone}
          onChange={handleChange} 
        />
      </Field>
 
-
-        <Flex justifyContent={"center"}  >
+        
+        <Flex justifyContent={"center"}   >
 
           <DatePicker      
             placeholderText= "תאריך ושעה "
             locale={he}
-            required
-            selected={startDate} 
-            onChange={ (date) =>{ 
-                hendelCaLchange(date);
-            }}
-             inline
-             showMonthDropdown
-             show
-             timeIntervals={30}
-             dateFormat="PPp"                  
-           />
+            selected={state[STATE_KEY].date}
+            onChange={  (date) => hendelCaLchange(date)} 
+            timeIntervals={30}
+            dateFormat="PP"     
+            required        
+            className='order-cal'
+
+            
+                 
+     >
+  
+     </DatePicker>
 
        </Flex>
     
       <HStack gap="10" width="full">
 
-          <Field label="משעה" required>
+          <Field label="משעה"  required>
 
              <Input 
              type='time' 
              placeholder="12:00" 
              variant="subtle" 
-             id='FromH'
-             value={state[STATE_KEY].FromH}
+             required
+             id='hour'
+             value={state[STATE_KEY].hour}
              onChange={handleChange}
              />
 
@@ -242,8 +218,9 @@ const NewOrder = ({ orderId, newOrder }) => {
                type='time' 
                placeholder="00:00" 
                variant="subtle" 
-               id="ToH"
-               value={state[STATE_KEY].ToH}
+               id="tooHour"
+               required
+               value={state[STATE_KEY].tooHour}
                onChange={handleChange}
 
                />
@@ -252,23 +229,20 @@ const NewOrder = ({ orderId, newOrder }) => {
 
       </HStack>
       
-
- 
         
-      <Field label="תיאור הבקשה  " >
+      <Field pt={1} label="תיאור הבקשה  " >
           <Textarea 
               resize={"none"} 
               variant={"subtle"} 
-              value={state[STATE_KEY].JobDescription} 
+              value={state[STATE_KEY].jobDescription} 
               onChange={handleChange} 
-              id='JobDescription'  
+              id='jobDescription'  
             />
       </Field>
 
-      <Select
-            key={"new-order"}
+        <Select
             placeholder="אזור"
-            required
+           required
             variant="subtle"
             id='city'
             value={state[STATE_KEY].city}
@@ -277,24 +251,23 @@ const NewOrder = ({ orderId, newOrder }) => {
             
           >
 
-          <Option>
-              <option >אזור</option>
+          <Option  required>
+                   <option value="">{ state[STATE_KEY].city ?? "אזורֿ / עיר" }</option>
                   {israelRegions.map((obj,i)=>{
                   const city = obj.value
   
-                  return <option  id={city}  key={`  ${i}`} value={city} >{city}</option>
+                  return <option required  id={city}  key={`  ${i}`} value={city} >{city}</option>
              })}   
             </Option>
-      </Select>
-
+      </Select> 
     
 
-       <Field label="כתובת" >
+       <Field  pt={1} label="כתובת" required >
          <Input 
             type='text' 
             variant={"subtle"} 
-            id='addres'
-            value={state[STATE_KEY].addres}
+            id='address'
+            value={state[STATE_KEY].address}
             onChange={handleChange}
             required 
             width={"100%"}      
@@ -302,48 +275,49 @@ const NewOrder = ({ orderId, newOrder }) => {
        </Field>
 
 
-       <Field label="מספר חדרים " >
+       <Field pt={1} label="מספר חדרים " >
         <Input 
             variant={"subtle"}
             required    
             type='number'   
             width={"100%"}     
-            value={state[STATE_KEY].ApartmentRoomsNumber}
+            value={state[STATE_KEY].rooms}
             onChange={handleChange}  
-            id="ApartmentRoomsNumber"  
+            id="rooms"  
             />
        </Field>
 
 
-       <Field label="מספר מקלחות" >
+       <Field pt={1} label="מספר מקלחות" >
           <Input 
               variant={"subtle"} 
               type="number" 
-              id="NumberOfBaths"  
-              value={state[STATE_KEY].NumberOfBaths} 
+              id="baths"  
+              value={state[STATE_KEY].baths} 
               onChange={handleChange}
                 />
        </Field>
 
 
 
-      <Field  label="גודל הדירה במטרים" >
+      <Field pt={1}  label="גודל הדירה במטרים" >
         <Input 
             variant={"subtle"} 
             type="number"  
-            id="ApartmentSize" 
-            value={state[STATE_KEY].ApartmentSize}
+            id="size" 
+            value={state[STATE_KEY].size}
             onChange={handleChange} 
 
             />
       </Field>
 
-      <Field label="מחיר שעתי"  >
+      <Field pt={1} label="מחיר שעתי" required  >
         <Input 
             variant={"subtle"}  
-            id="orderPrice"  
+            required
+            id="price"  
             type="number"
-            value={state[STATE_KEY].orderPrice}
+            value={state[STATE_KEY].price}
             onChange={handleChange} 
             max={300}
             min={0}
@@ -354,13 +328,9 @@ const NewOrder = ({ orderId, newOrder }) => {
 
 
         <Flex  justifyContent={"center"} marginTop={"15px"}  >
-          <motion.button
-            type="submit"
-            style={Style.submitBtn}
-            whileHover={{ boxShadow: `3px 3px 3px inset` ,background: "black" ,color:"#fff" }}
-          >
-          {orderId? "עדכן ":" שלח הזמנה "}  
-        </motion.button>
+          {/* ther is no way to control date required  */} 
+         <Button type="submit">{Id? "עדכן ":" שלח הזמנה "}</Button> 
+          {/* /////////////// */}
         </Flex>
     </Container>
     </form>
@@ -368,3 +338,4 @@ const NewOrder = ({ orderId, newOrder }) => {
 };
 
 export default NewOrder;
+

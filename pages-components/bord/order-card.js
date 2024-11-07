@@ -16,18 +16,19 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
   const { data: session, status, update } = useSession();
   const {  mutateOrders } = useOrders()
 
-  const orderHendler = async (e,Id,city) => {
+  const orderHendler = async (e,orderId,city,vendorEmail) => {
+    console.log(e);
+    
       e.preventDefault()
 
-    if (!Id) return;
 
-      const email = session.user.email
+
 
     try { 
            const options =  {
              method: 'POST',
              headers: {'Content-Type': 'application/json'},
-             body: JSON.stringify( { Id ,email, city })
+             body: JSON.stringify( { orderId , city , vendorEmail })
              }
 
 
@@ -100,7 +101,7 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                          <Text fontWeight={'bold'}  >חדרי רחצה: {order?.baths || 'לא זמין'}</Text>
                          <Text fontWeight={'bold'}  >תיאור עבודה: {order?.jobDescription || 'לא זמין'}</Text>
                          <Text fontWeight={'bold'}  >שעה: {order?.hour || 'לא זמין'} - {order?.ToH || 'לא זמין'}</Text>
-                         <Text fontWeight={'bold'} >מזהה הזמנה : {order?.Id.slice(0,10) +"..." || 'לא זמין'}</Text>
+                         <Text fontWeight={'bold'} >מזהה הזמנה : {order?._id.slice(0,10) +"..." || 'לא זמין'}</Text>
 
                         <Box p={4}>
 
@@ -109,7 +110,7 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                             color="#fff" 
                             variant="outline" 
                             width={150}
-                            onClick={(e)=>orderHendler(e, order.Id, order.city)}
+                            onClick={(e)=>orderHendler(e, order._id, order.city , session?.user.email)}
                           >
                             <Text>קח הזמנה</Text>  
                           </Button>

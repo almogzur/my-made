@@ -1,72 +1,104 @@
 import clientPromise from '../../../lib/db';
 
-
 export default async function handler(req, res) {
-
-  const { Id, email, city } = req.body;
-
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  if (!Id || !email || !city) {
-    return res.status(400).json({ message: 'Missing required fields: Id, email, or city' });
+  const { orderId, vendorEmail, city } = req.body;
+
+  if (!orderId || !vendorEmail || !city) {
+    return res.status(400).json({ message: 'Missing required fields' });
   }
 
   try {
+    // Database connection
     const client = await clientPromise;
     const database = client.db('my-made');
     const areadatabase = client.db('my-made-Areas');
-
     const usersCollection = database.collection('users');
     const cityCollection = areadatabase.collection(city);
 
- // Retrieve the order document
-    const order = await cityCollection.findOne({  Id });
-    if (!order) {
-      console.log("User Err");
-      
-      return res.status(404).json({ message: 'Order not found in city collection' });
+    // Retrieve the order from the city collection
+    let clientOrder;
+    try {
+      clientOrder = await cityCollection.findOne({ "_id": orderId });
+      if (!clientOrder) {
+        return res.status(404).json({ message: 'Order not found in city collection' });
+      }
+    } catch (error) {
+      console.error("Error retrieving order from city collection:", error);
+      return res.status(500).json({ message: 'Error retrieving order from city collection' });
     }
 
-
-    // Retrieve the user document
-    const user = await usersCollection.findOne({ email: email });
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+    // Retrieve the vendor's data
+    let vendor;
+    try {
+      vendor = await usersCollection.findOne({ email: vendorEmail });
+      if (!vendor) {
+        return res.status(404).json({ message: 'Vendor not found' });
+      }
+    } catch (error) {
+      console.error("Error retrieving vendor data:", error);
+      return res.status(500).json({ message: 'Error retrieving vendor data' });
     }
 
- 
-    if (order.ownerId.toString() === user._id.toString()) {
-      return res.status(400).json({ message: "לקוח שפותח הזמנה לא יכול למשוך אותה בתור משק  " });
+    // Check if the vendor is the original owner of the order
+    if (clientOrder.ownerId.toString() === vendor._id.toString()) {
+      return res.status(400).json({ message: "לקוח שפותח הזמנה לא יכול למשוך אותה בתור משק" });
     }
-    // Add the order to the user's vendor orders array
 
-    
-    await usersCollection.updateOne(
-      { email: email ,  },
-      { $push: { 'Vendor.Vendor_Active_Order': order } }
-    );
+    // Define the updated order details
+    const updatedOrder = {
+      ...clientOrder,
+      Vendor_Name: vendor.Vendor?.name,
+      Vendor_Phone: vendor.Vendor?.phone,
+      Vendor_Action_Date: new Date(),
+      status: 'inProcess'
+    };
 
-    // Remove the order from the city's orders array
-
-    const deleteResult = await cityCollection.deleteOne({ Id });
-
-    if(!deleteResult.deletedCount === 1 ){
-            
-        return res.status(404).json({massage:"Order is Not Removed from DB"})
-
+    // Update the client's copy of the order in `Profile_Orders`
+    try {
+      await usersCollection.updateOne(
+        { _id: clientOrder.ownerId, "Profile_Orders._id": orderId },
+        {
+          $set: {
+            "Profile_Orders.$.Vendor_Name": vendor.name,
+            "Profile_Orders.$.Vendor_Phone": vendor.Vendor?.phone,
+            "Profile_Orders.$.Vendor_Action_Date": updatedOrder.Vendor_Action_Date,
+            "Profile_Orders.$.status": 'inProcess'
+          }
+        }
+      );
+    } catch (error) {
+      console.error("Error updating client's Profile_Orders:", error);
+      return res.status(500).json({ message: 'Error updating client\'s Profile_Orders' });
     }
- 
 
-    // Success response
-    return res.status(200).json({ message: 'Order moved successfully' });
+    // Update the vendor's active orders, avoiding duplication
+    try {
+      await usersCollection.updateOne(
+        { _id: vendor._id },
+        {
+          $addToSet: { "Vendor.Vendor_Orders": updatedOrder }
+        }
+      );
+    } catch (error) {
+      console.error("Error updating vendor's active orders:", error);
+      return res.status(500).json({ message: 'Error updating vendor\'s active orders' });
+    }
+
+    // Remove the order from the city collection
+    try {
+      await cityCollection.deleteOne({ "_id": orderId });
+    } catch (error) {
+      console.error("Error removing order from city collection:", error);
+      return res.status(500).json({ message: 'Error removing order from city collection' });
+    }
+
+    return res.status(200).json({ message: 'Order moved and updated successfully for both client and vendor' });
   } catch (error) {
-    console.error("Error moving order:", error);
-    return res.status(500).json({ message: 'Server error' });
+    console.error("Unexpected server error:", error);
+    return res.status(500).json({ message: 'Unexpected server error' });
   }
-  finally{
-
-  }
-  
 }

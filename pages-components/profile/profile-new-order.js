@@ -28,7 +28,7 @@ const STATE_KEY = "Order";
 
 
 
-const NewOrder = ({ Id, newOrder }) => {
+const NewOrder = ({ id, newOrder }) => {
 
   const { data: session, status } = useSession();
   const [ state, setState ] = useContext(StateContext);
@@ -50,8 +50,8 @@ const NewOrder = ({ Id, newOrder }) => {
   useEffect(() => {
     
    
-    if (Id) { //  order only if it's not a new order
-      const existingOrder = user?.Orders?.find(order => order.Id === Id);
+    if (id) { //  order only if it's not a new order
+      const existingOrder = user?.Profile_Orders?.find(order => order._id === id);
         
       if (existingOrder) {
         setState(prevState => ({
@@ -70,7 +70,7 @@ const NewOrder = ({ Id, newOrder }) => {
        [STATE_KEY]: []
     }));
 
-  }, [Id, user, newOrder]);
+  }, [id, user, newOrder]);
 
 
   const handleChange = (e) => {
@@ -105,8 +105,8 @@ const NewOrder = ({ Id, newOrder }) => {
         }))    
   }
 
-  const createNewOrder = async (event) => {
-
+  const createNewOrder = async (e) => {
+        e.preventDefault()
 
     try {
 
@@ -156,9 +156,9 @@ const NewOrder = ({ Id, newOrder }) => {
 
   return (
     
-    <form  onSubmit={Id? updateExistingOrder: createNewOrder}>
+    <form  onSubmit={id? updateExistingOrder: createNewOrder}>
    <Container     >
-      <Text  fontWeight={"bolder"} fontSize={"larger"} >{session.user.name}</Text>
+      <Text  fontWeight={"bolder"} fontSize={"larger"} >{session?.user?.name}</Text>
       <Text fontWeight={"bolder"} fontSize={"larger"}>הזמן משק בית</Text>
       
 
@@ -329,7 +329,7 @@ const NewOrder = ({ Id, newOrder }) => {
 
         <Flex  justifyContent={"center"} marginTop={"15px"}  >
           {/* ther is no way to control date required  */} 
-         <Button type="submit">{Id? "עדכן ":" שלח הזמנה "}</Button> 
+         <Button type="submit">{id? "עדכן ":" שלח הזמנה "}</Button> 
           {/* /////////////// */}
         </Flex>
     </Container>

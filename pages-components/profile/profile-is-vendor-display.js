@@ -29,7 +29,7 @@ const VendorDisplay = ({ user, setEdit ,edit }) => {
       <Flex justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >
 
           <Text  >שם</Text>
-          <Text >{user.BussniseName}</Text>
+          <Text >{user.name}</Text>
         </Flex>
 
         <Flex  justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >

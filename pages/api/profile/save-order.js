@@ -45,12 +45,12 @@ const handler = async (req, res) => {
     
 
     const newOrder = {
+        name,
+        status: "Open",
       ...req.body,
-      name,
-      createdAt: new Date(),
-      Id: uuidv4(),
-      status: "Open",
-      ownerId: userId, 
+       createdAt: new Date(),
+       _id: uuidv4(),
+       ownerId: userId, 
     };
 
     // Add the order to the user's Orders array

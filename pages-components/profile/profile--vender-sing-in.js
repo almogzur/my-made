@@ -100,8 +100,8 @@ const VendorForm = ({ setEdit ,edit }) => {
              
                 variant={"subtle"}
                  required
-                 value={state[STATE_KEY].BussniseName} 
-                 id="BussniseName"
+                 value={state[STATE_KEY].name} 
+                 id="name"
                  onChange={handleChange}  
 
                  />

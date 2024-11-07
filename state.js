@@ -1,25 +1,27 @@
 const State = {
 
   Vendor:{
-       BussniseName:"",
+       name:"",
        price:0,
        description:"",
        phone:"",
-       Active_Active_Orders:[]
+       Active_Orders:[]
  },
   Order: { 
-      phone:"",
-      date:"",
-      hour:"",
-      tooHour:"",
-      jobDescription:"",
-      address:"",
-      city:"",
-      status:"",
-      rooms:"",
-      baths:'',
-      homeSize:"",
-      price:"",
+       price:"",
+       status:"",
+       phone:"",
+       date:"",
+       hour:"",
+       tooHour:"",
+       jobDescription:"",
+       city:"",
+       address:"",
+       rooms:"",
+       baths:'',
+       homeSize:"",
+
+      
  },
  Profile_Active_Orders:[],
  Profile_Old_Orders:[],

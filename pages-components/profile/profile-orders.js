@@ -79,7 +79,7 @@ const ProfileOrders = () => {
   const handleClick = (index) => {
     setExpandedOrder(expandedOrder === index ? null : index);
   };
-
+       //change this to saave to old orders and not remove 
   const handleRemoveOrder = async (e,Id) => {
       e.preventDefault()
       setIsRemoving(true);
@@ -123,8 +123,11 @@ const ProfileOrders = () => {
             { title: "מחיר לשעה", value: order.price || na},
             { title: "מזמין", value: order.name },
             { title: "טלפון", value: order.phone },
+
             { title: "סטטוס הזמנה", value: order.status ?  <BadgeStatus status={order.status} /> : null  },
-            { title: "תאריך ושעה", value: order.date ? new Date(order.date).toLocaleString('he-IL').slice(0,10)  :na },
+            { title: "תאריך ", value: order.date ? new Date(order.date).toLocaleString('he-IL').slice(0,10)  :na },
+            { title:"" , value:""},
+            { title:"" , value:""},
             { title: "עיר", value: order.city || na },
             { title: "כתובת", value: order.address || na },
             { title: "מספר חדרים", value: order.rooms || na },
@@ -202,7 +205,7 @@ const ProfileOrders = () => {
                         backgroundColor: Colors.d
                         }
                         }>
-                    {isRemoving ? 'מוחק...' : 'מחק'}
+                    {isRemoving ? 'בטל...' : 'בטל'}
                  </Button>
 
                   <UiDialog 
@@ -211,7 +214,7 @@ const ProfileOrders = () => {
                       backgroundColor: Colors.d
                       }}
                       buttonText="ערוך הזמנה">
-                    <NewOrder Id={order.Id} />
+                    <NewOrder id={order._id} />
                   </UiDialog>
                 </Flex>
 

@@ -46,6 +46,7 @@ const OrdersWrapper=({ Mode })=>{
             flexWrap={"wrap"} 
             justifyContent={"space-around"} 
             background={'gray.200'}
+            minHeight={"600px"}
              >  
             
               { Array.isArray(orders) && filterCity  ?     

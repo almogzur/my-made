@@ -12,12 +12,12 @@ import {
 import Colors from "../lib/colors";
 import NewOrder from  '../pages-components/profile/profile-new-order'
 
-const ControldPopOvre = ({children ,id}) => {
+const ControldPopOvre = ({children ,id , propsKey}) => {
 
     const [open, setOpen] = useState(false)
 
     return (
-      <PopoverRoot open={open} onOpenChange={(e) => setOpen(e.open)}>
+      <PopoverRoot key={propsKey} open={open} onOpenChange={(e) => setOpen(e.open)}>
         <PopoverTrigger asChild>
         <Button  p={4} size="sm" colorPalette={""}  variant="subtle" >פרטים </Button>
 

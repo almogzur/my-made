@@ -94,9 +94,9 @@ const VendorForm = ({ setEdit ,edit }) => {
 
         <Heading fontSize={"3xl"} p={4} color={Colors.c} textAlign={"center"} >{`הרשם למערכת `}</Heading>
 
-
-        <Field  p={1}  label="שם" required helperText=" תופיע במערכת בשם זה" >
-           <Input 
+        <Container maxWidth={"700px"}>
+          <Field  p={1}  label="שם" required helperText=" תופיע במערכת בשם זה" >
+            <Input 
              
                 variant={"subtle"}
                  required
@@ -105,17 +105,14 @@ const VendorForm = ({ setEdit ,edit }) => {
                  onChange={handleChange}  
 
                  />
-        </Field>
+          </Field>
 
-        <Field p={1}  label="מחיר   " required helperText=" מחיר לעשת עבודה" >
-           <Input variant={"subtle"}  type="number" required  onChange={handleChange} id="price"  />
-        </Field>
-
-        <Field p={1}  label="טלפון " required helperText=" יוצג ללקוח רק לאחר הסכמה  " >
+      
+          <Field p={1}  label="טלפון " required helperText=" יוצג ללקוח רק לאחר הסכמה  " >
            <Input variant={"subtle"}  type="number" required  onChange={handleChange} id="phone"  />
-        </Field>
+          </Field>
 
-        <Field p={1} label="תיאור ">
+          <Field p={1} label="תיאור ">
         <Textarea
            id={"description"}
           text={"תיאור"}
@@ -125,15 +122,15 @@ const VendorForm = ({ setEdit ,edit }) => {
            variant={"subtle"}
            rows={3}
         />
-        </Field>
+          </Field>
 
-        <Flex justifyContent={"center"} >
-          <Button bg={Colors.d} m={4} type="submit">
-          <FaPenFancy size={"1.5em"}  color={Colors.c}/>{"הרשמה"}
-          
+          <Flex justifyContent={"center"} >
+           <Button bg={Colors.d} m={4} type="submit">
+           <FaPenFancy size={"1.5em"}  color={Colors.c}/>{"הרשמה"}     
           </Button>
-         </Flex>
-
+          </Flex>
+          
+        </Container>
         </form>
       </Flex>
 

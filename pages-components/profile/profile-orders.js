@@ -23,6 +23,7 @@ import ControldPopOvre from '../../components/controled-popover';
 
 import {  Badge, Button, Container, Flex, Heading, Text } from '@chakra-ui/react';
 import BadgeStatus from '../../components/badge_status';
+import { title } from 'process';
 
 const ProfileOrders = () => {
 
@@ -32,6 +33,9 @@ const ProfileOrders = () => {
   const { user, isLoading, isValidating,  userError, updateUser } = useUser(session?.user?.email);
   const [isRemoving, setIsRemoving] = useState(false);
   const { xxl,xl,lg,md,sm,xs,xxs} = useContext(WindowWidthContext);
+  
+  const combinedOrders = (user?.Profile_Orders || []).concat(user?.Profile_Active_Orders || []);
+
   
 
   const handleRemoveOrder = async (e,_id) => {
@@ -73,36 +77,78 @@ const ProfileOrders = () => {
           <Container background={'gray.200'} p={2}     >
               <Heading textAlign={"center"} p={4} m={1} color={Colors.d} fontSize={"3xl"}>ההזמנות  שלי </Heading> 
 
-              <Container maxWidth={"1000px"} p={0} >
+              <Container maxWidth={"1000px"} p={0}  >
 
-                 <Flex  justifyContent={"space-between"} alignItems={"center"}  background={Colors.d} p={2} >
-                   <Badge p={3} colorPalette={""} >סטטוס</Badge>
-                   <Badge p={3}>לתאריך</Badge>
+
+                  {/* STATIC ROW */}
+                 <Flex  justifyContent={"space-between"} alignItems={"center"}  background={Colors.d} p={2}  >
+                   <Badge p={3} colorPalette={""}ß >סטטוס</Badge>
+                   <Badge p={3}>לתאריך </Badge>
                    <Badge p={3} colorPalette={""}   disabled >פרטים</Badge>
                  </Flex>
                  
-                  {user?.Profile_Orders?.map((order, index) => {
-                    const orderDetails = [
-                    { title: "מזמין", value: order.name },
-                    { title: "מחיר לשעה", value: order.price || na},
-                    { title : "משעה", value:order.hour},
-                    { title : "עד שעה", value:order.tooHour},
-                    { title: "תאריך ", value: order.date ? new Date(order.date).toLocaleString('he-IL').slice(0,10)  :na },
-                    { title: "כתובת", value: order.address || na },
-                    { title: "תיאור", value: order.jobDescription || na },
-                    
-                    { title: "עודכנה ב", value: order.updateAt ? new Date(order.updateAt).toLocaleString('he-IL') : na },
-                         ];
-            
-                   return <Flex  key={order.orderId} justifyContent={"space-around"}  alignItems={"center"}  bg={"#fff"} height={"60px"}  >
 
-                             <BadgeStatus textStyle={xxs && xs ? "sm" :null } status={order.status}/>
-                             <Text >{order.date.slice(0,10)}</Text>
-                             <ControldPopOvre id={order._id} >
-                                {orderDetails.map((item) => (
-                                  <Flex direction={""} justifyContent={"space-between"} p={0.5} >
-                                    <Text key={item.value} >{item.value}</Text>
-                                    <Text key={item.title}>{item.title}</Text>
+
+
+                 {/* DATA */}
+                  {combinedOrders.map((order, index) => {
+                    console.log(order)
+
+                    const vendorInfo = [
+                          { title: "שם נותן השירות" , value:order.Vendor_Name , flag:true },
+                          { title: "טלפון לייצירת קשר" , value:order.Vendor_Phone, flag:true},
+                        ]
+
+                    const orderDetails = [
+                        { title: "מזמין", value: order.name  },
+                        { title: "מחיר לשעה", value: order.price || na},
+                        { title : "משעה", value:order.hour},
+                        { title : "עד שעה", value:order.tooHour},
+                        { title: "תאריך ", value: order.date ? new Date(order.date).toLocaleString('he-IL').slice(0,10)  :na },
+                        { title: "כתובת", value: order.address || na },
+                        { title: "תיאור", value: order.jobDescription || na },
+                        { title: "עודכנה ב", value: order.updateAt ? new Date(order.updateAt).toLocaleString('he-IL') : na },
+                        { title: "עיר" , value: order.city || na},
+                      
+                    ]
+
+                    const combinedDetails = order.status==="inProcess" ? orderDetails.concat(vendorInfo) : orderDetails;
+                         
+            
+                   return <Flex m={1}  borderRadius={7} key={order.orderId} justifyContent={"space-around"}  alignItems={"center"}  bg={"#fff"} height={"60px"}  >
+
+                             <BadgeStatus key={order.status+ index} textStyle={xxs && xs ? "sm" :null } status={order.status}/>
+                             <Text key={order.data} >{order.date.slice(0,10)}</Text>
+                             <ControldPopOvre id={order._id} propsKey={order._id} >
+
+                                {combinedDetails.map(( item , index ) => (
+                                   <Flex  key={order._id+ index +"list"} justifyContent={"space-between"} p={0.5} >
+                                   { item.flag?
+                                      <Fragment key={ order._id + index + "badge" }>
+                                      {
+                                        <Badge 
+                                           colorPalette={"orange"} 
+                                           key={ item.value? item.value : order._id + index + "missing render Value" }
+                                           >
+                                           {item.value}
+                                         </Badge>
+                                         }{
+                                           <Badge 
+                                              key={ order._id + item.title }
+                                              colorPalette={"orange"}
+                                              >
+                                              {item.title}
+                                           </Badge>
+                                              }
+                                           </Fragment>
+                                          :
+                                          <Fragment key={ order._id + index } >
+                                              <Text  key={order._id + item.value? item.value : index + "mising render value" + item.title } >{item.value}</Text>
+                                              <Text key={order.title}>{item.title}</Text>
+                                           </Fragment>
+                                   } 
+                                  
+                                 
                                   </Flex>
                                     ))}
                             </ControldPopOvre>
@@ -113,15 +159,15 @@ const ProfileOrders = () => {
                          </Flex>
                           })}
 
-                <Flex p={4} justifyContent={"center"}>
-                  <UiDialog
-                     buttonText="הזמנה חדשה"
+                      <Flex p={4} justifyContent={"center"}>
+                       <UiDialog
+                         buttonText="הזמנה חדשה"
                         buttonStyle={{background:Colors.d}}
-                     Icon={<IoMdAddCircle size="2em" color={Colors.b} />}
-                  >
-                   <NewOrder newOrder={true} />
+                        Icon={<IoMdAddCircle size="2em" color={Colors.b} />}
+                       >
+                      <NewOrder newOrder={true} />
              
-                  </UiDialog>
+                       </UiDialog>
                 </Flex>
               </Container>
 

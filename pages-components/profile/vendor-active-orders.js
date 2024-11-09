@@ -23,6 +23,7 @@ const VendorActiveOrders = () => {
   const { user, isLoading, isValidating,  userError, updateUser } = useUser(session?.user?.email);
 
   const VendorOrders = user?.Vendor?.Vendor_Orders
+  
   const isVendor = user?.Vendor?.isVendor
   const na = "לא זמין "
   
@@ -33,9 +34,9 @@ const VendorActiveOrders = () => {
         animate={{opacity:1}}
         transition={{duration:1}}
      >
-      <Flex  direction={"column"} p={2} bg={"gray.200"}  mb={'100px'} alignItems={"center"} >
-
-          <Heading p={4} fontSize={"3xl"} color={Colors.c} >הזמנות משק</Heading>
+      <Flex  direction={"column"} p={2} mb={"12em"} bg={"gray.200"} alignItems={"center"} >
+          <Container maxWidth={"700px"}>
+          <Heading textAlign={"center"} p={4} fontSize={"3xl"} color={Colors.c} >הזמנות  לקוחות</Heading>
     
            <AccordionRoot collapsible defaultValue={["b"]}>   
 
@@ -89,7 +90,7 @@ const VendorActiveOrders = () => {
                 </AccordionItem>
               } )}
           </AccordionRoot>
-            
+          </Container>
 
       </Flex>
       </m.div>

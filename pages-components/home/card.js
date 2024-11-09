@@ -21,6 +21,7 @@ const Card = ({text,IconEl  }) => {
           justifyContent={"center"} 
           alignItems={"center"}  
           boxShadow={'0 8px 16px rgba(0, 0, 0, 1)'}
+          borderRadius={7}
           
           >
            <IconEl  size={"11em"} color={Colors.d}/>

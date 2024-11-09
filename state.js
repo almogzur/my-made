@@ -2,7 +2,6 @@ const State = {
 
   Vendor:{
        name:"",
-       price:0,
        description:"",
        phone:"",
        Active_Orders:[]

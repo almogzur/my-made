@@ -22,7 +22,8 @@ const HowThisWorks = () => {
 
     
     return (
-        <Container p={0} m={0} height={"40%"} background={Colors.background}>
+      <Flex justifyContent={"space-around"} >
+         <Container p={0} m={0} height={"40%"} >
 
             <Text fontSize={"4xl"} textAlign={"center"}  >{HeasLine}</Text>
             
@@ -34,7 +35,8 @@ const HowThisWorks = () => {
                     
                     )}
             </Flex>  
-        </Container>
+         </Container>
+       </Flex>
     );
 };
 

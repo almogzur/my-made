@@ -19,14 +19,12 @@ const VendorDisplay = ({ user, setEdit ,edit }) => {
         transition={{duration:2 }}
       >
         <Container p={4} background={'gray.200'}>
-        
-       <Heading fontSize={"2rem"} fontWeight={"bold"} textAlign={"center"} color={Colors.c} >  נרשמתם בהצלחה </Heading>
+          <Container maxWidth={"700px"}>
+           <Heading fontSize={"2rem"} fontWeight={"bold"} textAlign={"center"} color={Colors.c} >  נרשמתם בהצלחה </Heading>
+           <Text textAlign={"center"} fontSize={"large"}  color={Colors.c} mb={"20px"} p={2} > ניתן לראות הזמנות בלוח עבודות  </Text>
 
-       <Text textAlign={"center"} fontSize={"medium"}  color={Colors.c} mb={"20px"} p={2} > ניתן לראות הזמנות בלוח עבודות  </Text>
-
-       <Flex p={4} direction={"column"} gap={"15px"} mb={"20px"} >
-      
-      <Flex justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >
+            <Flex p={4} direction={"column"} gap={"15px"} mb={"20px"} >
+        <Flex justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >
 
           <Text  >שם</Text>
           <Text >{user.name}</Text>
@@ -39,44 +37,39 @@ const VendorDisplay = ({ user, setEdit ,edit }) => {
 
         </Flex>
 
-        <Flex justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >
-          <Text >מחיר לשעה</Text>
-          <Text >{user.price}</Text>
-        </Flex>
 
         <Flex justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >
           <Text >זמין</Text>
           <Text >{user.isVendor ? 'כן' : 'לא'}</Text>
         </Flex>
         
-       </Flex>
+            </Flex>
 
-       <Flex p={4} direction={"column"} m={1} borderBottom={'4px dotted #c2b5a9'} width={"inherit"}  fontWeight={"bold"}   >
+             <Flex p={4} direction={"column"} m={1} borderBottom={'4px dotted #c2b5a9'} width={"inherit"}  fontWeight={"bold"}   >
          <Text >תיאור</Text>
         <Text >{user.description}</Text>
-       </Flex>
+             </Flex>
+       
 
-       <Flex p={4} justifyContent={"center"}  gap={"10px"}  m={4}  >
+            <Flex p={4} justifyContent={"center"}  gap={"10px"}  m={4}  >
 
 
-           <Button fontSize={"medium"}  borderRadius={"4px"} width={"120px"}  background={Colors.d} onClick={()=>setEdit(true) }>
-                <MdEdit  color={Colors.c} />  
-                <Text>ערוך פרטים</Text> 
+           <Button fontSize={"medium"}  borderRadius={"4px"} width={"120px"} variant={"subtle"} background={Colors.d} onClick={()=>setEdit(true) }>
+                <MdEdit  color={Colors.b} />  
+            <Text>ערוך פרטים</Text> 
 
            </Button>
         {user?.isVendor && 
           <Link href={"/bord"} >
-          <Button    width={"120px"} fontSize={"medium"} background={Colors.d}>
-             
-                <FaRegClipboard  color={Colors.c} />
-                 <Text> לוח עבודות</Text>
-           
+
+          <Button    width={"120px"} fontSize={"medium"} background={Colors.d} variant={"subtle"}>
+              <FaRegClipboard color={Colors.b}/> <Text> לוח עבודות</Text> 
           </Button>
           </Link>
         }
 
-      </Flex>
-      
+            </Flex>
+            </Container>
         </Container>
     </motion.div>
   );

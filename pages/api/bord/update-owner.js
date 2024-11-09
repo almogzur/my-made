@@ -54,26 +54,10 @@ export default async function handler(req, res) {
       Vendor_Name: vendor.Vendor?.name,
       Vendor_Phone: vendor.Vendor?.phone,
       Vendor_Action_Date: new Date(),
+      Vendor_ID : vendor._id,
       status: 'inProcess'
+      
     };
-
-    // Update the client's copy of the order in `Profile_Orders`
-    try {
-      await usersCollection.updateOne(
-        { _id: clientOrder.ownerId, "Profile_Orders._id": orderId },
-        {
-          $set: {
-            "Profile_Orders.$.Vendor_Name": vendor.name,
-            "Profile_Orders.$.Vendor_Phone": vendor.Vendor?.phone,
-            "Profile_Orders.$.Vendor_Action_Date": updatedOrder.Vendor_Action_Date,
-            "Profile_Orders.$.status": updatedOrder.status
-          }
-        }
-      );
-    } catch (error) {
-      console.error("Error updating client's Profile_Orders:", error);
-      return res.status(500).json({ message: 'Error updating client\'s Profile_Orders' });
-    }
 
     // Update the vendor's active orders, avoiding duplication
     try {
@@ -86,6 +70,20 @@ export default async function handler(req, res) {
     } catch (error) {
       console.error("Error updating vendor's active orders:", error);
       return res.status(500).json({ message: 'Error updating vendor\'s active orders' });
+    }
+
+    // Update the client's order status in Profile_Orders, pull it from Profile_Orders, and add to Profile_Active_Orders
+    try {
+      await usersCollection.updateOne(
+        { _id: clientOrder.ownerId },
+        {
+          $pull: { Profile_Orders: { _id: orderId } },  // Remove order from Profile_Orders
+          $addToSet: { Profile_Active_Orders: updatedOrder } // Add updated order to Profile_Active_Orders
+        }
+      );
+    } catch (error) {
+      console.error("Error updating client's active orders:", error);
+      return res.status(500).json({ message: 'Error updating client\'s active orders' });
     }
 
     // Remove the order from the city collection

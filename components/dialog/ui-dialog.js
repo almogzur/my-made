@@ -41,7 +41,7 @@ const Dialog = ({children,buttonStyle, buttonText, Icon}) => {
            top: "1em",
            left: "1em",
            right: "1em",
-           bottom: "1em",
+           bottom: "10px",
            borderRadius:"8px",
            overflowX:"hidden",
            background:'#e4e4e7'

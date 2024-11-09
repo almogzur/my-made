@@ -24,17 +24,15 @@ const handler = async (req, res) => {
   const userEmail = session.user.email;
   const database = client.db('my-made');
   const users = database.collection('users');
-  const {name, price, description ,phone } = req.body;
+  const {name, description ,phone } = req.body;
 
   try {
-    // Find the user by their email and update their vendor information
     const filter = { email: userEmail };
     const updateDoc = {
       $set: {
         "Vendor.name": name,
-        "Vendor.price": price,
-        "Vendor.description": description,
         "Vendor.phone":phone,
+        "Vendor.description": description,
         'Vendor.isVendor': true, 
         'Vendor.Vendor_Orders':[]
       }

@@ -152,11 +152,17 @@ const NewOrder = ({ id, newOrder }) => {
     }
   };  
 
+  function addMonths(date, months) {
+    const newDate = new Date(date);
+     newDate.setMonth(newDate.getMonth() + months);
+    return newDate;
+}
+
 
   return (
     
     <form  onSubmit={id? updateExistingOrder: createNewOrder}>
-   <Container  bg={'gray.200'} color={Colors.d}   > 
+      <Container  bg={'gray.200'} color={Colors.d} maxWidth={"700px"}  > 
       <Text  fontWeight={"bolder"} fontSize={"larger"} >{session?.user?.name}</Text>
       <Text fontWeight={"bolder"} fontSize={"larger"}>הזמן משק בית</Text>
       
@@ -173,12 +179,10 @@ const NewOrder = ({ id, newOrder }) => {
          onChange={handleChange} 
        />
      </Field>
-
+       
         
-        <Flex justifyContent={"center"}   >
-
+        <Field label={"תאריך ושעה"} required paddingTop={"10px"}>
           <DatePicker      
-            placeholderText= "תאריך ושעה "
             locale={he}
             selected={state[STATE_KEY].date}
             onChange={  (date) => hendelCaLchange(date)} 
@@ -186,14 +190,13 @@ const NewOrder = ({ id, newOrder }) => {
             dateFormat="PP"     
             required        
             className='order-cal'
+            minDate={new Date()}
+            maxDate={addMonths(new Date(), 6)}
 
-            
-                 
-     >
-  
-     </DatePicker>
+            >
+          </DatePicker>
+         </Field>
 
-       </Flex>
     
       <HStack gap="10" width="full">
 
@@ -229,29 +232,28 @@ const NewOrder = ({ id, newOrder }) => {
       </HStack>
       
         
-  
-
-        <Select
-            placeholder="אזור"
+        <Field label="אזורֿ / עיר" paddingTop={"10px"} required>
+          <Select
            required
             variant="subtle"
             id='city'
             value={state[STATE_KEY].city}
-            onChange={handleSelect}
-            paddingTop={"20px"}
+            onChange={handleSelect}  
+            paddingBottom={"10px"}
+
             
           >
 
-          <Option  required>
-                   <option value="">{ state[STATE_KEY].city ?? "אזורֿ / עיר" }</option>
+          <Option   required>
+                   <option value="">{ state[STATE_KEY].city ??null }</option>
                   {israelRegions.map((obj,i)=>{
                   const city = obj.value
   
-                  return <option required  id={city}  key={`  ${i}`} value={city} >{city}</option>
+                  return <option required   id={city}  key={`  ${i}`} value={city} >{city}</option>
              })}   
             </Option>
-      </Select> 
-    
+         </Select> 
+       </Field>
 
        <Field  pt={1} label="כתובת" required >
          <Input 
@@ -299,9 +301,6 @@ const NewOrder = ({ id, newOrder }) => {
             />
       </Field>
 
-
-
-
       <Field pt={1} label=" שעתון" required  >
         <Input 
             variant={"subtle"}  
@@ -316,14 +315,12 @@ const NewOrder = ({ id, newOrder }) => {
             />
       </Field>
 
-
-
         <Flex  justifyContent={"center"} marginTop={"15px"}  >
           {/* ther is no way to control date required  */} 
          <Button colorPalette={"blue"} variant={"subtle"} type="submit">{id? "עדכן ":" שלח הזמנה "}</Button> 
           {/* /////////////// */}
         </Flex>
-    </Container>
+      </Container>
     </form>
   );
 };

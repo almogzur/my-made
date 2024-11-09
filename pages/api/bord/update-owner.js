@@ -66,7 +66,7 @@ export default async function handler(req, res) {
             "Profile_Orders.$.Vendor_Name": vendor.name,
             "Profile_Orders.$.Vendor_Phone": vendor.Vendor?.phone,
             "Profile_Orders.$.Vendor_Action_Date": updatedOrder.Vendor_Action_Date,
-            "Profile_Orders.$.status": 'inProcess'
+            "Profile_Orders.$.status": updatedOrder.status
           }
         }
       );

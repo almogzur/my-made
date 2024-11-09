@@ -10,7 +10,7 @@ function OrdersButton({width,height,border,borderRadius,borderColor}) {
           height: '4em',
           border: `2px solid ${borderColor?? Colors.c}`,
           borderRadius: "6px",
-          color:"#fff"
+
          }
 
     return <button  style={Style}  >

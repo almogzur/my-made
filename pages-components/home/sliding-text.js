@@ -11,7 +11,7 @@ import AnimatedHeadline from "./animated-headline";
                     animate: { y: 0, opacity: 1 , type:"sping" },    
                     transition: { duration: 1, ease: "easeOut" }
                 },
-                style:{   fontSize: "3em", color: Colors.c , fontWeight: "bold",}
+                style:{   fontSize: "3em", color: Colors.d , fontWeight: "bold",}
                 } 
 
 const CopyText = [ 
@@ -50,7 +50,7 @@ const SlidingTextWrapper = () => {
 
     return (
             
-                <Flex  direction={"column"} alignItems={"center"}    textAlign={"center"} color={"#fff"} p={0}  >
+                <Flex  direction={"column"} alignItems={"center"}    textAlign={"center"} p={0}  >
                               <AnimatedHeadline 
                                 
                                      text={headLine.Text} 
@@ -60,7 +60,7 @@ const SlidingTextWrapper = () => {
                                      transition={headLine.animation.transition} 
 
                                      />
-                {CopyText.map((obj,i)=>{
+                      {CopyText.map((obj,i)=>{
                         return  <AnimatedHeadline 
                                      key={i} 
                                      text={obj.Text} 

@@ -42,7 +42,7 @@ const MyDrawer = () => {
         {/** open btn */}
          <DrawerTrigger asChild background={{}} width={"60px"} height={"inherit"} p={2} mr={"2px"}>
 
-                <BsArrowBarLeft  color="#fff" />
+                <BsArrowBarLeft  color={Colors.b} />
           
 
 

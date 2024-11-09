@@ -22,13 +22,13 @@ const ProfileAvatr = () => {
        animate={{opacity:1}}
        transition={{duration:2 }}
     >
-      <Flex background={"#fff"} p={"20px"} direction={'column'} alignItems={"center"} fontWeight={"bold"} >
+      <Flex  background={"gray.200"} mt={2} pt={6} direction={'column'} alignItems={"center"} fontWeight={"bold"} >
         
-         <Image style={{border:` dotted 3px ${Colors.c}`,padding:"6px" }}    width={130} height={50} src={session?.user.image || profileDefualtIcon} alt="" />
+         <Image style={{border:` dotted 5px ${Colors.d}`,padding:"10px", borderRadius:"18px" }}     width={160} height={80} src={session?.user.image || profileDefualtIcon} alt="" />
 
-          <Heading color={Colors.c} >{session?.user?.name ?? "אלמוני" }</Heading>
-          <Text p={1} >{session?.user?.email.toUpperCase() }</Text>
-          <Text p={2} >אימייל מאושר : {session?.user?.emailVerified ? "כן" :" לא"}</Text>
+          <Heading color={Colors.d} >{session?.user?.name.toUpperCase() ?? "אלמוני" }</Heading>
+          <Text  p={1} >{session?.user?.email }</Text>
+          <Text p={2} >אימייל מאומת : {session?.user?.emailVerified ? "כן" :" לא"}</Text>
       </Flex>
       </m.div>
       </LazyMotion>

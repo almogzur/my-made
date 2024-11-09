@@ -9,19 +9,15 @@ const State = {
  },
   Order: { 
        price:"",
-       status:"",
        phone:"",
        date:"",
        hour:"",
        tooHour:"",
-       jobDescription:"",
+       description:"",
        city:"",
        address:"",
        rooms:"",
        baths:'',
-       homeSize:"",
-
-      
  },
  Profile_Active_Orders:[],
  Profile_Old_Orders:[],

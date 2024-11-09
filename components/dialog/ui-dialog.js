@@ -6,6 +6,7 @@ import { m, LazyMotion, color } from "framer-motion";
 import ReactModal from "react-modal";
 import Colors from "../../lib/colors";
 import f from '../../lib/features'
+import { Button, Flex } from "@chakra-ui/react";
 
 
   // outside the  function scope prevent react Memo
@@ -14,128 +15,65 @@ import f from '../../lib/features'
 
 
 
-const Dialog = ({children,buttonStyle, buttonText, Icon}) =>
-   {
+const Dialog = ({children,buttonStyle, buttonText, Icon}) => {
+
      const [showModal, setShowModal] = useState(false)
-      const handleModal = () => {  setShowModal(!showModal) }
-
-
-      const Style = {
-        helpBtn:{
-           display:'flex',
-           justifyContent:'space-evenly',
-           alignItems:'center',
-           width:"60px",
-           height:"40px",   
-           zIndex:2 ,
-           backgroundColor: "#f4f4f5",
-     
-           border: 'none',
-           borderRadius: '5px',
-           cursor: 'pointer',
-           fontWeight: 'bold',
-           margin: "5px",
-  
-        },
-        BtnsWrapper:{
-            display:"flex",
-            position:'fixed',  
-            left:"27px",
-            top:"35px",
-            zIndex:"2"
-          }
-      }
-
-
-
-  const scroolDown = ()=>{
-
-
-    const options = {
-          top:700,
-          behavior:"smooth"
-        }
+     const handleModal = () => {  setShowModal(!showModal) }
+     const scroolDown = ()=>{
+    const options = {top:700,behavior:"smooth"}
     
     if(contentRef){
-      contentRef.scroll(options)
+        contentRef.scroll(options)
     }
+     }
 
-
-  }
+     const overlay ={
+          position: "absolute",
+          top: "1em",
+          left: "5px",
+          right: "5px",
+          bottom: '1em',
+          borderRadius: "2px",
+          overflowX:"hidden",
+     }
+     const content ={
+          position: 'fixed',
+           top: "1em",
+           left: "1em",
+           right: "1em",
+           bottom: "1em",
+           borderRadius:"8px",
+           overflowX:"hidden",
+           background:'#e4e4e7'
+       
+     }
   
   return (
-    < >
+    <>
   
-      <m.button
-          transition={{duration:0.5, stiffness:50}}
-          whileHover={{
-             boxShadow: `4px 4px 2px  ${Colors.c} inset `,
-             scale:1.1
-           }}
-
-          style={buttonStyle?? null}
-          onClick={handleModal}
-      >  
-           { Icon }{buttonText}
-      </m.button>
+      <Button  variant={"subtle"}  style={{...buttonStyle}} onClick={handleModal}>  {Icon}{buttonText} </Button>
       
-     
       <ReactModal
          ariaHideApp={false}
-        isOpen={showModal}
-        onRequestClose={handleModal}
-        style={{
-          content: {
-            position: "absolute",
-            top: "1em",
-            left: "5px",
-            right: "5px",
-            bottom: '1em',
-            borderRadius: "2px",
-            overflowX:"hidden",
-         
-          },
-          overlay: {
-            position: 'fixed',
-            top: "0",
-            left: "0",
-            right: "0",
-            bottom: "0",
-            borderRadius:"8px",
-            overflowX:"hidden",
-            background:Colors.d,
-            
-            
-      
-              }
-        }}
-        overlayRef={(node) => overlayRef = node}
+         isOpen={showModal}
+         onRequestClose={handleModal}
+         style={{content: content ,overlay: overlay }}
+         overlayRef={(node) => overlayRef = node}
          contentRef={(node) => contentRef = node}        
         >
-        <LazyMotion features={f}>
-        <div style={Style.BtnsWrapper}>
-          <m.button
-              whileHover={{ background: Colors.d, color:"#fff"  }}
-               onClick={scroolDown}
-               style={Style.helpBtn }
-          >
-            <FaArrowDown  size="30" />
-          </m.button>
+      
+        <Flex justifyContent={"flex-end"} >
+
+          <Button colorPalette={"blue"} variant={"subtle"} onClick={scroolDown} ml={1} p={0} >
+            <FaArrowDown   />
+          </Button>
           
-          <m.button
-            whileHover={{ background: Colors.d,color:"#fff" }}
-            onClick={ handleModal}
-            style={{...Style.helpBtn             }}
-          >
-            <RiCloseLargeFill  size="30" />
-          </m.button>
-        
-        </div>
-        </LazyMotion>
+          <Button onClick={ handleModal} m={0} p={0}  colorPalette={"blue"} variant={"subtle"} >
+            <RiCloseLargeFill   />
+          </Button>
+
+        </Flex>
         {children}
-
-    
-
       </ReactModal>
     </>
   );

@@ -3,7 +3,7 @@ import { WindowWidthContext } from "../../context";
 import StyledImage from "./styled-image";
 import SlidingTextWrapper from './sliding-text'
 import Colors from "../../lib/colors";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Bos } from "@chakra-ui/react";
 
 
 import MD1 from '../../public/800px/cover1.jpg'
@@ -21,22 +21,23 @@ const PhotosMd = {
 
 
 function  MainSection() {
-  const { xl, lg , md , sm } = useContext(WindowWidthContext);
+  const { xxl,xl,lg,md,sm,xs,xxs } = useContext(WindowWidthContext);
   
   return (
 
-        <Container p={2}  >
+        <Container  >
             <SlidingTextWrapper/> 
             <Flex direction={"column"} alignItems={"center"}  >
               <StyledImage 
                   Images={ PhotosMd.A } 
-                  PropsImageStyle={{ 
-                      width: sm && md? "800px" : "400px", 
-                      height:sm && md? "600px":"300px",  
-                       borderRadius: lg ? "12px" : null ,
-                       borderRadius:"3%",
-                         margin: lg? "2em" : null  ,
-                         opacity: "0.8"
+                    PropsImageStyle={{ 
+                      width: xxs && xs? "800px" : "400px", 
+                      height:xxs && xs? "600px":"300px",  
+                       marginTop:"1em",
+                       marginBottom:"1em",
+                       boxShadow:'0 8px 16px rgba(0, 0, 0, 1)'
+
+                    
                            }} 
                   timer={8000} 
                    />

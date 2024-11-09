@@ -22,9 +22,9 @@ const HowThisWorks = () => {
 
     
     return (
-        <Container height={"40%"} background={Colors.d}>
+        <Container p={0} m={0} height={"40%"} background={Colors.background}>
 
-            <Text fontSize={"4xl"} textAlign={"center"} color={"#fff"} >{HeasLine}</Text>
+            <Text fontSize={"4xl"} textAlign={"center"}  >{HeasLine}</Text>
             
             <Flex flexWrap={"wrap"} justifyContent={"space-around"} >
                 {Object.values(CopyText)

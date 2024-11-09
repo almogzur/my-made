@@ -41,12 +41,12 @@ const handler = async (req, res) => {
 
     const userId = user._id; 
     const name = session.user.name
-
+    const status = "Open"
     
 
     const newOrder = {
         name,
-        status: "Open",
+        status,
       ...req.body,
        createdAt: new Date(),
        _id: uuidv4(),

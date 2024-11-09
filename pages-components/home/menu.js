@@ -14,9 +14,9 @@ const Menu = () => {
   const router = useRouter()
 
      return (
-        <Flex height={"80px"}   background={Colors.d} >
+        <Flex height={"80px"}    background={Colors.d} >
 
-           <Flex width={"50%"} height={"inherit"} background={Colors.d}>
+           <Flex width={"50%"} height={"inherit"}>
             <GiVacuumCleaner size={"4em"} color="#fff"  /> 
           </Flex>
         

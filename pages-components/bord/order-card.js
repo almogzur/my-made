@@ -56,7 +56,7 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
   const isExpanded = expandedIndex === itemIndex 
 
   return (
-        <Container p={0} maxWidth={"360px"}>
+        <Container p={0} m={0} maxWidth={"360px"}>
          <AnimatePresence>
              <MotionCard        
                 boxShadow="lg"
@@ -73,7 +73,7 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
         }}
         exit={{opacity:0}}
              >    
-              <Card.Body p={3} m={0}>
+              <Card.Body p={1} m={0}>
           
                     <Card.Title color={Colors.c}  fontSize="2xl" fontWeight="bold">  {order?.name || 'לא זמין'}</Card.Title>
                     <Text fontSize="md">כתובת: {order?.address || 'לא זמין'}</Text>

@@ -17,7 +17,7 @@ export default function Home() {
   }
 
   return (
-    <Container>
+    <>
       <Head>
         <title>MadeIt</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,8 +27,7 @@ export default function Home() {
      <MainSection/>
      <QuickcSingIn/>
      <HowThisWorks/>
-      
-    </Container>
+     </>
   );
 }
 

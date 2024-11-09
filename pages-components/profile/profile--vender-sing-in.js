@@ -89,7 +89,7 @@ const VendorForm = ({ setEdit ,edit }) => {
   }
 
  return ( 
-      <Flex  p={4} background={"#fff"}   direction={"column"}  justifyContent={"center"}  alignContent={'center'} >
+      <Flex  p={4} background={"gray.200"}   direction={"column"}  justifyContent={"center"}  alignContent={'center'} >
         <form  onSubmit={handleSubmit} >
 
         <Heading fontSize={"3xl"} p={4} color={Colors.c} textAlign={"center"} >{`הרשם למערכת `}</Heading>

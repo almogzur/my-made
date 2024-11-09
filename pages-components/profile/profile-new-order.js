@@ -19,6 +19,7 @@ import {
   NativeSelectField  as Option,
   NativeSelectRoot as Select,
 } from "@chakra-ui/react"
+import Colors from '../../lib/colors.js';
 
 
 ////
@@ -35,8 +36,6 @@ const NewOrder = ({ id, newOrder }) => {
   const { user, isLoading, isError ,updateUser } = useUser(session?.user?.email);
   
   const router = useRouter();
-
-  
 
 
   // No Session redirect
@@ -119,7 +118,7 @@ const NewOrder = ({ id, newOrder }) => {
       });
   
       if (response.ok) {
-        
+        updateUser()
 
         console.log('New order created successfully');
       }
@@ -139,11 +138,11 @@ const NewOrder = ({ id, newOrder }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...state[STATE_KEY], Id }),
+        body: JSON.stringify({ ...state[STATE_KEY], id }),
       });
   
       if (response.ok) {
-        mutate()
+        updateUser()
         console.log('Order updated successfully');
       } else {
         alert('Failed to update order');
@@ -157,7 +156,7 @@ const NewOrder = ({ id, newOrder }) => {
   return (
     
     <form  onSubmit={id? updateExistingOrder: createNewOrder}>
-   <Container     >
+   <Container  bg={'gray.200'} color={Colors.d}   > 
       <Text  fontWeight={"bolder"} fontSize={"larger"} >{session?.user?.name}</Text>
       <Text fontWeight={"bolder"} fontSize={"larger"}>הזמן משק בית</Text>
       
@@ -230,15 +229,7 @@ const NewOrder = ({ id, newOrder }) => {
       </HStack>
       
         
-      <Field pt={1} label="תיאור הבקשה  " >
-          <Textarea 
-              resize={"none"} 
-              variant={"subtle"} 
-              value={state[STATE_KEY].jobDescription} 
-              onChange={handleChange} 
-              id='jobDescription'  
-            />
-      </Field>
+  
 
         <Select
             placeholder="אזור"
@@ -298,20 +289,20 @@ const NewOrder = ({ id, newOrder }) => {
                 />
        </Field>
 
-
-
-      <Field pt={1}  label="גודל הדירה במטרים" >
-        <Input 
-            variant={"subtle"} 
-            type="number"  
-            id="size" 
-            value={state[STATE_KEY].size}
-            onChange={handleChange} 
-
+       <Field pt={1} label="תיאור הבקשה  " >
+          <Textarea 
+              resize={"none"} 
+              variant={"subtle"} 
+              value={state[STATE_KEY].jobDescription} 
+              onChange={handleChange} 
+              id='description'  
             />
       </Field>
 
-      <Field pt={1} label="מחיר שעתי" required  >
+
+
+
+      <Field pt={1} label=" שעתון" required  >
         <Input 
             variant={"subtle"}  
             required
@@ -329,7 +320,7 @@ const NewOrder = ({ id, newOrder }) => {
 
         <Flex  justifyContent={"center"} marginTop={"15px"}  >
           {/* ther is no way to control date required  */} 
-         <Button type="submit">{id? "עדכן ":" שלח הזמנה "}</Button> 
+         <Button colorPalette={"blue"} variant={"subtle"} type="submit">{id? "עדכן ":" שלח הזמנה "}</Button> 
           {/* /////////////// */}
         </Flex>
     </Container>

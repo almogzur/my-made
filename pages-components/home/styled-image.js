@@ -21,15 +21,11 @@ const StyledImage = ({ Images, timer = 3000, PropsImageStyle, PropsDivStyle }) =
 
   return (
       <motion.div
-        
+         
         key={index} // key is not only for List its can triger rerender if changed 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1  }}
-        transition={{
-          opacity: { duration: 2 },
-          ease: "ease",
-          
-        }}
+        transition={{ opacity: { duration: 2 }, ease: "ease" }}
         style={PropsDivStyle? PropsDivStyle :  {}}
       >
         <Image  style={PropsImageStyle ? PropsImageStyle :  {}} src={src} alt="נקיון בבית" />

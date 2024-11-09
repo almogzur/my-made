@@ -28,7 +28,7 @@ const OrdersWrapper=({ Mode })=>{
                 direction={"column"}
                 justifyContent={"center"}
                 alignItems={"center"}
-                bg={"#fff"}
+                bg={"gray.200"}
                 height={"12em"}
                 width={'100%'}
                 >
@@ -39,7 +39,14 @@ const OrdersWrapper=({ Mode })=>{
      
  return (
         
-          <Flex width={"100%"} p={0} m={0}flexWrap={"wrap"} justifyContent={"space-around"}  bg={"#fff"} >  
+          <Flex 
+            width={"100%"} 
+            p={0} 
+            m={0} 
+            flexWrap={"wrap"} 
+            justifyContent={"space-around"} 
+            background={'gray.200'}
+             >  
             
               { Array.isArray(orders) && filterCity  ?     
               
@@ -57,7 +64,7 @@ const OrdersWrapper=({ Mode })=>{
                        direction={"column"}
                        justifyContent={"center"}
                        alignContent={"center"}
-                       background='#fff'
+                       background='gray.200'
                        height={"12em"} 
                     >
                      <GiVacuumCleaner size={"5em"} color={Colors.c}  /> 

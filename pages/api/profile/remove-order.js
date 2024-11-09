@@ -3,7 +3,6 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 
 const handler = async (req, res) => {
-
   const API_NAME = "Remove Order API";
   console.log(API_NAME);
   
@@ -12,7 +11,6 @@ const handler = async (req, res) => {
     console.log(`Method ${req.method} Not Allowed`);
     return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
-
 
   const session = await getServerSession(req, res, authOptions);
 
@@ -24,24 +22,46 @@ const handler = async (req, res) => {
   const client = await clientPromise;
   const userEmail = session.user.email;
   const database = client.db('my-made');
-  const users = database.collection('users');  
-  const  { Id } = req.query
+  const areaDatabase = client.db('my-made-Areas');
+  const users = database.collection('users');
+  const { id } = req.query;
 
-  if (!Id) {
+  if (!id) {
     console.log(API_NAME, 'Order ID is required');
     return res.status(400).json({ message: 'Order ID is required' });
   }
 
   try {
-    // Find the user by their email and remove the order with the matching orderId from the Orders array
-    const filter = { email: userEmail };
-    const updateDoc = {  $pull: { Orders: { Id } }};
+    // Step 1: Retrieve the order to find the corresponding city
+    const user = await users.findOne({ email: userEmail, "Profile_Orders._id": id }, { projection: { "Profile_Orders.$": 1 } });
+    const order = user?.Profile_Orders?.[0];
 
-    const result = await users.updateOne(filter, updateDoc);
+    if (!order) {
+      console.log("Order not found in user's profile");
+      return res.status(404).json({ message: 'Order not found' });
+    }
 
-    if (result.modifiedCount >= 1) {
-      console.log("Order removed successfully");
-      return res.status(200).json({ message: 'Order removed successfully' });
+    const city = order.city;  
+    const cityCollection = areaDatabase.collection(city);
+
+    // Step 2: Remove the order from the user's `Profile_Orders`
+
+    const updateDoc = { $pull: { 'Profile_Orders': { _id: id } } };
+    const userResult = await users.updateOne({ email: userEmail }, updateDoc);
+
+    if (userResult.modifiedCount === 1) {
+      console.log("Order removed from user's profile");
+
+      // Step 3: Remove the order from the corresponding city collection
+      const cityResult = await cityCollection.deleteOne({ "_id": id });
+
+      if (cityResult.deletedCount === 1) {
+        console.log("Order removed from city collection");
+        return res.status(200).json({ message: 'Order removed successfully from both user and city collection' });
+      }   else {
+        console.log("Order not found in city collection");
+        return res.status(404).json({ message: 'Order not found in city collection' });
+      }
     } else {
       console.log("Order not found or no changes made");
       return res.status(404).json({ message: 'Order not found or no changes made' });

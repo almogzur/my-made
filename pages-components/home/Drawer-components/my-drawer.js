@@ -68,8 +68,8 @@ const  MyDrawer = () => {
                            PropsOnClick={()=>{ session? router.push("/profile") : signIn(undefined,{callbackUrl:"/profile"})   }}
                            animationIndex={1.5} 
               />
-              { user?.Vendor.isVendor &&
-                 <DrawerItem text={"לוח"} Icon={<FcViewDetails size={"2em"}/>} PropsOnClick={()=>router.push()} animationIndex={1.9}  /> }
+              { user?.Vendor?.isVendor &&
+                 <DrawerItem text={"לוח"} Icon={<FcViewDetails size={"2em"}/>} PropsOnClick={()=>router.push("/bord")} animationIndex={1.9}  /> }
           </DrawerBody>
 
           <DrawerFooter>

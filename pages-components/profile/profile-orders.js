@@ -114,7 +114,7 @@ const ProfileOrders = () => {
 
 
                   {/* STATIC ROW */}
-                  <Flex m={1}  borderRadius={7}  justifyContent={"space-around"}  alignItems={"center"}  bg={"#fff"} height={"60px"}  >
+                  <Flex m={1}  borderRadius={7}  bg={"gray.400"} justifyContent={"space-around"}  alignItems={"center"}  height={"60px"}  >
                      
                    <Text p={3} colorPalette={""} >סטטוס</Text>
                    <Text p={3}>לתאריך </Text>

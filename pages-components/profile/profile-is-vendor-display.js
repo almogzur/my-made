@@ -6,6 +6,17 @@ import Link from 'next/link';
 import { Container , Heading , Text , Flex, Button} from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import {
+  DialogActionTrigger,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogRoot,
+  DialogTitle,
+  DialogTrigger,
+} from "../../components/ui/dialog"
 // link is 32 k Route is 113k for 1 navigation 
 // replaced width Link
 
@@ -23,50 +34,89 @@ const VendorDisplay = ({ user, setEdit ,edit }) => {
            <Heading fontSize={"2rem"} fontWeight={"bold"} textAlign={"center"} color={Colors.c} >  נרשמתם בהצלחה </Heading>
            <Text textAlign={"center"} fontSize={"large"}  color={Colors.c} mb={"20px"} p={2} > ניתן לראות הזמנות בלוח עבודות  </Text>
 
-            <Flex p={4} direction={"column"} gap={"15px"} mb={"20px"} >
-        <Flex justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >
-
-          <Text  >שם</Text>
-          <Text >{user.name}</Text>
-        </Flex>
-
-        <Flex  justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >
-
-          <Text >טלפון</Text>
-          <Text   >{user.phone ?? "לא זמין"}</Text>
-
-        </Flex>
 
 
-        <Flex justifyContent={"space-between"} borderBottom={"2px solid #c2b5a9"} pb={"8px"} fontWeight={"bold"}  >
-          <Text >זמין</Text>
-          <Text >{user.isVendor ? 'כן' : 'לא'}</Text>
-        </Flex>
-        
-            </Flex>
-
-             <Flex p={4} direction={"column"} m={1} borderBottom={'4px dotted #c2b5a9'} width={"inherit"}  fontWeight={"bold"}   >
-         <Text >תיאור</Text>
-        <Text >{user.description}</Text>
-             </Flex>
        
 
-            <Flex p={4} justifyContent={"center"}  gap={"10px"}  m={4}  >
+      
+       
+            {/* Btn Wrap  */}
+            <Flex p={4} justifyContent={"center"}  gap={"10px"}  m={4}  >     
+              {user?.isVendor && 
+              <>
+                <Link href={"/bord"} >
+                  <Button    width={"120px"} fontSize={"medium"} background={Colors.d} variant={"subtle"}>
+                    <FaRegClipboard color={Colors.b}/> <Text> לוח עבודות</Text> 
+                  </Button>
+                </Link>
+                <DialogRoot
+                  placement={"center"}
+                  motionPreset="slide-in-bottom"
+                 >
+            <DialogTrigger asChild>
+              <Button fontSize={"medium"}  borderRadius={"4px"} width={"120px"} variant={"subtle"} background={Colors.d} >פרטים  </Button>
+            </DialogTrigger>
+            <DialogContent>
+
+               <DialogHeader>
+                <DialogTitle></DialogTitle>
+               </DialogHeader>
+
+               <DialogBody>
+                <Flex p={4} direction={"column"} gap={"15px"} mb={"20px"} >
+
+                  <Flex justifyContent={"space-between"} borderBottom={`2px solid ${Colors.d} `} pb={1} fontWeight={"bold"}  >
+                   <Text >{user.name}</Text>
+                   <Text  >שם</Text>
+                  </Flex>
+
+                  <Flex  justifyContent={"space-between"} borderBottom={`2px solid ${Colors.d} `}  pb={1} fontWeight={"bold"}  >
+
+                   <Text   >{user.phone ?? "לא זמין"}</Text>
+                  <Text >טלפון</Text>
+
+                  </Flex>
 
 
-           <Button fontSize={"medium"}  borderRadius={"4px"} width={"120px"} variant={"subtle"} background={Colors.d} onClick={()=>setEdit(true) }>
-                <MdEdit  color={Colors.b} />  
-            <Text>ערוך פרטים</Text> 
+                  <Flex justifyContent={"space-between"} borderBottom={`2px solid ${Colors.d} `}  pb={1} fontWeight={"bold"}  >
+                   <Text >{user.isVendor ? 'כן' : 'לא'}</Text>
+                  <Text >זמין</Text>
+                  </Flex>
+        
+                  </Flex>
 
-           </Button>
-        {user?.isVendor && 
-          <Link href={"/bord"} >
+                  <Flex p={1} direction={"column"} textAlign={"end"} m={1} borderBottom={`4px dotted ${Colors.d}  `} width={"inherit"}  fontWeight={"bold"}   >
+                   <Text >תיאור</Text>
+                   <Text >{user.description}</Text>
 
-          <Button    width={"120px"} fontSize={"medium"} background={Colors.d} variant={"subtle"}>
-              <FaRegClipboard color={Colors.b}/> <Text> לוח עבודות</Text> 
-          </Button>
-          </Link>
-        }
+            
+                  </Flex>
+
+               </DialogBody>
+
+               <DialogFooter>
+                <DialogActionTrigger asChild>
+                  <Button variant="outline">סגור</Button>
+                </DialogActionTrigger>
+                <Button 
+                  fontSize={"medium"}  
+                  borderRadius={"4px"} 
+                  width={"120px"} 
+                  variant={"outline"} 
+                  onClick={()=>setEdit(true)}
+                  >
+                <MdEdit  color={Colors.b} 
+                />  
+                <Text>ערוך פרטים</Text> 
+              </Button>
+               </DialogFooter>
+
+               <DialogCloseTrigger />
+               
+            </DialogContent>
+               </DialogRoot>
+               </>
+               }
 
             </Flex>
             </Container>

@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useSession } from 'next-auth/react'
 import MainSection from '../pages-components/home/main-section'
-import HomePageNavigation from '../pages-components/home/home-navigation'
+import HomePageNavigation from '../pages-components/navigation'
 import HowThisWorks from '../pages-components/home/how-this-works';
 import HomePageReview from '../pages-components/home/review';
 import QuickcSingIn from '../pages-components/home/ quick-sing-in';

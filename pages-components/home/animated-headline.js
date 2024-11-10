@@ -1,4 +1,4 @@
-import { Container , Text  } from "@chakra-ui/react";
+import { Container , Heading, Text  } from "@chakra-ui/react";
 
 import {motion } from "framer-motion";
 
@@ -13,9 +13,7 @@ const AnimatedHeadline = ({ text, initia, animate, style, transition , fontWeigh
             style={style}
 
         >
-            <Container  >
-           <Text fontWeight={fontWeight?? null}  >{text}</Text>
-           </Container>
+           <Heading fontSize={ "2xl"} fontWeight={fontWeight?? null}  >{text}</Heading>
         </motion.div>
   
     );

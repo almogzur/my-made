@@ -49,10 +49,10 @@ const BoardTools=({
 
 
   return (
-     <Container background={"gray.200"} p={0}  mt={4} >
+     <Container background={"gray.200"}  >
          <Text textStyle={"2xl"} p={2} fontWeight={"bold"} textAlign={"center"}  color={Colors.c}> סינן עבדוה לפי </Text>
 
-        <Container maxWidth={600} padding={"15px"} p={5} >
+        <Container maxWidth={600}  >
 
            <Field label="עיר" size={"sm"}  />
            <Select

@@ -15,8 +15,6 @@ const OrdersWrapper=({ Mode })=>{
   const  [ orderIsRemoved , setOrderIsRemoved] = useState(null)
   const { orders, orderError , isOrderLoading , isOrderValidating , mutateOrders } = useOrders(filterCity)
 
-
-
   const [expandedIndex, setExpandedIndex] = useState(null);
 
   const handleExpand = (index) => {

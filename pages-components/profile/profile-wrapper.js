@@ -8,7 +8,7 @@ import VendorActiveOrders from './vendor-active-orders'
 const UserProfilePage = () => {
 
   return (
-    <Flex  wrap={"wrap"} gap={"30px"} p={0}>
+    <Flex  gap={"30px"} direction={"column"} p={0}>
     
       <Container > 
            <ProfileAvatr /> 

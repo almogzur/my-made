@@ -3,7 +3,7 @@ import { StateContext } from '../../context.js';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import useUser from '../../lib/hooks/useUser.js';
-import { Textarea ,Input, HStack, Container , Flex, Text, Button ,Stack , For , createListCollection } from '@chakra-ui/react';
+import { Textarea ,Input, HStack, Container , Flex, Text, Button  } from '@chakra-ui/react';
 import { Field  } from "../../components/ui/field"
 
 /////
@@ -161,15 +161,16 @@ const NewOrder = ({ id, newOrder }) => {
 
   return (
     
-    <form  onSubmit={id? updateExistingOrder: createNewOrder}>
-      <Container  bg={'gray.200'} color={Colors.d} maxWidth={"700px"}  > 
-      <Text  fontWeight={"bolder"} fontSize={"larger"} >{session?.user?.name}</Text>
-      <Text fontWeight={"bolder"} fontSize={"larger"}>הזמן משק בית</Text>
+    <form    onSubmit={id? updateExistingOrder: createNewOrder}>
+
+
+        <Text p={2}  fontWeight={"bolder"} fontSize={"larger"}  >{session?.user?.name}</Text>
+        <Text p={2} fontWeight={"bolder"} fontSize={"larger"}>הזן את כול הפרטים  הנדרישם לנו לרשום את ההזמנה </Text>
       
 
 
   
-     <Field label="טלפון" required >
+        <Field label="טלפון" required >
       <Input
          variant="subtle"
          type='tel'
@@ -178,10 +179,10 @@ const NewOrder = ({ id, newOrder }) => {
          value={state[STATE_KEY].phone}
          onChange={handleChange} 
        />
-     </Field>
+        </Field>
        
         
-        <Field label={"תאריך ושעה"} required paddingTop={"10px"}>
+         <Field label={"תאריך ושעה"} required paddingTop={"10px"}>
           <DatePicker      
             locale={he}
             selected={state[STATE_KEY].date}
@@ -198,7 +199,7 @@ const NewOrder = ({ id, newOrder }) => {
          </Field>
 
     
-      <HStack gap="10" width="full">
+         <HStack gap="10" width="full">
 
           <Field label="משעה"  required>
 
@@ -229,10 +230,10 @@ const NewOrder = ({ id, newOrder }) => {
 
            </Field>
 
-      </HStack>
+         </HStack>
       
         
-        <Field label="אזורֿ / עיר" paddingTop={"10px"} required>
+         <Field label="אזורֿ / עיר" paddingTop={"10px"} required>
           <Select
            required
             variant="subtle"
@@ -253,9 +254,9 @@ const NewOrder = ({ id, newOrder }) => {
              })}   
             </Option>
          </Select> 
-       </Field>
+         </Field>
 
-       <Field  pt={1} label="כתובת" required >
+         <Field  pt={1} label="כתובת" required >
          <Input 
             type='text' 
             variant={"subtle"} 
@@ -265,11 +266,11 @@ const NewOrder = ({ id, newOrder }) => {
             required 
             width={"100%"}      
             />
-       </Field>
+         </Field>
 
 
-       <Field pt={1} label="מספר חדרים " >
-        <Input 
+         <Field pt={1} label="מספר חדרים " >
+          <Input 
             variant={"subtle"}
             required    
             type='number'   
@@ -278,10 +279,10 @@ const NewOrder = ({ id, newOrder }) => {
             onChange={handleChange}  
             id="rooms"  
             />
-       </Field>
+         </Field>
 
 
-       <Field pt={1} label="מספר מקלחות" >
+         <Field pt={1} label="מספר מקלחות" >
           <Input 
               variant={"subtle"} 
               type="number" 
@@ -289,9 +290,9 @@ const NewOrder = ({ id, newOrder }) => {
               value={state[STATE_KEY].baths} 
               onChange={handleChange}
                 />
-       </Field>
+         </Field>
 
-       <Field pt={1} label="תיאור הבקשה  " >
+         <Field pt={1} label="תיאור הבקשה  " >
           <Textarea 
               resize={"none"} 
               variant={"subtle"} 
@@ -299,10 +300,10 @@ const NewOrder = ({ id, newOrder }) => {
               onChange={handleChange} 
               id='description'  
             />
-      </Field>
+         </Field>
 
-      <Field pt={1} label=" שעתון" required  >
-        <Input 
+        <Field pt={1} label=" שעתון" required  >
+         <Input 
             variant={"subtle"}  
             required
             id="price"  
@@ -311,16 +312,15 @@ const NewOrder = ({ id, newOrder }) => {
             onChange={handleChange} 
             max={300}
             min={0}
-
             />
-      </Field>
+        </Field>
 
         <Flex  justifyContent={"center"} marginTop={"15px"}  >
           {/* ther is no way to control date required  */} 
-         <Button colorPalette={"blue"} variant={"subtle"} type="submit">{id? "עדכן ":" שלח הזמנה "}</Button> 
+         <Button  type="submit">{id? "עדכן ":" שלח הזמנה "}</Button> 
           {/* /////////////// */}
         </Flex>
-      </Container>
+
     </form>
   );
 };

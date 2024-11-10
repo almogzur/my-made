@@ -3,7 +3,7 @@ import { useEffect, useState  , useContext} from 'react';
 import { useRouter } from 'next/router';
 import { FilterCityContext } from '../../context';
 import Colors from '../../lib/colors';
-import HomeNavigation from '../../pages-components/home/home-navigation'
+import Navigation from '../../pages-components/navigation'
 import BordTools from '../../pages-components/bord/bord-tool'
 import OrdersWrapper from '../../pages-components/bord/orders-wrapper';
 import { Container, Flex } from '@chakra-ui/react';
@@ -44,30 +44,32 @@ const BoardPage = () => {
 
 
   return (
-        <Container>
-        <HomeNavigation/>
-            <Flex flexWrap='wrap' gap={"20px"}  >
-      
-                 <Flex  flexBasis={"100%"} >
+  <>
+        <Navigation/>
+            <Flex direction={"column"} gap={"20px"}  >
+            
+             <Container  >
+                 <Flex >
                     <BordTools
                        setMode={setMode}
-                 setFilterCity={setFilterCity}
+                        setFilterCity={setFilterCity}
                         setFilterPriceArray={setFilterPriceArray}
                      />
-                </Flex>
+                 </Flex>
+             </Container>
 
-                 <Flex  flexBasis={"100%"}  >
+             <Container >
+               <Flex  justifyContent={"center"}  >
                   <OrdersWrapper
                        Mode={Mode}
                        filterCity={filterCity}
                        setFilterCity={setFilterCity}
               /> 
-                </Flex>
-
-
+               </Flex>
+             </Container>
             </Flex>
+</>        
 
-      </Container>
 
       
   );

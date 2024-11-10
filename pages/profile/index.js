@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react'
 import {useEffect,useState} from 'react'
 import { useRouter } from 'next/router'
 import ProfileWrapper from '../../pages-components/profile/profile-wrapper'
-import HomePageNavigation from '../../pages-components/home/home-navigation'
+import Navigation from '../../pages-components/navigation'
 
 const ProfilePage=()=>{
 
@@ -21,7 +21,7 @@ const ProfilePage=()=>{
 
 return (
   <>
-    <HomePageNavigation/>
+    <Navigation/>
     <ProfileWrapper/>
 
   </>)

@@ -36,9 +36,9 @@ const VendorActiveOrders = () => {
      >
       <Flex  direction={"column"} p={2} mb={"12em"} bg={"gray.200"} alignItems={"center"} >
           <Container maxWidth={"700px"}>
-          <Heading textAlign={"center"} p={4} fontSize={"3xl"} color={Colors.c} >הזמנות  לקוחות</Heading>
+            <Heading textAlign={"center"} p={4} fontSize={"3xl"} color={Colors.c} >הזמנות  לקוחות</Heading>
     
-           <AccordionRoot collapsible defaultValue={["b"]}>   
+            <AccordionRoot collapsible defaultValue={["b"]}>   
 
 
 
@@ -91,7 +91,6 @@ const VendorActiveOrders = () => {
               } )}
           </AccordionRoot>
           </Container>
-
       </Flex>
       </m.div>
       </LazyMotion>

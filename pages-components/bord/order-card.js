@@ -20,10 +20,6 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
     console.log(e);
     
       e.preventDefault()
-
-
-
-
     try { 
            const options =  {
              method: 'POST',
@@ -37,7 +33,7 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
       
       if (res.ok) {
         update();
-       setTimeout(() => {
+        setTimeout(() => {
         mutateOrders() 
        }, 3000); 
       }
@@ -60,18 +56,17 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
          <AnimatePresence>
              <MotionCard        
                 boxShadow="lg"
-        
-        m={sm && md?  3 : 2}
-        p={0}
-        bg="white"
-        initial={{ x: 300, opacity: 0, height: 0 }}
-        animate={{ x: 0, opacity: 1, height: 'auto' }}
-        transition={{
-          x: { duration: (itemIndex + 3) / 3 },
-          opacity: { duration: 0.2 },
-          height: { duration: (itemIndex + 1) / 3, type: 'spring' },
-        }}
-        exit={{opacity:0}}
+                m={sm && md?  3 : 2}
+                p={0}
+                bg="white"
+                initial={{ x: 300, opacity: 0, height: 0 }}
+                animate={{ x: 0, opacity: 1, height: 'auto' }}
+                transition={{
+                  x: { duration: (itemIndex + 3) / 3 },
+                  opacity: { duration: 0.2 },
+                  height: { duration: (itemIndex + 1) / 3, type: 'spring' },
+                  }}
+                 exit={{opacity:0, x:-300}}
              >    
               <Card.Body p={1} m={0}>
           

@@ -127,29 +127,23 @@ const ProfileOrders = () => {
                              <ControldPopOvre key={order._id + index +" pop_over_wrap "}  id={order._id} index={index} >
                                  {/* ControldPopOvre children */}
 
-                                {combinedDetails.map(( item , index ) => (
+                                {combinedDetails.map(( {title , value ,flag} , index ) => (
                                     <Flex  
                                      key={order._id+ index +"list"} 
                                      justifyContent={"space-between"}
-                                     p={0.5} >
-                                   { item.flag?
-                                      <Fragment key={ order._id + index + "badge" }>    
-
-                                        <Badge  key={ item.value? item.value : order._id + index + "missing render Value" } colorPalette={"orange"} >
-                                           {item.value}
-                                        </Badge>
-
-                                        <Badge   key={ order._id + item.title } colorPalette={"orange"}>
-                                              {item.title}
-                                        </Badge>
-
-                                         </Fragment>
+                                     p={0.5} 
+                                     style={{direction:"rtl"}}
+                                     >
+                                   { flag?
+                                         <Flex  key={ order._id + index + "badges" }>    
+                                           <Badge   key={ order._id + title } colorPalette={"orange"}>{title}</Badge>
+                                           <Badge  key={ value? value : order._id + index + "missing render Value" } colorPalette={"orange"} >{value}</Badge>
+                                         </Flex>
                                           :
-
-                                          <Fragment key={ order._id + index + item.value } >
-                                              <Text key={order._id + item.value? item.value : index + "mising render value" + item.title } >{item.value}</Text>
-                                              <Text key={order.title}>{item.title}</Text>
-                                         </Fragment>
+                                          <Flex justifyContent={"space-between"} key={ order._id + index + value }  flexBasis={"100%"} >
+                                              <Text fontWeight={"bold"} key={title}>{title}</Text>
+                                              <Text  fontWeight={"bold"} key={order._id + value? value : index + "mising render value" + title } >{value}</Text>
+                                         </Flex>
                                    } 
                                   
                                  
@@ -231,39 +225,37 @@ const OrderExmp=()=>{
 }
 
 const NewOrderDialg =()=>{
+        const [open ,setOpen] = useState()
   return  <Flex p={4} justifyContent={"center"}  >
-  <DialogRoot >
+     <DialogRoot open={open} >
 
-<DialogTrigger >
-<Button variant="solid" bg={Colors.d} size="lg" color={"black"} fontWeight={"bold"}>
-{<BiSolidMessageAdd/>}{"הזמנה חדשה"}
-</Button>
-</DialogTrigger>
-
-<DialogContent >
+         <DialogTrigger asChild >
+           <Button variant="solid" bg={Colors.d} size="lg" color={"black"} fontWeight={"bold"}>  {<BiSolidMessageAdd/>}{"הזמנה חדשה"} </Button>
+         </DialogTrigger>
+          <DialogContent >
 
 
-<DialogHeader >
-</DialogHeader>
+        <DialogHeader >
+        </DialogHeader>
 
-<DialogBody  style={{direction:"rtl"}} >
+        <DialogBody  style={{direction:"rtl"}} >
 
-<NewOrder newOrder={true} />
+        <NewOrder setPerent={setOpen}  newOrder={true} />
 
-</DialogBody>
+        </DialogBody>
 
-<DialogFooter>
-<DialogActionTrigger asChild>
-<Button  >סגור</Button>
-</DialogActionTrigger>
+        <DialogFooter>
+          <DialogActionTrigger asChild>
+        <Button  >סגור</Button>
+        </DialogActionTrigger>
 
-</DialogFooter>
+        </DialogFooter>
 
-<DialogCloseTrigger />
+        <DialogCloseTrigger />
 
 
-</DialogContent>
+         </DialogContent>
 
- </DialogRoot>
-</Flex>
+      </DialogRoot>
+     </Flex>
 }

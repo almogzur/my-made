@@ -3,76 +3,71 @@ import {
     PopoverBody,
     PopoverContent,
     PopoverRoot,
-    PopoverTitle,
     PopoverTrigger,
   } from "../components/ui/popover"
-  import {
-    DialogActionTrigger,
-    DialogBody,
-    DialogCloseTrigger,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogRoot,
-    DialogTitle,
-    DialogTrigger,
-  } from "../components/ui/dialog"
 
-  import { useState } from "react"
-  import { Button, Container, Flex } from "@chakra-ui/react"
-import Colors from "../lib/colors";
+
+import { useState } from "react"
+import { Button, Container, Flex ,Heading,Text} from "@chakra-ui/react"
 import NewOrder from  '../pages-components/profile/profile-new-order'
+import { useContext  } from "react"
+import { WindowWidthContext } from "../context"
 
 const ControldPopOvre = ({children ,id ,index}) => {
 
+  const { xxl,xl,lg,md,sm,xs,xxs} = useContext(WindowWidthContext);
+
+
     const [open, setOpen] = useState(false)
+    const [openChildren , setOpenChildren ] = useState(false)
 
     return (
-      <PopoverRoot  key={id + index + " pop_over "} open={open} onOpenChange={(e) => setOpen(e.open)}>
+      <PopoverRoot lazyMount  autoFocus  key={id + index + " pop_over "} open={open} onOpenChange={(e)  => setOpen(e.open) }>
 
          <PopoverTrigger asChild>
            <Button  p={4} size="sm" colorPalette={""}  variant="subtle" >פרטים </Button>
          </PopoverTrigger>
 
-          <PopoverContent >
+          <PopoverContent portalled={open}>
           <PopoverArrow />
-           <PopoverBody >
-          
+
+
+           <PopoverBody > 
+              <Heading textAlign={"center"}>פרטי ההזמנה </Heading>
             {children}
-            {/* Dialog  */}
+      
+
+
              <Flex  justifyContent={"space-evenly"}  p={2}>
               <Button onClick={()=>setOpen(false)} > סגור </Button>
+
+               <PopoverRoot lazyMount open={openChildren} onOpenChange={(e)=>setOpenChildren(e.open)} positioning={{ offset: { crossAxis: 0, mainAxis: !xs? -300 :0 } }}  >
+
+                   <PopoverTrigger asChild>
+                    <Button variant="solid" >  עדכון הזמנה </Button>
+
+                  </PopoverTrigger>
+
+
+            <PopoverContent portalled={false} style={{direction:"rtl"}}>
+
+
           
-              <DialogRoot key={id + index + "edit_dialog"}  asChild  scrollBehavior="inside" > 
+              <PopoverBody> 
+                    <NewOrder id={id} />   
+                    <Button onClick={()=>setOpenChildren(false)} > סגור </Button>
 
-                    <DialogTrigger asChild>
-                     <Button variant="outline" size="sm">ערוך הזמנה   </Button>
-                    </DialogTrigger>
+               </PopoverBody>
 
-                  <DialogContent  >
-                      <DialogHeader>
-                      <DialogTitle>{"form"}</DialogTitle>
-                      </DialogHeader>
+             </PopoverContent>
 
-                      <DialogBody  style={{direction:"rtl"}} >
-                        <NewOrder id={id} />    
-                      </DialogBody>
 
-                      <DialogFooter>
-                          <DialogActionTrigger asChild>
-                          <Button variant="outline">סגור</Button>
-                          </DialogActionTrigger>
-                         
-                      </DialogFooter>
-
-                   <DialogCloseTrigger variant="solid"  /> {/** this is passed by pros.children to the chukra CloseButton  */}
-
-                 </DialogContent>
-             </DialogRoot>
+               </PopoverRoot> 
 
             </Flex>
 
           </PopoverBody>
+
          </PopoverContent>
 
 

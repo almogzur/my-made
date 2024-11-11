@@ -43,12 +43,14 @@ const handler = async (req, res) => {
     const name = session.user.name
     const status = "Open"
     
+    const {date , ...rest} = req.body
 
     const newOrder = {
         name,
         status,
-      ...req.body,
-       createdAt: new Date(),
+        "date":date.slice(0,10),
+        ...rest,
+        createdAt: new Date(),
        _id: uuidv4(),
        ownerId: userId, 
     };

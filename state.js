@@ -16,7 +16,6 @@ const State = {
        city:"",
        address:"",
        rooms:"",
-       baths:'',
  },
  Profile_Active_Orders:[],
  Profile_Old_Orders:[],

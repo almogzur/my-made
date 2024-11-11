@@ -6,10 +6,8 @@ import { authOptions } from "../auth/[...nextauth]";
  * Edit Order API
  * This API endpoint allows authenticated users to update an existing order in their profile.
  * The API first locates the user by email and searches for the specified order in 
- * either `Profile_Orders` or `Profile_Active_Orders` using the provided `_id`.
- * Based on the `status` of the order, the API will conditionally update the order 
- * in the vendor's `Vendor_Orders` array if the status is "inProcess" and the 
- * `Vendor_ID` field is present in the order details.
+ * Profile_Active_Orders first, and then Profile_Orders using the provided _id.
+ * If the order is not found, it returns an error message.
  */
 
 const handler = async (req, res) => {
@@ -40,41 +38,49 @@ const handler = async (req, res) => {
   const { _id, status, city, Vendor_ID, ...updateFields } = req.body;
 
   try {
-    // Step 4: Locate the user and attempt to update the order in `Profile_Orders` or `Profile_Active_Orders`
+    // Step 4: First, try to locate the order in `Profile_Active_Orders`
     let userResult;
-    const filterProfileOrders = { email: userEmail, 'Profile_Orders._id': _id };
     const filterProfileActiveOrders = { email: userEmail, 'Profile_Active_Orders._id': _id };
 
-    // Prepare the update document with additional timestamp
-    
-    const updateDoc = {
-      $set: {
-        ...updateFields, 
-        "updatedByUserAt": new Date()
+    // Attempt to find and update the order in Profile_Active_Orders
+    userResult = await usersCollection.findOne(filterProfileActiveOrders);
+    if (userResult) {
+      // Order found in Profile_Active_Orders, update it
+      const updateDoc = {
+        $set: {
+          "Profile_Active_Orders.$": { ...updateFields, _id, city, status, updatedByUserAt: new Date() }
+        }
+      };
+      await usersCollection.updateOne(filterProfileActiveOrders, updateDoc);
+      console.log("Order updated in Profile_Active_Orders");
+    } else {
+      // If not found in Profile_Active_Orders, attempt to find in Profile_Orders
+      const filterProfileOrders = { email: userEmail, 'Profile_Orders._id': _id };
+      userResult = await usersCollection.findOne(filterProfileOrders);
+
+      if (userResult) {
+        // Order found in Profile_Orders, update it
+        const updateDoc = {
+          $set: {
+            "Profile_Orders.$": { ...updateFields, _id, city, status, updatedByUserAt: new Date() }
+          }
+        };
+        await usersCollection.updateOne(filterProfileOrders, updateDoc);
+        console.log("Order updated in Profile_Orders");
+      } else {
+        // If the order is not found in either Profile_Active_Orders or Profile_Orders
+        console.log("Order not found in Profile_Active_Orders or Profile_Orders");
+        return res.status(404).json({ message: 'Order not found' });
       }
-    };
-
-    // Try updating in `Profile_Orders`; if not found, update in `Profile_Active_Orders`
-    userResult = await usersCollection.updateOne(filterProfileOrders, updateDoc);
-    if (userResult.modifiedCount < 1) {
-      userResult = await usersCollection.updateOne(filterProfileActiveOrders, updateDoc);
     }
-
-    // Check if the order was updated successfully
-    if (userResult.modifiedCount < 1) {
-      console.log("Order not found in Profile_Orders or Profile_Active_Orders");
-      return res.status(200).json({ message: 'Order not found or no changes made' });
-    }
-
-    console.log("User's order updated successfully");
 
     // Step 5: Conditionally update the order in the appropriate collection based on status
-    if (status === "open") {
+    if (status === "Open") {
       // Update the order in the `city` collection if the status is "open"
       const cityCollection = areadatabase.collection(city);
       await cityCollection.updateOne(
         { "_id": _id },
-        { $addToSet: { ...updateFields, updatedByUserAt: new Date() } }
+        { $set: { ...updateFields, _id, city, updatedByUserAt: new Date() } }
       );
       console.log("Order updated in city collection");
 
@@ -83,9 +89,12 @@ const handler = async (req, res) => {
       const vendorFilter = { "Vendor._id": Vendor_ID, "Vendor.Vendor_Orders._id": _id };
       const vendorUpdateDoc = {
         $set: {
-          "Vendor.Vendor_Orders.$": {
-            ...updateFields,
-            "updatedByUserAt": new Date()
+          "Vendor.Vendor_Orders.$": { 
+            ...updateFields, 
+            _id, 
+            city, 
+            status, 
+            updatedByUserAt: new Date() 
           }
         }
       };

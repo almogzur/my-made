@@ -39,9 +39,9 @@ const ControldPopOvre = ({children ,id ,index}) => {
 
 
              <Flex  justifyContent={"space-evenly"}  p={2}>
-              <Button onClick={()=>setOpen(false)} > סגור </Button>
+              <Button onClick={()=>setOpen(false)} > סגור לשונית  </Button>
 
-               <PopoverRoot lazyMount open={openChildren} onOpenChange={(e)=>setOpenChildren(e.open)} positioning={{ offset: { crossAxis: 0, mainAxis: !xs? -300 :0 } }}  >
+               <PopoverRoot lazyMount open={openChildren} onOpenChange={(e)=>setOpenChildren(e.open)} positioning={{ offset: { crossAxis: 0, mainAxis: -300 } }}  >
 
                    <PopoverTrigger asChild>
                     <Button variant="solid" >  עדכון הזמנה </Button>
@@ -54,8 +54,8 @@ const ControldPopOvre = ({children ,id ,index}) => {
 
           
               <PopoverBody> 
-                    <NewOrder id={id} />   
-                    <Button onClick={()=>setOpenChildren(false)} > סגור </Button>
+                    <NewOrder id={id} setPerent={setOpenChildren} />   
+                    <Button onClick={()=>setOpenChildren(false)} >  סגור לשונית  </Button>
 
                </PopoverBody>
 

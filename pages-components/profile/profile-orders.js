@@ -6,32 +6,16 @@ import NewOrder from './profile-new-order';
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
 import { WindowWidthContext } from '../../context';
 import { BiSolidMessageAdd } from "react-icons/bi";
-
 import { motion , AnimatePresence } from 'framer-motion';
-import {
-  DialogActionTrigger,
-  DialogBody,
-  DialogCloseTrigger,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogRoot,
-  DialogTitle,
-  DialogTrigger,
-} from "../../components/ui/dialog"
-
 import { List } from "@chakra-ui/react"
-
-
 import ControldPopOvre from '../../components/controled-popover';
-
-
 import {  Badge, Button, Container, Flex, Heading, Text ,Box } from '@chakra-ui/react';
 import BadgeStatus from '../../components/badge_status';
-import { title } from 'process';
+import { DialogActionTrigger,DialogBody,DialogCloseTrigger,DialogContent,DialogFooter,DialogHeader,DialogRoot,DialogTitle,DialogTrigger } from "../../components/ui/dialog"
 
 
- const badge_h = "40px" 
+
+  const badge_h = "40px" 
   const badge_w = "60px"
 
 
@@ -82,8 +66,7 @@ const ProfileOrders = () => {
                 <OrderInfoText/>
                 <OrderExmp/>
                 
-              {/* DATA */}
-              {/* Orders Container  */}
+           
                <Container maxWidth={"1000px"} p={0}  >
                   {combinedOrders.map((order, index) => {
                   //  console.log(order)
@@ -98,7 +81,7 @@ const ProfileOrders = () => {
                         { title: "מחיר לשעה", value: order.price || na},
                         { title : "משעה", value:order.hour},
                         { title : "עד שעה", value:order.tooHour},
-                        { title: "תאריך ", value: order.date ? new Date(order.date).toLocaleString('he-IL').slice(0,10)  :na },
+                        { title: "תאריך ", value: order.date ? new Date(order.date).toLocaleString('he-IL').slice(0,10)  : na },
                         { title: "כתובת", value: order.address || na },
                         { title: "תיאור", value: order.jobDescription || na },
                         { title: "עודכנה ב", value: order.updateAt ? new Date(order.updateAt).toLocaleString('he-IL') : na },
@@ -121,7 +104,7 @@ const ProfileOrders = () => {
                               >     
                              
                              <BadgeStatus key={order.status + order._id} textStyle={xxs && xs ? "sm" :null } status={order.status}/>
-                             <Text key={order.data} >{order.date.slice(0,10)}</Text>
+                             <Text key={order.data} >{order?.date?.slice(0,10)|| ""}</Text>
 
                             {/* Open For Info  */}
                              <ControldPopOvre key={order._id + index +" pop_over_wrap "}  id={order._id} index={index} >
@@ -134,7 +117,7 @@ const ProfileOrders = () => {
                                      p={0.5} 
                                      style={{direction:"rtl"}}
                                      >
-                                   { flag?
+                                   { flag? 
                                          <Flex  key={ order._id + index + "badges" }>    
                                            <Badge   key={ order._id + title } colorPalette={"orange"}>{title}</Badge>
                                            <Badge  key={ value? value : order._id + index + "missing render Value" } colorPalette={"orange"} >{value}</Badge>
@@ -144,9 +127,7 @@ const ProfileOrders = () => {
                                               <Text fontWeight={"bold"} key={title}>{title}</Text>
                                               <Text  fontWeight={"bold"} key={order._id + value? value : index + "mising render value" + title } >{value}</Text>
                                          </Flex>
-                                   } 
-                                  
-                                 
+                                    }                        
                                    </Flex>
                                     ))}
 
@@ -166,8 +147,7 @@ const ProfileOrders = () => {
                          {/* Order row */} 
                           })}
                </Container>
-                {/* Orders Container End */}
-                {/* DATA End */}
+     
 
                 <NewOrderDialg/>
 

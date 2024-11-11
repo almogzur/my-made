@@ -11,7 +11,6 @@ import {  StrictMode , useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
 import { WindowWidthContext, StateContext,   FilterCityContext  } from '../context'
-import State from '../state'
 
 
 
@@ -22,7 +21,6 @@ export default function App({
 }) {
 
    
-   const [state,setState] = useState(State)
  
 
    const [filterCity, setFilterCity] = useState(null); 
@@ -47,7 +45,6 @@ export default function App({
 
   return (
     <ChakraProvider value={defaultSystem}>
-    <StateContext.Provider value={[state,setState]}>
       <SessionProvider session={session}>    
       <WindowWidthContext.Provider value={{xxl,xl,lg,md,sm,xs,xxs}}>
       <FilterCityContext.Provider value={[filterCity,setFilterCity]}>
@@ -55,7 +52,6 @@ export default function App({
       </FilterCityContext.Provider>
       </WindowWidthContext.Provider>
       </SessionProvider>
-      </StateContext.Provider>
       </ChakraProvider>
   )
 }

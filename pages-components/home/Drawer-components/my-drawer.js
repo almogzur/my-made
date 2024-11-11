@@ -31,7 +31,6 @@ const  MyDrawer = () => {
   const { data: session, status } = useSession();
   const {user , isLoading , isError} = useUser(session?.user?.email)
   const router = useRouter()
-  const animationIndex = 1
 
     return (
       <DrawerRoot   >
@@ -61,15 +60,17 @@ const  MyDrawer = () => {
 
           <DrawerBody  >  
   
-              <DrawerItem PropsOnClick={ () => router.push("/") } text={"דף הבית"} Icon={<FcHome size={"2em"} animationIndex={1} /> } />
+              <DrawerItem PropsOnClick={ () => router.push("/") } text={"דף הבית"} Icon={<FcHome size={"2em"}  />  } animationIndex="1" />
+
               <DrawerItem        
                            text={ session?.user?.name??  "הרשמה | כניסה "} 
                            Icon={<FcButtingIn size={"2em"}/>}
                            PropsOnClick={()=>{ session? router.push("/profile") : signIn(undefined,{callbackUrl:"/profile"})   }}
                            animationIndex={1.5} 
               />
+
               { user?.Vendor?.isVendor &&
-                 <DrawerItem text={"לוח"} Icon={<FcViewDetails size={"2em"}/>} PropsOnClick={()=>router.push("/bord")} animationIndex={1.9}  /> }
+                 <DrawerItem text={"לוח"} Icon={<FcViewDetails size={"2em"}/>} PropsOnClick={()=>router.push("/bord")} animationIndex="1.9"  /> }
           </DrawerBody>
 
           <DrawerFooter>

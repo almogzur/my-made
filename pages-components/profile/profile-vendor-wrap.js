@@ -1,7 +1,7 @@
 
 import { useSession } from 'next-auth/react'
-import {useState, useContext , useEffect} from 'react'
-import { StateContext } from '../../context'
+import {useState , useEffect} from 'react'
+
 import VendorDisplay from './profile-is-vendor-display'
 import VendorForm from './profile--vender-sing-in'
 import useUser from '../../lib/hooks/useUser'
@@ -16,7 +16,6 @@ const VendorWrap = () => {
 
 
     const { data: session ,status ,update} = useSession()
-    const [state, setState] = useContext(StateContext);
     const { user , isLoading , isError , updateUser} = useUser(session?.user?.email)
     const [edit ,setEdit] = useState(false)
 

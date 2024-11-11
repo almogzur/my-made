@@ -1,7 +1,9 @@
 import useUser from "../lib/hooks/useUser";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Colors from "../lib/colors"
-import { FcCancel , FcViewDetails ,FcPlus , FcHome, FcButtingIn } from "react-icons/fc";
+import {   FcViewDetails ,FcPlus , FcHome, FcButtingIn } from "react-icons/fc";
+import { ImExit } from "react-icons/im";
+
 import Link from "next/link";
 import { GiVacuumCleaner } from "react-icons/gi";
 import {  Box, Button, Container, Flex, For, Heading, Text} from "@chakra-ui/react";
@@ -23,7 +25,7 @@ const Menu = () => {
      return (
         <Flex mb={3}   background={Colors.d}  boxShadow={ "0px 10px 26px rgba(0, 0, 0, 0.5)"} p={2}  >
            <Flex width={"40%"}   alignItems={"center"} justifyContent={"center"}  >
-                  <Container p={0} m={2}><GiVacuumCleaner size={"3em"}  color={Colors.b}/></Container>
+                  <Container p={0} m={2}><GiVacuumCleaner  size={"3em"}  color={"black"}/></Container>
            </Flex>
         
           <Flex  width={"60%"}  justifyContent={"end"} alignItems={"center"}  >
@@ -34,13 +36,15 @@ const Menu = () => {
                <Link href={"/"}>
                 <Button 
                  m={3}
-                 variant={"subtle"}
-                 borderRadius={10} 
-                 boxShadow={ "0px 2px 4px rgba(0, 0, 0, 0.3)"}
-                 width={"110px"}
+                 p={2}  
+                  justifyContent={"space-around"}
+                 variant={"solid"} 
+                 boxShadow={ "4px 0px 2px rgba(0, 0, 0, 0.3)"}
+                 width={"120px"}
+                 fontWeight={600}
 
                  >
-                 {<FcHome />}{"בית"}
+                 {"בית"}{<FcHome />}
 
                </Button> 
                </Link>  
@@ -49,16 +53,19 @@ const Menu = () => {
 
                { pathName !== "/profile" ?
                  <Button 
-                 m={3}  
-                 variant={"subtle"}
-                 borderRadius={10} 
-                 boxShadow={ "0px 2px 4px rgba(0, 0, 0, 0.3)"}
+                 m={3}
+                 p={2}  
+                 variant={"solid"} 
+                 boxShadow={ "4px 0px 2px rgba(0, 0, 0, 0.3)"}
                  onClick={()=> session? routr.push("/profile"): signIn(undefined, { callbackUrl: '/profile' }) }
-                 width={"110px"}
+                 width={"120px"}
+                 fontWeight={600}
+                 justifyContent={"space-around"}
+
 
 
                  >
-                 {<FcButtingIn />}{session?.user?.name ? "פרופיל אישי" :  "הרשמה | כניסה "}
+                 {session?.user?.name ? "פרופיל אישי" :  "הרשמה|כניסה "}
                 </Button>
                 :null
                }
@@ -70,11 +77,11 @@ const Menu = () => {
                 <Link href="bord" >
                 <Button
                  m={3} 
-                   boxShadow={ "0px 2px 4px rgba(0, 0, 0, 0.5)"} 
+                 boxShadow={ "4px 0px 2px rgba(0, 0, 0, 0.3)"}
                    p={2} 
-                   variant={"subtle"} 
-                   borderRadius={10} 
-                   width={"110px"}
+                   variant={"solid"} 
+                   width={"120px"}
+                   fontWeight={600}
                    justifyContent={"space-around"}
                 >
                  <Text>לוח</Text>
@@ -88,14 +95,19 @@ const Menu = () => {
                 <Button 
                  m={3}
                  colorPalette={"red"} 
-                 variant={"subtle"}
+                 variant={"solid"} 
                  borderRadius={10} 
-                 boxShadow={ "0px 2px 4px rgba(255, 0, 0, 0.3)"}
+                 boxShadow={ "4px 0px 2px rgba(255, 0, 0, 0.3)"}
                  onClick={()=>signOut()}
-                 width={"110px"}
+                 width={"120px"}
+                 fontWeight={600}
+                 color={"#fff"}
+                 alignItems={"center"}
+                 justifyContent={"space-around"}
+
 
                  >
-                 {<FcCancel />}{"התנתק"}
+                 {"התנתק"}{<ImExit />}
                 </Button>
                :
                null 

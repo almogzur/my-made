@@ -23,56 +23,57 @@ import {
 import Colors from "../lib/colors";
 import NewOrder from  '../pages-components/profile/profile-new-order'
 
-const ControldPopOvre = ({children ,id , propsKey}) => {
+const ControldPopOvre = ({children ,id ,index}) => {
 
     const [open, setOpen] = useState(false)
 
     return (
-      <PopoverRoot key={propsKey} open={open} onOpenChange={(e) => setOpen(e.open)}>
+      <PopoverRoot  key={id + index + " pop_over "} open={open} onOpenChange={(e) => setOpen(e.open)}>
 
-        <PopoverTrigger asChild>
-
-          <Button  p={4} size="sm" colorPalette={""}  variant="subtle" >פרטים </Button>
-
+         <PopoverTrigger asChild>
+           <Button  p={4} size="sm" colorPalette={""}  variant="subtle" >פרטים </Button>
          </PopoverTrigger>
 
-        <PopoverContent>
+          <PopoverContent >
           <PopoverArrow />
-          <PopoverBody>
-            {children}
-
-            <Flex  justifyContent={"space-evenly"}  p={2}>
-             <Button onClick={()=>setOpen(false)} > סגור </Button>
+           <PopoverBody >
           
-             <DialogRoot scrollBehavior="inside" >
+            {children}
+            {/* Dialog  */}
+             <Flex  justifyContent={"space-evenly"}  p={2}>
+              <Button onClick={()=>setOpen(false)} > סגור </Button>
+          
+              <DialogRoot key={id + index + "edit_dialog"}  asChild  scrollBehavior="inside" > 
+
                     <DialogTrigger asChild>
                      <Button variant="outline" size="sm">ערוך הזמנה   </Button>
-                 </DialogTrigger>
+                    </DialogTrigger>
 
-                  <DialogContent>
+                  <DialogContent  >
                       <DialogHeader>
-                      <DialogTitle>Dialog Title</DialogTitle>
+                      <DialogTitle>{"form"}</DialogTitle>
                       </DialogHeader>
 
-                      <DialogBody>
-                         <NewOrder id={id} />    
+                      <DialogBody  style={{direction:"rtl"}} >
+                        <NewOrder id={id} />    
                       </DialogBody>
 
                       <DialogFooter>
                           <DialogActionTrigger asChild>
-                          <Button variant="outline">Cancel</Button>
+                          <Button variant="outline">סגור</Button>
                           </DialogActionTrigger>
-                          <Button>Save</Button>
+                         
                       </DialogFooter>
 
-                   <DialogCloseTrigger />
+                   <DialogCloseTrigger variant="solid"  /> {/** this is passed by pros.children to the chukra CloseButton  */}
 
                  </DialogContent>
              </DialogRoot>
+
             </Flex>
 
           </PopoverBody>
-        </PopoverContent>
+         </PopoverContent>
 
 
       </PopoverRoot>

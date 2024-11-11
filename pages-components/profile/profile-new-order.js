@@ -47,12 +47,18 @@ const NewOrder = ({ id, newOrder }) => {
 
   // Fetch the order if orderId is provided
   useEffect(() => {
-    
-   
+       
     if (id) { //  order only if it's not a new order
-      const existingOrder = user?.Profile_Orders?.find(order => order._id === id);
+      
+      const ActiveOrders = user?.Profile_Active_Orders || []
+      const OpenOrders  = user?.Profile_Orders || []
+      const ComboOrders = OpenOrders.concat(ActiveOrders)
+
+      const existingOrder = ComboOrders.find(order => order._id === id);
+
+        console.log(existingOrder);
         
-      if (existingOrder) {
+      if (ComboOrders) {
         setState(prevState => ({
           ...prevState,
           [STATE_KEY]: { ...existingOrder  }
@@ -105,7 +111,6 @@ const NewOrder = ({ id, newOrder }) => {
   }
 
   const createNewOrder = async (e) => {
-        e.preventDefault()
 
     try {
 
@@ -138,7 +143,7 @@ const NewOrder = ({ id, newOrder }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...state[STATE_KEY], id }),
+        body: JSON.stringify({ ...state[STATE_KEY] } ),
       });
   
       if (response.ok) {
@@ -165,8 +170,9 @@ const NewOrder = ({ id, newOrder }) => {
 
 
         <Text p={2}  fontWeight={"bolder"} fontSize={"larger"}  >{session?.user?.name}</Text>
-        <Text p={2} fontWeight={"bolder"} fontSize={"larger"}>הזן את כול הפרטים  הנדרישם לנו לרשום את ההזמנה </Text>
+        <Text p={2} fontWeight={"bolder"} fontSize={"larger"}>{id?  "עדכון פרטי הזמנה " :  "הזן את הפרטים הנדרים לרשום הזמנה "  }</Text>
       
+        <Field m={4} required label={"נקודה אדומה מסמנת שהשדה הוא חובה "}/>
 
 
   
@@ -232,7 +238,8 @@ const NewOrder = ({ id, newOrder }) => {
 
          </HStack>
       
-        
+        { // you cant change the city on exiteng oreder 
+          id ? null :
          <Field label="אזורֿ / עיר" paddingTop={"10px"} required>
           <Select
            required
@@ -241,7 +248,7 @@ const NewOrder = ({ id, newOrder }) => {
             value={state[STATE_KEY].city}
             onChange={handleSelect}  
             paddingBottom={"10px"}
-
+            
             
           >
 
@@ -255,7 +262,7 @@ const NewOrder = ({ id, newOrder }) => {
             </Option>
          </Select> 
          </Field>
-
+          }
          <Field  pt={1} label="כתובת" required >
          <Input 
             type='text' 

@@ -5,7 +5,6 @@
 // Css
 import '../pages/Main.css'
 import "react-datepicker/dist/react-datepicker.css"
-import "../components/range-elemnt/range-elemnt.css"
 
 import { SessionProvider } from "next-auth/react"
 import {  StrictMode , useState } from "react"

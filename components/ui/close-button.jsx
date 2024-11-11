@@ -10,8 +10,9 @@ import { forwardRef } from 'react'
 import { LuX } from 'react-icons/lu'
 
 export const CloseButton = forwardRef(function CloseButton(props, ref) {
+          const porpsVariant = props.variant
   return (
-    <ChakraIconButton variant='ghost' aria-label='Close' ref={ref} {...props}>
+    <ChakraIconButton variant={porpsVariant??'ghost'} aria-label='Close' ref={ref} {...props}>
       {_nullishCoalesce(props.children, () => (
         <LuX />
       ))}

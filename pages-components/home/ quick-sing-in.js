@@ -1,7 +1,5 @@
 import Colors from '../../lib/colors'
-import OrdersButton from '../../components/go-to-orders-button';
-import { color } from 'framer-motion';
-import { Flex , Heading } from '@chakra-ui/react';
+import { Button, Flex , Heading } from '@chakra-ui/react';
 
 function QuickcSingIn() {
 
@@ -17,7 +15,7 @@ function QuickcSingIn() {
  
        >
         <Heading  textAlign={"center"} fontSize={"2em"} color={Colors.b} >צריך עזרה פרסם עכשיו ?!  </Heading>
-        <OrdersButton borderColor={Colors.b} />
+        <Button borderColor={Colors.b} variant={"outline"}  > הזמנה חדשה </Button>
     </Flex>
     )
 }

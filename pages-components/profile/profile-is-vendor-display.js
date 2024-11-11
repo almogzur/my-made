@@ -5,6 +5,9 @@ import Colors from '../../lib/colors';
 import Link from 'next/link';
 import { Container , Heading , Text , Flex, Button} from '@chakra-ui/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { BsFillInfoSquareFill } from "react-icons/bs";
+import { BiSolidMessageAdd } from "react-icons/bi";
+
 
 import {
   DialogActionTrigger,
@@ -32,7 +35,7 @@ const VendorDisplay = ({ user, setEdit ,edit }) => {
         <Container p={4} background={'gray.200'}>
           <Container maxWidth={"700px"}>
            <Heading fontSize={"2rem"} fontWeight={"bold"} textAlign={"center"} color={Colors.c} >  נרשמתם בהצלחה </Heading>
-           <Text textAlign={"center"} fontSize={"large"}  color={Colors.c} mb={"20px"} p={2} > ניתן לראות הזמנות בלוח עבודות  </Text>
+           <Text textAlign={"center"} fontSize={"large"}  color={Colors.c} mb={"20px"} p={2} > ניתן לראות הזמנות בלוח   </Text>
 
 
 
@@ -45,18 +48,18 @@ const VendorDisplay = ({ user, setEdit ,edit }) => {
               {user?.isVendor && 
               <>
                 <Link href={"/bord"} >
-                  <Button    width={"120px"} fontSize={"medium"} background={Colors.d} variant={"subtle"}>
-                    <FaRegClipboard color={Colors.b}/> <Text> לוח עבודות</Text> 
+                  <Button  fontWeight={"bold"}  width={"120px"} fontSize={"medium"} background={Colors.d} variant={"subtle"}>
+                    <FaRegClipboard color={Colors.b}/> <Text> לוח  </Text> 
                   </Button>
                 </Link>
                 <DialogRoot
                   placement={"center"}
                   motionPreset="slide-in-bottom"
                  >
-            <DialogTrigger asChild>
-              <Button fontSize={"medium"}  borderRadius={"4px"} width={"120px"} variant={"subtle"} background={Colors.d} >פרטים  </Button>
-            </DialogTrigger>
-            <DialogContent>
+                   <DialogTrigger asChild>
+                    <Button fontWeight={"bold"} fontSize={"medium"}  borderRadius={"4px"} width={"120px"} variant={"subtle"} background={Colors.d} >{"פרטים"}{<BsFillInfoSquareFill color='#fff'/>}  </Button>
+                   </DialogTrigger>
+                   <DialogContent>
 
                <DialogHeader>
                 <DialogTitle></DialogTitle>
@@ -113,8 +116,8 @@ const VendorDisplay = ({ user, setEdit ,edit }) => {
 
                <DialogCloseTrigger />
                
-            </DialogContent>
-               </DialogRoot>
+                    </DialogContent>
+                      </DialogRoot>
                </>
                }
 

@@ -27,7 +27,6 @@ const INITIAL_ORDER_STATE = {
   phone: '',
   date: null,
   hour: '',
-  tooHour: '',
   city: '',
   address: '',
   rooms: '',
@@ -40,6 +39,8 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
   const [state, setState] = useState(INITIAL_ORDER_STATE);
   const { user, isLoading, isError, updateUser } = useUser(session?.user?.email);
   const { xs } = useContext(WindowWidthContext);
+  const [orderStatus, setOrderStatus] = useState(null);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -52,7 +53,10 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
     if (id && user) {
       const ComboOrders = [...(user?.Profile_Orders || []), ...(user?.Profile_Active_Orders || [])];
       const existingOrder = ComboOrders.find(order => order._id === id);
-      if (existingOrder) setState(existingOrder);
+      if (existingOrder) {
+        setState(existingOrder);
+        setOrderStatus(existingOrder.status); // Store status to use in handleSubmit
+      }
     }
   }, [id, user]);
 
@@ -70,7 +74,14 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = id ? '/api/profile/edit-order' : '/api/profile/save-order';
+    
+    // Choose URL based on the order status
+    const url = id
+      ? orderStatus === "Open"
+        ? '/api/profile/edit-new-order'
+        : '/api/profile/edit-in-process-order'
+      : '/api/profile/save-order';
+
     const method = id ? 'PUT' : 'POST';
 
     try {
@@ -93,7 +104,7 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
   };
 
   return (
-    <form style={{ fontWeight: "bold" }} onSubmit={handleSubmit}>
+    <form style={{ fontWeight: "bold" , direction:"rtl" }} onSubmit={handleSubmit}>
       <Text p={!xs ? 1 : 3} fontWeight={"bolder"} fontSize={"larger"}>
         {session?.user?.name}
       </Text>
@@ -101,6 +112,8 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
         {id ? "עדכון פרטי הזמנה" : "הזן את הפרטים הנדרים לרשום הזמנה"}
       </Text>
 
+
+      <HStack  >
       <Field mt={2} label="טלפון" required>
         <Input
           variant="subtle"
@@ -125,8 +138,9 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
           maxDate={addMonths(new Date(), 6)}
         />
       </Field>
+     </HStack>
 
-      <HStack gap="10" width="full">
+      <HStack  >
         <Field label="משעה" required>
           <Input
             type='time'
@@ -137,18 +151,22 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
             onChange={handleChange}
           />
         </Field>
-        <Field label="עד שעה" required>
-          <Input
-            type='time'
-            variant="subtle"
-            required
-            id="tooHour"
-            value={state.tooHour}
-            onChange={handleChange}
-          />
-        </Field>
+        <Field pt={1} label="מספר חדרים" required>
+        <Input
+          variant="subtle"
+          type='number'
+          id="rooms"
+          value={state.rooms}
+          onChange={handleChange}
+          required
+          width="100%"
+        />
+      </Field>
+     
       </HStack>
 
+
+      <HStack>
       {!id && (
         <Field label="אזורֿ / עיר" paddingTop={"10px"} required>
           <Select
@@ -169,7 +187,6 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
           </Select>
         </Field>
       )}
-
       <Field pt={1} label="כתובת" required>
         <Input
           type='text'
@@ -181,29 +198,9 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
           width="100%"
         />
       </Field>
+      </HStack>
 
-      <Field pt={1} label="מספר חדרים" required>
-        <Input
-          variant="subtle"
-          type='number'
-          id="rooms"
-          value={state.rooms}
-          onChange={handleChange}
-          required
-          width="100%"
-        />
-      </Field>
-
-      <Field pt={1} label="תיאור הבקשה">
-        <Textarea
-          resize="none"
-          variant="subtle"
-          id='jobDescription'
-          value={state.jobDescription}
-          onChange={handleChange}
-        />
-      </Field>
-
+      <HStack>
       <Field pt={1} label="שעתון" required>
         <Input
           variant="subtle"
@@ -216,6 +213,19 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
           min={0}
         />
       </Field>
+
+      <Field pt={1} label="תיאור הבקשה">
+        <Textarea
+        rows={1}
+          resize="none"
+          variant="subtle"
+          id='jobDescription'
+          value={state.jobDescription}
+          onChange={handleChange}
+        />
+      </Field>
+
+      </HStack>
 
       <Flex justifyContent="center" mt="15px">
         <Button type="submit">{id ? "עדכן" : "שלח הזמנה"}</Button>

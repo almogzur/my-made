@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const { orderId, vendorEmail, city } = req.body;
+  const { orderId,status, vendorEmail, city  , ...rest } = req.body;
 
   if (!orderId || !vendorEmail || !city) {
     return res.status(400).json({ message: 'Missing required fields' });
@@ -50,7 +50,7 @@ export default async function handler(req, res) {
 
     // Define the updated order details
     const updatedOrder = {
-      ...clientOrder,
+      ...rest,
       Vendor_Name: vendor.Vendor?.name,
       Vendor_Phone: vendor.Vendor?.phone,
       Vendor_Action_Date: new Date(),
@@ -64,7 +64,7 @@ export default async function handler(req, res) {
       await usersCollection.updateOne(
         { _id: vendor._id },
         {
-          $addToSet: { "Vendor.Vendor_Orders": updatedOrder }
+          $set: { "Vendor.Vendor_Orders": updatedOrder }
         }
       );
     } catch (error) {
@@ -75,10 +75,10 @@ export default async function handler(req, res) {
     // Update the client's order status in Profile_Orders, pull it from Profile_Orders, and add to Profile_Active_Orders
     try {
       await usersCollection.updateOne(
-        { _id: clientOrder.ownerId },
+        { _id: clientOrder.ownerId  },
         {
-          $pull: { Profile_Orders: { _id: orderId } },  // Remove order from Profile_Orders
-          $addToSet: { Profile_Active_Orders: updatedOrder } // Add updated order to Profile_Active_Orders
+          $pull: { "Profile_Orders": { _id: orderId } },  // Remove order from Profile_Orders
+          $set: { "Profile_Active_Orders": updatedOrder } // Add updated order to Profile_Active_Orders
         }
       );
     } catch (error) {

@@ -33,6 +33,7 @@ const VendorActiveOrders = () => {
         initial={{opacity:0}}
         animate={{opacity:1}}
         transition={{duration:1}}
+        style={{  boxShadow:'0 8px 16px rgba(0, 0, 0, 1)'  }}
      >
       <Flex  direction={"column"} p={2} mb={"12em"} bg={"gray.200"} alignItems={"center"} >
           <Container maxWidth={"700px"}>

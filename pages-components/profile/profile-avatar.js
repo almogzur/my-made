@@ -21,7 +21,8 @@ const ProfileAvatr = () => {
       <m.div
        initial={{opacity:0}}
        animate={{opacity:1}}
-       transition={{duration:2 }}
+       transition={{duration:2  }}
+       style={{                              boxShadow:'0 8px 16px rgba(0, 0, 0, 1)'      }}
     >
       
       <Flex p={4} background={"gray.200"}   justifyContent={"center"}  >
@@ -46,9 +47,9 @@ const ProfileAvatr = () => {
           </Flex>
       
 
-        <Flex direction={"column"}   fontSize={!sm? "small" :"larger"} >
-           <Heading  color={Colors.d} >{session?.user?.name.toUpperCase() ?? "אלמוני" }</Heading>
-           <Text   >{session?.user?.email }</Text>
+        <Flex fontWeight={"bolder"} direction={"column"}   fontSize={!sm? "small" :"larger"} >
+           <Heading fontSize={xs && xxs ? "2xl":'4xl' } color={Colors.d} >{session?.user?.name.toUpperCase() ?? "אלמוני" }</Heading>
+           <Text   >{session?.user?.email.toLocaleUpperCase() }</Text>
            <Text  >אימייל מאומת : {session?.user?.emailVerified ? "כן" :" לא"}</Text>
           </Flex>
           </Flex>

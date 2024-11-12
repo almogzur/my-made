@@ -31,6 +31,7 @@ const VendorDisplay = ({ user, setEdit ,edit }) => {
         initial={{opacity:0}}
         animate={{opacity:1}}
         transition={{duration:2 }}
+        style={{  boxShadow:'0 8px 16px rgba(0, 0, 0, 1)'  }}
       >
         <Container p={4} background={'gray.200'}>
           <Container maxWidth={"700px"}>

@@ -24,13 +24,14 @@ const handler = async (req, res) => {
   const client = await clientPromise;
   const database = client.db('my-made');
   const areadatabase = client.db("my-made-Areas");
+  const usersCollection = database.collection('users');
+
 
   const userEmail = session.user.email;
 
 
   try {
 
-    const usersCollection = database.collection('users');
 
     // Find user by email to get their _id
     const user = await usersCollection.findOne({ email: userEmail });
@@ -42,12 +43,12 @@ const handler = async (req, res) => {
     const userId = user._id; 
     const name = session.user.name
     const status = "Open"
-    
-    const {date , ...rest} = req.body
+    const {date , city,  ...rest} = req.body
 
     const newOrder = {
         name,
         status,
+        city,
         "date":date.slice(0,10),
         ...rest,
         createdAt: new Date(),
@@ -60,7 +61,7 @@ const handler = async (req, res) => {
 
     const userResult = await usersCollection.updateOne({ email: userEmail }, updateUser);
 
-    const areaCollection = areadatabase.collection(req.body.city);
+    const areaCollection = areadatabase.collection(city);
 
     const addOrderToArea = await areaCollection.insertOne(newOrder);
 

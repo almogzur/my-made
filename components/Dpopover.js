@@ -4,7 +4,7 @@ import {
     PopoverContent,
     PopoverRoot,
     PopoverTrigger,
-  } from "../components/ui/popover"
+  } from "./ui/popover"
 
 
 import { useState } from "react"
@@ -22,7 +22,7 @@ const ControldPopOvre = ({children ,id ,index}) => {
     const [openChildren , setOpenChildren ] = useState(false)
 
     return (
-      <PopoverRoot lazyMount  autoFocus  key={id + index + " pop_over "} open={open} onOpenChange={(e)  => setOpen(e.open) }>
+      <PopoverRoot lazyMount  key={id + index + " pop_over "} open={open} onOpenChange={(e)  => setOpen(e.open) }>
 
          <PopoverTrigger asChild>
            <Button  p={4} size="sm" colorPalette={""}  variant="subtle" >פרטים </Button>
@@ -34,14 +34,14 @@ const ControldPopOvre = ({children ,id ,index}) => {
 
            <PopoverBody > 
               <Heading textAlign={"center"}>פרטי ההזמנה </Heading>
-            {children}
+               {children}
       
 
 
              <Flex  justifyContent={"space-evenly"}  p={2}>
               <Button onClick={()=>setOpen(false)} > סגור לשונית  </Button>
 
-               <PopoverRoot lazyMount open={openChildren} onOpenChange={(e)=>setOpenChildren(e.open)} positioning={{ offset: { crossAxis: 0, mainAxis: -300 } }}  >
+               <PopoverRoot  open={openChildren} onOpenChange={(e)=>setOpenChildren(e.open)}    >
 
                    <PopoverTrigger asChild>
                     <Button variant="solid" >  עדכון הזמנה </Button>
@@ -49,7 +49,7 @@ const ControldPopOvre = ({children ,id ,index}) => {
                   </PopoverTrigger>
 
 
-            <PopoverContent portalled={false} style={{direction:"rtl"}}>
+            <PopoverContent portalled={false} >
 
 
           

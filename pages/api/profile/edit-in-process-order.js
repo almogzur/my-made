@@ -2,6 +2,7 @@
 import clientPromise from '../../../lib/db';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
+import { ObjectId , } from 'mongodb';
 
 const handler = async (req, res) => {
   const API_NAME = "Edit In-Process Order API";
@@ -19,39 +20,45 @@ const handler = async (req, res) => {
   }
 
   const client = await clientPromise;
-  const userEmail = session.user.email;
   const database = client.db('my-made');
   const usersCollection = database.collection('users');
 
   const { _id, city, Vendor_ID, status, ...updateFields } = req.body;
+  const userEmail = session.user.email;
+   
 
   try {
-    // Step 1: Locate and update the order within `Profile_Active_Orders`
-    const filterProfileActiveOrders = { email: userEmail, 'Profile_Active_Orders._id': _id };
+
+    const Client = usersCollection.findOne({email:userEmail})
+    const Vendor = usersCollection.findOne( {_id:ObjectId.createFromHexString(Vendor_ID) } )
+
     const updateDoc = {
-      $addToSet: {
-        "Profile_Active_Orders.$": { ...updateFields, _id, city, status, updatedByUserAt: new Date() }
+       ...updateFields, 
+       _id,
+       city,
+       updatedByUserAt: new Date(),
+       status,
+       Vendor_ID:ObjectId.createFromHexString(Vendor_ID)
       }
-    };
-    const userResult = await usersCollection.updateOne(filterProfileActiveOrders, updateDoc);
 
-    if (userResult.modifiedCount === 0) {
-      return res.status(404).json({ message: 'Order not found in Profile_Active_Orders' });
-    }
 
-    // Step 2: Update the order in the vendor's active orders
-    const vendorFilter = { "_id": Vendor_ID, "Vendor.Vendor_Orders._id": _id };
-    const vendorUpdateDoc = {
-      $addToSet: {
-        "Vendor.Vendor_Orders.$": { ...updateFields, _id, city, updatedByUserAt: new Date() }
-      }
-    };
-    const vendorResult = await usersCollection.updateOne(vendorFilter, vendorUpdateDoc);
+    
+     // Client 
+    const clientFiler = { email:userEmail , "Profile_Active_Orders._id":_id }
+        
+    const userUpdateResult = await usersCollection.updateOne(clientFiler,{$set:{"Profile_Active_Orders.$":updateDoc}});
+    
 
-    if (vendorResult.modifiedCount > 0) {
-      console.log("Order updated in vendor's orders");
+     // Vendor 
+    const vendorFilter = { _id: ObjectId.createFromHexString(Vendor_ID) , "Vendor.Vendor_Orders._id": _id };
+
+    const vendorResult = await usersCollection.updateOne(vendorFilter, {$set: {"Vendor.Vendor_Orders.$":updateDoc}});
+
+
+    if (vendorResult.acknowledged && userUpdateResult.acknowledged ) {
+      console.log( API_NAME , "Success");
     } else {
-      console.log("Order not found in vendor's orders");
+      console.log(API_NAME,"Failed");
     }
 
     return res.status(200).json({ message: 'In-process order updated successfully' });

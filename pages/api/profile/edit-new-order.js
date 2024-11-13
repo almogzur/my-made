@@ -2,6 +2,7 @@
 import clientPromise from '../../../lib/db';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
+
 const handler = async (req, res) => {
   const API_NAME = "Edit Open Order API";
   console.log(API_NAME);
@@ -22,13 +23,12 @@ const handler = async (req, res) => {
   const areadatabase = client.db('my-made-Areas');
   const usersCollection = database.collection('users');
 
-
-  
   const { _id, city, ...updateFields } = req.body;
   const userEmail = session.user.email;
 
 
   try {
+
     const user = await usersCollection.findOne({ email: userEmail });
     if (!user) {
       console.log("User not found");
@@ -46,19 +46,10 @@ const handler = async (req, res) => {
        
     };
     
-    // Update operation with array filter
-    const updateOperation = {
-      $set: {  "Profile_Orders.$": updatedOrder
-      }
-    };
-    
-    // Define the array filter to match the correct order by _id
 
-    
-    // Execute the update
     const userResult = await usersCollection.updateOne(
       filterProfileOrders,
-      updateOperation,
+      {$set:{"Profile_Orders.$": updatedOrder}},
       
     );
         const cityCollection = areadatabase.collection(city);
@@ -66,11 +57,11 @@ const handler = async (req, res) => {
         const cityResult = await cityCollection.updateOne({ "_id": _id },{ $set: updatedOrder })
 
           if (userResult.acknowledged  && cityResult.acknowledged) {
-            console.log("Order added successfully");
-          return res.status(200).json({ message: 'Order added successfully' });
+            console.log("Order Edited successfully");
+          return res.status(200).json({ message: 'Order Edited successfully' });
         } else {
           console.log(userResult,addOrderToArea );
-          return res.status(200).json({ message: 'User not found or no changes made' });
+          return res.status(200).json({ message: ' no changes made' });
         }
 
      } catch (error) {

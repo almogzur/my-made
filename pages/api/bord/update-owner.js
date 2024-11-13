@@ -1,13 +1,17 @@
+import { error } from 'console';
 import clientPromise from '../../../lib/db';
+import { ObjectId  } from 'mongodb';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  const { orderId,status, vendorEmail, city  , ...rest } = req.body;
+  const {  vendorEmail  , order } = req.body;
+  const { status , _id, city, ownerId , ...restOfOrder} = order
 
-  if (!orderId || !vendorEmail || !city) {
+
+  if ( !_id || !vendorEmail || !order.city) {
     return res.status(400).json({ message: 'Missing required fields' });
   }
 
@@ -19,84 +23,57 @@ export default async function handler(req, res) {
     const usersCollection = database.collection('users');
     const cityCollection = areadatabase.collection(city);
 
-    // Retrieve the order from the city collection
-    let clientOrder;
-    try {
-      clientOrder = await cityCollection.findOne({ "_id": orderId });
-      if (!clientOrder) {
-        return res.status(404).json({ message: 'Order not found in city collection' });
-      }
-    } catch (error) {
-      console.error("Error retrieving order from city collection:", error);
-      return res.status(500).json({ message: 'Error retrieving order from city collection' });
-    }
+ 
+      const Vendor_info = await usersCollection.findOne({ email: vendorEmail });
+      const Owner  = await usersCollection.findOne({ _id :  ObjectId.createFromHexString(ownerId)})
 
-    // Retrieve the vendor's data
-    let vendor;
-    try {
-      vendor = await usersCollection.findOne({ email: vendorEmail });
-      if (!vendor) {
-        return res.status(404).json({ message: 'Vendor not found' });
-      }
-    } catch (error) {
-      console.error("Error retrieving vendor data:", error);
-      return res.status(500).json({ message: 'Error retrieving vendor data' });
-    }
+    
+    
+     if ( order.ownerId === Vendor_info._id ) {
+       return res.status(400).json({ message: "לקוח שפותח הזמנה לא יכול למשוך אותה בתור משק" });
+     }
 
-    // Check if the vendor is the original owner of the order
-    if (clientOrder.ownerId.toString() === vendor._id.toString()) {
-      return res.status(400).json({ message: "לקוח שפותח הזמנה לא יכול למשוך אותה בתור משק" });
-    }
+  //   Define the updated order details
+      const updatedOrder = {
+        Vendor_Name: Vendor_info.Vendor?.name,
+       Vendor_Phone: Vendor_info.Vendor?.phone,
+       Vendor_Action_Date: new Date(),
+       Vendor_ID : Vendor_info._id,
+       status: 'inProcess',
+       city,
+      ...restOfOrder,
+      _id:_id,
+      ownerId:ObjectId.createFromHexString(ownerId)
 
-    // Define the updated order details
-    const updatedOrder = {
-      ...rest,
-      Vendor_Name: vendor.Vendor?.name,
-      Vendor_Phone: vendor.Vendor?.phone,
-      Vendor_Action_Date: new Date(),
-      Vendor_ID : vendor._id,
-      status: 'inProcess'
-      
     };
 
     // Update the vendor's active orders, avoiding duplication
-    try {
-      await usersCollection.updateOne(
-        { _id: vendor._id },
+
+
+
+    const VendorResult =  await usersCollection.updateOne(  {email:vendorEmail }, { $push : { "Vendor.Vendor_Orders": updatedOrder  } })
+    
+     const ClientResult =  await usersCollection.updateOne({ _id: Owner._id },
         {
-          $set: { "Vendor.Vendor_Orders": updatedOrder }
-        }
-      );
-    } catch (error) {
-      console.error("Error updating vendor's active orders:", error);
-      return res.status(500).json({ message: 'Error updating vendor\'s active orders' });
-    }
+            $pull: { "Profile_Orders": { _id: _id } },  
+            $push: { "Profile_Active_Orders": updatedOrder } // Add updated order to Profile_Active_Orders
+         }
+       )
 
-    // Update the client's order status in Profile_Orders, pull it from Profile_Orders, and add to Profile_Active_Orders
-    try {
-      await usersCollection.updateOne(
-        { _id: clientOrder.ownerId  },
-        {
-          $pull: { "Profile_Orders": { _id: orderId } },  // Remove order from Profile_Orders
-          $set: { "Profile_Active_Orders": updatedOrder } // Add updated order to Profile_Active_Orders
-        }
-      );
-    } catch (error) {
-      console.error("Error updating client's active orders:", error);
-      return res.status(500).json({ message: 'Error updating client\'s active orders' });
-    }
+      const deleteResult =  await cityCollection.deleteOne({ "_id": _id });
 
-    // Remove the order from the city collection
-    try {
-      await cityCollection.deleteOne({ "_id": orderId });
-    } catch (error) {
-      console.error("Error removing order from city collection:", error);
-      return res.status(500).json({ message: 'Error removing order from city collection' });
-    }
+         if(VendorResult.acknowledged  && ClientResult.acknowledged && deleteResult.acknowledged ){
+           return res.status(200).json({ message: 'Order moved and updated successfully for both client and vendor' });
+         }else{
+             console.log(error);
+             return res.status(200).json({massage:"update not acknowledged"})
+            
+       }
 
-    return res.status(200).json({ message: 'Order moved and updated successfully for both client and vendor' });
+
   } catch (error) {
     console.error("Unexpected server error:", error);
     return res.status(500).json({ message: 'Unexpected server error' });
   }
+
 }

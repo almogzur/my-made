@@ -16,7 +16,7 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
   const { data: session, status, update } = useSession();
   const {  mutateOrders } = useOrders()
 
-  const orderHendler = async (e,orderId,city,vendorEmail) => {
+  const orderHendler = async (e,order,vendorEmail) => {
     console.log(e);
     
       e.preventDefault()
@@ -24,7 +24,7 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
            const options =  {
              method: 'POST',
              headers: {'Content-Type': 'application/json'},
-             body: JSON.stringify( { orderId , city , vendorEmail })
+             body: JSON.stringify( {  vendorEmail , order  })
              }
 
 
@@ -105,7 +105,7 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                             color="#fff" 
                             variant="outline" 
                             width={150}
-                            onClick={(e)=>orderHendler(e, order._id, order.city , session?.user.email)}
+                            onClick={(e)=>orderHendler(e,order,  session?.user.email )}
                           >
                             <Text>קח הזמנה</Text>  
                           </Button>

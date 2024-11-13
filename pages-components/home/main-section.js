@@ -30,7 +30,7 @@ function  MainSection() {
            <m.div  initial={{x:-300}} animate={{x:0}} transition={{ease: "easeOut", duration: 2 ,stiffness:100 }}  >
            <Container maxWidth={"900px"}>
             
-          <Heading textAlign={"center"} fontSize={!xs?"2xl":!md?"3xl":"4xl"} fontWeight={300} p={!xs? 1 : !md? 5 : 6} m={1} >  {"צריכים עוזר\ת בית ? הרשמו עכשיו !! תיאום קל ופשוט."}</Heading>
+          <Heading textAlign={"center"} fontSize={!xs?"2xl":!md?"4xl":"5xl"} fontWeight={300} p={!xs? 1 : !md? 5 : 6} m={1} lineHeight={!xs?1:!md?2:2} >  {"צריכים עוזר\ת בית ? הרשמו עכשיו !! תיאום קל ופשוט."}</Heading>
 
      
             
@@ -38,6 +38,8 @@ function  MainSection() {
 
           </m.div>
          </LazyMotion>
+
+
           <Flex direction={"column"} alignItems={"center"}  >
               <StyledImage 
                   Images={ PhotosMd } 
@@ -51,6 +53,8 @@ function  MainSection() {
                    timer={8000} 
                    />
           </Flex>
+
+
       </Container>
   );
 

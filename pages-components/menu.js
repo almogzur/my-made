@@ -47,7 +47,7 @@ const Menu = () => {
               }}
               height={0}
               width={120}
-              src={session?.user?.image || profileDefualtIcon} alt="" 
+              src={session?.user?.image } alt="" 
             />
 
         </Flex>

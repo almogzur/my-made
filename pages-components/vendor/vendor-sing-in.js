@@ -13,7 +13,7 @@ const descriptionPlaceholder =
   פרטים נוספים ...
   `;
 
-const VendorForm = ({ setEdit, edit }) => {
+const VendorSingin = ({ setEdit, edit }) => {
   const { data: session, status } = useSession();
   const { user, isLoading, isError, updateUser } = useUser(session?.user?.email);
 
@@ -116,4 +116,4 @@ const VendorForm = ({ setEdit, edit }) => {
   );
 };
 
-export default VendorForm;
+export default VendorSingin;

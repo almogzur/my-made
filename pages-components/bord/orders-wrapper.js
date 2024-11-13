@@ -29,6 +29,7 @@ const OrdersWrapper=({ Mode })=>{
                 bg={"gray.200"}
                 height={"12em"}
                 width={'100%'}
+
                 >
 
              <LoadingSpinner/>
@@ -45,6 +46,8 @@ const OrdersWrapper=({ Mode })=>{
             justifyContent={"space-around"} 
             background={'gray.200'}
             minHeight={"600px"}
+            boxShadow={'0 8px 16px rgba(0, 0, 0, 1)'}
+
              >  
             
               { Array.isArray(orders) && filterCity  ?     

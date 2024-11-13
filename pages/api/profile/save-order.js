@@ -2,6 +2,7 @@ import clientPromise from '../../../lib/db';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 import { v4 as uuidv4 } from 'uuid';
+import { ObjectId } from 'mongodb';
 
 const handler = async (req, res) => {
 
@@ -28,24 +29,18 @@ const handler = async (req, res) => {
 
 
   const userEmail = session.user.email;
-
+  const userId = ObjectId.createFromHexString(session.user.id)
 
   try {
 
 
     // Find user by email to get their _id
-    const user = await usersCollection.findOne({ email: userEmail });
-    if (!user) {
-      console.log("User not found");
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    const userId = user._id; 
+     
     const name = session.user.name
     const status = "Open"
     const {date , city,  ...rest} = req.body
 
-    const newOrder = {
+    const Doc = {
         name,
         status,
         city,
@@ -57,13 +52,13 @@ const handler = async (req, res) => {
     };
 
     // Add the order to the user's Orders array
-    const updateUser = { $push: { Profile_Orders: newOrder } };
-
-    const userResult = await usersCollection.updateOne({ email: userEmail }, updateUser);
+    const userFilter = { email: userEmail }
+    const userOperation = { $push: { Profile_Orders: Doc } };
+    const userResult = await usersCollection.updateOne(userFilter , userOperation );
 
     const areaCollection = areadatabase.collection(city);
 
-    const addOrderToArea = await areaCollection.insertOne(newOrder);
+    const addOrderToArea = await areaCollection.insertOne(Doc);
 
     if (userResult.acknowledged  && addOrderToArea.acknowledged) {
         console.log("Order added successfully");

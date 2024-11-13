@@ -16,7 +16,8 @@ import { BsArrowBarLeft } from "react-icons/bs";
 import { BsArrowBarRight } from "react-icons/bs";
 import Colors from "../../../lib/colors";
 import DrawerItem from './drawer-item'
-import { FcButtingIn } from "react-icons/fc";
+import { FcButtingIn , FcCustomerSupport } from "react-icons/fc";
+
 import {   FcViewDetails, FcPlus , FcHome, FcCancel } from "react-icons/fc";
 import { signOut ,signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
@@ -63,14 +64,18 @@ const  MyDrawer = () => {
               <DrawerItem PropsOnClick={ () => router.push("/") } text={"דף הבית"} Icon={<FcHome size={"2em"}  />  } animationIndex="1" />
 
               <DrawerItem        
-                           text={ session?.user?.name??  "הרשמה | כניסה "} 
+                           text={ session?.user?.name? "ההזמנות שלי " :  "הרשמה | כניסה "} 
                            Icon={<FcButtingIn size={"2em"}/>}
                            PropsOnClick={()=>{ session? router.push("/profile") : signIn(undefined,{callbackUrl:"/profile"})   }}
                            animationIndex={1.5} 
               />
 
               { user?.Vendor?.isVendor &&
-                 <DrawerItem text={"לוח"} Icon={<FcViewDetails size={"2em"}/>} PropsOnClick={()=>router.push("/bord")} animationIndex="1.9"  /> }
+              <>
+                 <DrawerItem text={"ניהול לקוחות"} Icon={<FcCustomerSupport size={"2em"}/> }  PropsOnClick={()=>{router.push("/vendor") }} animationIndex="2.3"  />
+                 <DrawerItem text={"לוח"} Icon={<FcViewDetails size={"2em"}/>} PropsOnClick={()=>router.push("/bord")} animationIndex="1.9"  /> 
+                 </> 
+                 }
           </DrawerBody>
 
           <DrawerFooter>

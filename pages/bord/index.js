@@ -46,28 +46,12 @@ const BoardPage = () => {
   return (
   <>
         <Navigation/>
-            <Flex direction={"column"} gap={"20px"}  >
-            
-             <Container  >
-                 <Flex >
-                    <BordTools
-                       setMode={setMode}
-                        setFilterCity={setFilterCity}
-                        setFilterPriceArray={setFilterPriceArray}
-                     />
-                 </Flex>
-             </Container>
-
-             <Container >
-               <Flex  justifyContent={"center"}  >
-                  <OrdersWrapper
-                       Mode={Mode}
-                       filterCity={filterCity}
-                       setFilterCity={setFilterCity}
-              /> 
-               </Flex>
-             </Container>
+           <Container >
+             <Flex direction={"column"} gap={"20px"}  >
+                    <BordTools setMode={setMode} setFilterCity={setFilterCity} setFilterPriceArray={setFilterPriceArray} />
+                    <OrdersWrapper  Mode={Mode} filterCity={filterCity} setFilterCity={setFilterCity} /> 
             </Flex>
+         </Container>
 </>        
 
 

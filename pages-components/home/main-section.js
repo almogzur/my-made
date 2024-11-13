@@ -24,44 +24,48 @@ function  MainSection() {
   const { xxl,xl,lg,md,sm,xs,xxs } = useContext(WindowWidthContext);
   
   return (
+      <LazyMotion features={f}>
+        <m.div  initial={{x:-300}} animate={{x:0}} transition={{ease: "easeOut", duration: 2 ,stiffness:100 }}  >
 
-        <Container  >
-          <LazyMotion features={f}>
-           <m.div  initial={{x:-300}} animate={{x:0}} transition={{ease: "easeOut", duration: 2 ,stiffness:100 }}  >
            <Container maxWidth={"900px"}>
             
-          <Heading textAlign={"center"} fontSize={!xs?"2xl":!md?"4xl":"5xl"} fontWeight={300} p={!xs? 1 : !md? 5 : 6} m={1} lineHeight={!xs?1:!md?2:2} >  {"צריכים עוזר\ת בית ? הרשמו עכשיו !! תיאום קל ופשוט."}</Heading>
+           <Heading 
+            textAlign={"center"} 
+            fontSize={!xs?"2xl":!md?"4xl":"5xl"} 
+            fontWeight={300} 
+            p={!xs? 1 : !md? 5 : 6} 
+            m={1} 
+            lineHeight={!xs?1:!md?2:2} 
+             >
+              {"צריכים עוזר\ת בית ? הרשמו עכשיו !! תיאום קל ופשוט."}
+            </Heading>
 
-     
-            
-           </Container>
-
-          </m.div>
-         </LazyMotion>
-
-
-          <Flex direction={"column"} alignItems={"center"}  >
-              <StyledImage 
-                  Images={ PhotosMd } 
-                   PropsImageStyle={{ 
-                   width: xxs && xs? "800px" : "400px", 
-                   height:xxs && xs? "600px":"300px",  
-                   marginTop:!xs? "1em ": "3em",
-                   marginBottom: !xs? "1em ": "3em" ,
-                   boxShadow:'0 8px 16px rgba(0, 0, 0, 1)'
-                            }} 
-                   timer={8000} 
-                   />
-          </Flex>
+        
+           <StyledImage 
+              Images={ PhotosMd } 
+               PropsImageStyle={{ 
+               width: xxs && xs? "800px" : "400px", 
+               height:xxs && xs? "600px":"300px",  
+               marginTop:!xs? "1em ": "3em",
+               marginBottom: !xs? "1em ": "3em" ,
+               boxShadow:'0 8px 16px rgba(0, 0, 0, 1)'
+              }} 
+                timer={8000} 
+             />
 
 
-      </Container>
+
+        </Container>
+
+      </m.div>
+      </LazyMotion>
+
+
   );
 
 }
 
 export default MainSection;
-
 
 
 

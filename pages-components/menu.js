@@ -1,13 +1,17 @@
 import useUser from "../lib/hooks/useUser";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Colors from "../lib/colors"
-import {   FcViewDetails ,FcPlus , FcHome, FcButtingIn } from "react-icons/fc";
+import {   FcViewDetails ,FcPlus , FcHome, FcButtingIn , FcCustomerSupport } from "react-icons/fc";
 import { ImExit } from "react-icons/im";
 
 import Link from "next/link";
 import { GiVacuumCleaner } from "react-icons/gi";
 import {  Box, Button, Container, Flex, For, Heading, Text} from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import {  WindowWidthContext } from '../context';
+import { useEffect , useContext, useState } from 'react';
+import Image from "next/image";
+
 
 
 const Menu = () => {
@@ -19,13 +23,43 @@ const Menu = () => {
  //{text :,Icon:<FcButtingIn size={"2em"}/>, href:"profile"},
      const routr = useRouter()
      const pathName = routr.pathname
+     const { xxl,xl,lg,md,sm,xs,xxs } = useContext(WindowWidthContext);
 
      
 
-     return (
-        <Flex mb={3}   background={Colors.d}  boxShadow={ "0px 10px 26px rgba(0, 0, 0, 0.5)"} p={2}  >
+     return ( 
+      <Flex justifyContent={"center"}>
+        <Container p={0} m={0}>
+          <Flex mb={3}   background={Colors.d}  boxShadow={ "0px 10px 26px rgba(0, 0, 0, 0.5)"} p={2}  >
            <Flex width={"40%"}   alignItems={"center"} justifyContent={"center"}  >
                   <Container p={0} m={2}><GiVacuumCleaner  size={"3em"}  color={"black"}/></Container>
+                  <Flex  alignItems={"center"}  justifyContent={"space-evenly"} >
+
+        <Flex  justifyContent={"flex-end"} >
+
+            <Image 
+            style={{
+              border:` dotted 3px ${Colors.d}`,
+              borderRadius:"18px" ,
+              objectFit:"cover",
+              margin:"10px",
+              padding:"10px"
+              }}
+              height={0}
+              width={120}
+              src={session?.user?.image || profileDefualtIcon} alt="" 
+            />
+
+        </Flex>
+
+
+          <Flex fontWeight={"bolder"} direction={"column"}   fontSize={!sm? "small" :"larger"} >
+           <Heading fontSize={xs && xxs ? "2xl":'4xl' } color={Colors.d} >{session?.user?.name.toUpperCase() ?? "אלמוני" }</Heading>
+           <Text   >{session?.user?.email.toLocaleUpperCase() }</Text>
+           <Text  >אימייל מאומת : {session?.user?.emailVerified ? "כן" :" לא"}</Text>
+          </Flex>
+
+        </Flex>
            </Flex>
         
           <Flex  width={"60%"}  justifyContent={"end"} alignItems={"center"}  >
@@ -57,15 +91,17 @@ const Menu = () => {
                  p={2}  
                  variant={"solid"} 
                  boxShadow={ "4px 0px 2px rgba(0, 0, 0, 0.3)"}
-                 onClick={()=> session? routr.push("/profile"): signIn(undefined, { callbackUrl: '/profile' }) }
                  width={"120px"}
                  fontWeight={600}
                  justifyContent={"space-around"}
+                 onClick={()=> session? routr.push("/profile"): signIn(undefined, { callbackUrl: '/profile' }) }
 
 
 
                  >
-                 {session?.user?.name ? "פרופיל אישי" :  "הרשמה|כניסה "}
+                 {session?.user?.name ? "הזמנות" :  "הרשמה|כניסה "}
+                 <FcButtingIn/>
+
                 </Button>
                 :null
                }
@@ -73,7 +109,7 @@ const Menu = () => {
 
 
 
-               {isVendor && pathName !== "/bord" ? 
+               {isVendor && pathName !== "/bord" &&
                 <Link href="bord" >
                 <Button
                  m={3} 
@@ -88,15 +124,31 @@ const Menu = () => {
                  <FcViewDetails/>
                 </Button>
                 </Link>
-                :null
+                
+               }
+               {isVendor && pathName !=="/vendor" &&
+                <Link  href={"./vendor"} >
+                <Button 
+                 m={3}
+                 p={2}  
+                 variant={"solid"} 
+                 boxShadow={ "4px 0px 2px rgba(0, 0, 0, 0.3)"}
+                 width={"120px"}
+                 fontWeight={600}
+                 justifyContent={"space-around"}
+                 >
+                  לקוחות
+                  <FcCustomerSupport size={"2em"} />
+                 </Button>
+                 </Link>
                }
          
                {session? 
+               
                 <Button 
                  m={3}
                  colorPalette={"red"} 
                  variant={"solid"} 
-                 borderRadius={10} 
                  boxShadow={ "4px 0px 2px rgba(255, 0, 0, 0.3)"}
                  onClick={()=>signOut()}
                  width={"120px"}
@@ -114,6 +166,8 @@ const Menu = () => {
                }
           </Flex>
 
+         </Flex>
+        </Container>
         </Flex>
   )
 }

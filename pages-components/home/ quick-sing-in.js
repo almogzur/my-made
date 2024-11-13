@@ -1,10 +1,11 @@
 import Colors from '../../lib/colors'
-import { Button, Flex , Heading } from '@chakra-ui/react';
+import { Button, Container, Flex , Heading } from '@chakra-ui/react';
 
 function QuickcSingIn() {
 
 
   return (
+    <Container>
     <Flex
      direction={"column"} 
      justifyContent={"space-around"} 
@@ -17,6 +18,7 @@ function QuickcSingIn() {
         <Heading  textAlign={"center"} fontSize={"2em"} color={Colors.b} >צריך עזרה פרסם עכשיו ?!  </Heading>
         <Button borderColor={Colors.b} variant={"outline"}  > הזמנה חדשה </Button>
     </Flex>
+    </Container>
     )
 }
 

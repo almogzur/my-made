@@ -33,8 +33,7 @@ export default async function handler(req, res) {
        return res.status(400).json({ message: "לקוח שפותח הזמנה לא יכול למשוך אותה בתור משק" });
      }
 
-  //   Define the updated order details
-      const updatedOrder = {
+      const Doc = {
         Vendor_Name: Vendor_info.Vendor?.name,
        Vendor_Phone: Vendor_info.Vendor?.phone,
        Vendor_Action_Date: new Date(),
@@ -47,23 +46,29 @@ export default async function handler(req, res) {
 
     };
 
-    // Update the vendor's active orders, avoiding duplication
 
+      const vendorFilter =  {email:vendorEmail }
+      const vendorOperation = { $push : { "Vendor.Vendor_Orders": Doc  } }
+      const VendorResult =  await usersCollection.updateOne( vendorFilter , vendorOperation )   
 
+      const clientFiler = { _id: Owner._id }
 
-    const VendorResult =  await usersCollection.updateOne(  {email:vendorEmail }, { $push : { "Vendor.Vendor_Orders": updatedOrder  } })
-    
-     const ClientResult =  await usersCollection.updateOne({ _id: Owner._id },
-        {
-            $pull: { "Profile_Orders": { _id: _id } },  
-            $push: { "Profile_Active_Orders": updatedOrder } // Add updated order to Profile_Active_Orders
-         }
-       )
+      const clientOperation = { 
+         $pull: { "Profile_Orders": { _id: _id } },  
+         $push: { "Profile_Active_Orders": Doc } 
+        }
 
-      const deleteResult =  await cityCollection.deleteOne({ "_id": _id });
+      const ClientResult =  await usersCollection.updateOne(clientFiler,clientOperation)
 
-         if(VendorResult.acknowledged  && ClientResult.acknowledged && deleteResult.acknowledged ){
-           return res.status(200).json({ message: 'Order moved and updated successfully for both client and vendor' });
+         if(VendorResult.acknowledged  && ClientResult.acknowledged  ){
+            const deleteResult =  await cityCollection.deleteOne({ "_id": _id })
+
+              if(deleteResult.acknowledged){
+                  return res.status(200).json({ message: 'Order moved and updated successfully for both client and vendor' });
+                }else{
+                  return status(200).json({massage:'order was not removed from cityCollection '})
+                }
+              
          }else{
              console.log(error);
              return res.status(200).json({massage:"update not acknowledged"})

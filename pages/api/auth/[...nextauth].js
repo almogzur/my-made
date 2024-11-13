@@ -5,7 +5,6 @@ import clientPromise from '../../../lib/db'
 
 
 export const authOptions = {
-  // Configure one or more authentication providers
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -14,13 +13,19 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-   async session({ session, token, user }) {
-    // Send properties to the client, like an access_token and user id from a provider.
-    // extanding Session Object 
-    // passiong user id for db calls from Front end as slug quary 
-      
+    async session({session, token, user}) {
+      session = {...session,
+        // extending the session widt the user id 
+        // for back end 
+        // insted of puling the id out of db see edit-new-order line 33   
+          user: {
+              id: user.id,
+              ...session.user
+          }
+      }
       return session
-   },
+  },
+  
   /////////////////////////////////////////////////////////////////////////////
   // JWT work with cookies saving a Token  and verefing it on singin()
   /*async jwt({ token, user, account, profile, isNewUser }) {
@@ -29,7 +34,7 @@ export const authOptions = {
  ////////////////////////////////////////////////////////////////////////// 
 },
 
-// when useing adapter Session Stratgy defualt back to Databace
+// when useing adapter Session Stratgy defualts back to Database
 adapter: MongoDBAdapter(clientPromise, {
   databaseName:"my-made",
   },  

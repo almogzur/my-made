@@ -69,6 +69,7 @@ const ProfileOrders = () => {
                           return (
                              <DataRow order={order} index={index}  key={order._id + index + "DataRow"} />)
                        })}
+                       
                 <NewOrderDialg/>
            </Container>
           </motion.div>
@@ -115,9 +116,6 @@ const OrderExmp=()=>{
   return <Flex justifyContent={"center"} >
    <Container maxWidth={"700px"}  p={0} m={0} boxShadow={'0 8px 16px rgba(0, 0, 0, 1)'} >
       <Flex  
-      
-           
-
            bg={"gray.400"} 
            justifyContent={"space-around"}  
            alignItems={"center"}  
@@ -200,13 +198,13 @@ const DataRow = ({order , index})=>{
 }
 
 const NewOrderDialg =()=>{
-        const [open ,setOpen] = useState()
+        const [open ,setOpen] = useState(false)
         
   return  <Flex p={4} justifyContent={"center"}  >
-     <DialogRoot open={open} >
+       <DialogRoot open={open} >
 
          <DialogTrigger asChild >
-           <Button variant="solid" bg={Colors.d} size="lg" color={"black"} fontWeight={"bold"}>  {<BiSolidMessageAdd/>}{"הזמנה חדשה"} </Button>
+           <Button variant="solid" onClick={()=>setOpen(true)} bg={Colors.d} size="lg" color={"black"} fontWeight={"bold"}>  {<BiSolidMessageAdd/>}{"הזמנה חדשה"} </Button>
          </DialogTrigger>
           <DialogContent >
 
@@ -222,7 +220,7 @@ const NewOrderDialg =()=>{
 
         <DialogFooter>
           <DialogActionTrigger asChild>
-        <Button  >סגור</Button>
+        <Button onClick={()=>setOpen(false)} >סגור</Button>
         </DialogActionTrigger>
 
         </DialogFooter>

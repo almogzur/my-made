@@ -1,7 +1,11 @@
 // pages/api/profile/edit-new-order.js
+
+
+
 import clientPromise from '../../../lib/db';
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
+import { ObjectId } from 'mongodb';
 
 const handler = async (req, res) => {
   const API_NAME = "Edit Open Order API";
@@ -23,38 +27,32 @@ const handler = async (req, res) => {
   const areadatabase = client.db('my-made-Areas');
   const usersCollection = database.collection('users');
 
+
   const { _id, city, ...updateFields } = req.body;
   const userEmail = session.user.email;
+  const userId = session.user.id
+  const cityCollection = areadatabase.collection(city);
 
 
   try {
 
-    const user = await usersCollection.findOne({ email: userEmail });
-    if (!user) {
-      console.log("User not found");
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    const filterProfileOrders = { email: userEmail, "Profile_Orders._id" : _id  };
-
-    const updatedOrder = {
+    const Doc = {
       city,
       updatedByUserAt: new Date(),
       ...updateFields,
-       ownerId:user._id,
+       ownerId:ObjectId.createFromHexString(userId),
        _id:_id
        
     };
     
+    const profileFilter = { email: userEmail, "Profile_Orders._id" : _id  };
+    const profileOperation = {$set:{"Profile_Orders.$": Doc}}
+    const userResult = await usersCollection.updateOne( profileFilter, profileOperation);
 
-    const userResult = await usersCollection.updateOne(
-      filterProfileOrders,
-      {$set:{"Profile_Orders.$": updatedOrder}},
-      
-    );
-        const cityCollection = areadatabase.collection(city);
 
-        const cityResult = await cityCollection.updateOne({ "_id": _id },{ $set: updatedOrder })
+      const cityFilter = { "_id": _id }
+      const cityOperation = { $set: Doc }
+      const cityResult = await cityCollection.updateOne(cityFilter, cityOperation)
 
           if (userResult.acknowledged  && cityResult.acknowledged) {
             console.log("Order Edited successfully");

@@ -25,14 +25,11 @@ const handler = async (req, res) => {
 
   const { _id, city, Vendor_ID, status, ...updateFields } = req.body;
   const userEmail = session.user.email;
-   
+  
 
   try {
 
-    const Client = usersCollection.findOne({email:userEmail})
-    const Vendor = usersCollection.findOne( {_id:ObjectId.createFromHexString(Vendor_ID) } )
-
-    const updateDoc = {
+    const Doc = {
        ...updateFields, 
        _id,
        city,
@@ -41,27 +38,25 @@ const handler = async (req, res) => {
        Vendor_ID:ObjectId.createFromHexString(Vendor_ID)
       }
 
-
-    
      // Client 
-    const clientFiler = { email:userEmail , "Profile_Active_Orders._id":_id }
-        
-    const userUpdateResult = await usersCollection.updateOne(clientFiler,{$set:{"Profile_Active_Orders.$":updateDoc}});
-    
-
+    const clientFiler = { email:userEmail , "Profile_Active_Orders._id":_id } 
+    const clientOperatin = {$set:{"Profile_Active_Orders.$":Doc}}
+    const userUpdateResult = await usersCollection.updateOne(clientFiler,clientOperatin);
+  
      // Vendor 
     const vendorFilter = { _id: ObjectId.createFromHexString(Vendor_ID) , "Vendor.Vendor_Orders._id": _id };
-
-    const vendorResult = await usersCollection.updateOne(vendorFilter, {$set: {"Vendor.Vendor_Orders.$":updateDoc}});
-
+    const vendorOperation= {$set: {"Vendor.Vendor_Orders.$":Doc}}
+    const vendorResult = await usersCollection.updateOne(vendorFilter,vendorOperation);
 
     if (vendorResult.acknowledged && userUpdateResult.acknowledged ) {
-      console.log( API_NAME , "Success");
+        console.log( API_NAME , "Success");
+        return res.status(200).json({ message: 'In-process order updated successfully' });
+
     } else {
-      console.log(API_NAME,"Failed");
+       console.log(API_NAME,"Failed to update");
+       return res.status(500).json({massage:'Failed'})
     }
 
-    return res.status(200).json({ message: 'In-process order updated successfully' });
   } catch (error) {
     console.error(API_NAME, 'Error updating in-process order:', error);
     return res.status(500).json({ message: 'Error updating in-process order', error });

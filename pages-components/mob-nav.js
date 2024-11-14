@@ -17,7 +17,6 @@ const MobNav = () => {
     return (
         <Flex p={2} mb={3} background={Colors.d}  height={ !xs? "60px": !md? "70px" : null}  justifyContent={"space-between"} alignItems={"center"}   boxShadow={ "0px 6px 16px rgba(0, 0, 0, 0.5)"}  >
           <MyDrawer/>
-          <Heading color={Colors.b}  fontSize={!xs ? "2em " :"3em "} >{"MadeIT"}</Heading>
           <Box color={Colors.b}  p={2}  ><GiVacuumCleaner size={"3em"}/> </Box>  
         </Flex>
       

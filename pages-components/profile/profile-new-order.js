@@ -114,18 +114,22 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
 
 
       <HStack  >
-      <Field mt={2} label="טלפון" required>
+
+       <Field mt={2} label="טלפון" required  htmlFor='phone'>
         <Input
           variant="subtle"
           type='tel'
           id="phone"
           required
+          pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
           value={state.phone}
           onChange={handleChange}
+          lang='he'
+          
         />
-      </Field>
+       </Field>
 
-      <Field label="תאריך ושעה" required paddingTop={"10px"}>
+       <Field label="תאריך " required paddingTop={"10px"}>
         <DatePicker
           locale={he}
           selected={state.date}
@@ -138,10 +142,13 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
           maxDate={addMonths(new Date(), 6)}
         />
       </Field>
+  
      </HStack>
-
+    
+   
+    
       <HStack  >
-        <Field label="משעה" required>
+        <Field label="שעת הגעה" required>
           <Input
             type='time'
             variant="subtle"
@@ -200,21 +207,8 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
       </Field>
       </HStack>
 
-      <HStack>
-      <Field pt={1} label="שעתון" required>
-        <Input
-          variant="subtle"
-          required
-          id="price"
-          type="number"
-          value={state.price}
-          onChange={handleChange}
-          max={300}
-          min={0}
-        />
-      </Field>
 
-      <Field pt={1} label="תיאור הבקשה">
+      <Field pt={1} label=" בקשות לנותן השירות">
         <Textarea
         rows={1}
           resize="none"
@@ -225,7 +219,19 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
         />
       </Field>
 
-      </HStack>
+      <Field pt={1} label="שעתון" required>
+        <Input
+            
+          variant="subtle"
+          required
+          id="price"
+          type="number"
+          value={state.price}
+          onChange={handleChange}
+          max={300}
+          min={0}
+        />
+      </Field>
 
       <Flex justifyContent="center" mt="15px">
         <Button type="submit">{id ? "עדכן" : "שלח הזמנה"}</Button>

@@ -1,4 +1,3 @@
-import { Button } from "../../../components/ui/button"
 import {
   DrawerActionTrigger,
   DrawerBackdrop,
@@ -11,7 +10,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "../../../components/ui/drawer"
-import { For, Heading , Flex } from "@chakra-ui/react";
+import { For, Heading , Flex ,Button ,Container } from "@chakra-ui/react";
 import { BsArrowBarLeft } from "react-icons/bs";
 import { BsArrowBarRight } from "react-icons/bs";
 import Colors from "../../../lib/colors";
@@ -26,6 +25,9 @@ import useUser from '../../../lib/hooks/useUser'
 import {m,LazyMotion} from 'framer-motion'
 import f from "../../../lib/features"
 import { useRouter } from "next/router";
+import Image from 'next/image'
+
+
 
 const  MyDrawer = () => {
 
@@ -50,10 +52,23 @@ const  MyDrawer = () => {
         <DrawerContent offset="3" rounded="0"    >
 
       
-          <DrawerHeader  p={3}  >
-              <Flex justifyContent={"flex-end"} p={0} m={0} >
-                <DrawerCloseTrigger    variant="solid" p={4}  colorPalette="" position={"unset"}   color={"#fff"} borderRadius={3}   />
-              </Flex>
+          <DrawerHeader  p={0}  >
+
+
+                <DrawerCloseTrigger    variant="solid" p={0} m={0} colorPalette=""   color={"#fff"}   />
+               
+
+          
+                <Flex gap={3} alignItems={"center"} p={2} >
+                <Image    height={30} width={45} src={session?.user?.image } alt="" style={{borderRadius:4}} />
+                <Heading >{session?.user?.name ?? "" }</Heading>
+               </Flex>
+
+               
+
+  
+              
+              
             </DrawerHeader>
 
 
@@ -69,13 +84,14 @@ const  MyDrawer = () => {
                            PropsOnClick={()=>{ session? router.push("/profile") : signIn(undefined,{callbackUrl:"/profile"})   }}
                            animationIndex={1.5} 
               />
+                 <DrawerItem text={user?.Vendor?.isVendor ?  "ניהול לקוחות" : "הרשמה כנותן שירות "} Icon={<FcCustomerSupport size={"2em"}/> }  PropsOnClick={()=>{router.push("/vendor") }} animationIndex="2.3"  />
 
               { user?.Vendor?.isVendor &&
-              <>
-                 <DrawerItem text={"ניהול לקוחות"} Icon={<FcCustomerSupport size={"2em"}/> }  PropsOnClick={()=>{router.push("/vendor") }} animationIndex="2.3"  />
-                 <DrawerItem text={"לוח"} Icon={<FcViewDetails size={"2em"}/>} PropsOnClick={()=>router.push("/bord")} animationIndex="1.9"  /> 
-                 </> 
+              
+                 <DrawerItem text={" לוח לקוחות "} Icon={<FcViewDetails size={"2em"}/>} PropsOnClick={()=>router.push("/bord")} animationIndex="1.9"  /> 
+                 
                  }
+
           </DrawerBody>
 
           <DrawerFooter>

@@ -13,7 +13,6 @@ import { useEffect , useContext, useState } from 'react';
 import Image from "next/image";
 
 
-
 const Menu = () => {
 
   const { data: session ,status } = useSession()
@@ -30,35 +29,12 @@ const Menu = () => {
      return ( 
       <Flex justifyContent={"center"}>
         <Container p={0} m={0}>
-          <Flex mb={3}   background={Colors.d}  boxShadow={ "0px 10px 26px rgba(0, 0, 0, 0.5)"} p={2}  >
+          <Flex mb={3}   background={Colors.d}  boxShadow={ "0px 10px 26px rgba(0, 0, 0, 0.5)"}  p={2}  >
            <Flex width={"40%"}   alignItems={"center"} justifyContent={"center"}  >
                   <Container p={0} m={2}><GiVacuumCleaner  size={"3em"}  color={"black"}/></Container>
                   <Flex  alignItems={"center"}  justifyContent={"space-evenly"} >
 
-        <Flex  justifyContent={"flex-end"} >
-
-            <Image 
-            style={{
-              border:` dotted 3px ${Colors.d}`,
-              borderRadius:"18px" ,
-              objectFit:"cover",
-              margin:"10px",
-              padding:"10px"
-              }}
-              height={0}
-              width={120}
-              src={session?.user?.image } alt="" 
-            />
-
-        </Flex>
-
-
-          <Flex fontWeight={"bolder"} direction={"column"}   fontSize={!sm? "small" :"larger"} >
-           <Heading fontSize={xs && xxs ? "2xl":'4xl' } color={Colors.d} >{session?.user?.name.toUpperCase() ?? "אלמוני" }</Heading>
-           <Text   >{session?.user?.email.toLocaleUpperCase() }</Text>
-           <Text  >אימייל מאומת : {session?.user?.emailVerified ? "כן" :" לא"}</Text>
-          </Flex>
-
+       <UserInfo/>
         </Flex>
            </Flex>
         
@@ -172,6 +148,33 @@ const Menu = () => {
   )
 }
 export default Menu
+
+const UserInfo = ()=>{
+
+  const { data: session ,status } = useSession()
+  const {user , isLoading , isError} = useUser(session?.user?.email)
+  const { xxl,xl,lg,md,sm,xs,xxs } = useContext(WindowWidthContext);
+
+  return (    
+        <>
+        {session  &&
+          <>
+          <Image   style={{ border:` dotted 3px ${Colors.d}`,  marginLeft:30}} height={40} width={65} src={session?.user?.image } alt=""  />
+
+          <Flex fontWeight={"bolder"} justifyItems={"center"}   fontSize={!sm? "small" :"larger"} >
+
+                <Flex  direction={"column"}>
+                 <Heading >{session?.user?.name.toUpperCase() ?? "אלמוני" }</Heading>
+                 <Text fontSize={"md"} >{session?.user?.email.toLocaleUpperCase() }</Text>
+                 <Text  fontSize={"md"}  >אימייל מאומת : {session?.user?.emailVerified ? "כן" :" לא"}</Text>
+                </Flex>
+          </Flex>
+          </>
+     }
+     </>
+
+  )
+}
 
 
 

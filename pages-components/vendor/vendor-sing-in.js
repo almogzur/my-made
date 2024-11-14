@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import Colors from '../../lib/colors';
 import useUser from '../../lib/hooks/useUser';
@@ -6,6 +6,7 @@ import LoadingSpinner from "../../components/my-spinner/loading-spinner";
 import { FaPenFancy } from "react-icons/fa";
 import { Input, Textarea, Container, Button, Flex, Heading } from "@chakra-ui/react";
 import { Field } from "../../components/ui/field";
+import { WindowWidthContext } from "../../context";
 
 const descriptionPlaceholder = 
 ` דוגמה : המחיר הוא עבור 1 2 3  
@@ -16,11 +17,11 @@ const descriptionPlaceholder =
 const VendorSingin = ({ setEdit, edit }) => {
   const { data: session, status } = useSession();
   const { user, isLoading, isError, updateUser } = useUser(session?.user?.email);
+  const { xxl,xl,lg,md,sm,xs,xxs} = useContext(WindowWidthContext);
 
   const [formData, setFormData] = useState({
     name: user?.name || "",
     phone: user?.phone || "",
-    description: user?.description || "",
   });
 
   const [isFetching, setIsFetching] = useState(false);
@@ -64,15 +65,16 @@ const VendorSingin = ({ setEdit, edit }) => {
     return <LoadingSpinner />;
   }
 
-  return (
-    <Flex p={4} boxShadow={  '0 8px 16px rgba(0, 0, 0, 1)'  } background={"gray.200"} direction={"column"} justifyContent={"center"} alignContent={'center'}>
+  return (  
+    <Flex justifyContent={"center"}>
+    <Container fontWeight={"bold"} p={0}  m={0} >
+    <Flex p={4}  direction={"column"} justifyContent={"center"} alignContent={'center'}>
       <form onSubmit={handleSubmit}>
-        <Heading fontSize={"3xl"} p={4} color={Colors.c} textAlign={"center"}>
-          {`הרשם למערכת `}
-        </Heading>
 
-        <Container maxWidth={"700px"}>
-          <Field p={1} label="שם" required helperText="תופיע במערכת בשם זה">
+        <Container maxWidth={"700px"} boxShadow={  '0 8px 16px rgba(0, 0, 0, 1)'   } p={3} >
+        <Heading fontSize={!xs?"xl":"3xl"} p={4} color={Colors.c} textAlign={"center"}>הרשם למערכת ההזמנות כנותן שירות </Heading>
+
+          <Field p={1} label="שם"  required helperText="תופיע במערכת בשם זה">
             <Input
               variant={"subtle"}
               required
@@ -82,28 +84,19 @@ const VendorSingin = ({ setEdit, edit }) => {
             />
           </Field>
 
-          <Field p={1} label="טלפון" required helperText="יוצג ללקוח רק לאחר הסכמה">
+          <Field p={1} label="טלפון" required helperText="יוצג ללקוח רק לאחר  ">
             <Input
               variant={"subtle"}
-              type="number"
+              type="tel"
               required
               value={formData.phone}
               id="phone"
               onChange={handleChange}
+              pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+
             />
           </Field>
 
-          <Field p={1} label="תיאור">
-            <Textarea
-              id="description"
-              value={formData.description}
-              onChange={handleChange}
-              placeholder={descriptionPlaceholder}
-              resize="none"
-              variant={"subtle"}
-              rows={3}
-            />
-          </Field>
 
           <Flex justifyContent={"center"}>
             <Button bg={Colors.d} m={4} type="submit">
@@ -112,6 +105,8 @@ const VendorSingin = ({ setEdit, edit }) => {
           </Flex>
         </Container>
       </form>
+    </Flex>
+    </Container>
     </Flex>
   );
 };

@@ -59,16 +59,15 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                 m={sm && md?  3 : 2}
                 p={0}
                 bg="white"
-                initial={{ x: 300, opacity: 0, height: 0 }}
-                animate={{ x: 0, opacity: 1, height: 'auto' }}
+                initial={{  opacity: 0, height: 0 }}
+                animate={{  opacity: 1, height: 'auto' }}
                 transition={{
-                  x: { duration: (itemIndex + 3) / 3 },
-                  opacity: { duration: 0.2 },
+                  opacity: { duration: 1 },
                   height: { duration: (itemIndex + 1) / 3, type: 'spring' },
                   }}
                  exit={{opacity:0, x:-300}}
              >    
-              <Card.Body p={1} m={0}>
+                 <Card.Body p={1} m={0}>
           
                     <Card.Title color={Colors.c}  fontSize="2xl" fontWeight="bold">  {order?.name || 'לא זמין'}</Card.Title>
                     <Text fontSize="md">כתובת: {order?.address || 'לא זמין'}</Text>

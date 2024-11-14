@@ -35,7 +35,7 @@ const BoardTools=({
   return (
     <motion.div  >
   
-        <Flex   bg={"gray.200"}  direction={"column"}  boxShadow={'0 8px 16px rgba(0, 0, 0, 1)'}>
+        <Flex     direction={"column"}  boxShadow={'0 8px 16px rgba(0, 0, 0, 1)'}>
          <Heading fontSize={"3xl"} p={4} fontWeight={"bold"} textAlign={"center"}  color={Colors.c}> סינן עבדוה לפי </Heading>
 
 

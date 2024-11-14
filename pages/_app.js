@@ -11,6 +11,7 @@ import {  StrictMode , useState } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import { ChakraProvider, defaultSystem } from "@chakra-ui/react"
 import { WindowWidthContext, StateContext,   FilterCityContext  } from '../context'
+import { LocaleProvider, useLocaleContext } from "@chakra-ui/react"
 
 
 

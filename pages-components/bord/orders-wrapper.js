@@ -44,7 +44,6 @@ const OrdersWrapper=({ Mode })=>{
             m={0} 
             flexWrap={"wrap"} 
             justifyContent={"space-around"} 
-            background={'gray.200'}
             minHeight={"600px"}
             boxShadow={'0 8px 16px rgba(0, 0, 0, 1)'}
 

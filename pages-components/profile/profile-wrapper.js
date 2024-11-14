@@ -1,8 +1,8 @@
-import {  Badge, Button, Container, Flex, Heading, Text ,Box } from '@chakra-ui/react';
+import {  Badge, Button, Container, Flex, Heading, Text ,Box , Stack } from '@chakra-ui/react';
 import { List } from "@chakra-ui/react"
 
 import BadgeStatus from '../../components/badge_status';
-import { motion , AnimatePresence } from 'framer-motion';
+import { motion , AnimatePresence, color } from 'framer-motion';
 import { BiSolidMessageAdd } from "react-icons/bi";
 import { WindowWidthContext } from '../../context';
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
@@ -10,16 +10,11 @@ import NewOrder from './profile-new-order';
 import Colors from '../../lib/colors';
 import useUser from '../../lib/hooks/useUser';
 import { useSession } from 'next-auth/react';
-import { useContext, useState, Fragment } from 'react';
+import { useContext, useState } from 'react';
 import { DialogActionTrigger,DialogBody,DialogCloseTrigger,DialogContent,DialogFooter,DialogHeader,DialogRoot,DialogTitle,DialogTrigger } from "../../components/ui/dialog"
 
-import {
-  PopoverArrow,
-  PopoverBody,
-  PopoverContent,
-  PopoverRoot,
-  PopoverTrigger,
-} from "../../components/ui/popover"
+import Popover from '../../components/popover'
+
 
   const badge_h = "40px" 
   const badge_w = "60px"
@@ -61,41 +56,45 @@ const ProfileOrders = () => {
     return <LoadingSpinner />;
   }
 
-  return  <motion.div { ...animate} style={{fontWeight:"bold" ,  }} >
+  return  <motion.div { ...animate} style={{fontWeight:"bold" , paddingBottom:"100px" }} >
 
             <Container p={2}  >
                 <OrderInfoText/>
-                  {combinedOrders.map((order, index) => <DataRow order={order} index={index}  key={order._id + index + "DataRow"} />)}
                 <NewOrderDialg/>
+                <OrderExmp/>
+                  {combinedOrders.map((order, index) => <DataRow order={order} index={index}  key={order._id + index + "DataRow"} />)}
             </Container>
          </motion.div>
   
 };
 
 const OrderInfoText = ()=>{
-  return <>
-      <Container p={5} mb={2}>
-        <Heading  textAlign={"center"} p={2}  color={Colors.d} fontSize={"3xl"}>ההזמנות  שלי </Heading> 
-        <Heading fontWeight={400} textAlign={"center"} p={2}>במסך זה ניתן ליראות לפתוח הזמנות חשדשות </Heading> 
-        <Heading fontWeight={400} textAlign={"center"} p={2} > להיות במעקב וליצות קשר עם נותן השירות   </Heading>
-     </Container>
+  return <Container p={2} >
+           <Container p={5} mb={2}>
+             <Heading   p={2}   fontSize={"3xl"}>  ההזמנות שלי </Heading> 
+             <Stack>
+             <Heading  size="md" m={2}>פעולות </Heading>
+             <Text fontWeight={400}  p={0.5}> ניתן ליראות לפתוח הזמנות חדשות </Text> 
+             <Text fontWeight={400}  p={0.5} > להיות במעקב וליצות קשר עם נותן השירות   </Text>
+             </Stack>
+           </Container>
 
-
-           <Flex >
+            <Heading>סטטוס הזמנה </Heading>
+           <Flex p={4} >
             <List.Root  mb={4} gap="2" variant="plain"  align="start"  >
 
              <List.Item>
               <List.Indicator asChild >
               <Badge colorPalette={"green"} w={badge_w} h={badge_h}  textAlign={"center"}>חדשה</Badge> 
               </List.Indicator>
-              <Text > הזמנהה בסטטוס חדשה ו מופיע בלוח </Text>  
+              <Text > הזמנהה  חדשה ו מופיע בלוח </Text>  
              </List.Item>
 
             <List.Item>
              <List.Indicator asChild >
              <Badge h={badge_h} w={badge_w} colorPalette={"orange"} textAlign={"center"}>טיפול</Badge>
              </List.Indicator>
-             <Text>  ההזמנה בסטטוס נלקחה ע״י נותן שירות ועודנה בפרטיו</Text>
+             <Text>  ההזמנה  נלקחה ע״י נותן שירות ועודנה בפרטיו</Text>
             </List.Item>
 
           <List.Item>
@@ -106,16 +105,17 @@ const OrderInfoText = ()=>{
             </List.Item>
 
         </List.Root>
-      </Flex>
- </>
+           </Flex>
+ </Container>
 }
 
 const OrderExmp=()=>{
   return (
     <Flex>
-      <Container   p={0} mb={3} boxShadow={'0 4px 8px rgba(0, 0, 0, 1)'} >
+    
+      <Container   p={0} mb={3} boxShadow={'0 4px 8px rgba(0, 0, 0, 1)'} maxWidth={"1000px"} >
       <Flex  
-           bg={"gray.400"} 
+           bg={"gray.300"} 
            justifyContent={"space-around"}  
            alignItems={"center"}  
            height={"60px"}
@@ -145,29 +145,30 @@ const DataRow = ({order , index})=>{
 
     const orderDetails = [
   { title: "מזמין", value: order.name  },
-  { title: "מחיר לשעה", value: order.price || na},
-  { title : "משעה", value:order.hour},
-  { title : "עד שעה", value:order.tooHour},
+  { title : "שעת הגעה מבוקשת", value:order.hour},
   { title: "תאריך ", value: order.date ? new Date(order.date).toLocaleString('he-IL').slice(0,10)  : na },
   { title: "כתובת", value: order.address || na },
-  { title: "תיאור", value: order.jobDescription || na },
-  { title: "עודכנה ב", value: order.updateAt ? new Date(order.updateAt).toLocaleString('he-IL') : na },
+  { title: "עודכנה ב", value: order.updateAt ? new Date(order.updateAt).toLocaleString('he-IL') : "ללא עדכונים " },
   { title: "עיר" , value: order.city || na},
+  { title: "שעתון ", value: order.price || na},
+  { title: "בקשות", value: order.jobDescription || na },
 
    ]
     const combinedDetails = order.status === "inProcess" ? orderDetails.concat(vendorInfo) : orderDetails;
 
-    return (    
-       <Container  m={0} p={0} >   
+    const longTail = new Date(order.date).toLocaleString('he-IL')
+    const midTail = longTail.slice(0,10)
+    const shortTail = longTail.slice(0,5)
 
-           <OrderExmp/>
-
-          <Flex  boxShadow={'0 2px 6px rgba(0, 0, 0, 1)'} borderRadius={3} justifyContent={"space-around"}  alignItems={"center"}  bg={"#fff"} height={"60px"}>     
+    return (  
+      <Flex justifyContent={"center"} >
+       <Container  m={0} p={0} maxWidth={"1000px"} >   
+          <Flex  boxShadow={'0 2px 6px rgba(0, 0, 0, 1)'} borderRadius={3} justifyContent={"space-around"}  alignItems={"center"}  bg={"#fff"} height={"60px"} mb={2} >     
    
            <BadgeStatus key={order.status + order._id} textStyle={xxs && xs ? "sm" :null } status={order.status}/>
-            <Text  fontSize={!xs? 13 : 15} key={order.data} >{new Date(order.date).toLocaleString("he-IL").slice(0,10).slice(0,5)|| ""}</Text>
+            <Text  fontSize={!xs? 13 : 15} key={order.data} >{!xs? shortTail :midTail  || ""}</Text>
               {/* resurve closeing option dataPop  */}
-            <Popover open={infoPop} setOpen={setInfoPopup} openTrigerText={"פרטים"}  key={order._id + index + 'popup1'} position={{placement: "top-start"}}> 
+            <Popover open={infoPop} setOpen={setInfoPopup} openTrigerText={"פרטים"}  key={order._id + index + 'popup1'} position={{placement: "top-start"}} btnsStyleProps={{bg:Colors.a,color:"black"}} > 
                 {combinedDetails.map(( {title , value ,flag} , index ) => (
                 
                 <Flex      key={order._id+ index +"list"}  justifyContent={"space-between"} p={0.5} style={{direction:"rtl"}} >
@@ -187,36 +188,38 @@ const DataRow = ({order , index})=>{
             </Popover>
 
                 {/*  close popup in responce.ok using need state controol */}
-            <Popover open={editPop} setOpen={setEditPopup} openTrigerText={"עדכון"} key={order._id + index + 'popup2'}  position={{  offset: { crossAxis: 0, mainAxis: -50 }  }
-            } >
+            <Popover open={editPop} setOpen={setEditPopup} openTrigerText={"עדכון"} key={order._id + index + 'popup2'}  position={{  offset: { crossAxis: 0, mainAxis: -50 }}}   btnsStyleProps={{bg:Colors.a,color:"black"}} >
               <NewOrder setPerent={setEditPopup} id={order._id} />
            </Popover>
 
-  {/* <Button colorPalette={"red"} onClick={(e) => handleRemoveOrder(e,order._id)}>
+     {/* <Button colorPalette={"red"} onClick={(e) => handleRemoveOrder(e,order._id)}>
         {isRemoving ? 'מוחק...' : 'מחק'}
       </Button>  */}
          </Flex>
       </Container>
+      </Flex>  
     )
 
 }
 
-const NewOrderDialg =()=>{
+const NewOrderDialg =( )=>{
         const [open ,setOpen] = useState(false)
-        
+        const { xxl,xl,lg,md,sm,xs,xxs} = useContext(WindowWidthContext);
+
   return  <Flex p={4} justifyContent={"center"}  >
-       <DialogRoot open={open} >
+
+       <DialogRoot open={open}   >
 
          <DialogTrigger asChild >
-           <Button variant="solid" onClick={()=>setOpen(true)} bg={Colors.d} size="lg" color={"black"} fontWeight={"bold"}>  {<BiSolidMessageAdd/>}{"הזמנה חדשה"} </Button>
+           <Button variant="solid" onClick={()=>setOpen(true)} bg={Colors.b} size={xs?"lg":"sm"} color={"black"} fontWeight={"bold"}>  {<BiSolidMessageAdd/>}{"הזמנה חדשה"} </Button>
          </DialogTrigger>
-          <DialogContent >
+          <DialogContent maxWidth={"430px"} >
 
 
         <DialogHeader >
         </DialogHeader>
 
-        <DialogBody  style={{direction:"rtl"}} >
+        <DialogBody  style={{direction:"rtl"}}   >
 
         <NewOrder setPerent={setOpen}  newOrder={true} />
 
@@ -224,7 +227,7 @@ const NewOrderDialg =()=>{
 
         <DialogFooter>
           <DialogActionTrigger asChild>
-        <Button onClick={()=>setOpen(false)} >סגור</Button>
+          <Button onClick={()=>setOpen(false)} >סגור</Button>
         </DialogActionTrigger>
 
         </DialogFooter>
@@ -238,28 +241,7 @@ const NewOrderDialg =()=>{
      </Flex>
 }
 
-const Popover = ({children, headline ,openTrigerText, position , open ,setOpen  })=>{
-  const { xxl,xl,lg,md,sm,xs,xxs} = useContext(WindowWidthContext);
-  return (
-    <PopoverRoot  h={badge_h} w={badge_w}  open={open} onOpenChange={(e)  => setOpen(e.open)  } positioning={position? position : {}}>
-       <PopoverTrigger asChild>
-         <Button  fontWeight={"bold"}  variant={"outline"}    p={2} size="sm"   >{openTrigerText} </Button>
-       </PopoverTrigger>
 
-        <PopoverContent portalled={open}>
-        <PopoverArrow />
-         <PopoverBody > 
-            <Heading textAlign={"center"}>{headline}</Heading>
-             {children}
-             <Button variant={"outline"} colorPalette={"gray"} onClick={()=>setOpen(false)} > סגור   </Button>
-        </PopoverBody>
-       </PopoverContent>
-
-
-    </PopoverRoot>
-  )
-
-}
 
 
 export default ProfileOrders

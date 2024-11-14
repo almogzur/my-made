@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
     
     
-     if ( order.ownerId === Vendor_info._id ) {
+     if ( order.ownerId.toString() === Vendor_info._id.toString() ) {
        return res.status(400).json({ message: "לקוח שפותח הזמנה לא יכול למשוך אותה בתור משק" });
      }
 

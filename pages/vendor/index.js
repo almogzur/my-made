@@ -18,6 +18,12 @@ const VendorPage=()=>{
 
   const Vendor = user?.Vendor?.isVendor  
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/");
+    }
+  }, [status, router]);
+
 
     if (status === 'loading') {
 

@@ -33,13 +33,19 @@ body{
     height :40px;
     border-radius:6px;
     background:#f4f4f5;
-
+    width:inherit;
     padding:10px; 
     font-size:14px;
-    width:inherit   
-    
-    
+
 }
+
+@media (max-width: 320px) {
+    .order-cal{
+        width:inherit
+    }
+  }
+
+  
 
 
 

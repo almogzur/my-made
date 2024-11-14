@@ -25,7 +25,7 @@ const HowThisWorks = () => {
       <Flex justifyContent={"space-around"} >
          <Container p={0} m={0} height={"40%"} >
 
-            <Text fontSize={"4xl"} textAlign={"center"}  >{HeasLine}</Text>
+            <Text fontSize={"4xl"} fontWeight={"bolder"} p={4} textAlign={"center"}  >{HeasLine}</Text>
             
             <Flex flexWrap={"wrap"} justifyContent={"space-around"} >
                 {Object.values(CopyText)

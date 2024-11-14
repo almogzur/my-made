@@ -20,22 +20,32 @@ const Menu = () => {
 
  const isVendor =   user?.Vendor?.isVendor
  //{text :,Icon:<FcButtingIn size={"2em"}/>, href:"profile"},
-     const routr = useRouter()
-     const pathName = routr.pathname
+     const router = useRouter()
+     const pathName = router.pathname
      const { xxl,xl,lg,md,sm,xs,xxs } = useContext(WindowWidthContext);
+
+     
 
      
 
      return ( 
       <Flex justifyContent={"center"}>
         <Container p={0} m={0}>
-          <Flex mb={3}   background={Colors.d}  boxShadow={ "0px 10px 26px rgba(0, 0, 0, 0.5)"}  p={2}  >
+          <Flex 
+            mb={3}   
+            background={router.pathname === "/profile" ? Colors.b: Colors.d}  
+            boxShadow={ "0px 10px 26px rgba(0, 0, 0, 0.5)"}  
+            p={2}
+              >
+              
            <Flex width={"40%"}   alignItems={"center"} justifyContent={"center"}  >
-                  <Container p={0} m={2}><GiVacuumCleaner  size={"3em"}  color={"black"}/></Container>
-                  <Flex  alignItems={"center"}  justifyContent={"space-evenly"} >
+                  <Container p={0} m={2}>
+                     <GiVacuumCleaner  size={"3em"}  color={"black"}/>
+                  </Container>
 
-       <UserInfo/>
-        </Flex>
+      
+                  <UserInfo/>
+              
            </Flex>
         
           <Flex  width={"60%"}  justifyContent={"end"} alignItems={"center"}  >
@@ -70,7 +80,7 @@ const Menu = () => {
                  width={"120px"}
                  fontWeight={600}
                  justifyContent={"space-around"}
-                 onClick={()=> session? routr.push("/profile"): signIn(undefined, { callbackUrl: '/profile' }) }
+                 onClick={()=> session? router.push("/profile"): signIn(undefined, { callbackUrl: '/profile' }) }
 
 
 
@@ -159,14 +169,13 @@ const UserInfo = ()=>{
         <>
         {session  &&
           <>
-          <Image   style={{ border:` dotted 3px ${Colors.d}`,  marginLeft:30}} height={40} width={65} src={session?.user?.image } alt=""  />
+          <Image   style={{ border:` dotted 3px ${Colors.d}`,  marginLeft:30}} height={40} width={75} src={session?.user?.image } alt=""  />
 
           <Flex fontWeight={"bolder"} justifyItems={"center"}   fontSize={!sm? "small" :"larger"} >
 
                 <Flex  direction={"column"}>
                  <Heading >{session?.user?.name.toUpperCase() ?? "אלמוני" }</Heading>
                  <Text fontSize={"md"} >{session?.user?.email.toLocaleUpperCase() }</Text>
-                 <Text  fontSize={"md"}  >אימייל מאומת : {session?.user?.emailVerified ? "כן" :" לא"}</Text>
                 </Flex>
           </Flex>
           </>

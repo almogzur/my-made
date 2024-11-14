@@ -25,21 +25,26 @@ function  MainSection() {
   
   return (
       <LazyMotion features={f}>
-        <m.div  initial={{x:-300}} animate={{x:0}} transition={{ease: "easeOut", duration: 2 ,stiffness:100 }}  >
+        <m.div  initial={{height:0 , opacity:0}} animate={{height:"auto" , opacity:1}} transition={{
+          height:{ duration:4, type:"spring", stiffness:10 },
+           opacity:{     duration: 6  }
+          }
+          }  >
 
-           <Container maxWidth={"900px"}>
-            
-           <Heading 
+        <Heading 
             textAlign={"center"} 
-            fontSize={!xs?"2xl":!md?"4xl":"5xl"} 
-            fontWeight={300} 
-            p={!xs? 1 : !md? 5 : 6} 
-            m={1} 
-            lineHeight={!xs?1:!md?2:2} 
+            fontSize={!xs?"2xl":"5xl"} 
+            fontWeight={"bolder"} 
+            p={2}
+            lineHeight={"normal"}
              >
               {"צריכים עוזר\ת בית ? הרשמו עכשיו !! תיאום קל ופשוט."}
             </Heading>
 
+
+           <Container maxWidth={"900px"}>
+            
+          
         
            <StyledImage 
               Images={ PhotosMd } 

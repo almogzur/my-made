@@ -43,8 +43,8 @@ const  MyDrawer = () => {
 
         {/** open btn */}
          <DrawerTrigger asChild  width={"60px"} height={"inherit"} p={2} mr={"2px"}>
-
-                <BsArrowBarLeft  color={Colors.b} />
+         
+                <BsArrowBarLeft  color={router.pathname === "/profile" ? "": Colors.a} />
           
          </DrawerTrigger>
 

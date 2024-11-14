@@ -15,7 +15,7 @@ const Card = ({text,IconEl  }) => {
        <Flex 
           p={4} 
           m={4}
-          height={"500px"} 
+          height={"400px"} 
           width={"280px"} 
           direction={"column"} 
           justifyContent={"center"} 

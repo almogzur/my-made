@@ -9,21 +9,21 @@ import {
   DrawerRoot,
   DrawerTitle,
   DrawerTrigger,
-} from "../../../components/ui/drawer"
+} from "../../components/ui/drawer"
 import { For, Heading , Flex ,Button ,Container } from "@chakra-ui/react";
 import { BsArrowBarLeft } from "react-icons/bs";
 import { BsArrowBarRight } from "react-icons/bs";
-import Colors from "../../../lib/colors";
+import Colors from "../../lib/colors";
 import DrawerItem from './drawer-item'
 import { FcButtingIn , FcCustomerSupport } from "react-icons/fc";
 
 import {   FcViewDetails, FcPlus , FcHome, FcCancel } from "react-icons/fc";
 import { signOut ,signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
-import useUser from '../../../lib/hooks/useUser'
+import useUser from '../../lib/hooks/useUser'
 
 import {m,LazyMotion} from 'framer-motion'
-import f from "../../../lib/features"
+import f from "../../lib/features"
 import { useRouter } from "next/router";
 import Image from 'next/image'
 

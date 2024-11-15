@@ -57,13 +57,18 @@ const ProfileOrders = () => {
   }
 
   return  <motion.div { ...animate} style={{fontWeight:"bold" , paddingBottom:"100px" }} >
-
-            <Container p={2}  >
+      
+            <Container p={3}  >
                 <OrderInfoText/>
-                <NewOrderDialg/>
+                <NewOrderDialg btnsStyle={ { variant:"solid",  bg:Colors.b , size:xs?"lg":"sm" , color:"black", fontWeight:"bold" } } />
                 <OrderExmp/>
-                  {combinedOrders.map((order, index) => <DataRow order={order} index={index}  key={order._id + index + "DataRow"} />)}
+                  {combinedOrders.map((order, index) => 
+                     <DataRow order={order} index={index}  key={order._id + index + "DataRow"} />
+                  )}
+       
+     
             </Container>
+
          </motion.div>
   
 };
@@ -111,7 +116,7 @@ const OrderInfoText = ()=>{
 
 const OrderExmp=()=>{
   return (
-    <Flex>
+
     
       <Container   p={0} mb={3} boxShadow={'0 4px 8px rgba(0, 0, 0, 1)'} maxWidth={"1000px"} >
       <Flex  
@@ -127,7 +132,7 @@ const OrderExmp=()=>{
 
     </Flex>
       </Container>
-   </Flex>
+
   )
 }
 
@@ -162,16 +167,32 @@ const DataRow = ({order , index})=>{
 
     return (  
       <Flex justifyContent={"center"} >
-       <Container  m={0} p={0} maxWidth={"1000px"} >   
-          <Flex  boxShadow={'0 2px 6px rgba(0, 0, 0, 1)'} borderRadius={3} justifyContent={"space-around"}  alignItems={"center"}  bg={"#fff"} height={"60px"} mb={2} >     
-   
-           <BadgeStatus key={order.status + order._id} textStyle={xxs && xs ? "sm" :null } status={order.status}/>
-            <Text  fontSize={!xs? 13 : 15} key={order.data} >{!xs? shortTail :midTail  || ""}</Text>
-              {/* resurve closeing option dataPop  */}
-            <Popover open={infoPop} setOpen={setInfoPopup} openTrigerText={"פרטים"}  key={order._id + index + 'popup1'} position={{placement: "top-start"}} btnsStyleProps={{bg:Colors.a,color:"black"}} > 
+               
+       <Flex   
+             boxShadow={'0 2px 6px rgba(0, 0, 0, 1)'} 
+              justifyContent={"space-around"}  
+              alignItems={"center"}  
+              bg={"#fff"} 
+              height={"60px"} 
+              basis={"100%"}
+              m={1}
+              
+              >
+
+             <BadgeStatus key={order.status + order._id} textStyle={xxs && xs ? "sm" :null } status={order.status}/>
+             <Text  fontSize={!xs? 13 : 15} key={order.data} >{!xs? shortTail :midTail  || ""}</Text>
+     
+             <Popover 
+                  key={order._id + index + 'popup1'} 
+                  open={infoPop} 
+                  setOpen={setInfoPopup} 
+                  openTrigerText={"פרטים"}  
+                  position={{placement: "top-start"}} 
+                  btnsStyle={{variant:"outline"}}
+                   > 
                 {combinedDetails.map(( {title , value ,flag} , index ) => (
                 
-                <Flex      key={order._id+ index +"list"}  justifyContent={"space-between"} p={0.5} style={{direction:"rtl"}} >
+                   <Flex      key={order._id+ index +"list"}  justifyContent={"space-between"} p={0.5} style={{direction:"rtl"}} >
                    { flag? 
                        <Flex  key={ order._id + index + "badges" }>    
                          <Badge   key={ order._id + title } colorPalette={"orange"}>{title}</Badge>
@@ -183,35 +204,43 @@ const DataRow = ({order , index})=>{
                           <Text  fontWeight={"bold"} key={order._id + value? value : index + "mising render value" + title } >{value}</Text>
                      </Flex>
                 }                        
-               </Flex>
+                  </Flex>
                 ))}
+                
             </Popover>
 
-                {/*  close popup in responce.ok using need state controol */}
-            <Popover open={editPop} setOpen={setEditPopup} openTrigerText={"עדכון"} key={order._id + index + 'popup2'}  position={{  offset: { crossAxis: 0, mainAxis: -50 }}}   btnsStyleProps={{bg:Colors.a,color:"black"}} >
-              <NewOrder setPerent={setEditPopup} id={order._id} />
+            <Popover 
+               key={order._id + index + 'popup2'} 
+               open={editPop} 
+               setOpen={setEditPopup} 
+               openTrigerText={"עדכון"} 
+               position={{placement:"top"}}   
+               btnsStyle={{variant:"outline"}} 
+               >
+              <NewOrder setPerent={setEditPopup} id={order._id} submitBtnStyle={{bg:Colors.a,color:"black"}}  />
            </Popover>
-
+      </Flex>
      {/* <Button colorPalette={"red"} onClick={(e) => handleRemoveOrder(e,order._id)}>
         {isRemoving ? 'מוחק...' : 'מחק'}
       </Button>  */}
-         </Flex>
-      </Container>
-      </Flex>  
+
+
+     </Flex>
+
     )
 
 }
 
-const NewOrderDialg =( )=>{
+const NewOrderDialg =({btnsStyle})=>{
         const [open ,setOpen] = useState(false)
         const { xxl,xl,lg,md,sm,xs,xxs} = useContext(WindowWidthContext);
 
-  return  <Flex p={4} justifyContent={"center"}  >
+    return  <Flex p={4} justifyContent={"center"}  >
 
        <DialogRoot open={open}   >
 
          <DialogTrigger asChild >
-           <Button variant="solid" onClick={()=>setOpen(true)} bg={Colors.b} size={xs?"lg":"sm"} color={"black"} fontWeight={"bold"}>  {<BiSolidMessageAdd/>}{"הזמנה חדשה"} </Button>
+           <Button onClick={()=>setOpen(true)}  {...btnsStyle}   >  {<BiSolidMessageAdd/>}{"הזמנה חדשה"} </Button>
          </DialogTrigger>
           <DialogContent maxWidth={"430px"} >
 
@@ -221,13 +250,13 @@ const NewOrderDialg =( )=>{
 
         <DialogBody  style={{direction:"rtl"}}   >
 
-        <NewOrder setPerent={setOpen}  newOrder={true} />
+        <NewOrder setPerent={setOpen}  newOrder={true} submitBtnStyle={{...btnsStyle}} />
 
         </DialogBody>
 
         <DialogFooter>
           <DialogActionTrigger asChild>
-          <Button onClick={()=>setOpen(false)} >סגור</Button>
+          <Button {...btnsStyle} onClick={()=>setOpen(false)} >סגור</Button>
         </DialogActionTrigger>
 
         </DialogFooter>
@@ -238,7 +267,7 @@ const NewOrderDialg =( )=>{
          </DialogContent>
 
       </DialogRoot>
-     </Flex>
+            </Flex>
 }
 
 

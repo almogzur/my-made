@@ -1,6 +1,6 @@
 import Colors from "../lib/colors"
 import { GiVacuumCleaner } from "react-icons/gi";
-import MyDrawer from "./home/Drawer-components/my-drawer";
+import MyDrawer from "./Drawer-components/my-drawer";
 import {  Flex ,Text , Box, Button, Heading} from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useContext } from "react";

@@ -1,5 +1,5 @@
  import {  motion } from "framer-motion";
-import Colors from "../../../lib/colors";
+import Colors from "../../lib/colors";
 import { Flex ,Text } from "@chakra-ui/react";
 import Link from "next/link";
 

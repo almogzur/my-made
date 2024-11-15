@@ -34,7 +34,7 @@ const INITIAL_ORDER_STATE = {
   price: ''
 };
 
-const NewOrder = ({ id, newOrder, setPerent }) => {
+const NewOrder = ({ id, newOrder, setPerent , submitBtnStyle }) => {
   const { data: session, status } = useSession();
   const [state, setState] = useState(INITIAL_ORDER_STATE);
   const { user, isLoading, isError, updateUser } = useUser(session?.user?.email);
@@ -234,7 +234,7 @@ const NewOrder = ({ id, newOrder, setPerent }) => {
       </Field>
 
       <Flex justifyContent="center" mt="15px">
-        <Button type="submit">{id ? "עדכן" : "שלח הזמנה"}</Button>
+        <Button {...submitBtnStyle} type="submit" >{id ? "עדכן" : "שלח הזמנה"}</Button>
       </Flex>
     </form>
   );

@@ -21,26 +21,24 @@ const Menu = () => {
  const isVendor =   user?.Vendor?.isVendor
  //{text :,Icon:<FcButtingIn size={"2em"}/>, href:"profile"},
      const router = useRouter()
-     const pathName = router.pathname
+     const pathName= router.pathname
+     
      const { xxl,xl,lg,md,sm,xs,xxs } = useContext(WindowWidthContext);
 
      
-
-     
-
      return ( 
       <Flex justifyContent={"center"}>
         <Container p={0} m={0}>
           <Flex 
             mb={3}   
-            background={router.pathname === "/profile" ? Colors.b: Colors.d}  
+            background={pathName === "/profile" ? Colors.b: Colors.d}  
             boxShadow={ "0px 10px 26px rgba(0, 0, 0, 0.5)"}  
             p={2}
               >
               
            <Flex width={"40%"}   alignItems={"center"} justifyContent={"center"}  >
                   <Container p={0} m={2}>
-                     <GiVacuumCleaner  size={"3em"}  color={"black"}/>
+                     <GiVacuumCleaner  size={"4em"}  color={"black"}/>
                   </Container>
 
       
@@ -154,9 +152,10 @@ const Menu = () => {
 
          </Flex>
         </Container>
-        </Flex>
+      </Flex>
   )
 }
+
 export default Menu
 
 const UserInfo = ()=>{

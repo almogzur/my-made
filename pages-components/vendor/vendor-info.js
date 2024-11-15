@@ -10,6 +10,7 @@ import useUser from '../../lib/hooks/useUser';
 import { useSession } from 'next-auth/react'
 import { Flex, Container , Heading ,Box  , Text, Badge , Button, VStack, Stack } from "@chakra-ui/react";
 import { WindowWidthContext } from '../../context';
+import { DataListItem, DataListRoot } from "../../components/ui/data-list"
 
 import {
   AccordionItem,
@@ -53,7 +54,8 @@ const VendorInfo = ({  setEdit ,edit }) => {
 
                 <DemoCustomerOrder/>
 
-                <VendorActiveOrders />  
+                <ActiveOrders />  
+
                 <InfoDialog/>
 
             </Flex>
@@ -99,18 +101,16 @@ const OnBording = ()=>{
 }
 
 
-const VendorActiveOrders = () => {
+const ActiveOrders = () => {
 
   const { data: session ,status ,update} = useSession()
   const { user, isLoading, isValidating,  userError, updateUser } = useUser(session?.user?.email);
 
   const VendorOrders = user?.Vendor?.Vendor_Orders
-  
   const isVendor = user?.Vendor?.isVendor
-  const na = "לא זמין "
   
     return (
-       <motion.div 
+        <motion.div 
         initial={{opacity:0}}
         animate={{opacity:1}}
         transition={{duration:1}}
@@ -118,23 +118,10 @@ const VendorActiveOrders = () => {
          >
         <Flex  direction={"column"}>
           { Array.isArray(VendorOrders) &&
-                VendorOrders?.map((order, index) => {
-                  const Fields = [
-                     { label: "חדרים", value: order.rooms },
-                     { label: "תאריך", value: order.date.slice(0,10)},
-                     { label : "משעה", value:order.hour},
-                     { label : "עד שעה", value:order.tooHour},
-                     { label: "עיר", value: order.city },
-                     { label: "כתובת", value: order.address },
-                     { label: "אמבטיות", value: order.baths },
-                     { label: "תיאור העבודה", value: order.jobDescription },
-                     { label: "גודל", value: order.size },
-                     { label: "נוצר בתאריך", value: new Date(order.createdAt).toLocaleString('he-IL') },
-                     // update this to fisplay only if  update the order 
-                     { label: "עודכן בתאריך",  value:  order.updateAt ? new Date(order.updateAt).toLocaleString('he-IL') :   na}
-                    ];
+                VendorOrders?.map((order, index) => 
 
-            return <OrderRow  key={order._id + "vendor_order" + index } order={order} index={index}  />} )}
+           <OrderRow  key={order._id + "vendor_order" + index } order={order} index={index}  /> 
+          )}
          
         </Flex>
        </motion.div>
@@ -256,6 +243,20 @@ const OrderRow = ({order, index})=>{
     const longTail = new Date(order.date).toLocaleString('he-IL')
     const midTail = longTail.slice(0,10)
     const shortTail = longTail.slice(0,5)
+    const na = "לא זמין "
+
+
+    const Fields = [
+      { label: "חדרים", value: order.rooms },
+      {label:"טלפון " , value:order.phone},
+      { label: "תאריך", value: order.date.slice(0,10)},
+      { label : "לשעה", value:order.hour},
+      { label: "עיר", value: order.city },
+      { label: "כתובת", value: order.address },
+      { label: "בקשות", value: order.jobDescription },
+      // update this to fisplay only if  update the order 
+      { label: "עודכן בתאריך",  value:  order.updatedByUserAt ? new Date(order.updatedByUserAt).toLocaleString('he-IL') :  ""}
+     ];
 
   return  <Flex justifyContent={"center"} >
           <Container maxWidth={"1000px"}
@@ -267,23 +268,36 @@ const OrderRow = ({order, index})=>{
           
           
          >
-        <Flex justifyContent="space-around" alignItems={"center"}  fontSize={xs? "16px" : "12px"}  >
+         <Flex justifyContent="space-around" alignItems={"center"}  fontSize={xs? "16px" : "12px"} fontWeight="bold"  >
+       
+            <Text >{order.name}</Text>
+            <Text >{order.phone}</Text>
+            <Text key={order.data}> {!xs? shortTail : midTail}</Text>
+ 
+            <Popover   
+              open={open}  
+              setOpen={setOpen} 
+              openTrigerText={"פרטים"} 
+              btnsStyle={{variant:"subtle",  colorPalette:"blue", fontWeight:"bold" }} 
+              position={{placement:"top-end"}}
+              >
+               <DataList Fields={Fields}  />
+           </Popover>      
 
-            <Text fontWeight="bold"  >
-              {order.name} 
-            </Text>
-            <Text fontWeight="bold" >
-              {order.phone}
-            </Text>
-          
-            <Text fontWeight="bold" >
-            <Text   key={order.data} >{!xs? shortTail : midTail  }</Text>
-            </Text>
-            <Popover   open={open}  setOpen={setOpen} openTrigerText={"פרטים"} btnsStyleProps={{variant:"subtle",  p:!xs? 2:4 , colorPalette:"blue" }} >
-
-            </Popover>         
-        </Flex>
-
-         </Container>
          </Flex>
+         </Container>
+          </Flex>
+}
+
+const DataList = ({Fields})=>{
+      return (
+        <Flex p={4} justifyContent={"end"} fontWeight={"bold"} >
+                <DataListRoot orientation="horizontal" style={{direction:"rtl"}} size={"sm"}  >
+      {Fields.map((item) => (
+        item.value  && // only if value
+        <DataListItem key={item.label} label={item.label} value={item.value} p={0} m={0}  fontSize={"md"}  />
+      ))}
+    </DataListRoot>
+        </Flex>
+      )
 }

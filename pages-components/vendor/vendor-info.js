@@ -278,7 +278,7 @@ const OrderRow = ({order, index})=>{
               open={open}  
               setOpen={setOpen} 
               openTrigerText={"פרטים"} 
-              btnsStyle={{variant:"subtle",  colorPalette:"blue", fontWeight:"bold" }} 
+              btnsStyle={{variant:"subtle",  colorPalette:"blue", fontWeight:"bold",m:2 }} 
               position={{placement:"top-end"}}
               >
                <DataList Fields={Fields}  />
@@ -291,13 +291,17 @@ const OrderRow = ({order, index})=>{
 
 const DataList = ({Fields})=>{
       return (
-        <Flex p={4} justifyContent={"end"} fontWeight={"bold"} >
+        <>
+        <Heading textAlign={"center"} fontSize={"2xl"} >פרטי הזמנה</Heading>
+        <Flex p={4} justifyContent={"end"} fontWeight={"bold"} direction={"column"} >
+     
                 <DataListRoot orientation="horizontal" style={{direction:"rtl"}} size={"sm"}  >
       {Fields.map((item) => (
         item.value  && // only if value
-        <DataListItem key={item.label} label={item.label} value={item.value} p={0} m={0}  fontSize={"md"}  />
+        <DataListItem key={item.label} label={item.label} value={item.value} p={0} m={0}  fontSize={"sm"}  />
       ))}
     </DataListRoot>
         </Flex>
+        </>
       )
 }

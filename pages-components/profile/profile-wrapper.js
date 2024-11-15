@@ -188,15 +188,15 @@ const DataRow = ({order , index})=>{
                   setOpen={setInfoPopup} 
                   openTrigerText={"פרטים"}  
                   position={{placement: "top-start"}} 
-                  btnsStyle={{variant:"outline"}}
+                  btnsStyle={{variant:"outline",fontWeight:"bold"}}
                    > 
                 {combinedDetails.map(( {title , value ,flag} , index ) => (
                 
-                   <Flex      key={order._id+ index +"list"}  justifyContent={"space-between"} p={0.5} style={{direction:"rtl"}} >
+                     <Flex  key={order._id+ index +"list"}   p={0.5} style={{direction:"rtl"}} >
                    { flag? 
-                       <Flex  key={ order._id + index + "badges" }>    
-                         <Badge   key={ order._id + title } colorPalette={"orange"}>{title}</Badge>
-                         <Badge  key={ value? value : order._id + index + "missing render Value" } colorPalette={"orange"} >{value}</Badge>
+                       <Flex justifyContent={"space-between"} pt={0.2} basis={"100%"} key={ order._id + index + "badges" } >    
+                         <Badge  fontWeight={"bold"} p={1}  key={ order._id + title } colorPalette={"red"}>{title}</Badge>
+                         <Badge  fontWeight={"bold"} p={1}  key={ value? value : order._id + index + "missing render Value" } colorPalette={"red"} >{value}</Badge>
                       </Flex>
                       :
                       <Flex justifyContent={"space-between"} key={ order._id + index + value }  flexBasis={"100%"} >
@@ -215,9 +215,9 @@ const DataRow = ({order , index})=>{
                setOpen={setEditPopup} 
                openTrigerText={"עדכון"} 
                position={{placement:"top"}}   
-               btnsStyle={{variant:"outline"}} 
+               btnsStyle={{variant:"outline" , fontWeight:"bold"}} 
                >
-              <NewOrder setPerent={setEditPopup} id={order._id} submitBtnStyle={{bg:Colors.a,color:"black"}}  />
+              <NewOrder setPerent={setEditPopup} id={order._id} submitBtnStyle={{bg:Colors.a,color:"black",fontWeight:'bold'}}  />
            </Popover>
       </Flex>
      {/* <Button colorPalette={"red"} onClick={(e) => handleRemoveOrder(e,order._id)}>

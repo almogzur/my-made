@@ -2,7 +2,7 @@ import {  Badge, Button, Container, Flex, Heading, Text ,Box , Stack } from '@ch
 import { List } from "@chakra-ui/react"
 
 import BadgeStatus from '../../components/badge_status';
-import { motion , AnimatePresence, color } from 'framer-motion';
+import { motion , AnimatePresence, color, m } from 'framer-motion';
 import { BiSolidMessageAdd } from "react-icons/bi";
 import { WindowWidthContext } from '../../context';
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
@@ -12,6 +12,7 @@ import useUser from '../../lib/hooks/useUser';
 import { useSession } from 'next-auth/react';
 import { useContext, useState } from 'react';
 import { DialogActionTrigger,DialogBody,DialogCloseTrigger,DialogContent,DialogFooter,DialogHeader,DialogRoot,DialogTitle,DialogTrigger } from "../../components/ui/dialog"
+import { DataListItem, DataListRoot } from "../../components/ui/data-list"
 
 import Popover from '../../components/popover'
 
@@ -27,7 +28,9 @@ const ProfileOrders = () => {
   const { user, isLoading, isValidating,  userError, updateUser } = useUser(session?.user?.email);
   const [isRemoving, setIsRemoving] = useState(false);
   const { xxl,xl,lg,md,sm,xs,xxs} = useContext(WindowWidthContext);  
+
   const combinedOrders = (user?.Profile_Orders || []).concat(user?.Profile_Active_Orders || []);
+
   const animate = {
                 initial:{opacity:0},
                  animate:{opacity:1},
@@ -149,14 +152,14 @@ const DataRow = ({order , index})=>{
    ]
 
     const orderDetails = [
-  { title: "מזמין", value: order.name  },
-  { title : "שעת הגעה מבוקשת", value:order.hour},
-  { title: "תאריך ", value: order.date ? new Date(order.date).toLocaleString('he-IL').slice(0,10)  : na },
-  { title: "כתובת", value: order.address || na },
-  { title: "עודכנה ב", value: order.updateAt ? new Date(order.updateAt).toLocaleString('he-IL') : "ללא עדכונים " },
-  { title: "עיר" , value: order.city || na},
-  { title: "שעתון ", value: order.price || na},
-  { title: "בקשות", value: order.jobDescription || na },
+         { title: "מזמין", value: order.name  },
+         { title : "שעת הגעה מבוקשת", value:order.hour},
+         { title: "תאריך ", value: order.date ? new Date(order.date).toLocaleString('he-IL').slice(0,10)  : na },
+         { title: "כתובת", value: order.address || na },
+         { title: "עודכנה ב", value: order.updateAt ? new Date(order.updateAt).toLocaleString('he-IL') : "ללא עדכונים " },
+         { title: "עיר" , value: order.city || na},
+         { title: "שעתון ", value: order.price || na},
+         { title: "בקשות", value: order.jobDescription || na },
 
    ]
     const combinedDetails = order.status === "inProcess" ? orderDetails.concat(vendorInfo) : orderDetails;
@@ -165,67 +168,56 @@ const DataRow = ({order , index})=>{
     const midTail = longTail.slice(0,10)
     const shortTail = longTail.slice(0,5)
 
+  
+
     return (  
       <Flex justifyContent={"center"} >
                
        <Flex   
              boxShadow={'0 2px 6px rgba(0, 0, 0, 1)'} 
-              justifyContent={"space-around"}  
+              justifyContent={"space-around"}
               alignItems={"center"}  
               bg={"#fff"} 
-              height={"60px"} 
               basis={"100%"}
               m={1}
+              maxWidth={"1000px"}
+              
               
               >
+            
+             <BadgeStatus styleProp={{p:3, m:2}}  key={order.status + order._id} textStyle={xxs && xs ? "sm" :null } status={order.status}/>
+             <Text  fontSize={"md"} key={order.data} >{!xs? shortTail :midTail  || ""}</Text>
 
-             <BadgeStatus key={order.status + order._id} textStyle={xxs && xs ? "sm" :null } status={order.status}/>
-             <Text  fontSize={!xs? 13 : 15} key={order.data} >{!xs? shortTail :midTail  || ""}</Text>
-     
-             <Popover 
+
+              <Popover 
+                  openTrigerText={"פרטים"}  
                   key={order._id + index + 'popup1'} 
                   open={infoPop} 
                   setOpen={setInfoPopup} 
-                  openTrigerText={"פרטים"}  
                   position={{placement: "top-start"}} 
-                  btnsStyle={{variant:"outline",fontWeight:"bold"}}
+                  btnsStyle={{variant:"subtle",fontWeight:"bold",p:3, m:2,    colorPalette:order.status==="inProcess"? "orange":''    }}
                    > 
-                {combinedDetails.map(( {title , value ,flag} , index ) => (
-                
-                     <Flex  key={order._id+ index +"list"}   p={0.5} style={{direction:"rtl"}} >
-                   { flag? 
-                       <Flex justifyContent={"space-between"} pt={0.2} basis={"100%"} key={ order._id + index + "badges" } >    
-                         <Badge  fontWeight={"bold"} p={1}  key={ order._id + title } colorPalette={"red"}>{title}</Badge>
-                         <Badge  fontWeight={"bold"} p={1}  key={ value? value : order._id + index + "missing render Value" } colorPalette={"red"} >{value}</Badge>
-                      </Flex>
-                      :
-                      <Flex justifyContent={"space-between"} key={ order._id + index + value }  flexBasis={"100%"} >
-                          <Text fontWeight={"bold"} key={title}>{title}</Text>
-                          <Text  fontWeight={"bold"} key={order._id + value? value : index + "mising render value" + title } >{value}</Text>
-                     </Flex>
-                }                        
-                  </Flex>
+                   <Heading textAlign={"end"} p={2} >פרטי ההזמנה </Heading>
+                     {combinedDetails.map(( {title,value,flag} , index ) => (
+
+          
+                      <ItemList key={value+index} title={title} value={value} flag={flag} index={index}  />
+
                 ))}
                 
-            </Popover>
+             </Popover>
 
-            <Popover 
+             <Popover 
                key={order._id + index + 'popup2'} 
                open={editPop} 
                setOpen={setEditPopup} 
                openTrigerText={"עדכון"} 
-               position={{placement:"top"}}   
-               btnsStyle={{variant:"outline" , fontWeight:"bold"}} 
+               btnsStyle={{variant:"subtle" , fontWeight:"bold",p:3 , colorPalette:order.status==="inProcess"? "orange":''  }} 
                >
-              <NewOrder setPerent={setEditPopup} id={order._id} submitBtnStyle={{bg:Colors.a,color:"black",fontWeight:'bold'}}  />
-           </Popover>
+               <NewOrder setPerent={setEditPopup} id={order._id} submitBtnStyle={{fontWeight:'bold' , colorPalette:order.status==="inProcess"? "orange":'' ,variant:"subtle" } }   />
+             </Popover>
       </Flex>
-     {/* <Button colorPalette={"red"} onClick={(e) => handleRemoveOrder(e,order._id)}>
-        {isRemoving ? 'מוחק...' : 'מחק'}
-      </Button>  */}
-
-
-     </Flex>
+   </Flex>
 
     )
 
@@ -268,6 +260,18 @@ const NewOrderDialg =({btnsStyle})=>{
 
       </DialogRoot>
             </Flex>
+}
+
+const ItemList = ({title,value,flag,index})=>{
+  return (
+        
+  <DataListRoot  orientation={"horizontal"} direction={"rtl"} p={0.4}  >
+ 
+        <DataListItem  label={title} value={value} fontWeight={'bold'} color= {flag? "red":""}   />
+ 
+</DataListRoot>
+
+  )
 }
 
 

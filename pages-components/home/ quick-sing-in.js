@@ -5,7 +5,7 @@ function QuickcSingIn() {
 
 
   return (
-    <Container>
+    <Container p={0}  mt={4}>
     <Flex
      direction={"column"} 
      justifyContent={"space-around"} 
@@ -15,8 +15,8 @@ function QuickcSingIn() {
       boxShadow={'0 2px 8px rgba(0, 0, 0, 1)'}
  
        >
-        <Heading  textAlign={"center"} fontSize={"2em"} color={Colors.b} >צריך עזרה פרסם עכשיו ?!  </Heading>
-        <Button borderColor={Colors.b} variant={"outline"}  > הזמנה חדשה </Button>
+        <Heading  textAlign={"center"} fontSize={"2em"} color={Colors.b} >צריך עזרה בניקיון הבית ?  הזמן  עכשיו ! </Heading>
+        <Button borderColor={Colors.b} variant={"outline"}  > הזמנה חדשה</Button>
     </Flex>
     </Container>
     )

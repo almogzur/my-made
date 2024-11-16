@@ -1,18 +1,18 @@
 import Colors from "../../lib/colors";
-import { Badge, Box, Card, Text, Flex, Container } from "@chakra-ui/react";
+import { Badge, Box, Card, Text, Flex, Container , Heading } from "@chakra-ui/react";
 import { Button } from "../../components/ui/button";
 import { motion, AnimatePresence } from 'framer-motion';
 import { WindowWidthContext } from '../../context';
 import { useContext, useEffect } from 'react';
 import { useSession } from "next-auth/react";
 import useOrders from "../../lib/hooks/useOrders";
-import BadgeStatus from "../../components/badge_status";
+import { DataListItem, DataListRoot } from "../../components/ui/data-list"
 
 const MotionCard = motion(Card.Root);
 
 const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
 
-  const {xl,lg,md,sm} = useContext(WindowWidthContext)
+  const { xxl,xl,lg,md,sm,xs,xxs } = useContext(WindowWidthContext);
   const { data: session, status, update } = useSession();
   const {  mutateOrders } = useOrders()
 
@@ -51,34 +51,62 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
 
   const isExpanded = expandedIndex === itemIndex 
 
+  const midTail = new Date(order.date).toLocaleString('he-IL').slice(0,10)
+  const shortTail = midTail.slice(0,5)
+
+  const Fields = [
+    { label:"טלפון " , value:order.phone},
+    { label: "כתובת", value: order.address },
+    { label: "חדרים", value: order.rooms },
+    { label: "תאריך", value: midTail },
+    { label : "לשעה", value:order.hour},
+    { label: "אזור / עיר", value: order.city },
+    { label: "בקשות", value: order.jobDescription },
+    // update this to fisplay only if  update the order 
+    { label: "עודכן בתאריך",  value:  order.updatedByUserAt ? new Date(order.updatedByUserAt).toLocaleString('he-IL') :  ""},
+    { label:"שעתון" , value: order.price + " שח",  }
+   ];
+
   return (
-        <Container p={0} m={0} maxWidth={"360px"}>
-         <AnimatePresence>
-             <MotionCard        
-                boxShadow="lg"
-                m={sm && md?  3 : 2}
-                p={0}
-                bg="white"
-                initial={{  opacity: 0, height: 0 }}
-                animate={{  opacity: 1, height: 'auto' }}
-                transition={{
-                  opacity: { duration: 1 },
-                  height: { duration: (itemIndex + 1) / 3, type: 'spring' },
-                  }}
-                 exit={{opacity:0, x:-300}}
+ 
+         <AnimatePresence mode="popLayout" >
+               <MotionCard        
+                 m={0}  
+                 mb={1}
+                 boxShadow={"xl"}
+                 p={2}          
+                 initial={{  opacity: 0, height: 0 }}
+                 animate={{  opacity: 1, height: 'auto',
+                            transition:{ opacity: { duration: 1 },
+                                         height: { duration: (itemIndex ) , type: 'spring' },
+                                        }
+                         }}
+                 exit={{opacity:0, x:-300, transition:{} }}
              >    
-                 <Card.Body p={1} m={0}>
-          
-                    <Card.Title color={Colors.c}  fontSize="2xl" fontWeight="bold">  {order?.name || 'לא זמין'}</Card.Title>
-                    <Text fontSize="md">כתובת: {order?.address || 'לא זמין'}</Text>
-                    <Text>עיר : {order?.city || 'לא זמין'}</Text>
-                    <Text>תאריך הזמנה: {new Date(order?.date).toLocaleString('he-IL').slice(0,10) || "לא זמין "}</Text>
-                    <Text>טלפון: {order?.phone || 'לא זמין'}</Text>
-                    <Text color={Colors.c} fontWeight={"bold"} fontSize={'larger'} > שעתון  : {order?.orderPrice || '0'}</Text>
-          
+                <Card.Body p={2} m={0}  >
+
+                  <Flex justifyContent={"space-between"} alignItems={"center"}   >
+                    
+                     <Badge fontSize={"md"} p={4}  colorPalette={"blue"}   fontWeight={"bold"}  >  {order?.price}</Badge>
+                     <Badge  p={4} fontSize={"md"} fontWeight={"bold"} >{xs?midTail:shortTail}</Badge>    
+
+                    
+
+                      <Button
+                        onClick={() => handleExpand(itemIndex)}
+                        p={0}
+                        h={"50px"}  //  fix size to prevent layout shift when text swap 
+                        width={"60px"} // same
+                      >
+                        {isExpanded ? ' סגור' : ' פרטים'}
+                      </Button>
+
+                    
+
+                  </Flex>
       
 
-                  <AnimatePresence>
+                  <AnimatePresence mode="sync">
                    {isExpanded && (
                         <motion.div
                           initial={{ height: 0, opacity: 0 }}
@@ -89,15 +117,8 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                              opacity:{ duration: 0.5 },
                           }}    
                          >
-                          <Flex direction="column" alignItems="center">
-                          <BadgeStatus status={order.status}  />
-                         <Text fontWeight={'bold'}  >חדרים: {order?.rooms || 'לא זמין'}</Text>
-                         <Text fontWeight={'bold'}  >חדרי רחצה: {order?.baths || 'לא זמין'}</Text>
-                         <Text fontWeight={'bold'}  >תיאור עבודה: {order?.jobDescription || 'לא זמין'}</Text>
-                         <Text fontWeight={'bold'}  >שעה: {order?.hour || 'לא זמין'} - {order?.ToH || 'לא זמין'}</Text>
-                         <Text fontWeight={'bold'} >מזהה הזמנה : {order?._id.slice(0,10) +"..." || 'לא זמין'}</Text>
-
-                        <Box p={4}>
+                            <Flex direction="column"  fontWeight={"bold"} justifyContent={"space-between"}  >
+                            <DataList Fields={Fields}  headingText={"פרטי הזמנה "} />
 
                           <Button 
                             backgroundColor={Colors.c} 
@@ -109,32 +130,31 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                             <Text>קח הזמנה</Text>  
                           </Button>
 
-                        </Box>
                           </Flex>
                        </motion.div>
             )}
                   </AnimatePresence>
 
-                  <Flex direction="column" p={2}  alignItems="center">
-
-            <Button
-              colorPalette="gray"
-              variant="surface"
-              onClick={() => handleExpand(itemIndex)}
-              width={120}
-              color={Colors.c}
-              
-            >
-              {isExpanded ? ' סגור' : ' פרטים'}
-            </Button>
-
-                  </Flex>
                   
                </Card.Body>
            </MotionCard>
          </AnimatePresence>
-        </Container>
+   
   );
 };
 
 export default OrderCard;
+
+const DataList = ({Fields , size, headingText})=>{
+  return (
+      <DataListRoot p={4} size={size?? "sm"}  orientation="horizontal" style={{direction:"rtl"}}   >
+        <Heading textAlign={"center"} color={Colors.d} fontSize={"2xl"} >{headingText??""}</Heading>
+
+        { Fields.map((item) => (
+           item.value  && // only if value
+       <DataListItem  key={item.label} label={item.label} value={item.value} p={0} m={0}  fontSize={"sm"}  />
+  ))}
+      </DataListRoot>
+  
+  )
+}

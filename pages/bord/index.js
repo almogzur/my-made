@@ -6,7 +6,7 @@ import Colors from '../../lib/colors';
 import Navigation from '../../pages-components/navigation'
 import BordTools from '../../pages-components/bord/bord-tool'
 import OrdersWrapper from '../../pages-components/bord/orders-wrapper';
-import { Container, Flex } from '@chakra-ui/react';
+import { Container, Flex, Separator } from '@chakra-ui/react';
 import LoadingSpinner from '../../components/my-spinner/loading-spinner';
 
 
@@ -49,6 +49,8 @@ const BoardPage = () => {
            <Container >
              <Flex direction={"column"} gap={"20px"}  >
                     <BordTools setMode={setMode} setFilterCity={setFilterCity} setFilterPriceArray={setFilterPriceArray} />
+                    <Separator size={"lg"}/>
+
                     <OrdersWrapper  Mode={Mode} filterCity={filterCity} setFilterCity={setFilterCity} /> 
             </Flex>
          </Container>

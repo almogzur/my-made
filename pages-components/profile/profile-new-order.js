@@ -121,7 +121,7 @@ const NewOrder = ({ id, newOrder, setPerent , submitBtnStyle }) => {
           type='tel'
           id="phone"
           required
-          pattern="[0-9]{3}[0-9]{3}[0-9]{4}"
+          pattern="0[0-9]{2}[0-9]{3}[0-9]{4}|0[0-9]{2}[0-9]{3}[0-9]{3}"
           value={state.phone}
           onChange={handleChange}
           lang='he'

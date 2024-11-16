@@ -11,6 +11,7 @@ import { useSession } from 'next-auth/react'
 import { Flex, Container , Heading ,Box  , Text, Badge , Button, VStack, Stack } from "@chakra-ui/react";
 import { WindowWidthContext } from '../../context';
 import { DataListItem, DataListRoot } from "../../components/ui/data-list"
+import { GiTakeMyMoney } from "react-icons/gi";
 
 import {
   AccordionItem,
@@ -84,15 +85,16 @@ const OnBording = ()=>{
              <Flex  alignItems={"center"}   >
                 <Container>
 
-                  <Stack>
-                    <Heading fontSize={"2rem"} fontWeight={"bold"}   p={2} >   דף ניהול לקוחות </Heading>
-                    <Heading as="h2" size="md" mb={2}>פעולות </Heading>
-                   <VStack align="start" spacing={3}>
+                  
+                    <Heading fontSize={"4xl"} fontWeight={"bold"}   p={3} >   דף ניהול לקוחות </Heading>
+
+                   <VStack align="start" fontWeight={"bold"} p={4} >
+                    <Heading  size="xl" mb={2}>פעולות </Heading>
+
                      <Text>   צפייה בפרטי הזמנה תאריך שעה טלפון  ועוד. </Text> 
                      <Text>עדכונים בזמן אמת על ביצוע שינוי בפרטי הזמנה.</Text>
-                     <Text> </Text>
                    </VStack>
-                 </Stack>
+                
                 </Container>
 
              </Flex>
@@ -240,35 +242,30 @@ const OrderRow = ({order, index})=>{
     const [open,setOpen] = useState()
     const { xxl,xl,lg,md,sm,xs,xxs} = useContext(WindowWidthContext);
 
-    const longTail = new Date(order.date).toLocaleString('he-IL')
-    const midTail = longTail.slice(0,10)
-    const shortTail = longTail.slice(0,5)
+
+    const midTail = new Date(order.date).toLocaleString('he-IL').slice(0,10)
+    const shortTail = midTail.slice(0,5)
     const na = "לא זמין "
 
 
     const Fields = [
       { label: "חדרים", value: order.rooms },
       {label:"טלפון " , value:order.phone},
-      { label: "תאריך", value: order.date.slice(0,10)},
+      { label: "תאריך", value: midTail },
       { label : "לשעה", value:order.hour},
-      { label: "עיר", value: order.city },
+      { label: "אזור / עיר", value: order.city },
       { label: "כתובת", value: order.address },
       { label: "בקשות", value: order.jobDescription },
       // update this to fisplay only if  update the order 
-      { label: "עודכן בתאריך",  value:  order.updatedByUserAt ? new Date(order.updatedByUserAt).toLocaleString('he-IL') :  ""}
+      { label: "עודכן בתאריך",  value:  order.updatedByUserAt ? new Date(order.updatedByUserAt).toLocaleString('he-IL') :  ""},
+      { label:"שעתון" , value: order.price + " שח",  }
      ];
 
   return  <Flex justifyContent={"center"} >
-          <Container maxWidth={"1000px"}
-          p={3}
-          m={0}
-          mt={1}
-          mb={1}
-          boxShadow={"md"}
-          
-          
-         >
-         <Flex justifyContent="space-around" alignItems={"center"}  fontSize={xs? "16px" : "12px"} fontWeight="bold"  >
+       
+        
+         
+         <Flex justifyContent="space-around" basis={"100%"} alignItems={"center"}  fontSize={xs? "lg" : "xs"} fontWeight="bold" boxShadow={'lg'} maxW={"1000px"} m={0.5} p={1} >
        
             <Text >{order.name}</Text>
             <Text >{order.phone}</Text>
@@ -285,17 +282,17 @@ const OrderRow = ({order, index})=>{
            </Popover>      
 
          </Flex>
-         </Container>
+      
           </Flex>
 }
 
 const DataList = ({Fields})=>{
       return (
         <>
-        <Heading textAlign={"center"} fontSize={"2xl"} >פרטי הזמנה</Heading>
-        <Flex p={4} justifyContent={"end"} fontWeight={"bold"} direction={"column"} >
+        <Heading textAlign={"center"} color={Colors.d} fontSize={"2xl"} >פרטי הזמנה</Heading>
+        <Flex p={4}  justifyContent={"end"} fontWeight={"bold"} direction={"column"} >
      
-                <DataListRoot orientation="horizontal" style={{direction:"rtl"}} size={"sm"}  >
+                <DataListRoot  orientation="horizontal" style={{direction:"rtl"}} size={"sm"}  >
       {Fields.map((item) => (
         item.value  && // only if value
         <DataListItem key={item.label} label={item.label} value={item.value} p={0} m={0}  fontSize={"sm"}  />

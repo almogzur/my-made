@@ -35,7 +35,7 @@ const BoardTools=({
   return (
     <motion.div  >
   
-        <Flex     direction={"column"}  boxShadow={'0 8px 16px rgba(0, 0, 0, 1)'}>
+        <Flex     direction={"column"}  >
          <Heading fontSize={"3xl"} p={4} fontWeight={"bold"} textAlign={"center"}  color={Colors.c}> סינן עבדוה לפי </Heading>
 
 
@@ -48,12 +48,12 @@ const BoardTools=({
               <Select
                     size={"lg"}
                     key={"bord"}
-                    variant="subtle"
                     id='city'
                     padding={"10px"}  
                     value={filterCity}
                     onChange={cityHendler}
                     fontWeight={"bold"}
+                    colorPalette={"blue"}
                   
                     
 
@@ -112,7 +112,7 @@ const PriceFilter =( {minPrice,maxPrice, setMinPrice , setMaxPrice}  )=>{
      <Flex direction={"column"} p={4}>    
               <Heading  fontSize={xs?"1xl":"medium"}  fontWeight={"bold"} >ניתן לסנן הזמנות לפי מחיר שעתי מוצע </Heading>
 
-       <Slider  defaultValue={[0, 100]}  p={4}  onValueChange={priceHedler}  />                 
+       <Slider colorPalette={"blue"} defaultValue={[0, 100]}  p={4}  onValueChange={priceHedler}  />                 
      
        <Flex justifyContent={'center'} maxWidth={"550px"}  >
      

@@ -12,8 +12,8 @@ import { PiCursorClickBold } from "react-icons/pi";
  const HeasLine=  " רוצה למצוא עוזר/ת !?"
 
 const CopyText = {
-    1:  {  text : "נרשמים בקלות ומפרסמים " , Icon: FaPenFancy ,   },
-    2:  { text : "מחפשים במערכת נוחה ומתקדמת" , Icon: TbViewfinder , },
+    1:  {  text : " נרשמים בקלות  " , Icon: FaPenFancy ,   },
+    2:  { text : " מפרסמים ונשארים במעקב  נוחה ומתקדמת" , Icon: TbViewfinder , },
     3:  { text : " ואתם במחרק של קליק  " , Icon:PiCursorClickBold , }
 
 } 
@@ -25,7 +25,6 @@ const HowThisWorks = () => {
       <Flex justifyContent={"space-around"} >
          <Container p={0} m={0} height={"40%"} >
 
-            <Text fontSize={"4xl"} fontWeight={"bolder"} p={4} textAlign={"center"}  >{HeasLine}</Text>
             
             <Flex flexWrap={"wrap"} justifyContent={"space-around"} >
                 {Object.values(CopyText)

@@ -27,8 +27,6 @@ const Orders=({})=>{
   const handleExpand = (index) => {
     setExpandedIndex((prevIndex) => (prevIndex === index ? null : index));
   };
-
-
   const orderHandler = async (e, order, vendorEmail) => {
     console.log(e);
     
@@ -68,29 +66,32 @@ const Orders=({})=>{
   }
      
  return (  
-
           <Container minHeight={"100vh"}>
             <Flex justifyContent={"center"} h={"100%"} >
 
               <Container maxWidth={"1000px"} p={0} m={0} >
 
 
-              <AnimatePresence mode='awit' >
-
+                <AnimatePresence mode={  "wait"} >
                 {Array.isArray(orders) && filterCity  &&   
                     orders.map( (order,i) =>                  
                      xs ? 
                      <motion.div
                       key={order._id} 
 
-                       initial={{ opacity: 0, height: 0 }}
-                       animate={{ opacity: 1, height: "auto",
-                              transition: { type: "spring", stiffness: 100 },
+                       initial={{ opacity: 0, height:0}}
+                       animate={{ opacity: 1, height:"auto",
+                              transition: { 
+                                opacity:{duration:1},
+                                height:{duration:1 , type:"spring" ,stiffness: 100 ,  }
+                               },
                          }}
-                       exit={{ opacity: 0, y: -300 ,
+                       exit={{ opacity: 0,x:"100%", height:0,  
                          transition :{ 
-                             y:{duration:2},
-                             opacity:{duration:2}
+                             opacity:{duration:1 },
+                             x:{duration:0.3}
+                          
+                          
 
                           }
                          }}
@@ -104,23 +105,22 @@ const Orders=({})=>{
                          hndler={orderHandler}
                     />
                     </motion.div>
-     
                     :
                     <motion.div
                       key={order._id} 
 
                        initial={{ opacity: 0, height: 0 }}
-                       animate={{
-                            opacity: 1,
-                            height: "auto",
+                       animate={{ opacity: 1 ,  height: "auto",
                             transition: {
-                               type: "spring", stiffness: 300
+                                  height:{  duration:0.5,    type: "spring", stiffness: 100 , },
+                                  opacity:{ duration:1 }
                                },
                                 }}
-                      exit={{ opacity: 0, x: -300 ,
+                       exit={{ opacity: 0,  height:0 , x:200,
                             transition :{ 
-                              x:{duration:2},
-                              opacity:{duration:2}      
+                              x:{duration:.5},
+                              opacity:{duration:.5}      ,
+                              height:{duration:.5}
                             }
                             }}
                      >
@@ -133,20 +133,13 @@ const Orders=({})=>{
                        hndler={orderHandler}
                     />       
                     </motion.div>   
-                   )
-                       
-
-                        }
-                </AnimatePresence>     
-
-                       
+                     )}
+                </AnimatePresence>           
               </Container>  
                 
 
             </Flex>           
          </Container> 
-
-
  )
 }
 
@@ -197,22 +190,24 @@ const SmallOrderCard = ({ order, itemIndex, expandedIndex, handleExpand , hndler
               exit={{ opacity: 0, height: 0 }}
             >
               <ModDataList Fields={EssentialFields} headingText="פרטי הזמנה" />
-              <Button
+              <Button 
+              w={"100%"}
                 backgroundColor={Colors.c}
                 color="#fff"
                 mt={2}
                 onClick={(e) => hndler(e, order, session?.user.email)}
               >
                 קח הזמנה
-              </Button>
+             </Button>
             </motion.div>
           )}
         </AnimatePresence>
+   
 
         <Button
           onClick={() => handleExpand(itemIndex)}
           mt={2}
-          variant="outline"
+          variant="solid"
           size="sm"
         >
           {isExpanded ? "סגור" : "פרטים"}
@@ -248,36 +243,44 @@ const BigCard = ({ order, itemIndex, expandedIndex, handleExpand , hndler }) => 
    ];
 
   return (        
-             <Flex  
-                 m={2}  
-                 mb={1}
-                 boxShadow={"xl"}
-                 p={2}                 
-                 alignItems={"center"}
-                justifyContent={"space-around"}
-             >    
-
-                  
-                  
-              <Flex direction={"column"} >
+             <Flex   p={2} m={2}  boxShadow={"xl"} alignItems={"center"} justifyContent={"space-around"}>    
+            
+             {!isExpanded && 
+             <>
+               <Flex direction={"column"} >
 
                      <Text  fontSize={"md"}     fontWeight={"bold"}  > שעתון :  {order?.price}</Text>
                      <Text     fontSize={"md"} fontWeight={"bold"} > תאריף {midTail}</Text>
                      <Text   fontSize={"md"}     fontWeight={"bold"}  > כתובת: { order.address }</Text>
+         
 
-
-                     <AnimatePresence mode="sync">
+                 
+                    
+              </Flex>
+              <Button onClick={() => handleExpand(itemIndex)}>
+                    פרטים
+                 </Button>
+      
+                 </>
+             }
+             
+      
+                 
+      
+              
+              <AnimatePresence mode="popLayout">
                          {isExpanded && (
                             <motion.div
-                          initial={{  opacity: 0 }}
-                          animate={{  opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
+                              initial={{  opacity: 0 }}
+                               animate={{  opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
                          
                          >
-                            <Flex direction="column"  fontWeight={"bold"} justifyContent={"space-around"}  >
-                            <ModDataList Fields={Fields}  headingText={"פרטי הזמנה "} />
+                 
+                            <Flex direction={"column"}>
+                              <ModDataList    Fields={Fields}  headingText={"פרטי הזמנה "} />
 
-                          <Button 
+                                <Button 
                             backgroundColor={Colors.c} 
                             color="#fff" 
                             variant="outline" 
@@ -285,23 +288,24 @@ const BigCard = ({ order, itemIndex, expandedIndex, handleExpand , hndler }) => 
                             onClick={(e)=> hndler( e ,order,  session?.user?.email )}
                           >
                             <Text>קח הזמנה</Text>  
-                          </Button>
+                               </Button>
 
-                          </Flex>
+                               <Button onClick={() => handleExpand(itemIndex)}>
+                                 {isExpanded ? ' סגור' : ' פרטים'}
+                               </Button>
+
+                            </Flex>
+       
+
                             </motion.div>
                             )}
-                    </AnimatePresence>
+                            
+              </AnimatePresence>
+            
+            
+         
 
-              </Flex>
 
-              <Button
-                 onClick={() => handleExpand(itemIndex)}
-                 p={0}
-                 h={"50px"}  //  fix size to prevent layout shift when text swap 
-                 width={"60px"} // same
-               >
-                 {isExpanded ? ' סגור' : ' פרטים'}
-             </Button>
        
             </Flex>
  

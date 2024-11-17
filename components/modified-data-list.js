@@ -1,9 +1,9 @@
 import { DataListItem, DataListRoot } from '../components/ui/data-list'
 import { Heading } from '@chakra-ui/react'
 
-const ModDataList = ({Fields , size, headingText})=>{
+const ModDataList = ({Fields , size, headingText , props})=>{
     return (
-        <DataListRoot p={4} size={size?? "sm"}  orientation="horizontal" style={{direction:"rtl"}}   >
+        <DataListRoot  p={4} size={size?? "sm"}  {...props} orientation="horizontal" style={{direction:"rtl"}}   >
           <Heading textAlign={"center"}  fontSize={"2xl"} >{headingText??""}</Heading>
   
           { Fields.map((item) => (

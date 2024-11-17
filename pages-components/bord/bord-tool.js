@@ -33,7 +33,7 @@ const BoardTools=({
 
 
   return (
-    <motion.div  >
+     <motion.div  >
   
         <Flex     direction={"column"}  >
          <Heading fontSize={"3xl"} p={4} fontWeight={"bold"} textAlign={"center"}  color={Colors.c}> סינן עבדוה לפי </Heading>
@@ -43,7 +43,7 @@ const BoardTools=({
 
           <Flex justifyContent={"center"}>
            <Container maxWidth={600} p={1} m={0}  >
-           <Heading p={2} fontSize={xs?"1xl":"medium"} fontWeight={"bold"} >בחר עיר או אזור לראות הזמנות חדשות </Heading>
+            <Heading p={2} fontSize={xs?"1xl":"medium"} fontWeight={"bold"} >בחר עיר או אזור לראות הזמנות חדשות </Heading>
 
               <Select
                     size={"lg"}
@@ -59,7 +59,7 @@ const BoardTools=({
 
           >
                <Option>
-                <option value="">   רשימת ערים זמינות </option>
+                <option  >   רשימת ערים זמינות </option>
                    {israelRegions.map((obj,i)=>{
                    const city = obj.value
   
@@ -110,9 +110,9 @@ const PriceFilter =( {minPrice,maxPrice, setMinPrice , setMaxPrice}  )=>{
  
   return   (  
      <Flex direction={"column"} p={4}>    
-              <Heading  fontSize={xs?"1xl":"medium"}  fontWeight={"bold"} >ניתן לסנן הזמנות לפי מחיר שעתי מוצע </Heading>
+        <Heading  fontSize={xs?"1xl":"medium"}  fontWeight={"bold"} >ניתן לסנן הזמנות לפי מחיר שעתי מוצע </Heading>
 
-       <Slider colorPalette={"blue"} defaultValue={[0, 100]}  p={4}  onValueChange={priceHedler}  />                 
+        <Slider colorPalette={"blue"} defaultValue={[0, 100]}  p={4}  onValueChange={priceHedler}  />                 
      
        <Flex justifyContent={'center'} maxWidth={"550px"}  >
      

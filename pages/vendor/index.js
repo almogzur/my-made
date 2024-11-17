@@ -25,6 +25,8 @@ const VendorPage=()=>{
   }, [status, router]);
 
 
+
+
     if (status === 'loading') {
 
      return <h1 style={{textAlign:'center'}}>Loading...</h1>

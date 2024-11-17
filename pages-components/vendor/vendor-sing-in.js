@@ -7,7 +7,7 @@ import { FaPenFancy } from "react-icons/fa";
 import { Input, Textarea, Container, Button, Flex, Heading } from "@chakra-ui/react";
 import { Field } from "../../components/ui/field";
 import { WindowWidthContext } from "../../context";
-
+import { useRouter } from "next/router";
 const descriptionPlaceholder = 
 ` דוגמה : המחיר הוא עבור 1 2 3  
  דוגמה: מבצע/ת את כאשר אין אנשים ביית 
@@ -18,11 +18,16 @@ const VendorSingin = ({ setEdit, edit }) => {
   const { data: session, status } = useSession();
   const { user, isLoading, isError, updateUser } = useUser(session?.user?.email);
   const { xxl,xl,lg,md,sm,xs,xxs} = useContext(WindowWidthContext);
+  const router = useRouter()
+
+
 
   const [formData, setFormData] = useState({
     name: user?.name || "",
     phone: user?.phone || "",
   });
+
+
 
   const [isFetching, setIsFetching] = useState(false);
 

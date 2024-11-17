@@ -44,7 +44,7 @@ function  MainSection() {
              >  
               {"צריכים עזרה בניקיון הבית ? הרשמו עכשיו !! תיאום קל ופשוט."}
         </Heading>
-          <Flex justifyContent={"center"} >
+          <Flex justifyContent={"center"} h={xs? 600 :400 } >
            <PhotoCarousel Photos={Photos} />
        </Flex>
 

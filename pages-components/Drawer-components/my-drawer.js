@@ -54,16 +54,22 @@ const  MyDrawer = () => {
       
           <DrawerHeader  p={0}  >
 
+            <Flex p={2} direction={"row-reverse"} justifyContent={"space-between"} >
 
-                <DrawerCloseTrigger    variant="solid" p={0} m={0} colorPalette=""   color={"#fff"}   />
-               
+                <DrawerCloseTrigger    variant="solid" p={0} m={0} colorPalette="" position={"unset"}   color={"#fff"}   />
+            
+                { session &&
 
-          
-                <Flex gap={3} alignItems={"center"} p={2} >
-                <Image    height={30} width={45} src={session?.user?.image } alt="" style={{borderRadius:4}} />
-                <Heading >{session?.user?.name ?? "" }</Heading>
+                 <Flex gap={3} alignItems={"center"} p={1} >
+
+                    <Image   height={40} width={42} src={session?.user?.image } alt="" style={{borderRadius:4}} />
+
+                      <Heading >{session?.user?.name ?? "" }</Heading>
+                </Flex>
+          }
                </Flex>
 
+        
                
 
   
@@ -84,9 +90,10 @@ const  MyDrawer = () => {
                            PropsOnClick={()=>{ session? router.push("/profile") : signIn(undefined,{callbackUrl:"/profile"})   }}
                            animationIndex={1.5} 
               />
+              { session  &&
                  <DrawerItem text={user?.Vendor?.isVendor ?  "ניהול לקוחות" : "הרשמה כנותן שירות "} Icon={<FcCustomerSupport size={"2em"}/> }  PropsOnClick={()=>{router.push("/vendor") }} animationIndex="2.3"  />
-
-              { user?.Vendor?.isVendor &&
+              }
+                   { user?.Vendor?.isVendor &&
               
                  <DrawerItem text={" לוח לקוחות "} Icon={<FcViewDetails size={"2em"}/>} PropsOnClick={()=>router.push("/bord")} animationIndex="1.9"  /> 
                  

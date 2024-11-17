@@ -24,31 +24,33 @@ const PhotoCarousel = ({ Photos }) => {
           key={currentIndex} // Unique key for each image to trigger exit animation
           src={Photos[currentIndex].src}
           alt={`Photo ${currentIndex + 1}`}
-          initial={{ opacity: 0, y: 260 }} // Start below the view
+
+          initial={{ opacity: 0  }} 
+
           animate={{
-            opacity: 1,
-            y: 0,
-            rotate:[20,0],
+                 opacity: 1,
+                 y: [300,0],
             transition: {
               opacity: { duration: 2 },
               y: { duration: 3 ,  },
-              rotate:{type:"spring",damping:4  }
+              
             },
           }}
           exit={{
             opacity: 0,
-            x: -630, // Exit upwards
+            scaleY:0, 
+            scaleX:0,
+
             transition: {
-              x: { duration: 2 , type:"tween" },
+              scaleY:{ duration:2 },
               opacity: { duration: 1 },
+              scaleX:{duration:2}
             },
           }}
           style={{
-            width: xxs && xs ? "800px" : "400px",
-            height: xxs && xs ? "600px" : "200px",
-            borderRadius:"3%",
-            objectFit:"cover"
-            
+            width:"auto",
+            height:"auto",
+            objectFit:"scale-down",
           }}
         />
       </AnimatePresence>

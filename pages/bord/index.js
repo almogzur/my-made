@@ -38,22 +38,16 @@ const BoardPage = () => {
   }, [status, router]);
 
 
-  if (status === 'loading' ) {
-    return <LoadingSpinner/>
-  }
-
 
   return (
   <>
         <Navigation/>
-           <Container >
-             <Flex direction={"column"} gap={"20px"}  >
-                    <BordTools setMode={setMode} setFilterCity={setFilterCity} setFilterPriceArray={setFilterPriceArray} />
-                    <Separator size={"lg"}/>
-
-                    <OrdersWrapper  Mode={Mode} filterCity={filterCity} setFilterCity={setFilterCity} /> 
-            </Flex>
-         </Container>
+        
+         <BordTools setMode={setMode} setFilterCity={setFilterCity} setFilterPriceArray={setFilterPriceArray} />
+         <Separator size={"lg"}/>
+         <OrdersWrapper  Mode={Mode} filterCity={filterCity} setFilterCity={setFilterCity} /> 
+     
+         
 </>        
 
 

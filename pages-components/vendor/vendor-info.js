@@ -30,6 +30,8 @@ import Popover from '../../components/popover';
 
 const VendorInfo = ({  setEdit ,edit }) => {
 
+    
+
 
   return (
       <motion.div
@@ -253,12 +255,13 @@ const OrderRow = ({order, index})=>{
         
          
      <Flex 
-       justifyContent="space-around" 
-       basis={"100%"} alignItems={"center"}  fontSize={xs? "md" : "xs"} fontWeight="bold" boxShadow={'lg'} maxW={"1000px"} m={0.5} p={1} >
+        justifyContent="space-around" 
+        alignItems={"center"}
+        basis={"100%"}   fontSize={xs? "md" : "xs"} fontWeight="bold" boxShadow={'lg'} maxW={"1000px"} m={0.5} p={1} >
        
-            <Text w={"25%"}  >{order.name}</Text>
-            <Text w={"25%"}  >{order.phone}</Text>
-            <Text w={"25%"}  key={order.data}> {!xs? shortTail : midTail}</Text>
+            <Text w={"25%"} alignItems={"center"}   >{order.name}</Text>
+            <Text w={"30%"}   >{order.phone}</Text>
+            <Text w={"20%"} textAlign={"center"}  key={order.data}> {!xs? shortTail : midTail}</Text>
  
             <Popover   
               open={open}  

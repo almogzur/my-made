@@ -15,10 +15,10 @@ import {
   const badge_w = "60px"
   const na = "מידע לא זמין"
 
-const Popover = ({children, headline ,openTrigerText, position , open ,setOpen  , btnsStyle })=>{
+const Popover = ({children, headline ,openTrigerText, position , open ,setOpen  , btnsStyle ,contanerWidth })=>{
     const { xxl,xl,lg,md,sm,xs,xxs} = useContext(WindowWidthContext);
     return (
-      <PopoverRoot  	   open={open} onOpenChange={(e)  => setOpen(e.open)  } positioning={position? position:{}}>
+      <PopoverRoot  w={contanerWidth?? null} 	   open={open} onOpenChange={(e)  => setOpen(e.open)  } positioning={position? position:{}}>
          <PopoverTrigger asChild>
            <Button  {...btnsStyle}  >{openTrigerText} </Button>
          </PopoverTrigger>

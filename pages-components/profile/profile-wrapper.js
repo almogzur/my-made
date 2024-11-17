@@ -179,13 +179,14 @@ const DataRow = ({order , index})=>{
               bg={"#fff"} 
               basis={"100%"}
               m={1}
+              p={2}
               maxWidth={"1000px"}
               
               
               >
             
-             <BadgeStatus styleProp={{p:3, m:2}}  key={order.status + order._id} textStyle={xxs && xs ? "sm" :null } status={order.status}/>
-             <Text  fontSize={"md"} key={order.data} >{!xs? shortTail :midTail  || ""}</Text>
+             <BadgeStatus w={"25%"}  styleProp={{p:3, m:2}}  key={order.status + order._id} textStyle={xxs && xs ? "sm" :null } status={order.status}/>
+             <Text w={"25%"} fontSize={"md"} key={order.data} textAlign={"center"} >{!xs? shortTail :midTail  || ""}</Text>
 
 
               <Popover 
@@ -195,6 +196,7 @@ const DataRow = ({order , index})=>{
                   setOpen={setInfoPopup} 
                   position={{placement: "top-start"}} 
                   btnsStyle={{variant:"subtle",fontWeight:"bold",p:3, m:2,    colorPalette:order.status==="inProcess"? "orange":''    }}
+                  contanerWidth={"25% "}
                    > 
                    <Heading textAlign={"end"} p={2} >פרטי ההזמנה </Heading>
                      {combinedDetails.map(( {title,value,flag} , index ) => (
@@ -212,6 +214,8 @@ const DataRow = ({order , index})=>{
                setOpen={setEditPopup} 
                openTrigerText={"עדכון"} 
                btnsStyle={{variant:"subtle" , fontWeight:"bold",p:3 , colorPalette:order.status==="inProcess"? "orange":''  }} 
+               contanerWidth={"25% "}
+
                >
                <NewOrder setPerent={setEditPopup} id={order._id} submitBtnStyle={{fontWeight:'bold' , colorPalette:order.status==="inProcess"? "orange":'' ,variant:"subtle" } }   />
              </Popover>

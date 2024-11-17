@@ -152,7 +152,6 @@ const DataRow = ({order , index})=>{
    ]
 
     const orderDetails = [
-         { title: "מזמין", value: order.name  },
          { title : "שעת הגעה מבוקשת", value:order.hour},
          { title: "תאריך ", value: order.date ? new Date(order.date).toLocaleString('he-IL').slice(0,10)  : na },
          { title: "כתובת", value: order.address || na },

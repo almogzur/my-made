@@ -1,5 +1,5 @@
 import Colors from "../../lib/colors";
-import { Badge, Box, Card, Text, Flex, Container , Heading } from "@chakra-ui/react";
+import { Badge, Box, Card, Text, Flex, Container , Heading , Separator } from "@chakra-ui/react";
 import { Button } from "../../components/ui/button";
 import { motion, AnimatePresence } from 'framer-motion';
 import { WindowWidthContext } from '../../context';
@@ -8,7 +8,6 @@ import { useSession } from "next-auth/react";
 import useOrders from "../../lib/hooks/useOrders";
 import { DataListItem, DataListRoot } from "../../components/ui/data-list"
 
-const MotionCard = motion(Card.Root);
 
 const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
 
@@ -68,13 +67,14 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
    ];
 
   return (
- 
+        
+        
          <AnimatePresence mode="popLayout" >
-               <MotionCard        
+               <Container  maxW={'1000px'}      
                  m={0}  
                  mb={1}
                  boxShadow={"xl"}
-                 p={2}          
+                 p={2}     
                  initial={{  opacity: 0, height: 0 }}
                  animate={{  opacity: 1, height: 'auto',
                             transition:{ opacity: { duration: 1 },
@@ -83,15 +83,18 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                          }}
                  exit={{opacity:0, x:-300, transition:{} }}
              >    
-                <Card.Body p={2} m={0}  >
 
                   <Flex justifyContent={"space-between"} alignItems={"center"}   >
-                    
-                     <Badge fontSize={"md"} p={4}  colorPalette={"blue"}   fontWeight={"bold"}  >  {order?.price}</Badge>
-                     <Badge  p={4} fontSize={"md"} fontWeight={"bold"} >{xs?midTail:shortTail}</Badge>    
+                    <Flex direction={"column"} >
 
-                    
+                     <Text p={1} fontSize={"md"}     fontWeight={"bold"}  > שעתון :  {order?.price}</Text>
+                     <Separator/>
+                     <Text p={1}    fontSize={"md"} fontWeight={"bold"} > תאריף {midTail}</Text>
+                     <Separator/>
+                     <Text p={1}  fontSize={"md"}     fontWeight={"bold"}  > כתובת: { order.address }</Text>
+                     <Separator/>
 
+                  </Flex>
                       <Button
                         onClick={() => handleExpand(itemIndex)}
                         p={0}
@@ -100,9 +103,6 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                       >
                         {isExpanded ? ' סגור' : ' פרטים'}
                       </Button>
-
-                    
-
                   </Flex>
       
 
@@ -136,10 +136,10 @@ const OrderCard = ({ order, itemIndex, expandedIndex, handleExpand }) => {
                   </AnimatePresence>
 
                   
-               </Card.Body>
-           </MotionCard>
+               </Container>
          </AnimatePresence>
-   
+ 
+  
   );
 };
 

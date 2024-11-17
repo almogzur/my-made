@@ -1,24 +1,17 @@
 import React, { useState ,useContext } from 'react';
 import { MdEdit } from 'react-icons/md';
-import { FaRegClipboard } from 'react-icons/fa';
+
 import Colors from '../../lib/colors';
-import Link from 'next/link';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BsFillInfoSquareFill } from "react-icons/bs";
-import { BiSolidMessageAdd } from "react-icons/bi";
+
 import useUser from '../../lib/hooks/useUser';
 import { useSession } from 'next-auth/react'
 import { Flex, Container , Heading ,Box  , Text, Badge , Button, VStack, Stack } from "@chakra-ui/react";
 import { WindowWidthContext } from '../../context';
 import { DataListItem, DataListRoot } from "../../components/ui/data-list"
-import { GiTakeMyMoney } from "react-icons/gi";
 
-import {
-  AccordionItem,
-  AccordionItemContent,
-  AccordionItemTrigger,
-  AccordionRoot,
-} from "../../components/ui/accordion"
+
 
 import {
   DialogActionTrigger,
@@ -36,7 +29,6 @@ import Popover from '../../components/popover';
 // replaced width Link
 
 const VendorInfo = ({  setEdit ,edit }) => {
-  const { data: session ,status ,update} = useSession()
 
 
   return (
@@ -74,11 +66,6 @@ export default VendorInfo;
 
 
 const OnBording = ()=>{
-
-  const { data: session ,status ,update} = useSession()
-
-  const { user , isLoading , isError , updateUser} = useUser(session?.user?.email)
-
 
   return    <Flex p={4} >
              
@@ -265,11 +252,13 @@ const OrderRow = ({order, index})=>{
        
         
          
-         <Flex justifyContent="space-around" basis={"100%"} alignItems={"center"}  fontSize={xs? "lg" : "xs"} fontWeight="bold" boxShadow={'lg'} maxW={"1000px"} m={0.5} p={1} >
+     <Flex 
+       justifyContent="space-around" 
+       basis={"100%"} alignItems={"center"}  fontSize={xs? "md" : "xs"} fontWeight="bold" boxShadow={'lg'} maxW={"1000px"} m={0.5} p={1} >
        
-            <Text >{order.name}</Text>
-            <Text >{order.phone}</Text>
-            <Text key={order.data}> {!xs? shortTail : midTail}</Text>
+            <Text w={"25%"}  >{order.name}</Text>
+            <Text w={"25%"}  >{order.phone}</Text>
+            <Text w={"25%"}  key={order.data}> {!xs? shortTail : midTail}</Text>
  
             <Popover   
               open={open}  
@@ -277,6 +266,7 @@ const OrderRow = ({order, index})=>{
               openTrigerText={"פרטים"} 
               btnsStyle={{variant:"subtle",  colorPalette:"blue", fontWeight:"bold",m:2 }} 
               position={{placement:"top-end"}}
+              w={"25%"} 
               >
                <DataList Fields={Fields}  />
            </Popover>      
@@ -288,10 +278,9 @@ const OrderRow = ({order, index})=>{
 
 const DataList = ({Fields})=>{
       return (
-        <>
-        <Heading textAlign={"center"} color={Colors.d} fontSize={"2xl"} >פרטי הזמנה</Heading>
         <Flex p={4}  justifyContent={"end"} fontWeight={"bold"} direction={"column"} >
-     
+        <Heading textAlign={"center"} color={Colors.d} fontSize={"2xl"} >פרטי הזמנה</Heading>
+
                 <DataListRoot  orientation="horizontal" style={{direction:"rtl"}} size={"sm"}  >
       {Fields.map((item) => (
         item.value  && // only if value
@@ -299,6 +288,5 @@ const DataList = ({Fields})=>{
       ))}
     </DataListRoot>
         </Flex>
-        </>
       )
 }

@@ -38,8 +38,9 @@ const OrdersWrapper=({ Mode })=>{
   }
      
  return (
-        <>
-          <ExmpRow/>
+  <Flex justifyContent={"center"} bg={"red"}>
+        <Flex direction={"column"}  >
+   
 
 
                { 
@@ -58,8 +59,8 @@ const OrdersWrapper=({ Mode })=>{
               }                   
 
            
-        </>
-
+        </Flex>
+   </Flex>
  )
 }
 
